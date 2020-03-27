@@ -12,5 +12,12 @@ Categorias: Bazar/Cocina
                 -Pavas
                 -Frascos de vidrio
             Decoracion
-                
+                -Perchas
+                -Canastos
+                -Percheros
+                -Cestos
             Organizadores
+                -Relojes
+                -Velas
+                -Faroles
+                -Espejos                             
