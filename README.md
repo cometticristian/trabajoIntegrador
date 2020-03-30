@@ -6,7 +6,7 @@ David Messina
 Ecommerce: productos de bazar
 Nombre: pickBazar
 
--Publico Objetivo: Personas mayores de 20 años, orientado a hogares. Con ingresos medio alto.
+-Publico Objetivo: Personas mayores de 20 años, orientado a hogares. Con ingresos medio-alto.
 
 -Vamos a llegar a nuestro publico enlazando nuestra pagina con redes sociales, principalmente instagram.
 
@@ -14,20 +14,31 @@ Nombre: pickBazar
                         https://www.morph.com.ar/
                         https://www.buenosairesbazar.com.ar/
                         https://www.reinabatata.com/
+                        https://olivertadeco.com/es/inicio
+                        https://www.artentino.com/
 
-
-Categorias: Bazar/Cocina
-                -Sartenes
-                -Cacerolas
-                -Jarros
-                -Pavas
+Categorias: Cocina
                 -Frascos de vidrio
-            Decoracion
-                -Perchas
-                -Canastos
-                -Percheros
+                -Cacerolas
+                -Sartenes
+                -Pavas
+                -Jarros
+                -Vasos térmicos
+                -Escurridores
+                -Accesorios
+            Baño
                 -Cestos
-            Organizadores
+                -Canastos
+                -Alfombras
+                -Limas
+                -Esponjas
+            Decoracion
+                -Relojes
+                -Espejos
+                -Cuadros
+                -Velas
+                -Faroles
+            Art. Limpieza
                 -Relojes
                 -Velas
                 -Faroles
