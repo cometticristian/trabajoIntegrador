@@ -39,7 +39,5 @@ Categorias: Cocina
                 -Velas
                 -Faroles
             Art. Limpieza
-                -Relojes
-                -Velas
-                -Faroles
-                -Espejos                             
+                -Mopas
+            Promociones                   
