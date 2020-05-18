@@ -167,8 +167,9 @@ hr {
 }
 
 .products-title {
-  font-size: 2.4em;
+  font-size: 2.8em;
   font-weight: 400;
+  text-align: center;
   color: var(--gray);
 }
 
@@ -193,43 +194,45 @@ hr {
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
 .product-box_data h2 {
-  font-size: 2.4em;
+  font-size: 2em;
   font-weight: 300;
   margin: 0;
 }
 
 .product-box_data span {
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-weight: 300;
-  color: var(--green);
+  color: var(--orange);
   margin: 0 0 0 10px;
 }
 
 .product-box_data p {
-  font-size: 1.5em;
+  font-size: 1.2em;
+  line-height: 1.5em;
   width: 100%;
   color: var(--gray);
-  margin: 0;
-  height: 0;
+  margin: 15px 0 0 0;
+  -height: 0;
   transition: 300ms;
   overflow: hidden;
 }
 
-.product-box_data i {
-  color: var(--green);
-  font-size: 1.8em;
-  width: 35px;
-  height: 35px;
+.product-box i {
+  color: var(--orange);
+  font-size: 1.5em;
+  width: 28px;
+  height: 28px;
   text-align: center;
   border: solid 1px;
   border-radius: 50%;
   position: absolute;
-  top: -15px;
-  right: 15px;
+  top: 315px;
+  right: 22px;
   background-color: #ffffff;
   display: flex;
   justify-content: center;
@@ -241,14 +244,16 @@ hr {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
-.product-box:hover p {
+product-box:hover p {
   height: 40px;
   margin-top: 15px;
 }
 
 .product-box:hover i {
-  transform: rotate(360deg);
-  box-shadow: 0 0 5px var(--green);
+  -transform: rotate(360deg);
+  width: 30px;
+  height: 30px;
+  box-shadow: 0 0 5px var(--orange);
 }
 
 
