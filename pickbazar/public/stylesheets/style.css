@@ -28,7 +28,8 @@ body {
 }
 
 body {
-  font-family: var(--base-font-family);
+  /*font-family: var(--base-font-family);*/
+  font-family: 'Montserrat', sans-serif;
   font-weight: 300;
 }
 

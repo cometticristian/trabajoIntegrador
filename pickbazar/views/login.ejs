@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pick Bazar</title>
+  <!-- Font Awesome Stylesheet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+  <!-- Bootstrap Grid Stylesheet -->
+  <link rel="stylesheet" href="/stylesheets/bootstrap-grid.min.css">
+  <!-- Own Stylesheet -->
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <style>
+    .blue{
+      background-color: #18A0FD;
+    }
+    .black{
+      background-color:black;
+    
+    }
+    .btn-login{
+      font-weight: bold;
+      font-size: 18px;
+      width: 300px;
+      line-height: 29px;
+      color: #FFFFFF;
+      margin: 6px;
+    }
+    .login-box{
+      background-color:#EDEFEF;
+      margin:5px;
+      padding:5px;
+    }
+  </style>
+</head>
+
+<body>
+
+ 
+
+<div class="container">
+ 
+ 
+  <div class="row">
+    <div class="col-12 col-lg-6 login-box">
+    
+      <div class="col-12">
+        <h2 class="section-title">INGRESA A TU CUENTA</h2>
+      </div>
+      
+      <div class="col-12 col-sm-3 col-lg-6">
+        <section>
+        <form action="/action_page.php">
+          <label for="email">Email:</label><br>
+          <input type="email" id="email" name="email" value="Email"><br>
+          <label for="password">Contraseña:</label><br>
+          <input type="password" id="password" name="password"><br><br>
+          <div><h3>Olvidaste tu contraseña?</h3></div>
+          <input class="btn-login black" type="submit" value="INGRESAR">
+        </form> 
+        <div> <input type="submit" class="btn-login blue" value="INGRESAR CON FACEBOOK"></div>
+        <div> <input type="submit" class="btn-login blue" value="INGRESAR CON GOOGLE+"></div>
+        </section>
+      </div>
+  </div>
+<!-- /div>
+    <div class="row" -->
+      <div class="col-12 col-lg-6 login-box">
+      <div class="col-12">
+        <h2 class="section-title">CREAR NUEVA CUENTA</h2>
+      </div>
+      <div class="col-12 col-sm-3 col-lg-6">
+        <section class="login-box">
+          <div> <input type="submit" class="btn-login blue" value="REGISTRAR CON FACEBOOK"></div>
+          <div> <input type="submit" class="btn-login blue" value="REGISTRAR CON GOOGLE+"></div>
+          <form action="/action_page.php">
+            <label for="email">Nombre:</label><br>
+            <input type="email" id="email" name="email" value="Email"><br>
+            <label for="email">Apellido:</label><br>
+            <input type="email" id="email" name="email" value="Email"><br>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" value="Email"><br>
+            <label for="password">Contraseña:</label><br>
+            <input type="password" id="password" name="password"><br><br>
+            <div><h3>Olvidaste tu contraseña?</h3></div>
+            <input class="btn-login black" type="submit" value="CREAR CUENTA">
+          </form> 
+         
+        </section>
+      </div>
+    </div>
+
+  </div>
+
+
+</body>
+</html>
+
