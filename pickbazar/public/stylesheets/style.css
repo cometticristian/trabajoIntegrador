@@ -467,3 +467,17 @@ hr {
   .limpieza{margin: 5px 0 0 42%;}
   .banner {height: 600px;}
 }
+.button-box {
+  height: 14px;
+  width: 110px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-around;
+}
+.slide-button {
+  border-radius: 50%;
+  height: 100%;
+  border: 1px solid #D1D1D1;
+}
