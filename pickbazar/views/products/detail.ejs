@@ -3,9 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Productos</title>
+    <!-- Font Awesome Stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <!-- Bootstrap Grid Stylesheet -->
+    <link rel="stylesheet" href="/stylesheets/bootstrap-grid.min.css">
+    <!-- Own Stylesheet -->
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/products-detail.css">
 </head>
 <body>
-    Producto 1
-</body>
+  <%- include("../partials/headerNav") %>
+    <section>
+        <div class="container">
+            <div>
+                <ul class="list">
+                    <li> COCINA /</li>
+                    <li> CACEROLAS /</li>
+                    <li> SET ANTIADHERENTE ></li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="small-img-box col-md-2">
+                    <div class="img-small"><img class="img-s" src="/images/products/4073283.jpg" alt=""></div>
+                    <div class="img-small"><img class="img-s" src="/images/products/4073283.jpg" alt=""></div>
+                    <div class="img-small"><img class="img-s" src="/images/products/4073283.jpg" alt=""></div>
+                    <div class="img-small"><img class="img-s" src="/images/products/4073283.jpg" alt=""></div>
+                </div>
+                <div class="img-box col-12 col-md-6">
+                    <img id="img1" src="/images/products/4073283.jpg" alt="">
+                    <%- include("../partials/slide-button") %>
+                </div>
+                <div class="description-box container col-12 col-md-4">
+                    <h2 class="description">
+                        SET ANTIADHERENTE 
+                    </h2>
+                    <h2 class="description">
+                        $5.500,00
+                    </h2>
+                    <h3 class="description">
+                        DESCRIPCION
+                    </h3>
+                    <p class="description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni consectetur sint veritatis quos id dignissimos aperiam quibusdam a esse, ducimus accusantium dolore dolor sequi odio atque, harum quidem eaque cupiditate libero ullam, ratione blanditiis? Ipsum est, consectetur sed atque obcaecati tenetur, corrupti soluta perferendis omnis nobis ad reprehenderit. At, incidunt!
+                    </p>
+                    <div class="design-box">
+                        <div id="design1">Elegir Diseño</div>
+                        <div id="design2">⯆</div>
+                    </div>
+                    <div class="add-box">
+                        <div id="add1" class="add">Agregar al carrito</div>
+                        <div id="add2" class="add">1</div>
+                    </div>
+                </div>
+            </div>
+            <div id="down" class="row">
+                <div id="down1" class="col-12">
+                    <div>
+                        PRODUCTOS RELACIONADOS
+                    </div>
+                </div>
+                <div id="down2" class="col-12">
+                    <div class="related">
+                        <div class="img-rel">
+                            <img class="img-s" src="/images/products/4073283.jpg" alt="">
+                            <h5>$1.748,00</h5>
+                            <h5>- / +</h5>
+                            <p>Cacerolas antiadherentes</p>
+                        </div>
+                    </div>
+                    <div class="related">
+                        <div class="img-rel">
+                            <img class="img-s" src="/images/products/4073283.jpg" alt="">
+                            <h5>$1.748,00</h5>
+                            <h5>- / +</h5>
+                            <p>Cacerolas antiadherentes</p>
+                        </div>
+                    </div>
+                    <div class="related">
+                        <div class="img-rel">
+                            <img class="img-s" src="/images/products/4073283.jpg" alt="">
+                            <h5>$1.748,00</h5>
+                            <h5>- / +</h5>
+                            <p>Cacerolas antiadherentes</p>
+                        </div>
+                    </div>
+                    <div class="related">
+                        <div class="img-rel">
+                            <img class="img-s" src="/images/products/4073283.jpg" alt="">
+                            <h5>$1.748,00</h5>
+                            <h5>- / +</h5>
+                            <p>Cacerolas antiadherentes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <%- include('../partials/footer') %>
+  </body>
 </html>
