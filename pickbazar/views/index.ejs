@@ -29,7 +29,7 @@
     </div>
 
     <div class="container">
-      <div class="row" style="border-bottom: solid 1px #999;">
+      <div class="row" style="border-bottom: solid 1px #999;padding-bottom: 15px;">
 
         <div class="col-3 col-md-2">
           <a href="/" class="main-header_home-link">
@@ -51,7 +51,7 @@
               <i class="fas fa-bars"></i>
             </button>
 
-            <div class="col-9 col-md-3" style="display: flex; justify-content: space-between;">
+            <div class="col-9 col-md-3 login-cart">
               <a href="/login">Login <i class="fas fa-address-card"></i></a>
 
               <a class="cart" href="#">Carrito <i class="fas fa-shopping-cart"></i></a>
@@ -59,7 +59,7 @@
           </div>
 
           <nav class="row">
-            <div class="col-md-9 prueba">
+            <div class="col-md-9 menu-wrapper">
               <div class="main-navbar">
                 <a href="#">COCINA</a>
                 <ul class="cocina">
@@ -106,24 +106,19 @@
               </div>
 
               <div class="main-navbar">
-                <a style="color:dimgray;" href="#">ADMINISTRADOR</a>
+                <a style="color:var(--light-orange);" href="#">ADMINISTRADOR</a>
               </div>
             </div>
           </nav>
 
-          <!--<nav class="row">
-            
-            <ul class="col-md-12 col-lg-12 main-navbar">
-              <li><a href="#">COCINA</a></li>
-              <li><a href="#">BAÑO</a></li>
-              <li><a href="#">DECORACIÓN</a></li>
-              <li><a href="#">ARTÍCULOS LIMPIEZA</a></li>
-              <li><a href="#">PROMOCIONES</a></li>
-            </ul>
-          </nav>
-  
-          <div class="cocina">
-            <ul>
+          <nav class="mobile-navbar">
+            <span><a href="#">
+                <h3>COCINA</h3>
+              </a>
+              <h3>>></h3>
+            </span>
+
+            <ul class="cocina">
               <li><a href="#">CACEROLAS</a></li>
               <li><a href="#">PAVAS</a></li>
               <li><a href="#">JARROS</a></li>
@@ -131,31 +126,54 @@
               <li><a href="#">SARTENES</a></li>
               <li><a href="#">ACCESORIOS</a></li>
             </ul>
-          </div>
-          <div class="baño">
-            <ul>
+
+            <span><a href="#">
+              <h3>BAÑO</h3>
+            </a>
+            <h3>>></h3>
+          </span>
+            <ul class="baño">
               <li><a href="#">CESTOS</a></li>
               <li><a href="#">CANASTOS</a></li>
               <li><a href="#">ALFOMBRAS</a></li>
               <li><a href="#">LIMAS</a></li>
               <li><a href="#">ESPONJAS</a></li>
             </ul>
-          </div>
-          <div class="decoracion">
-            <ul>
+
+            <span><a href="#">
+                <h3>DECORACIÓN</h3>
+              </a>
+              <h3>>></h3>
+            </span>
+            <ul class="decoracion">
               <li><a href="#">RELOJES</a></li>
               <li><a href="#">ESPEJOS</a></li>
               <li><a href="#">CUADROS</a></li>
               <li><a href="#">VELAS</a></li>
               <li><a href="#">FAROLES</a></li>
             </ul>
-          </div>
-          <div class="limpieza">
-            <ul>
+
+            <span><a href="#">
+                <h3>LIMPIEZA</h3>
+              </a>
+              <h3>>></h3>
+            </span>
+            <ul class="limpieza">
               <li><a href="#">MOPAS</a></li>
             </ul>
-          </div>
-        </div>-->
+
+            <span><a href="#">
+                <h3>PROMOCIONES</h3>
+              </a>
+              <h3>>></h3>
+            </span>
+            <span><a style="color:var(--light-orange);" href="#">
+              <h3>ADMINISTRADOR</h3>
+            </a>
+            <h3 style="color:var(--light-orange);">>></h3>
+          </span>
+            
+
         </div>
       </div>
     </div>
@@ -359,6 +377,7 @@
     </div>
   </div>
   <!-- /Nuevos Productos -->
+
   <!-- /Newsletter -->
   <section class="main-newsletter">
     <div class="container">

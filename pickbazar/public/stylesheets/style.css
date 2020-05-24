@@ -1,19 +1,13 @@
-/*====== Fonts ======
-@import url('https://fonts.google.com/specimen/Hind?category=Serif,Sans+Serif');
-*/
-
 /*====== Variables ======*/
 :root {
   --orange:#f58220;
-  --yellow: #EAC926;
+  --light-orange:#f1b580;
   --dark-blue: #03264C;
   --light-blue: #1259c3;
   --gray: #666666;
   --light-gray: #ebebeb;
-  --green: #39b54a;
-  --base-font-family: 'Hind', sans-serif
+  --base-font-family: 'Montserrat', sans-serif
 }
-
 
 /*====== Basics ======*/
 * {
@@ -116,7 +110,10 @@ hr {
   color: var(--gray);
   cursor: pointer;
 }
-
+.login-cart{
+  display: flex;
+  justify-content: space-between;
+}
 
 /*====== Main Navbar ======*/
 .btn-toggle-navbar {
@@ -131,22 +128,45 @@ hr {
   -margin:0 0 0 30px ;
 }
 
-.cart{
-  -margin: 0 0 0 30px;
+.mobile-navbar{
+  position: absolute;
+  top: 30px;
+  right: 15px;
+  width: 180px;
+  background-color: var(--orange);
+  padding: 5px;
+  border-radius: 5px;
+  border-top: solid 3px var(--gray);
+  border-bottom: solid 3px var(--gray);
+  z-index: 1;
 }
 
+.mobile-navbar span {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.mobile-navbar h3{
+  margin: 5px 0 2px 0;
+}
+
+.mobile-navbar ul{
+  border-bottom: solid 2px var(--light-orange);
+  padding: 2px 0 6px 0;
+  border-radius: 2px;
+}
+
+.mobile-navbar li{
+  margin-top: 2px;
+}
+
+.mobile-navbar a{
+  font-size: 1.2em;
+}
 .main-navbar {
-  margin-top: 20px;
   display: none;
 }
-
-.cocina,
-.baño,
-.decoracion,
-.limpieza{
-  display: none;
-  }
-
 
 /*====== Banner ======*/
 .banner {
@@ -156,7 +176,6 @@ hr {
   background-position: center center;
   height: 285px;
 }
-
 
 /*====== Products ======*/
 .products-wrapper {
@@ -373,18 +392,25 @@ hr {
   .cart{
     margin: 0;
   }
-  .prueba{
+  .menu-wrapper{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    margin-left: 2%;
+  }
+
+  .mobile-navbar{
+    display: none;
   }
 
   .main-navbar{
     display: inline-block;
-    -display: flex;
-    -flex-wrap: wrap;
-    -align-items: center;
-    -justify-content: space-between;
+    margin-top: 3%;
+    /*display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    */
   }
 
   .main-navbar a {
@@ -426,10 +452,13 @@ hr {
   .limpieza ul a:hover{
     color: var(--orange);
   }
-  .cocina{margin: 5px 0 0 0;}
-  .baño{margin:5px 0 0 0;}
-  .decoracion{margin: 5px 0 0 0;}
-  .limpieza{margin: 5px 0 0 0;}
+
+  .cocina,
+  .baño,
+  .decoracion,
+  .limpieza{
+    margin: 5px 0 0 0;
+  }
 
   .main-footer {
     padding: 40px 0;
