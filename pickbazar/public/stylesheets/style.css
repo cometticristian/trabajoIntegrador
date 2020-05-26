@@ -70,8 +70,6 @@ hr {
   padding: 15px 0;
 }
 
-.main-header_home-link,
-
 .news{
   background-color: black;
   color: white;
@@ -94,8 +92,8 @@ hr {
   position: relative;
   display: flex;
   align-items: center;
-  width: 70%;
-  margin-bottom: 30px;
+  -width: 70%;
+  margin-bottom: 10px;
 }
 
 .search-form_input {
@@ -110,7 +108,7 @@ hr {
 
 .search-form_button {
   position: absolute;
-  right: 2px;
+  right: 5px;
   height: 60%;
   background-color: #ffffff;
   border: none;
@@ -130,11 +128,11 @@ hr {
   padding: 5px;
   display: block;
   height: 25px;
-  margin:0 0 0 30px ;
+  -margin:0 0 0 30px ;
 }
 
 .cart{
-  margin: 0 0 0 30px;
+  -margin: 0 0 0 30px;
 }
 
 .main-navbar {
@@ -156,14 +154,14 @@ hr {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  height: 165px;
+  height: 285px;
 }
 
 
 /*====== Products ======*/
 .products-wrapper {
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .products-title {
@@ -234,7 +232,7 @@ hr {
   border-radius: 50%;
   position: absolute;
   top: 7%;
-  right: 7%;
+  right: 8%;
   background-color: #ffffff;
   display: flex;
   justify-content: center;
@@ -334,9 +332,15 @@ hr {
   font-weight: 300;
   line-height: 1.4em;
 }
+
 .footer-data a:hover{
   color: var(--orange);
   font-weight: 400;
+}
+
+.center-data{
+  display: flex;
+  justify-content: center;
 }
 
 .sub-footer {
@@ -359,7 +363,7 @@ hr {
   }
 
   .banner {
-    height: 300px;
+    height: 410px;
   }
 
   .btn-toggle-navbar {
@@ -369,13 +373,18 @@ hr {
   .cart{
     margin: 0;
   }
-
-  .main-navbar,
-  .main-navbar{
+  .prueba{
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     justify-content: space-between;
+  }
+
+  .main-navbar{
+    display: inline-block;
+    -display: flex;
+    -flex-wrap: wrap;
+    -align-items: center;
+    -justify-content: space-between;
   }
 
   .main-navbar a {
@@ -402,12 +411,14 @@ hr {
   .baño,
   .decoracion,
   .limpieza{
-    display: inline-block;
-    background-color: rgba(245, 130, 32, 0.5);
+    -display: inline-block;
+    display: block;
+    background-color: rgba(245, 130, 32, 0.7);
     border-left: solid 3px var(--orange);
     padding: 0 3px 0 5px;
     position: absolute;
     line-height: 20px;
+    z-index: 1;
   }
   .cocina ul a:hover,
   .baño ul a:hover,
@@ -416,9 +427,9 @@ hr {
     color: var(--orange);
   }
   .cocina{margin: 5px 0 0 0;}
-  .baño{margin:5px 0 0 16%;}
-  .decoracion{margin: 5px 0 0 31%;}
-  .limpieza{margin: 5px 0 0 45%;}
+  .baño{margin:5px 0 0 0;}
+  .decoracion{margin: 5px 0 0 0;}
+  .limpieza{margin: 5px 0 0 0;}
 
   .main-footer {
     padding: 40px 0;
@@ -428,18 +439,13 @@ hr {
 }
 
 @media (min-width: 992px) {
-  .cocina{margin: 5px 0 0 0;}
-  .baño{margin:5px 0 0 12%;}
-  .decoracion{margin: 5px 0 0 23%;}
-  .limpieza{margin: 5px 0 0 35%;}
-  .banner {height: 390px;}
   .footer-data {
-    width: 95%;
-    margin: auto;
+    -width: 95%;
+    -margin: auto;
     margin-top: 1em;
-    text-align: center;
     line-height: 2em;
   }
+
   .footer-data i {
     font-size: 2em;
   }
@@ -453,6 +459,14 @@ hr {
     line-height: 1.9em;
   }
 }
+/*
+  .cocina{margin: 5px 0 0 0;}
+  .baño{margin:5px 0 0 12%;}
+  .decoracion{margin: 5px 0 0 23%;}
+  .limpieza{margin: 5px 0 0 35%;}
+  .banner {height: 390px;}
+  
+
 @media (min-width: 1200px) {
   .cocina{margin: 5px 0 0 0;}
   .baño{margin:5px 0 0 13%;}

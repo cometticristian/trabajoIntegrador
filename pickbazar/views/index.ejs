@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,7 @@
   <link rel="stylesheet" href="/stylesheets/bootstrap-grid.min.css">
   <!-- Own Stylesheet -->
   <link rel="stylesheet" href="/stylesheets/style.css">
-  
+
 </head>
 
 <body>
@@ -26,36 +27,93 @@
         </div>
       </div>
     </div>
-    
-    <div class="container">  
+
+    <div class="container">
       <div class="row" style="border-bottom: solid 1px #999;">
-        
+
         <div class="col-3 col-md-2">
           <a href="/" class="main-header_home-link">
             <img src="/images/logo-pickBazar.jpg">
           </a>
         </div>
-        
+
         <div class="offset-1 col-8 col-md-9">
           <div class="row search">
-            
-            <form action="/search" method="GET" class="search-form">
-              <input type="text" name="keywords" placeholder="Buscar" class="search-form_input">
-              <button type="submit" class="search-form_button"><i class="fas fa-search"></i></button>
-            </form>
-            
-            
-            <button class="btn-toggle-navbar">
+
+            <div class="col-9 col-md-9">
+              <form action="/search" method="GET" class="search-form">
+                <input type="text" name="keywords" placeholder="Buscar" class="search-form_input">
+                <button type="submit" class="search-form_button"><i class="fas fa-search"></i></button>
+              </form>
+            </div>
+
+            <button class="offset-1 col-2 btn-toggle-navbar">
               <i class="fas fa-bars"></i>
             </button>
-            
-            <a href="/login">Login <i class="fas fa-address-card"></i></a>
-            
-            <a class="cart" href="/cart">Carrito <i class="fas fa-shopping-cart"></i></a>
+
+            <div class="col-9 col-md-3" style="display: flex; justify-content: space-between;">
+              <a href="/login">Login <i class="fas fa-address-card"></i></a>
+
+              <a class="cart" href="#">Carrito <i class="fas fa-shopping-cart"></i></a>
+            </div>
           </div>
-          
+
           <nav class="row">
-            <ul class="col-md-12 col-lg-9 main-navbar">
+            <div class="col-md-9 prueba">
+              <div class="main-navbar">
+                <a href="#">COCINA</a>
+                <ul class="cocina">
+                  <li><a href="#">CACEROLAS</a></li>
+                  <li><a href="#">PAVAS</a></li>
+                  <li><a href="#">JARROS</a></li>
+                  <li><a href="#">FRASCOS</a></li>
+                  <li><a href="#">SARTENES</a></li>
+                  <li><a href="#">ACCESORIOS</a></li>
+                </ul>
+              </div>
+
+              <div class="main-navbar">
+                <a href="#">BAÑO</a>
+                <ul class="baño">
+                  <li><a href="#">CESTOS</a></li>
+                  <li><a href="#">CANASTOS</a></li>
+                  <li><a href="#">ALFOMBRAS</a></li>
+                  <li><a href="#">LIMAS</a></li>
+                  <li><a href="#">ESPONJAS</a></li>
+                </ul>
+              </div>
+
+              <div class="main-navbar">
+                <a href="#">DECORACIÓN</a>
+                <ul class="decoracion">
+                  <li><a href="#">RELOJES</a></li>
+                  <li><a href="#">ESPEJOS</a></li>
+                  <li><a href="#">CUADROS</a></li>
+                  <li><a href="#">VELAS</a></li>
+                  <li><a href="#">FAROLES</a></li>
+                </ul>
+              </div>
+
+              <div class="main-navbar">
+                <a href="#">LIMPIEZA</a>
+                <ul class="limpieza">
+                  <li><a href="#">MOPAS</a></li>
+                </ul>
+              </div>
+
+              <div class="main-navbar">
+                <a href="#">PROMOCIONES</a>
+              </div>
+
+              <div class="main-navbar">
+                <a style="color:dimgray;" href="#">ADMINISTRADOR</a>
+              </div>
+            </div>
+          </nav>
+
+          <!--<nav class="row">
+            
+            <ul class="col-md-12 col-lg-12 main-navbar">
               <li><a href="#">COCINA</a></li>
               <li><a href="#">BAÑO</a></li>
               <li><a href="#">DECORACIÓN</a></li>
@@ -63,7 +121,7 @@
               <li><a href="#">PROMOCIONES</a></li>
             </ul>
           </nav>
-          
+  
           <div class="cocina">
             <ul>
               <li><a href="#">CACEROLAS</a></li>
@@ -97,278 +155,289 @@
               <li><a href="#">MOPAS</a></li>
             </ul>
           </div>
+        </div>-->
         </div>
       </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<div class="banner"></div>
+  <div class="banner"></div>
 
-<!-- Productos aleatorios -->
-<div class="container products-wrapper">
-  <div class="row">
-    <div class="col-12">
-      <h2 class="products-title">Selección de productos</h2>
-    </div>
-    
-    
-    <div class="col-6 col-sm-4 col-lg-3">
-      <section class="product-box">
-        <a href="#">
-          <figure class="product-box_image">
-            <img src="/images/products/sarten-antiadherente-28cm.jpg" alt="imagen de sarten antiadherente 28cm">
-          </figure>
-          <article class="product-box_data">
-            <h2>$5000</h2>
-            <span>10% OFF</span>
-            <p>Sarten cerámico antiadherente - 28cm diámetro</p>
-          </article>
-          <a href="/products"><i class="fas fa-cart-plus"></i></a>
-        </a>
-      </section>
-    </div>
-    <div class="col-6 col-sm-4 col-lg-3">
-      <section class="product-box">
-        <a href="#">
-          <figure class="product-box_image">
-            <img src="/images/products/cesto-negro.jpg" alt="imagen de cesto de residuo negro con pedal 3 litros">
-          </figure>
-          <article class="product-box_data">
-            <h2>$5000</h2>
-            <span>10% OFF</span>
-            <p>Cesto de residuos con pedal Black&Gold - 3 litros</p>
-          </article>
-          <a href="/products"><i class="fas fa-cart-plus"></i></a>
-        </a>
-      </section>
-    </div>
-    <div class="col-6 col-sm-4 col-lg-3">
-      <section class="product-box">
-        <a href="#">
-          <figure class="product-box_image">
-            <img src="/images/products/frasco-vidrio-decal-22cm.jpg" alt="imagen de frasco de vidrio 22cm">
-          </figure>
-          <article class="product-box_data">
-            <h2>$5000</h2>
-            <span>10% OFF</span>
-            <p>Frasco de vidrio con tapa Simple Home - 22cm.</p>
-          </article>
-          <a href="/products"><i class="fas fa-cart-plus"></i></a>
-        </a>
-      </section>
-    </div>
-    <div class="col-6 col-sm-4 col-lg-3">
-      <section class="product-box">
-        <a href="#">
-          <figure class="product-box_image">
-            <img src="/images/products/canasto-laundry-bamboo-marron.jpg" alt="imagen de canasto laundry marron">
-          </figure>
-          <article class="product-box_data">
-            <h2>$5000</h2>
-            <span>10% OFF</span>
-            <p>Canasto laundry chocolate - 40cm. diámetro</p>
-          </article>
-          <a href="/products"><i class="fas fa-cart-plus"></i></a>
-        </a>
-      </section>
-    </div>
-    <div class="col-6 col-sm-4 col-lg-3">
-      <section class="product-box">
-        <a href="#">
-          <figure class="product-box_image">
-            <img src="/images/products/cacerola-enlozada-x3.jpg" alt="imagen de cacerolas enlozadas set por 3">
-          </figure>
-          <article class="product-box_data">
-            <h2>$5000</h2>
-            <span>10% OFF</span>
-            <p>Cacerolas enlozadas con tapa de vidrio - 3 piezas 20, 22 y 24cm. </p>
-          </article>
-          <a href="/products"><i class="fas fa-cart-plus"></i></a>
-        </a>
-      </section>
-    </div>
-    <div class="col-6 col-sm-4 col-lg-3">
-      <section class="product-box">
-        <a href="#">
-          <figure class="product-box_image">
-            <img src="/images/products/mopa.jpg" alt="imagen de mopa con balde">
-          </figure>
-          <article class="product-box_data">
-            <h2>$5000</h2>
-            <span>10% OFF</span>
-            <p>Mopa con brazo extensible y balde centrífugo</p>
-          </article>
-          <a href="/products"><i class="fas fa-cart-plus"></i></a>
-        </a>
-      </section>
-    </div>
-    <div class="col-6 col-sm-4 col-lg-3">
-      <section class="product-box">
-        <a href="#">
-          <figure class="product-box_image">
-            <img src="/images/products/cubiertero.jpg" alt="imagen de cubiertero bamboo">
-          </figure>
-          <article class="product-box_data">
-            <h2>$5000</h2>
-            <span>10% OFF</span>
-            <p>Cubiertero de bamboo - 5 divisiones</p>
-          </article>
-          <a href="/products"><i class="fas fa-cart-plus"></i></a>
-        </a>
-      </section>
-    </div>
-    <div class="col-6 col-sm-4 col-lg-3">
-      <section class="product-box">
-        <a href="#">
-          <figure class="product-box_image">
-            <img src="/images/products/pava-silvadora-acero.jpg" alt="imagen de pava silvadora acero">
-          </figure>
-          <article class="product-box_data">
-            <h2>$5000</h2>
-            <span>10% OFF</span>
-            <p>Pava silvadora acero color cobre - 3 litros</p>
-          </article>
-          <a href="/products"><i class="fas fa-cart-plus"></i></a>
-        </a>
-      </section>
-    </div>
-    <!-- /Productos aleatorios -->
-    <!-- /Nuevos Productos -->
-    <div class="col-12">
-      <h2 class="products-title">Últimos lanzamientos</h2>
-    </div>
-    <div class="col-6 col-sm-4 col-lg-3">
-      <section class="product-box">
-        <a href="#">
-          <figure class="product-box_image">
-            <img src="/images/products/cacerola-antiadherente-x3.jpg" alt="imagen de set antiadherente 3 piezas">
-          </figure>
-          <article class="product-box_data">
-            <h2>$5000</h2>
-            <span>10% OFF</span>
-            <p>Set antiadherente con tapa de vidrio - 3 piezas 20, 24 y 24cm</p>
-          </article>
-          <i class="fas fa-cart-plus"></i>
-        </a>
-      </section>
-    </div>
-    <div class="col-6 col-sm-4 col-lg-3">
-      <section class="product-box">
-        <a href="#">
-          <figure class="product-box_image">
-            <img src="/images/products/canasto-laundry-tela-max.jpg" alt="imagen de canasto laundry de tela 58cm">
-          </figure>
-          <article class="product-box_data">
-            <h2>$5000</h2>
-            <span>10% OFF</span>
-            <p>Canasto laundry de tela - 58cm diámetro</p>
-          </article>
-          <i class="fas fa-cart-plus"></i>
-        </a>
-      </section>
-    </div>
-    <div class="col-6 col-sm-4 col-lg-3">
-      <section class="product-box">
-        <a href="#">
-          <figure class="product-box_image">
-            <img src="/images/products/cesto-elegance.jpg" alt="imagen de cesto de residuos Elegance">
-          </figure>
-          <article class="product-box_data">
-            <h2>$5000</h2>
-            <span>10% OFF</span>
-            <p>Cesto de residuos con pedal Elegance - 3 litros</p>
-          </article>
-          <i class="fas fa-cart-plus"></i>
-        </a>
-      </section>
-    </div>
-    <div class="col-6 col-sm-4 col-lg-3">
-      <section class="product-box">
-        <a href="#">
-          <figure class="product-box_image">
-            <img src="/images/products/bandeja-cama.jpg" alt="imagen de bandeja para desayunar en lacama">
-          </figure>
-          <article class="product-box_data">
-            <h2>$5000</h2>
-            <span>10% OFF</span>
-            <p>Bandeja de bamboo para desayunar en la cama</p>
-          </article>
-          <i class="fas fa-cart-plus"></i>
-        </a>
-      </section>
-    </div>
-  </div>
-</div>
-<!-- /Nuevos Productos -->
-<!-- /Newsletter -->
-<section class="main-newsletter">
-  <div class="container">
-    
+  <!-- Productos aleatorios -->
+  <div class="container products-wrapper">
     <div class="row">
       <div class="col-12">
-        <h3>Suscribite a nuestro newsletter y recibí novedades de descuentos y productos</h3>
+        <h2 class="products-title">Selección de productos</h2>
+      </div>
+
+
+      <div class="col-6 col-sm-4 col-lg-3">
+        <section class="product-box">
+          <a href="#">
+            <figure class="product-box_image">
+              <img src="/images/products/sarten-antiadherente-28cm.jpg" alt="imagen de sarten antiadherente 28cm">
+            </figure>
+            <article class="product-box_data">
+              <h2>$5000</h2>
+              <span>10% OFF</span>
+              <p>Sarten cerámico antiadherente - 28cm diámetro</p>
+            </article>
+            <a href="/products"><i class="fas fa-cart-plus"></i></a>
+          </a>
+        </section>
+      </div>
+      <div class="col-6 col-sm-4 col-lg-3">
+        <section class="product-box">
+          <a href="#">
+            <figure class="product-box_image">
+              <img src="/images/products/cesto-negro.jpg" alt="imagen de cesto de residuo negro con pedal 3 litros">
+            </figure>
+            <article class="product-box_data">
+              <h2>$5000</h2>
+              <span>10% OFF</span>
+              <p>Cesto de residuos con pedal Black&Gold - 3 litros</p>
+            </article>
+            <a href="/products"><i class="fas fa-cart-plus"></i></a>
+          </a>
+        </section>
+      </div>
+      <div class="col-6 col-sm-4 col-lg-3">
+        <section class="product-box">
+          <a href="#">
+            <figure class="product-box_image">
+              <img src="/images/products/frasco-vidrio-decal-22cm.jpg" alt="imagen de frasco de vidrio 22cm">
+            </figure>
+            <article class="product-box_data">
+              <h2>$5000</h2>
+              <span>10% OFF</span>
+              <p>Frasco de vidrio con tapa Simple Home - 22cm.</p>
+            </article>
+            <a href="/products"><i class="fas fa-cart-plus"></i></a>
+          </a>
+        </section>
+      </div>
+      <div class="col-6 col-sm-4 col-lg-3">
+        <section class="product-box">
+          <a href="#">
+            <figure class="product-box_image">
+              <img src="/images/products/canasto-laundry-bamboo-marron.jpg" alt="imagen de canasto laundry marron">
+            </figure>
+            <article class="product-box_data">
+              <h2>$5000</h2>
+              <span>10% OFF</span>
+              <p>Canasto laundry chocolate - 40cm. diámetro</p>
+            </article>
+            <a href="/products"><i class="fas fa-cart-plus"></i></a>
+          </a>
+        </section>
+      </div>
+      <div class="col-6 col-sm-4 col-lg-3">
+        <section class="product-box">
+          <a href="#">
+            <figure class="product-box_image">
+              <img src="/images/products/cacerola-enlozada-x3.jpg" alt="imagen de cacerolas enlozadas set por 3">
+            </figure>
+            <article class="product-box_data">
+              <h2>$5000</h2>
+              <span>10% OFF</span>
+              <p>Cacerolas enlozadas con tapa de vidrio - 3 piezas 20, 22 y 24cm. </p>
+            </article>
+            <a href="/products"><i class="fas fa-cart-plus"></i></a>
+          </a>
+        </section>
+      </div>
+      <div class="col-6 col-sm-4 col-lg-3">
+        <section class="product-box">
+          <a href="#">
+            <figure class="product-box_image">
+              <img src="/images/products/mopa.jpg" alt="imagen de mopa con balde">
+            </figure>
+            <article class="product-box_data">
+              <h2>$5000</h2>
+              <span>10% OFF</span>
+              <p>Mopa con brazo extensible y balde centrífugo</p>
+            </article>
+            <a href="/products"><i class="fas fa-cart-plus"></i></a>
+          </a>
+        </section>
+      </div>
+      <div class="col-6 col-sm-4 col-lg-3">
+        <section class="product-box">
+          <a href="#">
+            <figure class="product-box_image">
+              <img src="/images/products/cubiertero.jpg" alt="imagen de cubiertero bamboo">
+            </figure>
+            <article class="product-box_data">
+              <h2>$5000</h2>
+              <span>10% OFF</span>
+              <p>Cubiertero de bamboo - 5 divisiones</p>
+            </article>
+            <a href="/products"><i class="fas fa-cart-plus"></i></a>
+          </a>
+        </section>
+      </div>
+      <div class="col-6 col-sm-4 col-lg-3">
+        <section class="product-box">
+          <a href="#">
+            <figure class="product-box_image">
+              <img src="/images/products/pava-silvadora-acero.jpg" alt="imagen de pava silvadora acero">
+            </figure>
+            <article class="product-box_data">
+              <h2>$5000</h2>
+              <span>10% OFF</span>
+              <p>Pava silvadora acero color cobre - 3 litros</p>
+            </article>
+            <a href="/products"><i class="fas fa-cart-plus"></i></a>
+          </a>
+        </section>
+      </div>
+      <!-- /Productos aleatorios -->
+      <!-- /Nuevos Productos -->
+      <div class="col-12">
+        <h2 class="products-title">Últimos lanzamientos</h2>
+      </div>
+      <div class="col-6 col-sm-4 col-lg-3">
+        <section class="product-box">
+          <a href="#">
+            <figure class="product-box_image">
+              <img src="/images/products/cacerola-antiadherente-x3.jpg" alt="imagen de set antiadherente 3 piezas">
+            </figure>
+            <article class="product-box_data">
+              <h2>$5000</h2>
+              <span>10% OFF</span>
+              <p>Set antiadherente con tapa de vidrio - 3 piezas 20, 24 y 24cm</p>
+            </article>
+            <i class="fas fa-cart-plus"></i>
+          </a>
+        </section>
+      </div>
+      <div class="col-6 col-sm-4 col-lg-3">
+        <section class="product-box">
+          <a href="#">
+            <figure class="product-box_image">
+              <img src="/images/products/canasto-laundry-tela-max.jpg" alt="imagen de canasto laundry de tela 58cm">
+            </figure>
+            <article class="product-box_data">
+              <h2>$5000</h2>
+              <span>10% OFF</span>
+              <p>Canasto laundry de tela - 58cm diámetro</p>
+            </article>
+            <i class="fas fa-cart-plus"></i>
+          </a>
+        </section>
+      </div>
+      <div class="col-6 col-sm-4 col-lg-3">
+        <section class="product-box">
+          <a href="#">
+            <figure class="product-box_image">
+              <img src="/images/products/cesto-elegance.jpg" alt="imagen de cesto de residuos Elegance">
+            </figure>
+            <article class="product-box_data">
+              <h2>$5000</h2>
+              <span>10% OFF</span>
+              <p>Cesto de residuos con pedal Elegance - 3 litros</p>
+            </article>
+            <i class="fas fa-cart-plus"></i>
+          </a>
+        </section>
+      </div>
+      <div class="col-6 col-sm-4 col-lg-3">
+        <section class="product-box">
+          <a href="#">
+            <figure class="product-box_image">
+              <img src="/images/products/bandeja-cama.jpg" alt="imagen de bandeja para desayunar en lacama">
+            </figure>
+            <article class="product-box_data">
+              <h2>$5000</h2>
+              <span>10% OFF</span>
+              <p>Bandeja de bamboo para desayunar en la cama</p>
+            </article>
+            <i class="fas fa-cart-plus"></i>
+          </a>
+        </section>
       </div>
     </div>
-    <div class="row">
-      <div class=" col-12 newsletter">
-        <form action="/newslleter" method="POST" class="newsletter-form">
-          <input type="email" name="subscribe" placeholder="Ingresa tu email" class="newsletter_input">
-          <button type="submit" class="newsletter-form_button">Enviar <i class="far fa-paper-plane"></i></button>
-        </form>
-      </div>  
-    </div>
   </div>
-</div>
-</div>
-</section>
-<!--/Newsletter-->
-<!--/Footer-->
-<footer class="main-footer">
-  <div class="container">
-    <div class="row">
-      <div class="col-6 col-lg-4">
-        <article class="footer-data">
-          <h2>COMPRÁ  <i class="fas fa-shopping-bag"></i></h2>
-          <ul>
-            <li><a href="#">Cocina</a></li>
-            <li><a href="#">Baño</a></li>
-            <li><a href="#">Decoración</a></li>
-            <li><a href="#">Artículos limpieza</a></li>
-            <li><a href="#">promociones</a></li>
-          </ul>
-        </article>
+  <!-- /Nuevos Productos -->
+  <!-- /Newsletter -->
+  <section class="main-newsletter">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-12">
+          <h3>Suscribite a nuestro newsletter y recibí novedades de descuentos y productos</h3>
+        </div>
       </div>
-      <div class="col-6 col-lg-4">
-        <article class="footer-data">
-          <h2>CONTACTO  <i class="fas fa-id-card"></i></h2>
-          <ul>
-            <li><a href="mailto:info@pickbazar.com.ar">info@pickbazar.com.ar</a></li>
-            <li><a href="tel:+541143708900">+54 11 4370 8900</a></li>
-          </ul>
-        </article>
-        <article class="footer-data">
-          <a href="https://www.facebook.com/pickbazar" style="margin-right: 5px;"><i class="fab fa-facebook"></i></a>
-          <a href="https://www.instagram.com/pickbazar/" style="margin-left: 5px;"><i class="fab fa-instagram"></i></a>
-        </article>
-      </div>
-      <div class="col-6 col-lg-4">
-        <article class="footer-data">
-          <h2>NOSOTROS  <i class="fas fa-users"></i></h2>
-          <ul>
-            <li><a href="#">Conocenos</a></li>
-            <li><a href="#">F.A.Q.</a></li>
-          </ul>
-        </article>
+      <div class="row">
+        <div class=" col-12 newsletter">
+          <form action="/newslleter" method="POST" class="newsletter-form">
+            <input type="email" name="subscribe" placeholder="Ingresa tu email" class="newsletter_input">
+            <button type="submit" class="newsletter-form_button">Enviar <i class="far fa-paper-plane"></i></button>
+          </form>
+        </div>
       </div>
     </div>
+    </div>
+    </div>
+  </section>
+  <!--/Newsletter-->
+  <!--/Footer-->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-4 col-lg-4">
+          <div class="center-data">
+            <article class="footer-data">
+              <h2>COMPRÁ <i class="fas fa-shopping-bag"></i></h2>
+              <ul>
+                <li><a href="#">Cocina</a></li>
+                <li><a href="#">Baño</a></li>
+                <li><a href="#">Decoración</a></li>
+                <li><a href="#">Artículos limpieza</a></li>
+                <li><a href="#">promociones</a></li>
+              </ul>
+            </article>
+          </div>
+        </div>
+
+        <div class="col-4 col-lg-4">
+          <div class="center-data">
+            <article class="footer-data">
+              <h2>CONTACTO <i class="fas fa-id-card"></i></h2>
+              <ul>
+                <li><a href="mailto:info@pickbazar.com.ar">info@pickbazar.com.ar</a></li>
+                <li><a href="tel:+541143708900">+54 11 4370 8900</a></li>
+                <li>
+                  <a href="https://www.facebook.com/pickbazar" style="margin-right: 5px;"><i
+                      class="fab fa-facebook"></i></a>
+                  <a href="https://www.instagram.com/pickbazar/" style="margin-left: 5px;"><i
+                      class="fab fa-instagram"></i></a>
+                </li>
+              </ul>
+            </article>
+          </div>
+        </div>
+        <div class="col-4 col-lg-4">
+          <div class="center-data">
+            <article class="footer-data">
+              <h2>ABOUT US <i class="fas fa-users"></i></h2>
+              <ul>
+                <li><a href="#">Conocenos</a></li>
+                <li><a href="#">F.A.Q.</a></li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <div class="sub-footer">
+    <div class="container">
+      <p>Copyright 3Group.TT14 © 2020 </p>
+    </div>
   </div>
-</footer>
-<div class="sub-footer">
-  <div class="container">
-    <p>Copyright 3Group.TT14 © 2020 </p>
-  </div>
-</div>
-<!--/Footer-->
+  <!--/Footer-->
 </body>
+
 </html>
