@@ -29,7 +29,7 @@
     </div>
 
     <div class="container">
-      <div class="row" style="border-bottom: solid 1px #999;">
+      <div class="row" style="border-bottom: solid 1px #999;padding-bottom: 15px;">
 
         <div class="col-3 col-md-2">
           <a href="/" class="main-header_home-link">
@@ -51,79 +51,74 @@
               <i class="fas fa-bars"></i>
             </button>
 
-            <div class="col-9 col-md-3" style="display: flex; justify-content: space-between;">
+            <div class="col-9 col-md-3 login-cart">
               <a href="/login">Login <i class="fas fa-address-card"></i></a>
 
-              <a class="cart" href="#">Carrito <i class="fas fa-shopping-cart"></i></a>
+              <a class="cart" href="/cart">Carrito <i class="fas fa-shopping-cart"></i></a>
             </div>
           </div>
 
           <nav class="row">
-            <div class="col-md-9 prueba">
+            <div class="col-md-9 menu-wrapper">
               <div class="main-navbar">
-                <a href="#">COCINA</a>
+                <a href="/products">COCINA</a>
                 <ul class="cocina">
-                  <li><a href="#">CACEROLAS</a></li>
-                  <li><a href="#">PAVAS</a></li>
-                  <li><a href="#">JARROS</a></li>
-                  <li><a href="#">FRASCOS</a></li>
-                  <li><a href="#">SARTENES</a></li>
-                  <li><a href="#">ACCESORIOS</a></li>
+                  <li><a href="/products">CACEROLAS</a></li>
+                  <li><a href="/products">PAVAS</a></li>
+                  <li><a href="/products">JARROS</a></li>
+                  <li><a href="/products">FRASCOS</a></li>
+                  <li><a href="#/products">SARTENES</a></li>
+                  <li><a href="/products">ACCESORIOS</a></li>
                 </ul>
               </div>
 
               <div class="main-navbar">
-                <a href="#">BAÑO</a>
+                <a href="/products">BAÑO</a>
                 <ul class="baño">
-                  <li><a href="#">CESTOS</a></li>
-                  <li><a href="#">CANASTOS</a></li>
-                  <li><a href="#">ALFOMBRAS</a></li>
-                  <li><a href="#">LIMAS</a></li>
-                  <li><a href="#">ESPONJAS</a></li>
+                  <li><a href="/products">CESTOS</a></li>
+                  <li><a href="/products">CANASTOS</a></li>
+                  <li><a href="/products">ALFOMBRAS</a></li>
+                  <li><a href="/products">LIMAS</a></li>
+                  <li><a href="/products">ESPONJAS</a></li>
                 </ul>
               </div>
 
               <div class="main-navbar">
-                <a href="#">DECORACIÓN</a>
+                <a href="/products">DECORACIÓN</a>
                 <ul class="decoracion">
-                  <li><a href="#">RELOJES</a></li>
-                  <li><a href="#">ESPEJOS</a></li>
-                  <li><a href="#">CUADROS</a></li>
-                  <li><a href="#">VELAS</a></li>
-                  <li><a href="#">FAROLES</a></li>
+                  <li><a href="/products">RELOJES</a></li>
+                  <li><a href="/products">ESPEJOS</a></li>
+                  <li><a href="/products">CUADROS</a></li>
+                  <li><a href="/products">VELAS</a></li>
+                  <li><a href="/products">FAROLES</a></li>
                 </ul>
               </div>
 
               <div class="main-navbar">
-                <a href="#">LIMPIEZA</a>
+                <a href="/products">LIMPIEZA</a>
                 <ul class="limpieza">
-                  <li><a href="#">MOPAS</a></li>
+                  <li><a href="/products">MOPAS</a></li>
                 </ul>
               </div>
 
               <div class="main-navbar">
-                <a href="#">PROMOCIONES</a>
+                <a href="/products">PROMOCIONES</a>
               </div>
 
               <div class="main-navbar">
-                <a style="color:dimgray;" href="#">ADMINISTRADOR</a>
+                <a style="color:var(--light-orange);" href="products/create">ADMINISTRADOR</a>
               </div>
             </div>
           </nav>
 
-          <!--<nav class="row">
-            
-            <ul class="col-md-12 col-lg-12 main-navbar">
-              <li><a href="#">COCINA</a></li>
-              <li><a href="#">BAÑO</a></li>
-              <li><a href="#">DECORACIÓN</a></li>
-              <li><a href="#">ARTÍCULOS LIMPIEZA</a></li>
-              <li><a href="#">PROMOCIONES</a></li>
-            </ul>
-          </nav>
-  
-          <div class="cocina">
-            <ul>
+          <nav class="mobile-navbar">
+            <span><a href="#">
+                <h3>COCINA</h3>
+              </a>
+              <h3>>></h3>
+            </span>
+
+            <ul class="cocina">
               <li><a href="#">CACEROLAS</a></li>
               <li><a href="#">PAVAS</a></li>
               <li><a href="#">JARROS</a></li>
@@ -131,31 +126,54 @@
               <li><a href="#">SARTENES</a></li>
               <li><a href="#">ACCESORIOS</a></li>
             </ul>
-          </div>
-          <div class="baño">
-            <ul>
+
+            <span><a href="#">
+              <h3>BAÑO</h3>
+            </a>
+            <h3>>></h3>
+          </span>
+            <ul class="baño">
               <li><a href="#">CESTOS</a></li>
               <li><a href="#">CANASTOS</a></li>
               <li><a href="#">ALFOMBRAS</a></li>
               <li><a href="#">LIMAS</a></li>
               <li><a href="#">ESPONJAS</a></li>
             </ul>
-          </div>
-          <div class="decoracion">
-            <ul>
+
+            <span><a href="#">
+                <h3>DECORACIÓN</h3>
+              </a>
+              <h3>>></h3>
+            </span>
+            <ul class="decoracion">
               <li><a href="#">RELOJES</a></li>
               <li><a href="#">ESPEJOS</a></li>
               <li><a href="#">CUADROS</a></li>
               <li><a href="#">VELAS</a></li>
               <li><a href="#">FAROLES</a></li>
             </ul>
-          </div>
-          <div class="limpieza">
-            <ul>
+
+            <span><a href="#">
+                <h3>LIMPIEZA</h3>
+              </a>
+              <h3>>></h3>
+            </span>
+            <ul class="limpieza">
               <li><a href="#">MOPAS</a></li>
             </ul>
-          </div>
-        </div>-->
+
+            <span><a href="#">
+                <h3>PROMOCIONES</h3>
+              </a>
+              <h3>>></h3>
+            </span>
+            <span><a style="color:var(--light-orange);" href="#">
+              <h3>ADMINISTRADOR</h3>
+            </a>
+            <h3 style="color:var(--light-orange);">>></h3>
+          </span>
+            
+
         </div>
       </div>
     </div>
@@ -173,7 +191,7 @@
 
       <div class="col-6 col-sm-4 col-lg-3">
         <section class="product-box">
-          <a href="#">
+          <a href="/products/detail/1">
             <figure class="product-box_image">
               <img src="/images/products/sarten-antiadherente-28cm.jpg" alt="imagen de sarten antiadherente 28cm">
             </figure>
@@ -182,13 +200,13 @@
               <span>10% OFF</span>
               <p>Sarten cerámico antiadherente - 28cm diámetro</p>
             </article>
-            <a href="/products"><i class="fas fa-cart-plus"></i></a>
+            <a href="/cart"><i class="fas fa-cart-plus"></i></a>
           </a>
         </section>
       </div>
       <div class="col-6 col-sm-4 col-lg-3">
         <section class="product-box">
-          <a href="#">
+          <a href="/products/detail/1">
             <figure class="product-box_image">
               <img src="/images/products/cesto-negro.jpg" alt="imagen de cesto de residuo negro con pedal 3 litros">
             </figure>
@@ -197,13 +215,13 @@
               <span>10% OFF</span>
               <p>Cesto de residuos con pedal Black&Gold - 3 litros</p>
             </article>
-            <a href="/products"><i class="fas fa-cart-plus"></i></a>
+            <a href="/cart"><i class="fas fa-cart-plus"></i></a>
           </a>
         </section>
       </div>
       <div class="col-6 col-sm-4 col-lg-3">
         <section class="product-box">
-          <a href="#">
+          <a href="/products/detail/1">
             <figure class="product-box_image">
               <img src="/images/products/frasco-vidrio-decal-22cm.jpg" alt="imagen de frasco de vidrio 22cm">
             </figure>
@@ -212,13 +230,13 @@
               <span>10% OFF</span>
               <p>Frasco de vidrio con tapa Simple Home - 22cm.</p>
             </article>
-            <a href="/products"><i class="fas fa-cart-plus"></i></a>
+            <a href="/cart"><i class="fas fa-cart-plus"></i></a>
           </a>
         </section>
       </div>
       <div class="col-6 col-sm-4 col-lg-3">
         <section class="product-box">
-          <a href="#">
+          <a href="/products/detail/1">
             <figure class="product-box_image">
               <img src="/images/products/canasto-laundry-bamboo-marron.jpg" alt="imagen de canasto laundry marron">
             </figure>
@@ -227,13 +245,13 @@
               <span>10% OFF</span>
               <p>Canasto laundry chocolate - 40cm. diámetro</p>
             </article>
-            <a href="/products"><i class="fas fa-cart-plus"></i></a>
+            <a href="/cart"><i class="fas fa-cart-plus"></i></a>
           </a>
         </section>
       </div>
       <div class="col-6 col-sm-4 col-lg-3">
         <section class="product-box">
-          <a href="#">
+          <a href="/products/detail/1">
             <figure class="product-box_image">
               <img src="/images/products/cacerola-enlozada-x3.jpg" alt="imagen de cacerolas enlozadas set por 3">
             </figure>
@@ -242,7 +260,7 @@
               <span>10% OFF</span>
               <p>Cacerolas enlozadas con tapa de vidrio - 3 piezas 20, 22 y 24cm. </p>
             </article>
-            <a href="/products"><i class="fas fa-cart-plus"></i></a>
+            <a href="/cart"><i class="fas fa-cart-plus"></i></a>
           </a>
         </section>
       </div>
@@ -359,6 +377,7 @@
     </div>
   </div>
   <!-- /Nuevos Productos -->
+
   <!-- /Newsletter -->
   <section class="main-newsletter">
     <div class="container">

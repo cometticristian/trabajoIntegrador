@@ -1,11 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- Font Awesome Stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <!-- Bootstrap Grid Stylesheet -->
+    <link rel="stylesheet" href="/stylesheets/bootstrap-grid.min.css">
+    <!-- Own Stylesheet -->
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/products-create.css">
 </head>
+
 <body>
-    CREAR PRODUCTO
+    <div class="container-fluid">
+        <header class="row">
+            <div class="head col-12">
+                <i class="menu fas fa-bars"></i>
+                <h1 class="title">FORMULARIO DE CARGA INDIVIDUAL</h1>
+            </div>
+        </header>
+    </div>
+    <section class="container">
+        <div class="left">
+            <div class="sec2">
+                <form action="/products/create" method="POST">
+                    <div class="form">
+                        <select name="category" id="category" class="select">
+                            <option value="0">SELECCIONE CATEGORIA</option>
+                            <option value="1">COCINA</option>
+                            <option value="2">BAÑO</option>
+                            <option value="3">DECORACION</option>
+                            <option value="4">ARTICULOS DE LIMPIEZA</option>
+                        </select>
+                        <select name="sub-category" id="sub-category" class="select">
+                            <option value="0a">SELECCIONE SUB CATEGORIA</option>
+                            <option value="1a">SARTEN</option>
+                            <option value="1b">OLLA</option>
+                            <option value="1c">PLATO</option>
+                        </select>
+                    </div>
+            </div>
+            <div class="sec4">
+
+                <div class="form2">
+                    <label class="label-block" for="name">NOMBRE DEL PRODUCTO</label>
+                    <input class="input-block" type="text" name="name">
+                    <label class="label-block" for="brand">MARCA</label>
+                    <input class="input-block" type="text" name="brand">
+                    <label class="label-block" for="model">MODELO-DISEÑO</label>
+                    <input class="input-block" type="text" name="model">
+                    <label class="label-block" for="color">COLOR</label>
+                    <input class="input-block" type="text" name="color">
+                    <label class="label-block" for="description">DESCRIPCION</label>
+                    <textarea name="description" id="desc" cols="30" rows="10"></textarea>
+                </div>
+                <div class="form-price">
+                    <p class="font-price">
+                        <label for="price">PRECIO DE COSTO</label>
+                        <input class="input-price" type="number" name="price">
+                    </p>
+                    <p class="font-price">
+                        <label for="charge">RECARGO</label>
+                        <input class="input-price" type="number" name="charge">
+                    </p>
+                    <p class="font-price">
+                        <label for="model">IVA</label>
+                        <select name="model" id="" class="iva">
+                            <option value="10.5">21</option>
+                            <option value="21">10,5</option>
+                        </select>
+                    </p>
+                    <p class="font-price">
+                        <label for="desc">DESCUENTO</label>
+                        <input class="input-price" type="number" name="desc">
+                    </p>
+                    <p class="submit">
+                        <input class="send" type="submit" value="CARGAR PRODUCTO">
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="sec3">
+                <div class="photo main-photo">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <div class="photo photo-sec">
+                    <i class="fas fa-camera camera-sec"></i>
+                </div>
+                <div class="photo photo-sec">
+                    <i class="fas fa-camera camera-sec"></i>
+                </div>
+                <div class="photo photo-sec">
+                    <i class="fas fa-camera camera-sec"></i>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+    <div class="row masive-charge">
+        <div class="head col-12">
+            <h1 class="title2">CARGA MASIVA</h1>
+        </div>
+    </div>
+    </form>
+    <footer class="container-fluid">
+        <div class="foot">
+            <i class="fas fa-file-upload"></i>
+            <h2 class="upload-text">Subir lista de excel</h2>
+        </div>
+    </footer>
 </body>
+
 </html>
