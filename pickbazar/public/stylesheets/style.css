@@ -1,4 +1,4 @@
-/*====== Variables ======*/
+/*====== Variables ======
 :root {
   --orange:#f58220;
   --light-orange:#f1b580;
@@ -7,9 +7,8 @@
   --gray: #666666;
   --light-gray: #ebebeb;
   --base-font-family: 'Montserrat', sans-serif
-}
+}*/
 
-/*====== Basics ======*/
 * {
   box-sizing: border-box;
 }
@@ -55,7 +54,7 @@ textarea {
 
 hr {
   border: none;
-  border-bottom: solid 1px var(--light-gray);
+  border-bottom: solid 1px #ebebeb;
 }
 
 
@@ -91,7 +90,7 @@ hr {
 }
 
 .search-form_input {
-  -border: solid 1px var(--light-gray);
+  -border: solid 1px #ebebeb;
   display: block;
   width: 100%;
   padding: 7px 35px 7px 7px;
@@ -106,8 +105,8 @@ hr {
   height: 60%;
   background-color: #ffffff;
   border: none;
-  border-left: solid 1px var(--light-gray);
-  color: var(--gray);
+  border-left: solid 1px #ebebeb;
+  color: #666;
   cursor: pointer;
 }
 .login-cart{
@@ -117,7 +116,7 @@ hr {
 
 /*====== Main Navbar ======*/
 .btn-toggle-navbar {
-  background-color: var(--orange);
+  background-color: #f58220;
   color: #ffffff;
   font-size: 1.5em;
   border: none;
@@ -133,11 +132,11 @@ hr {
   top: 30px;
   right: 15px;
   width: 180px;
-  background-color: var(--orange);
+  background-color: #f58220;
   padding: 5px;
   border-radius: 5px;
-  border-top: solid 3px var(--gray);
-  border-bottom: solid 3px var(--gray);
+  border-top: solid 3px #666;
+  border-bottom: solid 3px #666;
   z-index: 1;
 }
 
@@ -152,7 +151,7 @@ hr {
 }
 
 .mobile-navbar ul{
-  border-bottom: solid 2px var(--light-orange);
+  border-bottom: solid 2px #f1b580;
   padding: 2px 0 6px 0;
   border-radius: 2px;
 }
@@ -187,8 +186,8 @@ hr {
   font-size: 2.8em;
   font-weight: 400;
   text-align: center;
-  color: var(--gray);
-  border-top: 1px solid var(--orange);
+  color: #666;
+  border-top: 1px solid #f58220;
   padding-top: 30px;
 }
 
@@ -205,7 +204,7 @@ hr {
 }
 
 .product-box_image {
-  border-bottom: 1px solid var(--orange);
+  border-bottom: 1px solid #f58220;
 }
 
 .product-box_data {
@@ -227,7 +226,7 @@ hr {
 .product-box_data span {
   font-size: 1.2em;
   font-weight: 300;
-  color: var(--orange);
+  color: #f58220;
   margin: 0 0 0 10px;
   padding-left: 5px;
 }
@@ -236,7 +235,7 @@ hr {
   font-size: 1.2em;
   line-height: 1.5em;
   width: 100%;
-  color: var(--gray);
+  color: #666;
   margin: 15px 0 0 0;
   transition: 300ms;
   overflow: hidden;
@@ -246,7 +245,7 @@ hr {
 }
 
 .product-box i {
-  color: var(--orange);
+  color: #f58220;
   font-size: 1.5em;
   width: 28px;
   height: 28px;
@@ -276,12 +275,12 @@ hr {
   -transform: rotate(360deg);
   width: 30px;
   height: 30px;
-  box-shadow: 0 0 5px var(--orange);
+  box-shadow: 0 0 5px #f58220;
 }
 
 /*====== Newsletter ======*/
 .main-newsletter {
-  background-color:var(--orange);
+  background-color:#f58220;
   padding: 30px 0;
 }
 
@@ -338,7 +337,7 @@ hr {
 }
 
 .footer-data i {
-  color: var(--orange);
+  color: #f58220;
   font-size: 1.5em;
 }
 
@@ -357,8 +356,7 @@ hr {
 }
 
 .footer-data a:hover{
-  color: var(--orange);
-  font-weight: 400;
+  color: #f58220;
 }
 
 .center-data{
@@ -367,13 +365,13 @@ hr {
 }
 
 .sub-footer {
-  border-top: 1px solid var(--light-gray);
+  border-top: 1px solid #ebebeb;
   background-color: #ffffff;
 }
 
 .sub-footer p {
   margin: 0;
-  color: var(--gray);
+  color: #666;
   padding: 15px 0;
 }
 
@@ -425,7 +423,7 @@ hr {
 
   .main-navbar a:hover,
   .right-navbar a:hover {
-    color: var(--orange);
+    color: #f58220;
     font-weight: 600;
   }
 
@@ -444,7 +442,7 @@ hr {
     -display: inline-block;
     display: block;
     background-color: rgba(245, 130, 32, 0.7);
-    border-left: solid 3px var(--orange);
+    border-left: solid 3px #f58220;
     padding: 0 3px 0 5px;
     position: absolute;
     line-height: 20px;
@@ -454,7 +452,7 @@ hr {
   .baño ul a:hover,
   .decoracion ul a:hover,
   .limpieza ul a:hover{
-    color: var(--orange);
+    color: #f58220;
   }
 
   .cocina,
@@ -472,6 +470,7 @@ hr {
 }
 
 @media (min-width: 992px) {
+  
   .footer-data {
     -width: 95%;
     -margin: auto;
@@ -527,4 +526,10 @@ hr {
   border-radius: 50%;
   height: 100%;
   border: 1px solid #D1D1D1;
+}*/
+
+@media (min-width: 1440px) {
+.banner {
+    height: 560px;
+  }
 }
