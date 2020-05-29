@@ -7,6 +7,12 @@ const productsController = require('../controllers/productsController');
 /* GET - All products */
 router.get('/', productsController.root);
 
+/* GET - Product category */
+router.get('/category/:productCategory/', productsController.category);
+
+/* GET - Product subcategory */
+router.get('/subCategory/:productSubCategory/', productsController.subCategory);
+
 /* GET - Product detail */
 router.get('/detail/:productId/', productsController.detail);
 

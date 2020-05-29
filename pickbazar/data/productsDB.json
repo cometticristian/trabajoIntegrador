@@ -68,7 +68,7 @@
 		"discount": 10,
 		"image": "cubiertero.jpg",
 		"category": "cocina",
-		"subCategory":"accesorios",
+		"subCategory":"accesorio",
 		"important": "home"
 	}, {
 		"id": 8,
@@ -118,7 +118,7 @@
 		"discount": 15,
 		"image": "bandeja-cama.jpg",
 		"category": "cocina",
-		"subCategory":"accesorios",
+		"subCategory":"accesorio",
 		"important": "new"
 	}
 ]
