@@ -1,8 +1,4 @@
-/*====== Fonts ======
-@import url('https://fonts.google.com/specimen/Hind?category=Serif,Sans+Serif');
-*/
-
-/*====== Variables ======*/
+/*====== Variables ======
 :root {
   --orange:#f58220;
   --yellow: #EAC926;
@@ -12,7 +8,7 @@
   --light-gray: #ebebeb;
   --green: #39b54a;
   --base-font-family: 'Hind', sans-serif
-}
+}*/
 
 
 /*====== Basics ======*/
@@ -61,7 +57,7 @@ textarea {
 
 hr {
   border: none;
-  border-bottom: solid 1px var(--light-gray);
+  border-bottom: solid 1px #ebebeb;
 }
 /*Basics*/
 
@@ -69,10 +65,10 @@ hr {
     margin-top: 0;
 }
 .products-title{
-    font-size: 2em;
+    font-size: 18px;
     font-weight: 400;
     text-align: left;
-    color: var(--gray);
+    color: #666666;
     border-top: none;
     padding-top: 0;
 }

@@ -1,58 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+<%- include('../partials/head') %>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos</title>
-    <!-- Font Awesome Stylesheet -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-    <!-- Bootstrap Grid Stylesheet -->
-    <link rel="stylesheet" href="/stylesheets/bootstrap-grid.min.css">
-    <!-- Own Stylesheet -->
-    <link rel="stylesheet" href="/stylesheets/style.css">
     <link rel="stylesheet" href="/stylesheets/products-detail.css">
 </head>
+
 <body>
-  <%- include("../partials/headerNav") %>
+    <%- include("../partials/headerNav") %>
     <section>
         <div class="container">
             <div>
                 <ul class="list">
-                    <li> COCINA /</li>
-                    <li> CACEROLAS /</li>
-                    <li> SET ANTIADHERENTE ></li>
+                    <li>
+                        <a href="/products/category/<%=product.category%>">
+                            <h2 class="products-title"><%=product.category%></h2>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/products/subCategory/<%=product.subCategory%>">
+                            <h2 class="products-title">/ <%=product.subCategory%></h2>
+                        </a>
+                    </li>
+                    <li>
+                        <h2 class="products-title">/ <%=product.name%></h2>
+                    </li>
                 </ul>
             </div>
-            <div class="row">
-                <div class="small-img-box col-md-2">
-                    <div class="img-small"><img class="img-s" src="/images/products/4073283.jpg" alt=""></div>
-                    <div class="img-small"><img class="img-s" src="/images/products/4073283.jpg" alt=""></div>
-                    <div class="img-small"><img class="img-s" src="/images/products/4073283.jpg" alt=""></div>
-                    <div class="img-small"><img class="img-s" src="/images/products/4073283.jpg" alt=""></div>
-                </div>
-                <div class="img-box col-12 col-md-6">
-                    <img id="img1" src="/images/products/4073283.jpg" alt="">
-                    <%- include("../partials/slide-button") %>
+            <div class="row detail">
+                
+                <div class=" col-12 col-md-8">
+                    <div class="row">
+                        <div class="col-md-3 small-img-box">
+                            <div class="img-small">
+                                <img class="img-s" src="/images/products/<%=product.image%>" alt="">
+                            </div>
+                            <div class="img-small">
+                                <img class="img-s" src="/images/products/<%=product.image%>" alt="">
+                            </div>
+                            <div class="img-small">
+                                <img class="img-s" src="/images/products/<%=product.image%>" alt="">
+                            </div>
+                        </div>
+                        <div class=" col-12 col-md-9 img-box">
+                            <img id="img1" src="/images/products/<%=product.image%>" alt="">
+                            <%- include("../partials/slide-button") %>
+                        </div>
+                    </div>
                 </div>
                 <div class="description-box container col-12 col-md-4">
-                    <h2 class="description">
-                        SET ANTIADHERENTE 
-                    </h2>
-                    <h2 class="description">
-                        $5.500,00
-                    </h2>
-                    <h3 class="h3-detail description">
-                        DESCRIPCION
-                    </h3>
-                    <p class="p-detail description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni consectetur sint veritatis quos id dignissimos aperiam quibusdam a esse, ducimus accusantium dolore dolor sequi odio atque, harum quidem eaque cupiditate libero ullam, ratione blanditiis? Ipsum est, consectetur sed atque obcaecati tenetur, corrupti soluta perferendis omnis nobis ad reprehenderit. At, incidunt!
-                    </p>
-                    <div class="design-box">
-                        <div id="design1">Elegir Diseño</div>
-                        <div id="design2">⯆</div>
+                    <div>
+                        <h2 class="description"><%=product.name%></h2>
+                        <h2 class="description">Precio $<%=product.price%></h2>
+                        <h3 class="h3-detail description">DESCRIPCION</h3>
+                        <p class="p-detail description"><%=product.description%></p>
+                        <div class="design-box">
+                            <div id="design1">Elegir Diseño</div>
+                            <div id="design2">⯆</div>
+                        </div>
                     </div>
+                    
                     <div class="add-box">
-                        <div id="add1" class="add">Agregar al carrito</div>
+                        <div id="add1" class="add">
+                            <a href="/cart">Agregar al carrito</a>
+                        </div>
                         <div id="add2" class="add">1</div>
                     </div>
                 </div>
@@ -64,42 +75,28 @@
                     </div>
                 </div>
                 <div id="down2" class="col-12">
-                    <div class="related">
-                        <div class="img-rel">
-                            <img class="img-s" src="/images/products/4073283.jpg" alt="">
-                            <h5>$1.748,00</h5>
-                            <h5>- / +</h5>
-                            <p class="p-detail">Cacerolas antiadherentes</p>
+                    <% category.forEach(function(category){ %>
+                        <div class="col-6 col-sm-3 col-lg-3">
+                            <section class="product-box">
+                                <a href="/products/detail/<%=category.id%>">
+                                    <figure class="product-box_image">
+                                        <img src="/images/products/<%=category.image%>" alt="imagen de <%=category.name%>"">
+                                    </figure>
+                                    <article class=" product-box_data">
+                                        <h2>$<%=category.price%>"</h2>
+                                        <span><%=category.discount%>"% OFF</span>
+                                        <p><%=category.description%>"</p>
+                                    </article>
+                                    <a href="/cart"><i class="fas fa-cart-plus"></i></a>
+                                </a>
+                            </section>
                         </div>
-                    </div>
-                    <div class="related">
-                        <div class="img-rel">
-                            <img class="img-s" src="/images/products/4073283.jpg" alt="">
-                            <h5>$1.748,00</h5>
-                            <h5>- / +</h5>
-                            <p class="p-detail">Cacerolas antiadherentes</p>
-                        </div>
-                    </div>
-                    <div class="related">
-                        <div class="img-rel">
-                            <img class="img-s" src="/images/products/4073283.jpg" alt="">
-                            <h5>$1.748,00</h5>
-                            <h5>- / +</h5>
-                            <p class="p-detail">Cacerolas antiadherentes</p>
-                        </div>
-                    </div>
-                    <div class="related">
-                        <div class="img-rel">
-                            <img class="img-s" src="/images/products/4073283.jpg" alt="">
-                            <h5>$1.748,00</h5>
-                            <h5>- / +</h5>
-                            <p class="p-detail">Cacerolas antiadherentes</p>
-                        </div>
+                        <%})%>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <%- include('../partials/footer') %>
-  </body>
-</html>
+        </section>
+        <%- include('../partials/footer') %>
+    </body>
+    
+    </html>
