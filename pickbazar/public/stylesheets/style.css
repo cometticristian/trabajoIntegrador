@@ -241,7 +241,6 @@ hr {
   overflow: hidden;
   padding: 0 5px;
   min-height: 45px;
-  -height: 0;
 }
 
 .product-box i {
@@ -259,6 +258,7 @@ hr {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: cell;
   transition: 300ms;
 }
 
@@ -479,11 +479,11 @@ hr {
   }
 
   .footer-data i {
-    font-size: 2em;
+    font-size: 1.5em;
   }
   
   .footer-data h2 {
-    font-size: 2em;
+    font-size: 1.7em;
   }
   
   .footer-data a {

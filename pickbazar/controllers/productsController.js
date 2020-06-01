@@ -7,7 +7,7 @@ let products = JSON.parse(fs.readFileSync(productsDB, 'utf-8'));
 const controller = {
 	// Root - Show all products
 	root: (req, res, next) => {
-		res.render('./products/list', { category: products, nombreCategoria: "Todos los productos" })
+		res.render('./products/list', { category: products, nombreCategoria: "" })
 	},
 	
 	category: (req, res, next) => {
@@ -29,7 +29,7 @@ const controller = {
 				nombreCategoria = product.category
 			}
 		})
-		res.render('./products/list', { category: category, nombreCategoria: nombreCategoria + " / " + req.params.productSubCategory })
+		res.render('./products/list', { category: category, nombreCategoria: nombreCategoria + " || " + req.params.productSubCategory })
 	},
 	
 	// Detail - Detail from one product
@@ -47,7 +47,7 @@ const controller = {
 			}
 			
 		})
-		category=[category[0],category[1], category[2],category[3]];
+		//category=[category[0],category[1], category[2],category[3]];
 		res.render('./products/detail', {product:product, category:category})
 	},
 	
