@@ -47,7 +47,6 @@ const controller = {
 			}
 
 		})
-		category = [category[0], category[1], category[2], category[3]];
 		res.render('./products/detail', { product: product, category: category })
 	},
 
