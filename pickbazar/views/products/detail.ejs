@@ -14,16 +14,16 @@
                 <ul class="list">
                     <li>
                         <a href="/products/category/<%=product.category%>">
-                            <h2 class="products-title"><%=product.category%></h2>
+                            <h2 class="product-title"><%=product.category.toUpperCase()%> |</h2>
                         </a>
                     </li>
                     <li>
                         <a href="/products/subCategory/<%=product.subCategory%>">
-                            <h2 class="products-title">/ <%=product.subCategory%></h2>
+                            <h2 class="product-title">| <%=product.subCategory.toUpperCase();%> |</h2>
                         </a>
                     </li>
                     <li>
-                        <h2 class="products-title">/ <%=product.name%></h2>
+                        <h2 class="product-title">| <%=product.name.toUpperCase();%></h2>
                     </li>
                 </ul>
             </div>
