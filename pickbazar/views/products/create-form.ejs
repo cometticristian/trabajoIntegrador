@@ -21,18 +21,18 @@
             <div class="sec2">
                 <form action="/products/create" method="POST">
                     <div class="form">
-                        <select name="category" id="category" class="select">
+                        <select name="pickCategory" id="category" class="select">
                             <option value="0">SELECCIONE CATEGORIA</option>
-                            <option value="1">COCINA</option>
-                            <option value="2">BAÑO</option>
-                            <option value="3">DECORACION</option>
-                            <option value="4">ARTICULOS DE LIMPIEZA</option>
+                            <option value="cocina">COCINA</option>
+                            <option value="baño">BAÑO</option>
+                            <option value="decoracion">DECORACION</option>
+                            <option value="limpieza">LIMPIEZA</option>
                         </select>
-                        <select name="sub-category" id="sub-category" class="select">
-                            <option value="0a">SELECCIONE SUB CATEGORIA</option>
-                            <option value="1a">SARTEN</option>
-                            <option value="1b">OLLA</option>
-                            <option value="1c">PLATO</option>
+                        <select name="pickSubCategory" id="subcategory" class="select">
+                            <option value="0">SELECCIONE SUB CATEGORIA</option>
+                            <option value="sartenes">SARTEN</option>
+                            <option value="ollas">OLLA</option>
+                            <option value="platos">PLATO</option>
                         </select>
                     </div>
             </div>
@@ -43,10 +43,6 @@
                     <input class="input-block" type="text" name="name">
                     <label class="label-block" for="brand">MARCA</label>
                     <input class="input-block" type="text" name="brand">
-                    <label class="label-block" for="model">MODELO-DISEÑO</label>
-                    <input class="input-block" type="text" name="model">
-                    <label class="label-block" for="color">COLOR</label>
-                    <input class="input-block" type="text" name="color">
                     <label class="label-block" for="description">DESCRIPCION</label>
                     <textarea name="description" id="desc" cols="30" rows="10"></textarea>
                 </div>
@@ -56,19 +52,15 @@
                         <input class="input-price" type="number" name="price">
                     </p>
                     <p class="font-price">
-                        <label for="charge">RECARGO</label>
-                        <input class="input-price" type="number" name="charge">
-                    </p>
-                    <p class="font-price">
                         <label for="model">IVA</label>
-                        <select name="model" id="" class="iva">
+                        <select name="tax" id="" class="iva">
                             <option value="10.5">21</option>
                             <option value="21">10,5</option>
                         </select>
                     </p>
                     <p class="font-price">
                         <label for="desc">DESCUENTO</label>
-                        <input class="input-price" type="number" name="desc">
+                        <input class="input-price" type="number" name="discount">
                     </p>
                     <p class="submit">
                         <input class="send" type="submit" value="CARGAR PRODUCTO">
