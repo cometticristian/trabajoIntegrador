@@ -5,41 +5,42 @@
 
 <body>
    <%- include('../partials/headerNav') %>
-   
+
    <!-- Productos aleatorios -->
    <div class="container products-wrapper">
       <div class="row">
          <div class="col-12">
             <%if(category.length>0){%>
-                  <a href="/products/category/<%=category[0].category%>">
-                     <h2 class="product-title"><%=nombreCategoria.toUpperCase();%></h2>
-                  </a>
-                  <%}else{%>
-                     <h2 class="product-title">En estemomento no hay productos de esta categoría</h2>
-                     <%}%>    
+            <a href="/products/category/<%=category[0].category%>">
+               <h2 class="products-title"><%=nombreCategoria.toUpperCase();%></h2>
+            </a>
+            <%}else{%>
+            <h2 class="products-title">En estemomento no hay productos de esta categoría</h2>
+            <%}%>    
                   </div>
                   
                   <% category.forEach(function(category){ %>
-                     <div class="col-6 col-sm-4 col-lg-3">
-                        <section class="product-box">
-                           <a href="/products/detail/<%=category.id%>">
-                              <figure class="product-box_image">
-                                 <img src="/images/products/<%=category.image%>" alt="imagen de <%=category.name%>"">
+            <div class="col-6 col-sm-4 col-lg-3">
+               <section class="product-box">
+                  <a href="/products/detail/<%=category.id%>">
+                     <figure class="product-box_image">
+                        <img src="/images/products/<%=category.image%>" alt="imagen de <%=category.name%>"">
                               </figure>
                               <article class=" product-box_data">
-                                 <h2>$<%=category.price%>"</h2>
-                                 <span><%=category.discount%>"% OFF</span>
-                                 <p><%=category.description%>"</p>
-                              </article>
-                              <a href="/cart"><i class="fas fa-cart-plus"></i></a>
-                           </a>
-                        </section>
-                     </div>
-                     <%})%>
-                  </div>
-               </div>
-               
-               <%- include('../partials/footer') %>
-            </body>
-            
-            </html>
+                        <h2>$<%=category.price%>"</h2>
+                        <span><%=category.discount%>"% OFF</span>
+                        <p><%=category.description%>"</p>
+                        </article>
+                        <a href="/cart"><i class="fas fa-cart-plus"></i></a>
+                  </a>
+               </section>
+            </div>
+            <%})%>
+         </div>
+         <a href="/products/create">CREAR PRODUCTO</a>
+      </div>
+
+      <%- include('../partials/footer') %>
+</body>
+
+</html>

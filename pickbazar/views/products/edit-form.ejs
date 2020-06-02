@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head') %>
+    <head>
+        <link rel="stylesheet" href="/stylesheets/products-create.css">
+    </head>
+
+<body>
+    <div class="container-fluid">
+        <header class="row">
+            <div class="head col-12">
+                <i class="menu fas fa-bars"></i>
+                <h1 class="title">EDITAR PRODUCTO</h1>
+            </div>
+        </header>
+    </div>
+    <section class="container">
+        <div class="left">
+            <div class="sec2">
+                <form action="/products/edit/<%=product.id%>?_method=PUT" method="POST">
+                    <div class="form">
+                        <select name="category" id="category" class="select">
+                            <option value="0"><%=product.category%></option>
+                            <option value="1">COCINA</option>
+                            <option value="2">BAÑO</option>
+                            <option value="3">DECORACION</option>
+                            <option value="4">ARTICULOS DE LIMPIEZA</option>
+                        </select>
+                        <select name="sub-category" id="sub-category" class="select">
+                            <option value="0a"><%=product.subCategory%></option>
+                            <option value="1a">SARTEN</option>
+                            <option value="1b">OLLA</option>
+                            <option value="1c">PLATO</option>
+                        </select>
+                    </div>
+            </div>
+            <div class="sec4">
+
+                <div class="form2">
+                    <label class="label-block" for="name">NOMBRE DEL PRODUCTO</label>
+                    <input class="input-block" type="text" name="name" value="<%=product.name%>">
+                    <label class="label-block" for="brand">MARCA</label>
+                    <input class="input-block" type="text" name="brand" value="<%=product.brand%>">
+                    <label class="label-block" for="description">DESCRIPCION</label>
+                    <textarea name="description" id="desc" cols="30" rows="10"><%=product.description%></textarea>
+                </div>
+                <div class="form-price">
+                    <p class="font-price">
+                        <label for="price">PRECIO DE COSTO</label>
+                        <input class="input-price" type="number" name="price" value="<%=product.price%>">
+                    </p>
+                    <p class="font-price">
+                        <label for="model">IVA</label>
+                        <select name="model" id="" class="iva">
+                            <option value="<%=product.tax%>"><%=product.tax%></option>
+                            <option value="10.5">21</option>
+                            <option value="21">10,5</option>
+                        </select>
+                    </p>
+                    <p class="font-price">
+                        <label for="desc">DESCUENTO</label>
+                        <input class="input-price" type="number" name="discount" value="<%=product.discount%>">
+                    </p>
+                    <p class="submit">
+                        <input class="send" type="submit" value="GUARDAR CAMBIOS">
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="sec3">
+                <div class="photo main-photo">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <div class="photo photo-sec">
+                    <i class="fas fa-camera camera-sec"></i>
+                </div>
+                <div class="photo photo-sec">
+                    <i class="fas fa-camera camera-sec"></i>
+                </div>
+                <div class="photo photo-sec">
+                    <i class="fas fa-camera camera-sec"></i>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+    </form>
+</body>
+
+</html>

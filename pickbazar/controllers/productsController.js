@@ -9,7 +9,7 @@ const controller = {
 	root: (req, res, next) => {
 		res.render('./products/list', { category: products, nombreCategoria: "" })
 	},
-	
+
 	category: (req, res, next) => {
 		let category = []
 		products.forEach(function (product) {
@@ -19,7 +19,7 @@ const controller = {
 		})
 		res.render('./products/list', { category: category, nombreCategoria: req.params.productCategory })
 	},
-	
+
 	subCategory: (req, res, next) => {
 		let category = [];
 		let nombreCategoria = "";
@@ -31,12 +31,12 @@ const controller = {
 		})
 		res.render('./products/list', { category: category, nombreCategoria: nombreCategoria + " || " + req.params.productSubCategory })
 	},
-	
+
 	// Detail - Detail from one product
 	detail: (req, res, next) => {
 		let product
-		for(let i=0; i<products.length; i++){
-			if(products[i].id == req.params.productId){
+		for (let i = 0; i < products.length; i++) {
+			if (products[i].id == req.params.productId) {
 				product = products[i];
 			}
 		}
@@ -45,35 +45,88 @@ const controller = {
 			if (similar.category == product.category) {
 				category.push(similar);
 			}
-			
+
 		})
-		//category=[category[0],category[1], category[2],category[3]];
-		res.render('./products/detail', {product:product, category:category})
+		category = [category[0], category[1], category[2], category[3]];
+		res.render('./products/detail', { product: product, category: category })
 	},
-	
+
 	// Create - Form to create
 	create: (req, res, next) => {
 		res.render('./products/create-form')
 	},
-	
+
 	// Create -  Method to store
 	store: (req, res, next) => {
-		res.send("Producto cargado correctamente");
+		let productIdMaker = 0;
+		for (let i = 0; i < products.length; i++) {
+			if (products[i].id > productIdMaker) {
+				productIdMaker = products[i].id;
+			}
+		}
+		let newProduct = {
+			id: productIdMaker + 1,
+			category: req.body.pickCategory,
+			subcategory: req.body.pickSubCategory,
+			name: req.body.name,
+			brand: req.body.brand,
+			description: req.body.description,
+			price: Number(req.body.price),
+			tax: req.body.tax,
+			discount: Number(req.body.discount)
+		}
+		products.push(newProduct);
+		fs.writeFileSync(productsDB, JSON.stringify(products));
+		res.redirect('/products');
 	},
-	
+
 	// Update - Form to edit
 	edit: (req, res, next) => {
-		res.render("./products/edit-form", {})
+		let product;
+		let id = req.params.productId;
+		for (let i = 0; i < products.length; i++) {
+			if (products[i].id == id) {
+				product = products[i];
+			} 
+		}
+		res.render("./products/edit-form", { product: product })
 	},
-	
+
 	// Update - Method to update
 	update: (req, res, next) => {
-		res.redirect('./products/products')//detail/'+ parseInt(req.params.productId))
+		let id = req.params.productId;
+		productEdited = {
+			id: Number(id),
+			category: req.body.pickCategory,
+			subCategory: req.body.pickSubCategory,
+			name: req.body.name,
+			brand: req.body.brand,
+			description: req.body.description,
+			price: Number(req.body.price),
+			tax: req.body.tax,
+			discount: Number(req.body.discount)
+		}
+
+		for (let i = 0; i < products.length; i++) {
+			if (products[i].id == id) {
+				products[i] = productEdited;
+			}
+		}
+		fs.writeFileSync(productsDB, JSON.stringify(products));
+
+
+		res.redirect('/products/detail/' + Number(id));
 	},
-	
+
 	// Delete - Delete one product from DB
 	destroy: (req, res, next) => {
-		res.redirect('./products/products');
+
+		let id = req.params.productId;
+
+		products = products.filter((producto) => { return producto.id != id });
+
+		fs.writeFileSync(productsDB, JSON.stringify(products));
+		res.redirect('/products');
 	}
 };
 
