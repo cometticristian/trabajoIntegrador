@@ -17,6 +17,9 @@ const controller = {
 				category.push(product)
 			}
 		})
+
+
+
 		res.render('./products/list', { category: category, nombreCategoria: req.params.productCategory })
 	},
 
@@ -47,7 +50,6 @@ const controller = {
 			}
 
 		})
-		category = [category[0], category[1], category[2], category[3]];
 		res.render('./products/detail', { product: product, category: category })
 	},
 
@@ -114,8 +116,8 @@ const controller = {
 		}
 		fs.writeFileSync(productsDB, JSON.stringify(products));
 
-
-		res.redirect('/products/detail/' + Number(id));
+		console.log(id);
+		res.redirect('/products/detail/' + id);
 	},
 
 	// Delete - Delete one product from DB
