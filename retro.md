@@ -32,3 +32,19 @@ Organizar las tareas en nuestro tablero de trabajo a través de Trello
 5. Dejar de hacer:
 ---aquellas practicas que podemos eliminar. Cuando el equipo ve que no le da valor o simplemente no le gusta una practica puede optar por eliminarla---
 //Por elmomento consideramos que no tenemos alguna práctica que debamos hacer menos o dejar de hacer
+
+RETROSPECTIVA Sprint 2
+
+1. Comenzar a hacer:
+
+2. Hacer más:
+Reuniones por Zoom o Webex que permitan mantener una comunicación más fluida y verificar el avance del proyecto, realizar modificaciones o solucionar problemáticas en grupo. Comunicar en que instancia del desarrollo del proyecto está cada miembro y de ser necesario solicitar colaboración.
+
+3. Continuar haciendo:
+Trabajar de forma coordinada, sin superponernos, priorizando las tareas própias de cada sprint. 
+
+4. Hacer menos:
+Por elmomento consideramos que no tenemos alguna práctica que debamos hacer menos o dejar de hacer
+
+5. Dejar de hacer:
+Por elmomento consideramos que no tenemos alguna práctica que debamos hacer menos o dejar de hacer
