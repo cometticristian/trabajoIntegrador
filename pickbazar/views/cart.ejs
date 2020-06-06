@@ -13,7 +13,7 @@
   <style>
     td {
       border-bottom: 1px solid black;
-      height: 25px;
+      height: 25px; 
     }
     .td-accion{
       text-align: right;
@@ -29,6 +29,10 @@
       color: black;
       text-align: center;
     }
+  .cart-discount{
+    color:orange;
+    vertical-align:super;  
+  }
  .btn-orange{
    COLOR:WHITE;
    background-color: orange;
@@ -68,44 +72,49 @@
             <th scope="col"><h3>#</h3></th>
             <th scope="col" colspan="2"><h3>PRODUCTO</h3></th>
             <th scope="col"><h3>PRECIO</h3></th>
+            <th scope="col"><h3>DESCUENTO</h3></th>
             <th scope="col"><h3>CANT</h3></th>
             <th scope="col" colspan="2"><h3>SUBTOTAL</h3></th>
           </tr>
         </thead>
         <tbody>
+          <% 
+          var totalDiscount,subtotal,taxes,total=0;
+          for(let i=0; i<cart.length; i++){ %>
           <tr>
-            <td scope="row">1</td>
+            <td scope="row"><%=i+1%></td>
             <td width="55"> <figure>
-              <img src="/images/products/cesto-negro.jpg" style="width:50px;" alt="imagen de cesto de residuo negro con pedal 3 litros">
+              <img src="/images/products/<%=cart[i].image%>" style="width:50px;" alt="imagen de <%=cart[i].name%>">
             </figure></td>
-            <td>Canasto</td>
-            <td>$100</td>
-            <td><div class="orange">1</div></td>
-            <td>$100</td>
-            <td class="td-accion"><a href="/cart"><i class='fas fa-trash-alt'></i></a>&nbsp;<a href="/cart"><i class='fas fa-pencil-alt'></i></a></td>
+            <td><%=cart[i].name%></td>
+            <% if(cart[i].discount!="0") {%>
+            <td>$<%=cart[i].price%> <span class="cart-discount"><%=cart[i].discount%>% OFF</span></td>
+            <% 
+            //Da NaN xq el JSON devuelve los numeros como strings, pero desde la BD devolvera integer, lo ajusto luego
+            totalDiscount=totalDiscount+(cart[i].price*cart[i].units)*cart[i].discount/100;
+            subtotal=subtotal+((cart[i].price*cart[i].units)-((cart[i].price*cart[i].units)*cart[i].discount/100));
+            %> 
+
+            <td>$<%=(cart[i].price*cart[i].units)*cart[i].discount/100%></td>
+            <% } else {
+            subtotal=subtotal+((cart[i].price*cart[i].units)-((cart[i].price*cart[i].units)*cart[i].discount/100));
+            %>
+              <td>$<%=cart[i].price%></td>
+              <td>$<%=(cart[i].price*cart[i].units)*cart[i].discount/100%></td>
+            <% }%>
+            <%if (modo="edit" && id===cart[i].id) {%>
+            <td><div><input type="text" id="iUnits" name="iUnits" size="2" value="<%=cart[i].units%>"></div></td>
+            <%} else {%>
+            <td><div class="orange"><%=cart[i].units%></div></td>
+            <%}%>
+            <td>$<%=((cart[i].price*cart[i].units)-((cart[i].price*cart[i].units)*cart[i].discount/100))%></td>
+            <td class="td-accion"><a href="/cart/remove/<%=cart[i].id%>"><i class='fas fa-trash-alt'></i></a>&nbsp;<a href="/cart/edit/<%=cart[i].id%>"><i class='fas fa-pencil-alt'></i></a></td>
           </tr>
-          <tr>
-            <td scope="row">2</td>
-            <td> <figure>
-              <img src="/images/products/cesto-negro.jpg" style="width:50px;" alt="imagen de cesto de residuo negro con pedal 3 litros">
-            </figure></td>
-            <td>Alfombra</td>
-            <td>$100</td>
-            <td><div class="orange">1</div></td>
-            <td>$100</td>
-            <td class="td-accion"><a href="/cart"><i class='fas fa-trash-alt'></i></a>&nbsp;<a href="/cart"><i class='fas fa-pencil-alt'></i></a></td>
-          </tr>
-          <tr>
-            <td scope="row">3</td>
-            <td> <figure>
-              <img src="/images/products/cesto-negro.jpg" style="width:50px;" alt="imagen de cesto de residuo negro con pedal 3 litros">
-            </figure></td>
-            <td>Set 3 Sartenes</td>
-            <td>$200</td>
-            <td><div class="orange">1</div></td>
-            <td>$200</td>
-            <td class="td-accion"><a href="/cart"><i class='fas fa-trash-alt'></i></a>&nbsp;<a href="/cart"><i class='fas fa-pencil-alt'></i></a></td>
-          </tr>
+          <%}%>
+         <%
+         taxes=parseInt(subtotal)*21/100;
+         total=subtotal+taxes;
+         %>
         </tbody>
       </table>
 
@@ -118,19 +127,19 @@
   <tr><th colspan="2" ><h3>RESUMEN DE COMPRA</h3></th></tr>
   <tr>
       <td>Subtotal</td>
-      <td>$1220</td>
+      <td>$<%=subtotal%></td>
   </tr>
   <tr>
     <td>Impuestos</td>
-    <td>$70</td>
+    <td>$<%=taxes%></td>
   </tr>
   <tr>
     <td>Descuentos</td>
-    <td>$0</td>
+    <td>$<%=totalDiscount%></td>
   </tr>
   <tr>
     <td><h4>Total del Pedido</h4></td>
-    <td><h4>$1290</h4></td>
+    <td><h4>$<%=total%></h4></td>
   </tr>
   <tr align="center">
     <td colspan="2"><button class="btn-orange">CONFIRMAR SU PEDIDO</button></td>
