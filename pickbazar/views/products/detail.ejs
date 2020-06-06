@@ -14,21 +14,21 @@
                 <ul class="list">
                     <li>
                         <a href="/products/category/<%=product.category%>">
-                            <h2 class="products-title"><%=product.category%></h2>
+                            <h2 class="product-title"><%=product.category.toUpperCase()%> |</h2>
                         </a>
                     </li>
                     <li>
                         <a href="/products/subCategory/<%=product.subCategory%>">
-                            <h2 class="products-title">/ <%=product.subCategory%></h2>
+                            <h2 class="product-title">| <%=product.subCategory.toUpperCase();%> |</h2>
                         </a>
                     </li>
                     <li>
-                        <h2 class="products-title">/ <%=product.name%></h2>
+                        <h2 class="product-title">| <%=product.name.toUpperCase();%></h2>
                     </li>
                 </ul>
             </div>
             <div class="row detail">
-                
+
                 <div class=" col-12 col-md-8">
                     <div class="row">
                         <div class="col-md-3 small-img-box">
@@ -58,8 +58,13 @@
                             <div id="design1">Elegir Diseño</div>
                             <div id="design2">⯆</div>
                         </div>
+                        <div class="crud">
+                            <form action="/products/delete/<%=product.id%>?_method=DELETE" method="POST">
+                                <button id="delete" class="send" type="submit">ELIMINAR</button>
+                            </form>
+                            <a id="edit" class="send" href='/products/edit/<%=product.id%>' target="_blank"><div>EDITAR</div></a>
+                        </div>
                     </div>
-                    
                     <div class="add-box">
                         <div id="add1" class="add">
                             <a href="/cart/add/<%=product.id%>">Agregar al carrito</a>
@@ -76,27 +81,27 @@
                 </div>
                 <div id="down2" class="col-12">
                     <% category.forEach(function(category){ %>
-                        <div class="col-6 col-sm-3 col-lg-3">
-                            <section class="product-box">
-                                <a href="/products/detail/<%=category.id%>">
-                                    <figure class="product-box_image">
-                                        <img src="/images/products/<%=category.image%>" alt="imagen de <%=category.name%>"">
+                    <div class="col-6 col-sm-3 col-lg-3">
+                        <section class="product-box">
+                            <a href="/products/detail/<%=category.id%>">
+                                <figure class="product-box_image">
+                                    <img src="/images/products/<%=category.image%>" alt="imagen de <%=category.name%>"">
                                     </figure>
                                     <article class=" product-box_data">
-                                        <h2>$<%=category.price%>"</h2>
-                                        <span><%=category.discount%>"% OFF</span>
-                                        <p><%=category.description%>"</p>
+                                    <h2>$<%=category.price%>"</h2>
+                                    <span><%=category.discount%>"% OFF</span>
+                                    <p><%=category.description%>"</p>
                                     </article>
                                     <a href="/cart"><i class="fas fa-cart-plus"></i></a>
-                                </a>
-                            </section>
-                        </div>
-                        <%})%>
+                            </a>
+                        </section>
                     </div>
+                    <%})%>
                 </div>
             </div>
-        </section>
-        <%- include('../partials/footer') %>
-    </body>
-    
-    </html>
+        </div>
+    </section>
+    <%- include('../partials/footer') %>
+</body>
+
+</html>

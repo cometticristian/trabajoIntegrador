@@ -12,7 +12,7 @@ const controller = {
 		let news = products.filter(product=>{
 			return product.important=="new";
 		});
-		res.render ('index', {category:products, selected, news});
+		res.render ('index', {selected, news});
     },
 }
     
