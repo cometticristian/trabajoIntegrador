@@ -15,15 +15,11 @@ router.get('/', cartController.show);
 /************ ADD Items to CART ************/
 /* GET - Form to create */
 router.get('/add/:id', cartController.add);
+router.get('/plus/:id', cartController.plus);
+router.get('/minus/:id', cartController.minus);
 
 /* POST - Store in Data Base */
 /*router.post('/create/', productsController.store);*/
-
-/************ EDIT ONE PRODUCT from cart ************/
-/* GET - Form to edit */
-router.get('/edit/:id', cartController.edit);
-/* PUT - Update in Data Base */
-//router.put('/edit/:id', cartController.update);*/
 
 /************ DELET ONE PRODUCT from cart ************/
 /* DELETE - Delete from Data Base */
