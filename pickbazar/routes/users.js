@@ -4,6 +4,8 @@ var router = express.Router();
 
 const usersController = require('../controllers/usersController');
 
+router.get('/login/', usersController.login);
+
 /* GET - User profile */
 router.get('/profile/:userId/', usersController.detail);
 

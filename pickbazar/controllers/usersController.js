@@ -6,6 +6,10 @@ let users = JSON.parse(fs.readFileSync(usersDB, 'utf-8'));
 
 const controller = {
 	
+	login: (req, res, next) => {
+		res.render('users/login');
+	  },
+
 	// Detail - Detail from one user
 	detail: (req, res, next) => {
 		let user
