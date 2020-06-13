@@ -1,5 +1,8 @@
 const fs = require('fs');
 const path = require('path');
+const bcrypt = require('bcrypt');
+const { check, validationResult, body } = require('express-validator');
+
 
 const usersDB = path.join(__dirname, '../data/usersDB.json');
 let users = JSON.parse(fs.readFileSync(usersDB, 'utf-8'));
@@ -10,8 +13,24 @@ const controller = {
 		res.render('users/login');
 	  },
 
+	processLogin: (req, res,next) =>{
+		/*
+		Tomar los datos
+		let userForm = req.body;
+		buscar elusuario enla base de datos, por email:req.body.email
+		Si el usuario existe
+			bcrypt hashcompare entre user.password y req.body.password
+			si la contraseña es valida
+				Devuelvo user a la vista y redirijo
+			Si la contraseña no es valida
+				Vuelvo a la vista con un error
+		Si el usuario no existe 
+			redirijo a la vista donde estaba con un error
+		*/
+	},
+
 	// Detail - Detail from one user
-	detail: (req, res, next) => {
+	profile: (req, res, next) => {
 		let user
 		for (let i = 0; i < users.length; i++) {
 			if (users[i].id == req.params.userId) {
@@ -23,8 +42,8 @@ const controller = {
 	},
 
 	// Create - Form to create
-	create: (req, res, next) => {
-		res.render('./login')
+	register: (req, res, next) => {
+		res.render('users/register')
 	},
 
 	// Create -  Method to store
@@ -37,18 +56,20 @@ const controller = {
 		}
 		let newUser = {
 			id: userIdMaker + 1,
-			first_name: req.body.pickFirstName,
-			last_name: req.body.pickLastName,
+			first_name: req.body.first_name,
+			last_name: req.body.last_name,
 			email: req.body.email,
-			password: req.body.password,
+			phone: req.body.phone,
+			password: bcrypt.hashSync(req.body.password, 10),
 			category: req.body.category,
-			avatar: ""
+			avatar: req.files[0].filename
 		}
 		users.push(newUser);
 		fs.writeFileSync(usersDB, JSON.stringify(users));
-		res.redirect('./users/profile');
+		res.redirect('users/login');
 	},
 
+	
 	// Update - Form to edit
 	edit: (req, res, next) => {
 		let user;
