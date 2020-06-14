@@ -8,25 +8,47 @@ const usersDB = path.join(__dirname, '../data/usersDB.json');
 let users = JSON.parse(fs.readFileSync(usersDB, 'utf-8'));
 
 const controller = {
-	
+
 	login: (req, res, next) => {
 		res.render('users/login');
-	  },
+	},
 
-	processLogin: (req, res,next) =>{
-		/*
-		Tomar los datos
-		let userForm = req.body;
-		buscar elusuario enla base de datos, por email:req.body.email
-		Si el usuario existe
-			bcrypt hashcompare entre user.password y req.body.password
-			si la contraseña es valida
-				Devuelvo user a la vista y redirijo
-			Si la contraseña no es valida
-				Vuelvo a la vista con un error
-		Si el usuario no existe 
-			redirijo a la vista donde estaba con un error
-		*/
+	processLogin: (req, res, next) => {
+		//Tomar los datos
+		//buscar elusuario enla base de datos, por email:req.body.email
+		//Si el usuario existe
+		//bcrypt hashcompare entre user.password y req.body.password
+		//si la contraseña es valida
+		//Devuelvo user a la vista y redirijo
+		//Si la contraseña no es valida
+		//Vuelvo a la vista con un error
+		//Si el usuario no existe 
+		//redirijo a la vista donde estaba con un error
+
+		let errors = validationResult(req);
+
+		let userFound;
+		if (!errors.isEmpty()) {
+			res.render('users/login', { errors: errors.errors });
+		}
+
+		userFound = users.filter(function (user) {
+			return user.email == req.body.email && bcrypt.compareSync(req.body.password, user.password) //user.password == req.body.password;
+		});
+
+		if (userFound == "") {
+			res.render('users/login', { errors: [{ msg: "Credenciales invalidas" }] });
+
+			//console.log(userFound);
+			//PRENDE SESION PARA EL USUARION LOGEADO
+			//GUARDA AL USUARIO LOGUEADO PARA USARLOS EN LAS VISTAS
+		} else {
+			req.session.userFound = userFound;
+			res.locals.userFound = userFound;
+			res.render('users/profile')
+		}
+
+
 	},
 
 	// Detail - Detail from one user
@@ -37,7 +59,7 @@ const controller = {
 				user = users[i];
 			}
 		}
-				
+
 		res.render('./users/profile', { user: user })
 	},
 
@@ -69,7 +91,7 @@ const controller = {
 		res.redirect('users/login');
 	},
 
-	
+
 	// Update - Form to edit
 	edit: (req, res, next) => {
 		let user;
@@ -77,7 +99,7 @@ const controller = {
 		for (let i = 0; i < users.length; i++) {
 			if (users[i].id == id) {
 				user = users[i];
-			} 
+			}
 		}
 		res.render("./users/edit-form", { user: user })
 	},

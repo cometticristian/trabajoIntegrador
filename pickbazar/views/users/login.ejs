@@ -3,49 +3,64 @@
 <%- include('../partials/head') %>
 
 <head>
-      <link rel="stylesheet" href="/stylesheets/loginRegister.css">
+   <link rel="stylesheet" href="/stylesheets/loginRegister.css">
 </head>
 
 <body>
    <%- include('../partials/headerNav') %>
-   
-   
-   
+
+
+
    <div class="container">
       <div class="row">
          <div class="col-12 col-md-6 offset-3 columna">
             <div class="formulario">
                <h1>INGRESÁ A TU CUENTA</h1>
                <!--<HR style="height:1px;border-width:0;color:gray;background-color:gray"></HR>-->
-               
+
                <section class="log-reg">
-                  <form action="/users/profile" method="POST">
-                     <label for="email"><h3>Email:</h3></label>
+                  
+                  <% if (typeof errors != 'undefined'){%>
                      
-                     <input class="" type="email" required id="email" name="email" value="">
-                     
-                     <label for="password"><h3>Contraseña:</h3></label>
-                     
-                     <input class="" type="password" required id="password" name="password">
-                     
-                     <div><a href="register">
-                        <h3>REGISTRARSE</h3>
-                     </a></div>
-                     <div class="align"><input class="btn-login black" type="submit" value="INGRESAR"></div>
-                  </form>
-                  <form class="align"> <input type="submit" class="btn-login orange" value="INGRESAR CON FACEBOOK"></form>
-                  <form class="align"> <input type="submit" class="btn-login orange" value="INGRESAR CON GOOGLE+"></form>
+                     <p style="color: crimson"><%=errors[0].msg%></p>
+                        
+                  <%}%>
+
+                     <form action="/users/login" method="POST">
+                        <label for="email">
+                           <h3>Email:</h3>
+                        </label>
+
+                        <input class="" type="email" id="email" name="email" value="">
+
+                        <label for="password">
+                           <h3>Contraseña:</h3>
+                        </label>
+
+                        <input class="" type="password" id="password" name="password">
+
+                        <div><a href="register">
+                              <h3>REGISTRARSE</h3>
+                           </a></div>
+                        <div class="align">
+                           <button class="btn-login black" type="submit">INGRESAR</button>
+                        </div>
+                     </form>
+                     <form class="align"> <input type="submit" class="btn-login orange" value="INGRESAR CON FACEBOOK">
+                     </form>
+                     <form class="align"> <input type="submit" class="btn-login orange" value="INGRESAR CON GOOGLE+">
+                     </form>
                </section>
             </div>
          </div>
-         
+
       </div>
    </div>
-   
-   
-   
-   
-   
+
+
+
+
+
    <%- include('../partials/footer') %>
 </body>
 

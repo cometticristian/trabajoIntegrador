@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const methodOverride =  require('method-override'); // Pasar poder usar los métodos PUT y DELETE
+const session = require('express-session');// Para usar Session
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -23,11 +24,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
+app.use(session({secret:'PickbazarSecret'}));
+
+app.use((req,res,next)=>{res.locals.userFound = false; next()} )
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
 app.use('/cart', cartRouter);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

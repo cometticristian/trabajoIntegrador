@@ -19,7 +19,7 @@ var storage = multer.diskStorage({
 
 /************ LOGIN USER ************/
 /* GET - Form to login */
-router.get('/login/', usersController.login);
+router.get('/login', usersController.login);
 
 /* POST - Process login form */
 router.post('/login/', [
