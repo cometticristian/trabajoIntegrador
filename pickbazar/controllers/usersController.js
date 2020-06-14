@@ -14,21 +14,6 @@ const controller = {
 	},
 
 	processLogin: (req, res, next) => {
-<<<<<<< HEAD
-		/*
-		Tomar los datos
-		let userForm = req.body;
-		buscar elusuario enla base de datos, por email:req.body.email
-		Si el usuario existe
-			bcrypt hashcompare entre user.password y req.body.password
-			si la contraseña es valida
-				Devuelvo user a la vista y redirijo
-			Si la contraseña no es valida
-				Vuelvo a la vista con un error
-		Si el usuario no existe 
-			redirijo a la vista donde estaba con un error
-		*/
-=======
 		//Tomar los datos
 		//buscar elusuario enla base de datos, por email:req.body.email
 		//Si el usuario existe
@@ -64,7 +49,6 @@ const controller = {
 		}
 
 
->>>>>>> c991e339d71a8fc4dd89935983513b8085a55f1d
 	},
 
 	// Detail - Detail from one user
