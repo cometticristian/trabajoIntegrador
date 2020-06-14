@@ -8,12 +8,12 @@ const usersDB = path.join(__dirname, '../data/usersDB.json');
 let users = JSON.parse(fs.readFileSync(usersDB, 'utf-8'));
 
 const controller = {
-	
+
 	login: (req, res, next) => {
 		res.render('users/login');
-	  },
+	},
 
-	processLogin: (req, res,next) =>{
+	processLogin: (req, res, next) => {
 		/*
 		Tomar los datos
 		let userForm = req.body;
@@ -37,7 +37,7 @@ const controller = {
 				user = users[i];
 			}
 		}
-				
+
 		res.render('./users/profile', { user: user })
 	},
 
@@ -48,28 +48,36 @@ const controller = {
 
 	// Create -  Method to store
 	store: (req, res, next) => {
-		let userIdMaker = 0;
-		for (let i = 0; i < users.length; i++) {
-			if (users[i].id > userIdMaker) {
-				userIdMaker = users[i].id;
+
+		let errors = validationResult(req);
+
+		if (errors.isEmpty()) {
+
+			let userIdMaker = 0;
+			for (let i = 0; i < users.length; i++) {
+				if (users[i].id > userIdMaker) {
+					userIdMaker = users[i].id;
+				}
 			}
+			let newUser = {
+				id: userIdMaker + 1,
+				first_name: req.body.first_name,
+				last_name: req.body.last_name,
+				email: req.body.email,
+				phone: req.body.phone,
+				password: bcrypt.hashSync(req.body.password, 10),
+				category: req.body.category,
+				avatar: req.files[0].filename
+			}
+			users.push(newUser);
+			fs.writeFileSync(usersDB, JSON.stringify(users));
+			res.redirect('login');
+		} else {
+			res.render('users/register', {errors: errors.errors});
 		}
-		let newUser = {
-			id: userIdMaker + 1,
-			first_name: req.body.first_name,
-			last_name: req.body.last_name,
-			email: req.body.email,
-			phone: req.body.phone,
-			password: bcrypt.hashSync(req.body.password, 10),
-			category: req.body.category,
-			avatar: req.files[0].filename
-		}
-		users.push(newUser);
-		fs.writeFileSync(usersDB, JSON.stringify(users));
-		res.redirect('users/login');
 	},
 
-	
+
 	// Update - Form to edit
 	edit: (req, res, next) => {
 		let user;
@@ -77,7 +85,7 @@ const controller = {
 		for (let i = 0; i < users.length; i++) {
 			if (users[i].id == id) {
 				user = users[i];
-			} 
+			}
 		}
 		res.render("./users/edit-form", { user: user })
 	},

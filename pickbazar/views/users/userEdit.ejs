@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+
+<head>
+   <link rel="stylesheet" href="/stylesheets/loginRegister.css">
+   
+</head>
+
+<body>
+   <%- include('../partials/headerNav') %>
+   
+   
+   
+   <div class="container">
+      <div class="row">
+         
+         <div class="col-12 col-md-6 offset-3 columna">
+            <div class="formulario">
+               <h1>EDITAR PERFIL</h1>
+               <!--<HR style="height:1px;border-width:0;color:gray;background-color:gray"></HR>-->
+               
+               <section class="log-reg">
+                  <form action="/users/register" method="POST" enctype="multipart/form-data">
+                     <label for="first_name">
+                        <h3>Nombre (*):</h3>
+                     </label>
+                     <input type="text" id="first_name" name="first_name" value="">
+                     
+                     <label for="last_name">
+                        <h3>Apellido (*):</h3>
+                     </label>
+                     <input type="text"  id="last_name" name="last_name" value="">
+                     
+                     <label for="email">
+                        <h3>Email (*):</h3>
+                     </label>
+                     <input type="email"  id="email" name="email" value="">
+                     
+                     <label for="phone">
+                        <h3>Telefono:</h3>
+                     </label>
+                     <input type="tel" id="phone" name="phone" value="">
+
+                     <label for="password">
+                        <h3>Contraseña (*):</h3>
+                     </label>
+                     <input type="password" id="password" name="password">
+                     
+                     <label for="passwordConfirm">
+                        <h3>Confirmar contraseña (*):</h3>
+                     </label>
+                     <input type="password" id="passwordConfirm" name="passwordConfirm">
+
+                     <label for="avatar">
+                        <h3>Imágen de perfil:</h3>
+                     </label>
+                     <input type="file" name="avatar">
+
+                     <div class="align"><input class="btn-login black" type="submit" value="CREAR CUENTA"></div>
+                  </form>
+                  
+               </section>
+            </div>
+         </div>
+      </div>
+   </div>
+   
+   
+   
+   
+   
+   <%- include('../partials/footer') %>
+</body>
+
+</html>
