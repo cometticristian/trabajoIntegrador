@@ -14,6 +14,7 @@ const controller = {
 	},
 
 	processLogin: (req, res, next) => {
+<<<<<<< HEAD
 		/*
 		Tomar los datos
 		let userForm = req.body;
@@ -27,6 +28,43 @@ const controller = {
 		Si el usuario no existe 
 			redirijo a la vista donde estaba con un error
 		*/
+=======
+		//Tomar los datos
+		//buscar elusuario enla base de datos, por email:req.body.email
+		//Si el usuario existe
+		//bcrypt hashcompare entre user.password y req.body.password
+		//si la contraseña es valida
+		//Devuelvo user a la vista y redirijo
+		//Si la contraseña no es valida
+		//Vuelvo a la vista con un error
+		//Si el usuario no existe 
+		//redirijo a la vista donde estaba con un error
+
+		let errors = validationResult(req);
+
+		let userFound;
+		if (!errors.isEmpty()) {
+			res.render('users/login', { errors: errors.errors });
+		}
+
+		userFound = users.filter(function (user) {
+			return user.email == req.body.email && bcrypt.compareSync(req.body.password, user.password) //user.password == req.body.password;
+		});
+
+		if (userFound == "") {
+			res.render('users/login', { errors: [{ msg: "Credenciales invalidas" }] });
+
+			//console.log(userFound);
+			//PRENDE SESION PARA EL USUARION LOGEADO
+			//GUARDA AL USUARIO LOGUEADO PARA USARLOS EN LAS VISTAS
+		} else {
+			req.session.userFound = userFound;
+			res.locals.userFound = userFound;
+			res.render('users/profile')
+		}
+
+
+>>>>>>> c991e339d71a8fc4dd89935983513b8085a55f1d
 	},
 
 	// Detail - Detail from one user
