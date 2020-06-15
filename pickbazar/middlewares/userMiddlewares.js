@@ -1,4 +1,4 @@
-const userMiddleware = {
+const userMiddlewares = {
 
     auth: function (req, res, next) {
         if (req.session.userLogged) {
@@ -15,4 +15,4 @@ const userMiddleware = {
     }
 }
 
-module.exports = userMiddleware;
+module.exports = userMiddlewares;

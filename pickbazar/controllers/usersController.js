@@ -45,7 +45,7 @@ const controller = {
 		} else {
 			req.session.userFound = userFound;
 			res.locals.userFound = userFound;
-			res.render('users/profile')
+			res.redirect('/')
 		}
 
 
@@ -95,7 +95,7 @@ const controller = {
 			fs.writeFileSync(usersDB, JSON.stringify(users));
 			res.redirect('login');
 		} else {
-			res.render('users/register', {errors: errors.errors});
+			res.render('users/register', {errors: errors.errors, datos: req.body});
 		}
 	},
 
