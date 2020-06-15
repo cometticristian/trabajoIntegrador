@@ -9,7 +9,11 @@
       <p><a href='/products/create'>Formulario Crear</a></p>
    -->
    <%- include('./partials/headerNav') %>
-
+   <% if (user==undefined){%>
+<h5>Login</h5>
+   <%}else{%>
+      <h5><%=user[0].first_name%></h5>
+   <%}%>
    <div class="banner"></div>
    
    <!-- Productos aleatorios -->

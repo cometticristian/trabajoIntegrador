@@ -140,23 +140,32 @@
         "avatar": ""
     },
     {
-        "id": 16,
-        "first_name": "Delfina",
-        "last_name": "Linares",
-        "email": "ladelfilinares@hotmail.com",
-        "phone": "1567893333",
-        "password": "$2b$10$LnKxzz102JKNF72Iwwhdx.bwE.VnDKgWXMYyEUgGihg48D7p2RPjC",
-        "caterory": "active",
-        "avatar": "avatar 1592224705755.jpg"
-    },
-    {
         "id": 17,
         "first_name": "Ludwing",
         "last_name": "Von Mises",
         "email": "ludwing@gmail.com",
         "phone": "0345615508201",
-        "password": "$2b$10$kEIRWulQeTnlN3YUW26KWe74u5Qg090CRqRMZn3WUBhedULqgJ0zm",
+        "password": "$2b$10$qQZMkNZE3wg15hR9eNGn/eXOh1aHn4qXL8wVkWAF78gzfAkCmH.hm",
+        "caterory": "active",
+        "avatar": "avatar 1592189958271.jpg"
+    },
+    {
+        "id": 16,
+        "first_name": "David",
+        "last_name": "Messina",
+        "email": "davidmessina900@speedy.com.ar",
+        "phone": "15678933",
+        "password": "$2b$10$lNqOOitZa9Tk9US2p9UiVuK4250tJT9U5nCimFR6j3As1mIZgLWHi",
+        "avatar": ""
+    },
+    {
+        "id": 18,
+        "first_name": "Cristian",
+        "last_name": "Messina",
+        "email": "123@wqeqwewqe.com",
+        "phone": "123456789",
+        "password": "$2b$10$nixVxSsUn2o3OeRiz4Xo4ePKd/K.hrN/h6WI8XNvHsihfiaDm.YaS",
         "category": "active",
-        "avatar": "avatar 1592232241759.jpg"
+        "avatar": "avatar 1592250500357.jpg"
     }
 ]

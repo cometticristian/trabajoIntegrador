@@ -7,6 +7,7 @@ const multer = require('multer');
 const usersController = require('../controllers/usersController');
 const fs = require('fs');
 const bcrypt = require('bcrypt');
+const userMiddlewares = require('../middlewares/userMiddlewares')
 
 const usersDB = path.join(__dirname, '../data/usersDB.json');
 let users = JSON.parse(fs.readFileSync(usersDB, 'utf-8'));
@@ -24,12 +25,12 @@ var upload = multer({ storage: storage });
 
 /************ LOGIN USER ************/
 /* GET - Form to login */
-router.get('/login', usersController.login);
+router.get('/login/', /*userMiddlewares.gest,*/ usersController.login);
 
 /* POST - Process login form */
 router.post('/login/', [
     check('email').isEmail().withMessage('Email invalido'),
-    check('password').isLength({ min: 6 }).withMessage('La contraseña debe tener al menos 6 caracteres'),
+    check('password').isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres'),
 ], usersController.processLogin);
 
 /* GET - User profile */
@@ -45,7 +46,7 @@ router.post('/register/', upload.any(), [
     check('last_name').isLength({ min: 2 }).withMessage('El apellido debe tener mas de 2 caracteres'),
     check('email').isEmail().withMessage('Debe ingresar un Email valido'),
     check('phone').isInt().withMessage('Debe ingresar solo numeros'),
-    check('phone').isLength({ min: 8 }).withMessage('El telefono debe tener el codigo de area'),
+    check('phone').isLength({ min: 8, max: 10}).withMessage('Máximo 10 dígitos y debe incluir el código de area'),
     check('password').isLength({ min: 6 }).withMessage('La contraseña debe tener mas de 6 caracteres'),
     body('email').custom(function (value) {
         for (let i=0; i<users.length; i++) {
@@ -67,9 +68,9 @@ router.post('/register/', upload.any(), [
 
 /************ EDIT ONE USER ************/
 /* GET - Form to edit */
-router.get('/edit-form/:userId', usersController.edit);
+router.get('/edit', usersController.edit);
 /* PUT - Update in Data Base */
-router.put('/edit-form/:userId', upload.any(), [
+router.put('/edit', upload.any(), [
     check('first_name').isLength({ min: 2 }).withMessage('El nombre debe tener mas de 2 caracteres'),
     check('last_name').isLength({ min: 2 }).withMessage('El apellido debe tener mas de 2 caracteres'),
     check('email').isEmail().withMessage('Debe ingresar un Email valido'),

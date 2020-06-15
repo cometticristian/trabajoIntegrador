@@ -54,11 +54,11 @@
                   }
                }
                %>
-                  <form action="/users/edit-form/<%=user.id%>?_method=PUT" method="POST" enctype="multipart/form-data">
+                  <form action="/users/edit?_method=PUT" method="POST" enctype="multipart/form-data">
                      <label for="first_name">
                         <h3>Nombre (*):</h3>
                      </label>
-                     <input type="text" required id="first_name" name="first_name" value="<%= (typeof datos != 'undefined') ? datos.first_name : ''  %>">
+                     <input type="text" required id="first_name" name="first_name" value="<%= (typeof datos != 'undefined') ? datos.first_name : user[0].first_name  %>">
                      <span style="color: red;font-size: 12px;"><%= buscarError('first_name')[0].msg %></span>
                      <label for="last_name">
                         <h3>Apellido (*):</h3>

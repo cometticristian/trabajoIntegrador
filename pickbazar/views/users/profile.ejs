@@ -6,7 +6,14 @@
     <title>Document</title>
 </head>
 <body style="background-color: chocolate;">
-    <h1> <%=userFound[0].first_name%></h1>
+    <h1> <%=user[0].first_name%></h1>
+    <h1> <%=user[0].last_name%></h1>
+    <h1> <%=user[0].email%></h1>
+   <img src="/images/users/<%=user[0].avatar%>" alt=""> 
+   <br>
+   <a href="/users/edit">Editar perfil</a>
+   <br>
+   <a href="/">HOME</a>
 </body>
 </html>
 

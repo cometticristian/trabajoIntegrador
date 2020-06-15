@@ -1,18 +1,18 @@
-const userMiddleware = {
+const userMiddlewares = {
 
     auth: function (req, res, next) {
         if (req.session.userLogged) {
             next();
         } else {
-            res.redirect("users/login");
+            res.redirect("/users/login");
         }
     },
 
     gest: function (req, res, next) {
         if (!req.session.userLogged) {
             next();
-        }
+        }else {res.redirect("/");}
     }
 }
 
-module.exports = userMiddleware;
+module.exports = userMiddlewares;
