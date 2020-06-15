@@ -111,7 +111,6 @@ const controller = {
 
 		let errors = validationResult(req);
 		let user = req.session.userFound;
-		console.log(user);
 
 		if (errors.isEmpty()) {			
 			userEdited = {
