@@ -36,7 +36,7 @@ router.post('/login/', [
 router.post('/logout/', usersController.logout);
 
 /* GET - User profile */
-router.get('/profile/', usersController.profile);
+router.get('/profile/', userMiddlewares.auth, usersController.profile);
 
 /************ CREATE ONE USER ************/
 /* GET - Form to create */
