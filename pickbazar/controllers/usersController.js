@@ -45,7 +45,7 @@ const controller = {
 		} else {
 			req.session.userFound = userFound;
 			res.locals.userFound = userFound;
-			res.render('users/profile')
+			res.redirect('/')
 		}
 
 
