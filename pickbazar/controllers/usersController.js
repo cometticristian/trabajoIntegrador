@@ -88,7 +88,7 @@ const controller = {
 				email: req.body.email,
 				phone: req.body.phone,
 				password: bcrypt.hashSync(req.body.password, 10),
-				category: req.body.category,
+				category: 'active',
 				avatar: req.files[0].filename
 			}
 			users.push(newUser);
@@ -114,26 +114,35 @@ const controller = {
 
 	// Update - Method to update
 	update: (req, res, next) => {
+
+		let errors = validationResult(req);
 		let id = req.params.userId;
-		userEdited = {
-			id: Number(id),
-			first_name: req.body.pickFirstName,
-			last_name: req.body.pickLastName,
-			email: req.body.email,
-			password: req.body.password,
-			category: req.body.category,
-			avatar: ""
-		}
 
-		for (let i = 0; i < users.length; i++) {
-			if (users[i].id == id) {
-				users[i] = userEdited;
+		if (errors.isEmpty()) {			
+			userEdited = {
+				id: Number(id),
+				first_name: req.body.first_name,
+				last_name: req.body.last_name,
+				email: req.body.email,
+				phone: req.body.phone,
+				password: bcrypt.hashSync(req.body.password, 10),
+				avatar: ""
 			}
+	
+			for (let i = 0; i < users.length; i++) {
+				if (users[i].id == id) {
+					users[i] = userEdited;
+				}
+			}
+			fs.writeFileSync(usersDB, JSON.stringify(users));
+	
+			console.log(id);
+			res.redirect('/users/login');
+		} else {
+			res.render("users/edit-form" + id, {errors: errors.errors, datos: req.body});	
 		}
-		fs.writeFileSync(usersDB, JSON.stringify(users));
 
-		console.log(id);
-		res.redirect('./users/profile/' + id);
+
 	},
 
 	// Delete - Delete one product from DB

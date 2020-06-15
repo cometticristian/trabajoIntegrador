@@ -58,32 +58,32 @@
                      <label for="first_name">
                         <h3>Nombre (*):</h3>
                      </label>
-                     <input type="text" id="first_name" name="first_name" value="<%= (typeof datos != 'undefined') ? datos.first_name : ''  %>">
+                     <input type="text" required id="first_name" name="first_name" value="<%= (typeof datos != 'undefined') ? datos.first_name : ''  %>">
                      <span style="color: red;font-size: 12px;"><%= buscarError('first_name')[0].msg %></span>
                      <label for="last_name">
                         <h3>Apellido (*):</h3>
                      </label>
-                     <input type="text" id="last_name" name="last_name" value="<%= (typeof datos != 'undefined') ? datos.last_name : ''  %>">
+                     <input type="text" required id="last_name" name="last_name" value="<%= (typeof datos != 'undefined') ? datos.last_name : ''  %>">
                      <span style="color: red;font-size: 12px;"><%= buscarError('last_name')[0].msg %></span>
                      <label for="email">
                         <h3>Email (*):</h3>
                      </label>
-                     <input type="email" id="email" name="email" value="<%= (typeof datos != 'undefined') ? datos.email : ''  %>">
+                     <input type="email" required id="email" name="email" value="<%= (typeof datos != 'undefined') ? datos.email : ''  %>">
                      <span style="color: red;font-size: 12px;"><%= buscarError('email')[0].msg %></span>
                      <label for="phone">
                         <h3>Telefono:</h3>
                      </label>
-                     <input type="tel" id="phone" name="phone" value="<%= (typeof datos != 'undefined') ? datos.phone : ''  %>">
+                     <input type="tel" required id="phone" name="phone" value="<%= (typeof datos != 'undefined') ? datos.phone : ''  %>">
                      <span style="color: red;font-size: 12px;"><%= buscarError('phone')[0].msg %></span>
                      <label for="password">
                         <h3>Contraseña (*):</h3>
                      </label>
-                     <input type="password" id="password" name="password" value="">
+                     <input type="password" required id="password" name="password" value="">
                      <span style="color: red;font-size: 12px;"><%= buscarError('password')[0].msg %></span>
                      <label for="passwordConfirm">
                         <h3>Confirmar contraseña (*):</h3>
                      </label>
-                     <input type="password" id="passwordConfirm" name="passwordConfirm">
+                     <input type="password" required id="passwordConfirm" name="passwordConfirm">
                      <span style="color: red;font-size: 12px;"><%= buscarError('passwordConfirm')[0].msg %></span>
                      <label for="avatar">
                         <h3>Imágen de perfil:</h3>

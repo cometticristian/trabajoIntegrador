@@ -67,9 +67,32 @@ router.post('/register/', upload.any(), [
 
 /************ EDIT ONE USER ************/
 /* GET - Form to edit */
-router.get('/edit/:userId', usersController.edit);
+router.get('/edit-form/:userId', usersController.edit);
 /* PUT - Update in Data Base */
-router.put('/edit/:userId', upload.any(), usersController.update);
+router.put('/edit-form/:userId', upload.any(), [
+    check('first_name').isLength({ min: 2 }).withMessage('El nombre debe tener mas de 2 caracteres'),
+    check('last_name').isLength({ min: 2 }).withMessage('El apellido debe tener mas de 2 caracteres'),
+    check('email').isEmail().withMessage('Debe ingresar un Email valido'),
+    check('phone').isInt().withMessage('Debe ingresar solo numeros'),
+    check('phone').isLength({ min: 8 }).withMessage('El telefono debe tener el codigo de area'),
+    check('password').isLength({ min: 6 }).withMessage('La contraseña debe tener mas de 6 caracteres'),
+    body('email').custom(function (value) {
+        for (let i=0; i<users.length; i++) {
+            if (users[i].email == value) {
+                return false;
+            }
+        }
+        return true;
+    }).withMessage('Usuario existente'),
+    body('passwordConfirm').custom(function (value, { req }) {
+        let pass = req.body.password;
+        console.log(pass);
+        if (pass != value) {
+            return false
+        }
+        return true;
+    }).withMessage('Las contraseñas no coinciden')
+], usersController.update);
 
 /************ DELET ONE PRODUCT ************/
 /* DELETE - Delete from Data Base */
