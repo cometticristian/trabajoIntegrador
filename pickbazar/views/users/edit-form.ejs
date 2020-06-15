@@ -63,17 +63,17 @@
                      <label for="last_name">
                         <h3>Apellido (*):</h3>
                      </label>
-                     <input type="text" required id="last_name" name="last_name" value="<%= (typeof datos != 'undefined') ? datos.last_name : ''  %>">
+                     <input type="text" required id="last_name" name="last_name" value="<%= (typeof datos != 'undefined') ? datos.last_name : user[0].last_name %>">
                      <span style="color: red;font-size: 12px;"><%= buscarError('last_name')[0].msg %></span>
                      <label for="email">
                         <h3>Email (*):</h3>
                      </label>
-                     <input type="email" required id="email" name="email" value="<%= (typeof datos != 'undefined') ? datos.email : ''  %>">
+                     <input type="email" required id="email" name="email" value="<%= (typeof datos != 'undefined') ? datos.email : user[0].email  %>">
                      <span style="color: red;font-size: 12px;"><%= buscarError('email')[0].msg %></span>
                      <label for="phone">
                         <h3>Telefono:</h3>
                      </label>
-                     <input type="tel" required id="phone" name="phone" value="<%= (typeof datos != 'undefined') ? datos.phone : ''  %>">
+                     <input type="tel" required id="phone" name="phone" value="<%= (typeof datos != 'undefined') ? datos.phone : user[0].phone  %>">
                      <span style="color: red;font-size: 12px;"><%= buscarError('phone')[0].msg %></span>
                      <label for="password">
                         <h3>Contraseña (*):</h3>

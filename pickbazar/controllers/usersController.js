@@ -89,6 +89,7 @@ const controller = {
 				category: 'active',
 				avatar: req.files[0].filename
 			}
+			
 			users.push(newUser);
 			fs.writeFileSync(usersDB, JSON.stringify(users));
 			res.redirect('login');
