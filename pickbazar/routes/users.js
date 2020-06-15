@@ -25,7 +25,7 @@ var upload = multer({ storage: storage });
 
 /************ LOGIN USER ************/
 /* GET - Form to login */
-router.get('/login/', userMiddlewares.gest, usersController.login);
+router.get('/login/', /*userMiddlewares.gest,*/ usersController.login);
 
 /* POST - Process login form */
 router.post('/login/', [
@@ -68,9 +68,9 @@ router.post('/register/', upload.any(), [
 
 /************ EDIT ONE USER ************/
 /* GET - Form to edit */
-router.get('/edit/:userId', usersController.edit);
+router.get('/edit/', usersController.edit);
 /* PUT - Update in Data Base */
-router.put('/edit/:userId', upload.any(), usersController.update);
+router.put('/edit/', upload.any(), usersController.update);
 
 /************ DELET ONE PRODUCT ************/
 /* DELETE - Delete from Data Base */

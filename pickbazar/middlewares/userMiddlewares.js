@@ -4,14 +4,14 @@ const userMiddlewares = {
         if (req.session.userLogged) {
             next();
         } else {
-            res.redirect("users/login");
+            res.redirect("/users/login");
         }
     },
 
     gest: function (req, res, next) {
         if (!req.session.userLogged) {
             next();
-        }
+        }else {res.redirect("/");}
     }
 }
 

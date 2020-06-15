@@ -8,11 +8,11 @@ const usersDB = path.join(__dirname, '../data/usersDB.json');
 let users = JSON.parse(fs.readFileSync(usersDB, 'utf-8'));
 
 const controller = {
-
+	
 	login: (req, res, next) => {
 		res.render('users/login');
 	},
-
+	
 	processLogin: (req, res, next) => {
 		//Tomar los datos
 		//buscar elusuario enla base de datos, por email:req.body.email
@@ -24,57 +24,55 @@ const controller = {
 		//Vuelvo a la vista con un error
 		//Si el usuario no existe 
 		//redirijo a la vista donde estaba con un error
-
+		
 		let errors = validationResult(req);
-
+		
 		let userFound;
 		if (!errors.isEmpty()) {
 			res.render('users/login', { errors: errors.errors });
 		}
-
+		
 		userFound = users.filter(function (user) {
 			return user.email == req.body.email && bcrypt.compareSync(req.body.password, user.password) //user.password == req.body.password;
 		});
-
+		
 		if (userFound == "") {
 			res.render('users/login', { errors: [{ msg: "Credenciales invalidas" }] });
-
+			
 			//console.log(userFound);
 			//PRENDE SESION PARA EL USUARION LOGEADO
 			//GUARDA AL USUARIO LOGUEADO PARA USARLOS EN LAS VISTAS
 		} else {
 			req.session.userFound = userFound;
-			res.locals.userFound = userFound;
-			res.redirect('/')
+			res.locals.userFound = true;
+			//console.log(userFound[0]);
+			//console.log(req.session.userFound[0]);
+			//console.log(res.locals.userFound[0]);
+			res.redirect('/users/profile')
 		}
-
-
 	},
-
+	
 	// Detail - Detail from one user
 	profile: (req, res, next) => {
-		let user
-		for (let i = 0; i < users.length; i++) {
-			if (users[i].id == req.params.userId) {
-				user = users[i];
-			}
-		}
-
+		let user = req.session.userFound
+		res.locals.userFound = true
+		let user2= res.locals.userFound
+		console.log(user2);
 		res.render('./users/profile', { user: user })
 	},
-
+	
 	// Create - Form to create
 	register: (req, res, next) => {
 		res.render('users/register')
 	},
-
+	
 	// Create -  Method to store
 	store: (req, res, next) => {
-
+		
 		let errors = validationResult(req);
-
+		
 		if (errors.isEmpty()) {
-
+			
 			let userIdMaker = 0;
 			for (let i = 0; i < users.length; i++) {
 				if (users[i].id > userIdMaker) {
@@ -98,20 +96,20 @@ const controller = {
 			res.render('users/register', {errors: errors.errors, datos: req.body});
 		}
 	},
-
-
+	
+	
 	// Update - Form to edit
 	edit: (req, res, next) => {
-		let user;
-		let id = req.params.userId;
+		let user = req.session.userFound
+		/*let id = user[0].id;
 		for (let i = 0; i < users.length; i++) {
 			if (users[i].id == id) {
 				user = users[i];
 			}
-		}
-		res.render("./users/edit-form", { user: user })
+		}*/
+		res.render("./users/userEdit", { user: user })
 	},
-
+	
 	// Update - Method to update
 	update: (req, res, next) => {
 		let id = req.params.userId;
@@ -124,25 +122,25 @@ const controller = {
 			category: req.body.category,
 			avatar: ""
 		}
-
+		
 		for (let i = 0; i < users.length; i++) {
 			if (users[i].id == id) {
 				users[i] = userEdited;
 			}
 		}
 		fs.writeFileSync(usersDB, JSON.stringify(users));
-
+		
 		console.log(id);
 		res.redirect('./users/profile/' + id);
 	},
-
+	
 	// Delete - Delete one product from DB
 	destroy: (req, res, next) => {
-
+		
 		let id = req.params.userId;
-
+		
 		users = users.filter((user) => { return user.id != id });
-
+		
 		fs.writeFileSync(usersDB, JSON.stringify(users));
 		res.redirect('/login');
 	}
