@@ -44,8 +44,9 @@ router.post('/register/', upload.any(), [
     check('first_name').isLength({ min: 2 }).withMessage('El nombre debe tener mas de 2 caracteres'),
     check('last_name').isLength({ min: 2 }).withMessage('El apellido debe tener mas de 2 caracteres'),
     check('email').isEmail().withMessage('Debe ingresar un Email valido'),
-    check('phone').isInt({ min: 8 }).withMessage('El telefono debe tener el codigo de area'),
-    check('password').isLength({ min: 8 }).withMessage('La contraseña debe tener mas de 8 caracteres'),
+    check('phone').isInt().withMessage('Debe ingresar solo numeros'),
+    check('phone').isLength({ min: 8 }).withMessage('El telefono debe tener el codigo de area'),
+    check('password').isLength({ min: 6 }).withMessage('La contraseña debe tener mas de 6 caracteres'),
     body('email').custom(function (value) {
         for (let i=0; i<users.length; i++) {
             if (users[i].email == value) {
