@@ -1,7 +1,7 @@
 const userMiddlewares = {
 
     auth: function (req, res, next) {
-        if (req.session.userLogged) {
+        if (req.session.userFound) {
             next();
         } else {
             res.redirect("/");
@@ -9,7 +9,7 @@ const userMiddlewares = {
     },
 
     gest: function (req, res, next) {
-        if (!req.session.userLogged) {
+        if (!req.session.userFound) {
             next();
         } else {
             res.redirect("/");

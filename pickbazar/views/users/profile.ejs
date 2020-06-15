@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body style="background-color: chocolate;">
-    <h1> <%=user[0].first_name%></h1>
-    <h1> <%=user[0].last_name%></h1>
-    <h1> <%=user[0].email%></h1>
-   <img src="/images/users/<%=user[0].avatar%>" alt=""> 
-   <br>
-   <a href="/users/edit">Editar perfil</a>
-   <br>
-   <a href="/">HOME</a>
+
+<%- include('../partials/head') %>
+
+<body>
+    <%- include('../partials/headerNav') %>
+
+    <div class="container -products-wrapper">
+        <div class="row">
+
+            <div class="col-6 col-sm-4 col-lg-3">
+                <section class="product-box">
+                    <a href="/users/edit">
+                        <figure class="product-box_image">
+                            <img src="/images/users/<%=user[0].avatar%>" alt="imagen de <%=user[0].avatar%>"">
+                       </figure>
+                       <article class=" product-box_data">
+                        <h2> <%=user[0].first_name%></h2>
+                        <h2> <%=user[0].last_name%></h2>
+                        <p> <%=user[0].email%></p>
+                            </article>
+                    </a>
+                </section>
+            </div>
+        </div>
+    </div>
+
+
+    <%- include('../partials/footer') %>
 </body>
+
 </html>
-
-

@@ -25,13 +25,15 @@ var upload = multer({ storage: storage });
 
 /************ LOGIN USER ************/
 /* GET - Form to login */
-router.get('/login/', userMiddlewares.gest, usersController.login);
+router.get('/login/', /*userMiddlewares.gest,*/ usersController.login);
 
 /* POST - Process login form */
 router.post('/login/', [
     check('email').isEmail().withMessage('Email invalido'),
     check('password').isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres'),
 ], usersController.processLogin);
+
+router.post('/logout/', usersController.logout);
 
 /* GET - User profile */
 router.get('/profile/', usersController.profile);

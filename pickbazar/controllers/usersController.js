@@ -14,17 +14,7 @@ const controller = {
 	},
 	
 	processLogin: (req, res, next) => {
-		//Tomar los datos
-		//buscar elusuario enla base de datos, por email:req.body.email
-		//Si el usuario existe
-		//bcrypt hashcompare entre user.password y req.body.password
-		//si la contraseña es valida
-		//Devuelvo user a la vista y redirijo
-		//Si la contraseña no es valida
-		//Vuelvo a la vista con un error
-		//Si el usuario no existe 
-		//redirijo a la vista donde estaba con un error
-		
+				
 		let errors = validationResult(req);
 		
 		let userFound;
@@ -44,20 +34,23 @@ const controller = {
 			//GUARDA AL USUARIO LOGUEADO PARA USARLOS EN LAS VISTAS
 		} else {
 			req.session.userFound = userFound;
-			res.locals.userFound = true;
+			res.locals.userFound = userFound[0];
 			//console.log(userFound[0]);
 			//console.log(req.session.userFound[0]);
-			//console.log(res.locals.userFound[0]);
+			//console.log("LOGIN-"+res.locals.userFound);
 			res.redirect('/users/profile')
 		}
 	},
+	logout: function(req,res,next){
+        //cerrar sesión
+        req.session.destroy();
+        res.redirect("/users/login");
+      },
 	
 	// Detail - Detail from one user
 	profile: (req, res, next) => {
 		let user = req.session.userFound
-		res.locals.userFound = true
-		let user2= res.locals.userFound
-		console.log(user2);
+		//console.log("PROFILE-"+user2);
 		res.render('./users/profile', { user: user })
 	},
 	
@@ -89,7 +82,7 @@ const controller = {
 				category: 'active',
 				avatar: req.files[0].filename
 			}
-			
+
 			users.push(newUser);
 			fs.writeFileSync(usersDB, JSON.stringify(users));
 			res.redirect('login');
@@ -135,8 +128,7 @@ const controller = {
 			
 
 			fs.writeFileSync(usersDB, JSON.stringify(users));
-			console.log('-------------------------------------------');
-			console.log(req.session.userFound);
+			//console.log(req.session.userFound);
 			res.redirect('/users/login');
 			
 		} else {

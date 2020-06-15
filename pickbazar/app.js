@@ -26,7 +26,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 app.use(session({secret:'PickbazarSecret'}));
 
-app.use((req,res,next)=>{res.locals.userFound = false; next()} )
+app.use(function (req, res, next) {
+  res.locals.userFound = req.session.user;
+  next()
+  })
+//app.use((req,res,next)=>{res.locals.userFound = false; next()} )
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
