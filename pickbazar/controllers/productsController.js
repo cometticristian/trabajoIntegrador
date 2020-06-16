@@ -69,7 +69,7 @@ const controller = {
 		let newProduct = {
 			id: productIdMaker + 1,
 			category: req.body.pickCategory,
-			subcategory: req.body.pickSubCategory,
+			subCategory: req.body.pickSubCategory,
 			name: req.body.name,
 			brand: req.body.brand,
 			description: req.body.description,

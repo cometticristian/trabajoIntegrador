@@ -27,10 +27,9 @@ app.use(methodOverride('_method'));
 app.use(session({secret:'PickbazarSecret'}));
 
 app.use(function (req, res, next) {
-  res.locals.userFound = req.session.user;
+  res.locals.userFound = req.session.userFound;
   next()
   })
-//app.use((req,res,next)=>{res.locals.userFound = false; next()} )
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

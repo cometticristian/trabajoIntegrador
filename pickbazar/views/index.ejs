@@ -9,10 +9,10 @@
       <p><a href='/products/create'>Formulario Crear</a></p>
    -->
    <%- include('./partials/headerNav') %>
-   <% if (user==undefined){%>
+   <% if (userFound==undefined){%>
 <h5>Login</h5>
    <%}else{%>
-      <h5><%=user[0].first_name%></h5>
+      <h5><%=userFound[0].first_name + userFound[0].last_name%></h5>
    <%}%>
    <div class="banner"></div>
    
