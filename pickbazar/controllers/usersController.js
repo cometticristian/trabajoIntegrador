@@ -38,13 +38,13 @@ const controller = {
 			//console.log(userFound[0]);
 			//console.log(req.session.userFound[0]);
 			//console.log("LOGIN-"+res.locals.userFound);
-			res.redirect('/users/profile')
+			res.redirect('/')
 		}
 	},
 	logout: function(req,res,next){
         //cerrar sesión
         req.session.destroy();
-        res.redirect("/users/login");
+        res.redirect("/");
       },
 	
 	// Detail - Detail from one user
@@ -127,7 +127,6 @@ const controller = {
 			
 
 			fs.writeFileSync(usersDB, JSON.stringify(users));
-			//console.log(req.session.userFound);
 			res.redirect('/users/login');
 			
 		} else {
@@ -136,7 +135,7 @@ const controller = {
 
 	},
 	
-	// Delete - Delete one product from DB
+	// Delete - change user category to 'inactive'
 	destroy: (req, res, next) => {
 		
 		let id = req.params.userId;

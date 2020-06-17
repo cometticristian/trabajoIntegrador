@@ -99,6 +99,6 @@ router.put('/edit', upload.any(), [
 
 /************ DELET ONE PRODUCT ************/
 /* DELETE - Delete from Data Base */
-router.delete('/delete/:userId', usersController.destroy);
+router.delete('/delete', usersController.destroy);
 
 module.exports = router;

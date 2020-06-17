@@ -9,11 +9,7 @@
       <p><a href='/products/create'>Formulario Crear</a></p>
    -->
    <%- include('./partials/headerNav') %>
-   <% if (userFound==undefined){%>
-<h5>Login</h5>
-   <%}else{%>
-      <h5><%=userFound[0].first_name + userFound[0].last_name%></h5>
-   <%}%>
+
    <div class="banner"></div>
    
    <!-- Productos aleatorios -->
@@ -31,9 +27,9 @@
                         <img src="/images/products/<%=select.image%>" alt="imagen de <%=select.name%>"">
                      </figure>
                      <article class=" product-box_data">
-                        <h2>$<%=select.price%>"</h2>
-                        <span><%=select.discount%>"% OFF</span>
-                        <p><%=select.description%>"</p>
+                        <h2>$<%=select.price%></h2>
+                        <span><%=select.discount%>% OFF</span>
+                        <p><%=select.description%></p>
                      </article>
                      <a href="/cart/add/<%=select.id%>"><i class="fas fa-cart-plus"></i></a>
                   </a>
@@ -56,9 +52,9 @@
                            <img src="/images/products/<%=nuevo.image%>" alt="imagen de <%=nuevo.name%>"">
                         </figure>
                         <article class=" product-box_data">
-                           <h2>$<%=nuevo.price%>"</h2>
-                           <span><%=nuevo.discount%>"% OFF</span>
-                           <p><%=nuevo.description%>"</p>
+                           <h2>$<%=nuevo.price%></h2>
+                           <span><%=nuevo.discount%>% OFF</span>
+                           <p><%=nuevo.description%></p>
                         </article>
                         <a href="/cart/add/<%=nuevo.id%>"><i class="fas fa-cart-plus"></i></a>
                      </a>

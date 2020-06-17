@@ -6,38 +6,38 @@
       </div>
     </div>
   </div>
-  
+
   <div class="container">
     <div class="row" style="border-bottom: solid 1px #999;padding-bottom: 15px;">
-      
+
       <div class="col-3 col-md-2">
         <a href="/" class="main-header_home-link">
           <img src="/images/logo-pickBazar.jpg">
         </a>
       </div>
-      
+
       <div class="offset-1 col-8 col-md-9">
         <div class="row search">
-          
+
           <div class="col-9 col-md-9">
             <form action="/search" method="GET" class="search-form">
               <input type="text" name="keywords" placeholder="Buscar" class="search-form_input">
               <button type="submit" class="search-form_button"><i class="fas fa-search"></i></button>
             </form>
           </div>
-          
+
           <button class="offset-1 col-2 btn-toggle-navbar">
             <i class="fas fa-bars"></i>
           </button>
-          
+
           <div class="col-9 col-md-3 login-cart">
-            <a href="/users/login">Login <i class="fas fa-address-card"></i></a>
+            <% if (userFound==undefined){%>
+              <a href="/users/login">Login <i class="fas fa-address-card"></i></a>
+            <%}else{%>
+              <a href="/users/profile">Ver perfil <i class="fas fa-user"></i> <%=userFound[0].first_name + ' ' + userFound[0].last_name%> </a>
+            <%}%>
             <a class="cart" href="/cart">Carrito <i class="fas fa-shopping-cart"></i></a>
-   <% if (userFound==undefined){%>
-<h5>Login</h5>
-   <%}else{%>
-      <h5><%=userFound[0].first_name + userFound[0].last_name%></h5>
-   <%}%>
+          
           </div>
         </div>
         

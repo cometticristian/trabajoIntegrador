@@ -16,14 +16,9 @@
          <div class="col-12 col-md-6 offset-3 columna">
             <div class="formulario">
                <h1>INGRESÁ A TU CUENTA</h1>
-               <!--<HR style="height:1px;border-width:0;color:gray;background-color:gray"></HR>-->
-
                <section class="log-reg">
-                  
                   <% if (typeof errors != 'undefined'){%>
-                     
                      <p style="color: crimson"><%=errors[0].msg%></p>
-                        
                   <%}%>
 
                      <form action="/users/login" method="POST">

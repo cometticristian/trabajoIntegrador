@@ -57,6 +57,41 @@ hr {
   border-bottom: solid 1px #ebebeb;
 }
 
+/*====== Profile ======*/
+.send {
+  border-radius: 5px;
+  background-color:white ;
+  border: solid 1px #f58220;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  width: 100px;
+  height: 30px;
+  margin: 0 0 10px 0;
+  text-align: center;
+}
+.orderButton {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+}
+.profile_data h2 {
+font-size: 2em;
+  font-weight: 300;
+  margin: 10px 0 10px 5px;
+  padding-left: 5px;
+}
+.profile_data p {
+  font-size: 1.5em;
+  line-height: 1.5em;
+  width: 100%;
+  color: #666;
+  margin: 0 0 0 5px;
+  transition: 300ms;
+  overflow: hidden;
+  padding: 0 5px;
+  min-height: 45px;
+}
 
 /*====== Main Header ======*/
 .main-header {
