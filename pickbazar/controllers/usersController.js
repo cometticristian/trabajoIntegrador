@@ -23,7 +23,8 @@ const controller = {
 		}
 		
 		userFound = users.filter(function (user) {
-			return user.email == req.body.email && bcrypt.compareSync(req.body.password, user.password) //user.password == req.body.password;
+			return user.email == req.body.email &&
+			bcrypt.compareSync(req.body.password, user.password)
 		});
 		
 		if (userFound == "") {
@@ -35,16 +36,19 @@ const controller = {
 		} else {
 			req.session.userFound = userFound;
 			res.locals.userFound = userFound[0];
-			//console.log(userFound[0]);
-			//console.log(req.session.userFound[0]);
-			//console.log("LOGIN-"+res.locals.userFound);
+
+			if (req.body.remember != undefined){
+				res.cookie('remember', userFound[0].email, {maxAge: 180000000})
+			}
+
 			res.redirect('/')
 		}
 	},
 	logout: function(req,res,next){
         //cerrar sesión
-        req.session.destroy();
-        res.redirect("/");
+		req.session.destroy();
+		res.clearCookie('remember')
+		res.redirect("/");
       },
 	
 	// Detail - Detail from one user

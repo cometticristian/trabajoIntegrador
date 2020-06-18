@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 const multer = require('multer');
 const path = require('path');
-
+const userMiddlewares = require('../middlewares/userMiddlewares')
 const productsController = require('../controllers/productsController');
 
 /************ MULTER STORAGE ************/
@@ -31,19 +31,19 @@ router.get('/detail/:productId/', productsController.detail);
 
 /************ CREATE ONE PRODUCT ************/
 /* GET - Form to create */
-router.get('/create/', productsController.create);
+router.get('/create/', userMiddlewares.admin, productsController.create);
 
 /* POST - Store in Data Base */
 router.post('/create/', upload.any(), productsController.store);
 
 /************ EDIT ONE PRODUCT ************/
 /* GET - Form to edit */
-router.get('/edit/:productId', productsController.edit);
+router.get('/edit/:productId', userMiddlewares.admin, productsController.edit);
 /* PUT - Update in Data Base */
 router.put('/edit/:productId', productsController.update);
 
 /************ DELET ONE PRODUCT ************/
 /* DELETE - Delete from Data Base */
-router.delete('/delete/:productId', productsController.destroy);
+router.delete('/delete/:productId', userMiddlewares.admin, productsController.destroy);
 
 module.exports = router;

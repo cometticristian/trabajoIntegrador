@@ -33,6 +33,7 @@ router.post('/login/', [
     check('password').isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres'),
 ], usersController.processLogin);
 
+/* POST - Process logout */
 router.post('/logout/', usersController.logout);
 
 /* GET - User profile */
@@ -40,7 +41,7 @@ router.get('/profile/', userMiddlewares.auth, usersController.profile);
 
 /************ CREATE ONE USER ************/
 /* GET - Form to create */
-router.get('/register/', usersController.register);
+router.get('/register/', userMiddlewares.gest, usersController.register);
 
 /* POST - Store in Data Base */
 router.post('/register/', upload.any(), [
@@ -70,7 +71,8 @@ router.post('/register/', upload.any(), [
 
 /************ EDIT ONE USER ************/
 /* GET - Form to edit */
-router.get('/edit', usersController.edit);
+router.get('/edit', userMiddlewares.auth, usersController.edit);
+
 /* PUT - Update in Data Base */
 router.put('/edit', upload.any(), [
     check('first_name').isLength({ min: 2 }).withMessage('El nombre debe tener mas de 2 caracteres'),
@@ -97,8 +99,8 @@ router.put('/edit', upload.any(), [
     }).withMessage('Las contraseñas no coinciden')
 ], usersController.update);
 
-/************ DELET ONE PRODUCT ************/
-/* DELETE - Delete from Data Base */
+/************ CHANGE USER TO CATEGORY INACTIVE ************/
+/* DELETE - Change user category to inactive */
 router.delete('/delete', usersController.destroy);
 
 module.exports = router;

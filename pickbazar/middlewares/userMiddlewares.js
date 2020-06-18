@@ -16,6 +16,18 @@ const userMiddlewares = {
         } else {
             res.redirect("/");
         }
+    },
+
+    admin: function (req, res, next) {
+
+        if (req.session.userFound == undefined) {
+            res.redirect("/")
+                        
+        } else if (req.session.userFound[0].category == "admin"){
+            next();            
+        } else {
+            res.redirect("/")
+        }
     }
 }
 
