@@ -65,23 +65,37 @@ const controller = {
 		let errors = validationResult(req);
 		
 		if (errors.isEmpty()) {
-			
+			let newUser;
 			let userIdMaker = 0;
 			for (let i = 0; i < users.length; i++) {
 				if (users[i].id > userIdMaker) {
 					userIdMaker = users[i].id;
 				}
 			}
-			let newUser = {
-				id: userIdMaker + 1,
-				first_name: req.body.first_name,
-				last_name: req.body.last_name,
-				email: req.body.email,
-				phone: req.body.phone,
-				password: bcrypt.hashSync(req.body.password, 10),
-				category: 'active',
-				avatar: req.files[0].filename
+			if (req.files == '') {
+				newUser = {
+					id: userIdMaker + 1,
+					first_name: req.body.first_name,
+					last_name: req.body.last_name,
+					email: req.body.email,
+					phone: req.body.phone,
+					password: bcrypt.hashSync(req.body.password, 10),
+					category: 'active',
+					avatar: 'default.png'
+				}
+			} else {
+				newUser = {
+					id: userIdMaker + 1,
+					first_name: req.body.first_name,
+					last_name: req.body.last_name,
+					email: req.body.email,
+					phone: req.body.phone,
+					password: bcrypt.hashSync(req.body.password, 10),
+					category: 'active',
+					avatar: req.files[0].filename
+				}
 			}
+
 
 			users.push(newUser);
 			fs.writeFileSync(usersDB, JSON.stringify(users));

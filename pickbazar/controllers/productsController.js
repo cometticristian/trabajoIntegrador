@@ -60,22 +60,47 @@ const controller = {
 
 	// Create -  Method to store
 	store: (req, res, next) => {
+
+		let newProduct;
 		let productIdMaker = 0;
 		for (let i = 0; i < products.length; i++) {
 			if (products[i].id > productIdMaker) {
 				productIdMaker = products[i].id;
 			}
 		}
-		let newProduct = {
-			id: productIdMaker + 1,
-			category: req.body.pickCategory,
-			subCategory: req.body.pickSubCategory,
-			name: req.body.name,
-			brand: req.body.brand,
-			description: req.body.description,
-			price: Number(req.body.price),
-			tax: req.body.tax,
-			discount: Number(req.body.discount)
+
+		if (req.files == "") {
+			newProduct = {
+				id: productIdMaker + 1,
+				category: req.body.pickCategory,
+				subCategory: req.body.pickSubCategory,
+				name: req.body.name,
+				brand: req.body.brand,
+				description: req.body.description,
+				price: Number(req.body.price),
+				tax: req.body.tax,
+				image: 'logo-pickBazar.jpg',
+				//secondPick: req.files[1].filename,
+				//thirdPick: req.files[2].filename,
+				//fourthPick: req.files[3].filename,
+				discount: Number(req.body.discount)
+			}
+		} else {
+			newProduct = {
+				id: productIdMaker + 1,
+				category: req.body.pickCategory,
+				subCategory: req.body.pickSubCategory,
+				name: req.body.name,
+				brand: req.body.brand,
+				description: req.body.description,
+				price: Number(req.body.price),
+				tax: req.body.tax,
+				image: req.files[0].filename,
+				//secondPick: req.files[1].filename,
+				//thirdPick: req.files[2].filename,
+				//fourthPick: req.files[3].filename,
+				discount: Number(req.body.discount)
+			}
 		}
 		products.push(newProduct);
 		fs.writeFileSync(productsDB, JSON.stringify(products));
@@ -89,13 +114,14 @@ const controller = {
 		for (let i = 0; i < products.length; i++) {
 			if (products[i].id == id) {
 				product = products[i];
-			} 
+			}
 		}
 		res.render("./products/edit-form", { product: product })
 	},
 
 	// Update - Method to update
 	update: (req, res, next) => {
+
 		let id = req.params.productId;
 		productEdited = {
 			id: Number(id),

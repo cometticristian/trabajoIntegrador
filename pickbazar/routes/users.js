@@ -25,7 +25,7 @@ var upload = multer({ storage: storage });
 
 /************ LOGIN USER ************/
 /* GET - Form to login */
-router.get('/login/', /*userMiddlewares.gest,*/ usersController.login);
+router.get('/login/', userMiddlewares.gest, usersController.login);
 
 /* POST - Process login form */
 router.post('/login/', [

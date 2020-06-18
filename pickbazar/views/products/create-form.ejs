@@ -19,7 +19,7 @@
     <section class="container">
         <div class="left">
             <div class="sec2">
-                <form action="/products/create" method="POST">
+                <form action="/products/create" enctype="multipart/form-data" method="POST">
                     <div class="form">
                         <select name="pickCategory" id="category" class="select">
                             <option value="0">SELECCIONE CATEGORIA</option>
@@ -69,17 +69,22 @@
             </div>
         </div>
         <div class="right">
+
             <div class="sec3">
                 <div class="photo main-photo">
+                    <input type="file" name="mainPick" class="inputFile">
                     <i class="fas fa-camera"></i>
                 </div>
                 <div class="photo photo-sec">
+                    <input type="file" name="secondPick" class="inputFile">
                     <i class="fas fa-camera camera-sec"></i>
                 </div>
                 <div class="photo photo-sec">
+                    <input type="file" name="thirdPick" class="inputFile">
                     <i class="fas fa-camera camera-sec"></i>
                 </div>
                 <div class="photo photo-sec">
+                    <input type="file" name="fourthPick" class="inputFile">
                     <i class="fas fa-camera camera-sec"></i>
                 </div>
             </div>
