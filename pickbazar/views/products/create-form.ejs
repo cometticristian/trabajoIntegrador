@@ -19,20 +19,34 @@
     <section class="container">
         <div class="left">
             <div class="sec2">
-                <form action="/products/create" method="POST">
+                <form action="/products/create" enctype="multipart/form-data" method="POST">
                     <div class="form">
                         <select name="pickCategory" id="category" class="select">
                             <option value="0">SELECCIONE CATEGORIA</option>
-                            <option value="cocina">COCINA</option>
-                            <option value="baño">BAÑO</option>
-                            <option value="decoracion">DECORACION</option>
-                            <option value="limpieza">LIMPIEZA</option>
+                            <option value="COCINA">COCINA</option>
+                            <option value="BAÑO">BAÑO</option>
+                            <option value="DECORACION">DECORACION</option>
+                            <option value="LIMPIEZA">LIMPIEZA</option>
                         </select>
                         <select name="pickSubCategory" id="subcategory" class="select">
                             <option value="0">SELECCIONE SUB CATEGORIA</option>
-                            <option value="sartenes">SARTEN</option>
-                            <option value="ollas">OLLA</option>
-                            <option value="platos">PLATO</option>
+                            <option value="CACEROLA">CACEROLA</option>
+                            <option value="PAVA">PAVA</option>
+                            <option value="JARRO">JARRO</option>
+                            <option value="FRASCO">FRASCO</option>
+                            <option value="SARTEN">SARTEN</option>
+                            <option value="ACCESORIO">ACCESORIO</option>
+                            <option value="CESTO">CESTO</option>
+                            <option value="CANASTO">CANASTO</option>
+                            <option value="ALFOMBRA">ALFOMBRA</option>
+                            <option value="LIMA">LIMA</option>
+                            <option value="ESPONJA">ESPONJA</option>
+                            <option value="RELOJ">RELOJ</option>
+                            <option value="ESPEJO">ESPEJO</option>
+                            <option value="CUADRO">CUADRO</option>
+                            <option value="VELA">VELA</option>
+                            <option value="FAROL">FAROL</option>
+                            <option value="MOPA">MOPA</option>
                         </select>
                     </div>
             </div>
@@ -69,17 +83,22 @@
             </div>
         </div>
         <div class="right">
+
             <div class="sec3">
                 <div class="photo main-photo">
+                    <input type="file" name="mainPick" class="inputFile">
                     <i class="fas fa-camera"></i>
                 </div>
                 <div class="photo photo-sec">
+                    <input type="file" name="secondPick" class="inputFile">
                     <i class="fas fa-camera camera-sec"></i>
                 </div>
                 <div class="photo photo-sec">
+                    <input type="file" name="thirdPick" class="inputFile">
                     <i class="fas fa-camera camera-sec"></i>
                 </div>
                 <div class="photo photo-sec">
+                    <input type="file" name="fourthPick" class="inputFile">
                     <i class="fas fa-camera camera-sec"></i>
                 </div>
             </div>
