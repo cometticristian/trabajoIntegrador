@@ -69,7 +69,7 @@ const controller = {
 			}
 		}
 
-		if (req.files == "") {
+		if (req.files == "" && req.files[1] == undefined && req.files[2] == undefined && req.files[3] == undefined) {
 			newProduct = {
 				id: productIdMaker + 1,
 				category: req.body.pickCategory,
@@ -80,12 +80,13 @@ const controller = {
 				price: Number(req.body.price),
 				tax: req.body.tax,
 				image: 'logo-pickBazar.jpg',
-				//secondPick: req.files[1].filename,
-				//thirdPick: req.files[2].filename,
-				//fourthPick: req.files[3].filename,
+				secondPick: '',
+				thirdPick: '',
+				fourthPick: '',
+				important: 'new',
 				discount: Number(req.body.discount)
 			}
-		} else {
+		} else if (req.files[0] != undefined && req.files[1] == undefined && req.files[2] == undefined && req.files[3] == undefined) {
 			newProduct = {
 				id: productIdMaker + 1,
 				category: req.body.pickCategory,
@@ -96,9 +97,61 @@ const controller = {
 				price: Number(req.body.price),
 				tax: req.body.tax,
 				image: req.files[0].filename,
-				//secondPick: req.files[1].filename,
-				//thirdPick: req.files[2].filename,
-				//fourthPick: req.files[3].filename,
+				secondPick: '',
+				thirdPick: '',
+				fourthPick: '',
+				important: 'new',
+				discount: Number(req.body.discount)
+			}
+		} else if (req.files[0] != undefined && req.files[1] != undefined && req.files[2] == undefined && req.files[3] == undefined) {
+			newProduct = {
+				id: productIdMaker + 1,
+				category: req.body.pickCategory,
+				subCategory: req.body.pickSubCategory,
+				name: req.body.name,
+				brand: req.body.brand,
+				description: req.body.description,
+				price: Number(req.body.price),
+				tax: req.body.tax,
+				image: req.files[0].filename,
+				secondPick: req.files[1].filename,
+				thirdPick: '',
+				fourthPick: '',
+				important: 'new',
+				discount: Number(req.body.discount)
+			}
+		} else if (req.files[0] != undefined && req.files[1] != undefined && req.files[2] != undefined && req.files[3] == undefined) {
+			newProduct = {
+				id: productIdMaker + 1,
+				category: req.body.pickCategory,
+				subCategory: req.body.pickSubCategory,
+				name: req.body.name,
+				brand: req.body.brand,
+				description: req.body.description,
+				price: Number(req.body.price),
+				tax: req.body.tax,
+				image: req.files[0].filename,
+				secondPick: req.files[1].filename,
+				thirdPick: req.files[2].filename,
+				fourthPick: '',
+				important: 'new',
+				discount: Number(req.body.discount)
+			}
+		} else if (req.files[0] != undefined && req.files[1] != undefined && req.files[2] != undefined && req.files[3] != undefined) {
+			newProduct = {
+				id: productIdMaker + 1,
+				category: req.body.pickCategory,
+				subCategory: req.body.pickSubCategory,
+				name: req.body.name,
+				brand: req.body.brand,
+				description: req.body.description,
+				price: Number(req.body.price),
+				tax: req.body.tax,
+				image: req.files[0].filename,
+				secondPick: req.files[1].filename,
+				thirdPick: req.files[2].filename,
+				fourthPick: req.files[3].filename,
+				important: 'new',
 				discount: Number(req.body.discount)
 			}
 		}
@@ -123,26 +176,111 @@ const controller = {
 	update: (req, res, next) => {
 
 		let id = req.params.productId;
-		productEdited = {
-			id: Number(id),
-			category: req.body.pickCategory,
-			subCategory: req.body.pickSubCategory,
-			name: req.body.name,
-			brand: req.body.brand,
-			description: req.body.description,
-			price: Number(req.body.price),
-			tax: req.body.tax,
-			discount: Number(req.body.discount)
+		let productToEdit;
+		let productEdited;
+
+		for (let i = 0; i < products.length; i++) {
+			if (products[i].id == id) {
+				productToEdit = products[i];
+			}
 		}
+		if (req.files == "" && req.files[1] == undefined && req.files[2] == undefined && req.files[3] == undefined) {
+			productEdited = {
+				id: productToEdit.id,
+				category: req.body.pickCategory,
+				subCategory: req.body.pickSubCategory,
+				name: req.body.name,
+				brand: req.body.brand,
+				description: req.body.description,
+				price: Number(req.body.price),
+				tax: req.body.tax,
+				important: productToEdit.important,
+				image: 'logo-pickBazar.jpg',
+				secondPick: '',
+				thirdPick: '',
+				fourthPick: '',
+				discount: Number(req.body.discount)
+			}
+		} else if (req.files[0] != undefined && req.files[1] == undefined && req.files[2] == undefined && req.files[3] == undefined) {
+			productEdited = {
+				id: productToEdit.id,
+				category: req.body.pickCategory,
+				subCategory: req.body.pickSubCategory,
+				name: req.body.name,
+				brand: req.body.brand,
+				description: req.body.description,
+				price: Number(req.body.price),
+				tax: req.body.tax,
+				important: productToEdit.important,
+				image: req.files[0].filename,
+				secondPick: '',
+				thirdPick: '',
+				fourthPick: '',
+				discount: Number(req.body.discount)
+			}
+		} else if (req.files[0] != undefined && req.files[1] != undefined && req.files[2] == undefined && req.files[3] == undefined) {
+			productEdited = {
+				id: productToEdit.id,
+				category: req.body.pickCategory,
+				subCategory: req.body.pickSubCategory,
+				name: req.body.name,
+				brand: req.body.brand,
+				description: req.body.description,
+				price: Number(req.body.price),
+				tax: req.body.tax,
+				important: productToEdit.important,
+				image: req.files[0].filename,
+				secondPick: req.files[1].filename,
+				thirdPick: '',
+				fourthPick: '',
+				discount: Number(req.body.discount)
+			}
+		} else if (req.files[0] != undefined && req.files[1] != undefined && req.files[2] != undefined && req.files[3] == undefined) {
+			productEdited = {
+				id: productToEdit.id,
+				category: req.body.pickCategory,
+				subCategory: req.body.pickSubCategory,
+				name: req.body.name,
+				brand: req.body.brand,
+				description: req.body.description,
+				price: Number(req.body.price),
+				tax: req.body.tax,
+				important: productToEdit.important,
+				image: req.files[0].filename,
+				secondPick: req.files[1].filename,
+				thirdPick: req.files[2].filename,
+				fourthPick: '',
+				discount: Number(req.body.discount)
+			}
+		} else if (req.files[0] != undefined && req.files[1] != undefined && req.files[2] != undefined && req.files[3] != undefined) {
+			productEdited = {
+				id: productToEdit.id,
+				category: req.body.pickCategory,
+				subCategory: req.body.pickSubCategory,
+				name: req.body.name,
+				brand: req.body.brand,
+				description: req.body.description,
+				price: Number(req.body.price),
+				tax: req.body.tax,
+				important: productToEdit.important,
+				image: req.files[0].filename,
+				secondPick: req.files[1].filename,
+				thirdPick: req.files[2].filename,
+				fourthPick: req.files[3].filename,
+				discount: Number(req.body.discount)
+			}
+		}
+
 
 		for (let i = 0; i < products.length; i++) {
 			if (products[i].id == id) {
 				products[i] = productEdited;
 			}
 		}
+
 		fs.writeFileSync(productsDB, JSON.stringify(products));
 
-		console.log(id);
+		
 		res.redirect('/products/detail/' + id);
 	},
 

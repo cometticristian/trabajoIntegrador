@@ -81,9 +81,9 @@ router.put('/edit', upload.any(), [
     check('phone').isInt().withMessage('Debe ingresar solo numeros'),
     check('phone').isLength({ min: 8 }).withMessage('El telefono debe tener el codigo de area'),
     check('password').isLength({ min: 6 }).withMessage('La contraseña debe tener mas de 6 caracteres'),
-    body('email').custom(function (value) {
+    body('email').custom(function (value, { req }) {
         for (let i=0; i<users.length; i++) {
-            if (users[i].email == value) {
+            if (users[i].email == value && req.session.userFound[0].email != value) {
                 return false;
             }
         }

@@ -123,17 +123,32 @@ const controller = {
 		let errors = validationResult(req);
 		let user = req.session.userFound;
 
-		if (errors.isEmpty()) {			
-			userEdited = {
-				id: user[0].id,
-				first_name: req.body.first_name,
-				last_name: req.body.last_name,
-				email: req.body.email,
-				phone: req.body.phone,
-				password: bcrypt.hashSync(req.body.password, 10),
-				category: 'active',
-				avatar: ""
+		if (errors.isEmpty()) {		
+			
+			if (req.files == '') {
+				userEdited = {
+					id: user[0].id,
+					first_name: req.body.first_name,
+					last_name: req.body.last_name,
+					email: req.body.email,
+					phone: req.body.phone,
+					password: bcrypt.hashSync(req.body.password, 10),
+					category: user[0].category,
+					avatar: 'default.png'
+				}
+			} else {
+				userEdited = {
+					id: user[0].id,
+					first_name: req.body.first_name,
+					last_name: req.body.last_name,
+					email: req.body.email,
+					phone: req.body.phone,
+					password: bcrypt.hashSync(req.body.password, 10),
+					category: user[0].category,
+					avatar: req.files[0].filename
+				}
 			}
+
 			
 			for (let i = 0; i < users.length; i++) {
 				if (users[i].id == user[0].id) {
@@ -155,13 +170,20 @@ const controller = {
 	
 	// Delete - change user category to 'inactive'
 	destroy: (req, res, next) => {
-		
-		let id = req.params.userId;
-		
-		users = users.filter((user) => { return user.id != id });
-		
+		//cambia categoria a inactivo
+		req.session.userFound[0].category = "inactive"
+		//reemplaza en en la base de datos de usuarios por el modificado
+		for (let i = 0; i < users.length; i++) {
+			if (users[i].id == req.session.userFound[0].id) {
+				users[i] = req.session.userFound[0];
+			}
+		}
+		//cierra sesion
+		req.session.destroy();
+		res.clearCookie('remember')
+		//escribo en el JSON
 		fs.writeFileSync(usersDB, JSON.stringify(users));
-		res.redirect('/login');
+		res.redirect('/users/login');
 	}
 };
 

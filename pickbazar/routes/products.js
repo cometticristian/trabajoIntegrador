@@ -40,7 +40,7 @@ router.post('/create/', upload.any(), productsController.store);
 /* GET - Form to edit */
 router.get('/edit/:productId', userMiddlewares.admin, productsController.edit);
 /* PUT - Update in Data Base */
-router.put('/edit/:productId', productsController.update);
+router.put('/edit/:productId', upload.any(), productsController.update);
 
 /************ DELET ONE PRODUCT ************/
 /* DELETE - Delete from Data Base */
