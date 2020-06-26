@@ -170,7 +170,7 @@ const controller = {
 	
 	// Delete - change user category to 'inactive'
 	destroy: (req, res, next) => {
-		//cambia categoria a inactivo
+		//cambia categoría a inactivo
 		req.session.userFound[0].category = "inactive"
 		//reemplaza en en la base de datos de usuarios por el modificado
 		for (let i = 0; i < users.length; i++) {
