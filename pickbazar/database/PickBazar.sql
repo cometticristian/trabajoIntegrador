@@ -17,8 +17,8 @@
 --
 -- Create schema pickbazar
 --
-
-CREATE DATABASE IF NOT EXISTS pickbazar;
+DROP DATABASE IF EXISTS pickbazar;
+CREATE DATABASE pickbazar;
 USE pickbazar;
 
 --
