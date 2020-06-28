@@ -1,3 +1,4 @@
+const db = require ('../database/models');
 const fs = require('fs');
 const path = require('path');
 
@@ -6,8 +7,7 @@ let products = JSON.parse(fs.readFileSync(productsDB, 'utf-8'));
 
 const controller = {
 	root: (req, res, next) => {
-		//let user = req.session.userFound
-		//console.log(res.locals.userFound);
+		
 
 		let selected = products.filter(product=>{
 			return product.important=="home";
@@ -15,7 +15,7 @@ const controller = {
 		let news = products.filter(product=>{
 			return product.important=="new";
 		});
-		res.render ('index', {selected, news/*, user*/});
+		res.render ('index', {selected, news});
 		
 		
     },
