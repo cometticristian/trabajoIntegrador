@@ -24,7 +24,7 @@
                <section class="product-box">
                   <a href="/products/detail/<%=select.id%>">
                      <figure class="product-box_image">
-                        <img src="/images/products/<%=select.image%>" alt="imagen de <%=select.name%>"">
+                        <img src="/images/products/<%=select.Image[0].name%>" alt="imagen de <%=select.name%>"">
                      </figure>
                      <article class=" product-box_data">
                         <h2>$<%=select.price%></h2>
@@ -35,8 +35,7 @@
                   </a>
                </section>
             </div>
-            
-            <%})%>
+         <%})%>
             
             <!-- /Productos aleatorios -->
             <!-- /Nuevos Productos -->
@@ -49,7 +48,7 @@
                   <section class="product-box">
                      <a href="/products/detail/<%=nuevo.id%>">
                         <figure class="product-box_image">
-                           <img src="/images/products/<%=nuevo.image%>" alt="imagen de <%=nuevo.name%>"">
+                           <img src="/images/products/<%=nuevo.Image[0].name%>" alt="imagen de <%=nuevo.name%>"">
                         </figure>
                         <article class=" product-box_data">
                            <h2>$<%=nuevo.price%></h2>
