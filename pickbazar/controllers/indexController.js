@@ -15,10 +15,11 @@ const controller = {
 			 include: [{association: "Subcategory"}, {association: "Image"}]
 			})
 
-		let newsReq = db.Product.findAll(
-			{where:{id:{[Op.gt]:8}},
-			 include: [{association: "Subcategory"}, {association: "Image"}]
-			})	
+			let newsReq = db.Product.findAll({/*where:{id:{[Op.gt]:8}*/
+				order: [['created_at', 'DESC']],
+				limit:4,
+				 include: [{association: "Subcategory"}, {association: "Image"}]
+				})	
 		
 			Promise.all([selectedReq, newsReq])
 		.then(function([selected, news]){
