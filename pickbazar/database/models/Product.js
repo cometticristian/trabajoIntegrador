@@ -46,10 +46,7 @@ module.exports = function (sequelize, dataTypes) {
             type: dataTypes.INTEGER,
             allowNull: false
         },
-        mainimage_id: {
-            type: dataTypes.INTEGER,
-            allowNull: false
-        },
+        
         created_at: {
             type: dataTypes.DATE,
             allowNull: false
@@ -75,6 +72,13 @@ module.exports = function (sequelize, dataTypes) {
             timestamps: false
             
         });
+
+        Product.belongsTo(models.Category,{
+            as: "Category",
+            foreignKey: "category_id",
+            timestamps: false
+            
+        });
         
         Product.belongsTo(models.Brand,{
             as: "brand",
@@ -88,12 +92,7 @@ module.exports = function (sequelize, dataTypes) {
             timestamps: "false"
         });
         
-        Product.belongsTo(models.Image,{
-            as: "Mainimage",
-            foreignKey: "mainimage_id",
-            timestamps: "false"
-        });
-        
+                
         //Está comentado porque sino tira error
         /*Product.belongsTo(models.Cartitem,{
             as: "Cartitem",

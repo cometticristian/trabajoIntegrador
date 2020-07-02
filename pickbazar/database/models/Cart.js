@@ -16,6 +16,10 @@ module.exports = function (sequelize, dataTypes) {
             type: dataTypes.INTEGER,
             allowNull: false
         },
+        state: {
+            type: dataTypes.STRING,
+            allowNull: false
+        },
         created_at: {
             type: dataTypes.DATE,
             allowNull: false

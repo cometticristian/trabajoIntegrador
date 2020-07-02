@@ -25,6 +25,18 @@ const controller = {
 		},
 		
 		category: (req, res, next) => {
+
+			//Traer db.Category.findAll y obtener el id, después pasarlo desde un promise a la vista
+			db.Product.findAll(
+				{where:{category_id:req.params.productCategory},
+					include: [{association: "Category"}, {association: "Image"}]
+				})
+
+			.then(function(category){
+				console.log(category[0].Category.name);
+				res.render('./products/list', { category: category, nombreCategoria: category[0].Category.name })
+			})
+			
 			/*let category = []
 			products.forEach(function (product) {
 				if (product.category == req.params.productCategory) {

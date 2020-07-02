@@ -34,13 +34,8 @@ module.exports = function(sequelize, dataTypes){
             as: "Product",
             foreignKey: "product_id",
             timestamps: "false"
-        }),
-        Image.hasOne(models.Product,{
-            as: "Mainproduct",
-            foreignKey: "mainimage_id",
-            timestamps: "false"
         })
-        
+     
     }
     
     return Image;
