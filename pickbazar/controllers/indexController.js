@@ -23,8 +23,7 @@ const controller = {
 		
 			Promise.all([selectedReq, newsReq])
 		.then(function([selected, news]){
-			console.log(selected/*[0].Image[0].name*/);
-			
+			//console.log(selected[0].Image[0].name);
 			res.render("index", {selected:selected, news:news})
 		})
 		.catch(function(error){
