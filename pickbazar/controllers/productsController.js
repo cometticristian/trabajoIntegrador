@@ -71,20 +71,17 @@ const controller = {
 
 		if (req.files == "" && req.files[1] == undefined && req.files[2] == undefined && req.files[3] == undefined) {
 			newProduct = {
-				id: productIdMaker + 1,
-				category: req.body.pickCategory,
-				subCategory: req.body.pickSubCategory,
 				name: req.body.name,
-				brand: req.body.brand,
 				description: req.body.description,
-				price: Number(req.body.price),
+				price: req.body.price,
+				discount: req.body.discount,
 				tax: req.body.tax,
-				image: 'logo-pickBazar.jpg',
-				secondPick: '',
-				thirdPick: '',
-				fourthPick: '',
-				important: 'new',
-				discount: Number(req.body.discount)
+				state: 1,
+				onsale: 0,
+				brand_id: req.body.brand,
+				category_id: req.body.category,
+				subcategory_id: req.body.pickSubCategory,
+				image: 'logo-pickBazar.jpg'
 			}
 		} else if (req.files[0] != undefined && req.files[1] == undefined && req.files[2] == undefined && req.files[3] == undefined) {
 			newProduct = {
