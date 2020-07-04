@@ -22,7 +22,7 @@ module.exports = function(sequelize, dataTypes){
         },
         created_at:{
             type:dataTypes.DATE,
-            allowNull: false
+            allowNull: true
         }
     }
     

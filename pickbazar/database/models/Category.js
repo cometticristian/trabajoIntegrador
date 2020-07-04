@@ -37,7 +37,9 @@ module.exports = function(sequelize, dataTypes){
             foreignKey: "category_id",
             timestamps: "false"
         })
-    }
 
+    }
     return Category;
 }
+
+

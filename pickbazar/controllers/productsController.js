@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const db = require ('../database/models');
+const db = require('../database/models');
 const { Op } = require("sequelize");
 
 const productsDB = path.join(__dirname, '../data/productsDB.json');
@@ -11,381 +11,511 @@ const controller = {
 	root: (req, res, next) => {
 		db.Product.findAll(
 			{
-				include: [{association: "Subcategory"},
-				{association: "Image"}]
+				include: [{ association: "Subcategory" },
+				{ association: "Image" }]
 			})
-			
-			.then(function(products){
+
+			.then(function (products) {
 				//console.log(products);
-				
+
 				res.render('./products/list', { category: products, nombreCategoria: "" })
 			})
-			.catch(function(error){
+			.catch(function (error) {
 				console.log(error);
-			})	
-		},
-		
+			})
+	},
+
 	category: (req, res, next) => {
-			
-			let productReq = db.Product.findAll(
-				{where:{category_id:req.params.productCategory},
-				include: [{association: "Category"}, {association: "Image"}]
+
+		let productReq = db.Product.findAll(
+			{
+				where: { category_id: req.params.productCategory },
+				include: [{ association: "Category" }, { association: "Image" }]
 			})
-			
-			let categoryReq =db.Category.findAll(
-				{where:{id:req.params.productCategory}
+
+		let categoryReq = db.Category.findAll(
+			{
+				where: { id: req.params.productCategory }
 			})
-			
-			Promise.all([productReq, categoryReq])
-			.then(function([category, categoryName]){
+
+		Promise.all([productReq, categoryReq])
+			.then(function ([category, categoryName]) {
 				//console.log(categoryName[0].name);
-				res.render('./products/list', { category: category,
-					nombreCategoria: categoryName[0].name })
+				res.render('./products/list', {
+					category: category,
+					nombreCategoria: categoryName[0].name
 				})
-				.catch(function(error){
-					console.log(error);
-				})
-				
-				/*let category = []
-				products.forEach(function (product) {
-					if (product.category == req.params.productCategory) {
-						category.push(product)
-					}
-				})
-				res.render('./products/list', { category: category,
-					nombreCategoria: req.params.productCategory })
-				*/
-				},
-			
+			})
+			.catch(function (error) {
+				console.log(error);
+			})
+
+		/*let category = []
+		products.forEach(function (product) {
+			if (product.category == req.params.productCategory) {
+				category.push(product)
+			}
+		})
+		res.render('./products/list', { category: category,
+			nombreCategoria: req.params.productCategory })
+		*/
+	},
+
 	subCategory: (req, res, next) => {
-				
-				let productReq = db.Product.findAll(
-					{where:{subcategory_id:req.params.productSubCategory},
-					include: [{association: "Subcategory"},
-					{association: "Category"},
-					{association: "Image"}]
+
+		let productReq = db.Product.findAll(
+			{
+				where: { subcategory_id: req.params.productSubCategory },
+				include: [{ association: "Subcategory" },
+				{ association: "Category" },
+				{ association: "Image" }]
+			})
+
+		let subcategoryReq = db.Subcategory.findAll(
+			{
+				where: { id: req.params.productSubCategory },
+				include: [{ association: "Category" },
+				{ association: "Product" }]
+			})
+
+
+		Promise.all([productReq, subcategoryReq])
+			.then(function ([category, subcategoryName]) {
+				console.log(subcategoryName[0].Category.name);
+				res.render('./products/list', {
+					category: category,
+					nombreCategoria: subcategoryName[0].Category.name + " || " + subcategoryName[0].name
 				})
-				
-				let subcategoryReq =db.Subcategory.findAll(
-					{where:{id:req.params.productSubCategory},
-					include: [{association: "Category"},
-					{association: "Product"}]
+			})
+			.catch(function (error) {
+				console.log(error);
+			})
+
+		/*let category = [];
+		let nombreCategoria = "";
+		products.forEach(function (product) {
+			if (product.subCategory == req.params.productSubCategory) {
+				category.push(product);
+				nombreCategoria = product.category
+			}
+		})
+		res.render('./products/list', { category: category,
+			nombreCategoria: nombreCategoria + " || " + req.params.productSubCategory })
+		*/
+	},
+
+
+	// Detail - Detail from one product
+	detail: (req, res, next) => {
+
+		let detailReq = db.Product.findAll(
+			{
+				where: { id: req.params.productId },
+				include: [{ association: "Subcategory" },
+				{ association: "Category" },
+				{ association: "Image" }]
+			})
+
+		let similarReq = db.Product.findAll(
+			{/*where:{category_id : 1},*/
+				include: [{ association: "Subcategory" },
+				{ association: "Category" },
+				{ association: "Image" }]
+			})
+
+
+		Promise.all([detailReq, similarReq])
+			.then(function ([product, similar]) {
+				//console.log(product);
+				res.render('./products/detail', {
+					product: product,
+					category: similar
 				})
-				
-				
-				Promise.all([productReq, subcategoryReq])
-				.then(function([category, subcategoryName]){
-					console.log(subcategoryName[0].Category.name);
-					res.render('./products/list', { category: category,
-						nombreCategoria: subcategoryName[0].Category.name + " || " + subcategoryName[0].name})
+			})
+			.catch(function (error) {
+				console.log(error);
+			})
+
+		/*let product
+		for (let i = 0; i < products.length; i++) {
+			if (products[i].id == req.params.productId) {
+				product = products[i];
+			}
+		}
+		let category = [];
+		products.forEach(function (similar) {
+			if (similar.category == product.category) {
+				category.push(similar);
+			}
+			
+		})
+		res.render('./products/detail', { product: product, category: category })
+		*/
+	},
+
+	// Create - Form to create
+	create: (req, res, next) => {
+		let categories = db.Category.findAll()
+		let subCategories = db.Subcategory.findAll()
+
+		Promise.all([categories, subCategories])
+			.then(([categories, subCategories]) => {
+				res.render('./products/create-form', { categories, subCategories })
+			})
+			.catch((error) => {
+				console.log(error);
+			})
+
+	},
+
+	// Create -  Method to store
+	store: (req, res, next) => {
+		let marcaBody = req.body.brand;
+		marcaBody = marcaBody.toLowerCase();
+		function MaysPrimera(string) {
+			return string.charAt(0).toUpperCase() + string.slice(1);
+		}
+		marcaBody = MaysPrimera(marcaBody);
+
+		db.Brand.findAll()
+			.then((marcas) => {
+				let contador = 0;
+				let marca;
+				for (let i = 0; i < marcas.length; i++) {
+					if (marcaBody == marcas[i].dataValues.name) {
+						contador++;
+						marca = marcas[i]
+					}
+				}
+				if (contador > 0) {
+					db.Product.create({
+						name: req.body.name,
+						description: req.body.description,
+						price: Number(req.body.price),
+						discount: Number(req.body.discount),
+						tax: req.body.tax,
+						state: 1,
+						category_id: req.body.category,
+						subcategory_id: req.body.subcategory,
+						brand_id: marca.dataValues.id
 					})
-					.catch(function(error){
-						console.log(error);
-					})
-					
-					/*let category = [];
-					let nombreCategoria = "";
-					products.forEach(function (product) {
-						if (product.subCategory == req.params.productSubCategory) {
-							category.push(product);
-							nombreCategoria = product.category
-						}
-					})
-					res.render('./products/list', { category: category,
-						nombreCategoria: nombreCategoria + " || " + req.params.productSubCategory })
-					*/
-				},		
-				
-				
-				// Detail - Detail from one product
-				detail: (req, res, next) => {
-					
-					let detailReq = db.Product.findAll(
-						{where:{id : req.params.productId},
-						include: [{association: "Subcategory"},
-						{association: "Category"},
-						{association: "Image"}]
-					})
-					
-					let similarReq = db.Product.findAll(
-						{/*where:{category_id : 1},*/
-						include: [{association: "Subcategory"},
-						{association: "Category"},
-						{association: "Image"}]
-					})
-					
-					
-					Promise.all([detailReq, similarReq])
-					.then(function([product, similar]){
-						//console.log(product);
-						res.render('./products/detail', { product: product,
-							category:similar})
+						.then((newProduct) => {
+							db.Image.create({
+								name: req.files[0].filename,
+								main: 1,
+								product_id: newProduct.id
+							})
 						})
-						.catch(function(error){
+						.then(() => {
+							res.redirect('/products');
+						})
+						.catch((error) => {
 							console.log(error);
 						})
-
-					/*let product
-					for (let i = 0; i < products.length; i++) {
-						if (products[i].id == req.params.productId) {
-							product = products[i];
-						}
-					}
-					let category = [];
-					products.forEach(function (similar) {
-						if (similar.category == product.category) {
-							category.push(similar);
-						}
-						
+				} else {
+					db.Brand.create({
+						name: marcaBody
 					})
-					res.render('./products/detail', { product: product, category: category })
-					*/
-				},
-				
-				// Create - Form to create
-				create: (req, res, next) => {
-					res.render('./products/create-form')
-				},
-				
-				// Create -  Method to store
-				store: (req, res, next) => {
-					
-					let newProduct;
-					let productIdMaker = 0;
-					for (let i = 0; i < products.length; i++) {
-						if (products[i].id > productIdMaker) {
-							productIdMaker = products[i].id;
-						}
-					}
-					
-					if (req.files == "" && req.files[1] == undefined && req.files[2] == undefined && req.files[3] == undefined) {
-						newProduct = {
-							id: productIdMaker + 1,
-							category: req.body.pickCategory,
-							subCategory: req.body.pickSubCategory,
-							name: req.body.name,
-							brand: req.body.brand,
-							description: req.body.description,
-							price: Number(req.body.price),
-							tax: req.body.tax,
-							image: 'logo-pickBazar.jpg',
-							secondPick: '',
-							thirdPick: '',
-							fourthPick: '',
-							important: 'new',
-							discount: Number(req.body.discount)
-						}
-					} else if (req.files[0] != undefined && req.files[1] == undefined && req.files[2] == undefined && req.files[3] == undefined) {
-						newProduct = {
-							id: productIdMaker + 1,
-							category: req.body.pickCategory,
-							subCategory: req.body.pickSubCategory,
-							name: req.body.name,
-							brand: req.body.brand,
-							description: req.body.description,
-							price: Number(req.body.price),
-							tax: req.body.tax,
-							image: req.files[0].filename,
-							secondPick: '',
-							thirdPick: '',
-							fourthPick: '',
-							important: 'new',
-							discount: Number(req.body.discount)
-						}
-					} else if (req.files[0] != undefined && req.files[1] != undefined && req.files[2] == undefined && req.files[3] == undefined) {
-						newProduct = {
-							id: productIdMaker + 1,
-							category: req.body.pickCategory,
-							subCategory: req.body.pickSubCategory,
-							name: req.body.name,
-							brand: req.body.brand,
-							description: req.body.description,
-							price: Number(req.body.price),
-							tax: req.body.tax,
-							image: req.files[0].filename,
-							secondPick: req.files[1].filename,
-							thirdPick: '',
-							fourthPick: '',
-							important: 'new',
-							discount: Number(req.body.discount)
-						}
-					} else if (req.files[0] != undefined && req.files[1] != undefined && req.files[2] != undefined && req.files[3] == undefined) {
-						newProduct = {
-							id: productIdMaker + 1,
-							category: req.body.pickCategory,
-							subCategory: req.body.pickSubCategory,
-							name: req.body.name,
-							brand: req.body.brand,
-							description: req.body.description,
-							price: Number(req.body.price),
-							tax: req.body.tax,
-							image: req.files[0].filename,
-							secondPick: req.files[1].filename,
-							thirdPick: req.files[2].filename,
-							fourthPick: '',
-							important: 'new',
-							discount: Number(req.body.discount)
-						}
-					} else if (req.files[0] != undefined && req.files[1] != undefined && req.files[2] != undefined && req.files[3] != undefined) {
-						newProduct = {
-							id: productIdMaker + 1,
-							category: req.body.pickCategory,
-							subCategory: req.body.pickSubCategory,
-							name: req.body.name,
-							brand: req.body.brand,
-							description: req.body.description,
-							price: Number(req.body.price),
-							tax: req.body.tax,
-							image: req.files[0].filename,
-							secondPick: req.files[1].filename,
-							thirdPick: req.files[2].filename,
-							fourthPick: req.files[3].filename,
-							important: 'new',
-							discount: Number(req.body.discount)
-						}
-					}
-					products.push(newProduct);
-					fs.writeFileSync(productsDB, JSON.stringify(products));
-					res.redirect('/products');
-				},
-				
-				// Update - Form to edit
-				edit: (req, res, next) => {
-					let product;
-					let id = req.params.productId;
-					for (let i = 0; i < products.length; i++) {
-						if (products[i].id == id) {
-							product = products[i];
-						}
-					}
-					res.render("./products/edit-form", { product: product })
-				},
-				
-				// Update - Method to update
-				update: (req, res, next) => {
-					
-					let id = req.params.productId;
-					let productToEdit;
-					let productEdited;
-					
-					for (let i = 0; i < products.length; i++) {
-						if (products[i].id == id) {
-							productToEdit = products[i];
-						}
-					}
-					if (req.files == "" && req.files[1] == undefined && req.files[2] == undefined && req.files[3] == undefined) {
-						productEdited = {
-							id: productToEdit.id,
-							category: req.body.pickCategory,
-							subCategory: req.body.pickSubCategory,
-							name: req.body.name,
-							brand: req.body.brand,
-							description: req.body.description,
-							price: Number(req.body.price),
-							tax: req.body.tax,
-							important: productToEdit.important,
-							image: 'logo-pickBazar.jpg',
-							secondPick: '',
-							thirdPick: '',
-							fourthPick: '',
-							discount: Number(req.body.discount)
-						}
-					} else if (req.files[0] != undefined && req.files[1] == undefined && req.files[2] == undefined && req.files[3] == undefined) {
-						productEdited = {
-							id: productToEdit.id,
-							category: req.body.pickCategory,
-							subCategory: req.body.pickSubCategory,
-							name: req.body.name,
-							brand: req.body.brand,
-							description: req.body.description,
-							price: Number(req.body.price),
-							tax: req.body.tax,
-							important: productToEdit.important,
-							image: req.files[0].filename,
-							secondPick: '',
-							thirdPick: '',
-							fourthPick: '',
-							discount: Number(req.body.discount)
-						}
-					} else if (req.files[0] != undefined && req.files[1] != undefined && req.files[2] == undefined && req.files[3] == undefined) {
-						productEdited = {
-							id: productToEdit.id,
-							category: req.body.pickCategory,
-							subCategory: req.body.pickSubCategory,
-							name: req.body.name,
-							brand: req.body.brand,
-							description: req.body.description,
-							price: Number(req.body.price),
-							tax: req.body.tax,
-							important: productToEdit.important,
-							image: req.files[0].filename,
-							secondPick: req.files[1].filename,
-							thirdPick: '',
-							fourthPick: '',
-							discount: Number(req.body.discount)
-						}
-					} else if (req.files[0] != undefined && req.files[1] != undefined && req.files[2] != undefined && req.files[3] == undefined) {
-						productEdited = {
-							id: productToEdit.id,
-							category: req.body.pickCategory,
-							subCategory: req.body.pickSubCategory,
-							name: req.body.name,
-							brand: req.body.brand,
-							description: req.body.description,
-							price: Number(req.body.price),
-							tax: req.body.tax,
-							important: productToEdit.important,
-							image: req.files[0].filename,
-							secondPick: req.files[1].filename,
-							thirdPick: req.files[2].filename,
-							fourthPick: '',
-							discount: Number(req.body.discount)
-						}
-					} else if (req.files[0] != undefined && req.files[1] != undefined && req.files[2] != undefined && req.files[3] != undefined) {
-						productEdited = {
-							id: productToEdit.id,
-							category: req.body.pickCategory,
-							subCategory: req.body.pickSubCategory,
-							name: req.body.name,
-							brand: req.body.brand,
-							description: req.body.description,
-							price: Number(req.body.price),
-							tax: req.body.tax,
-							important: productToEdit.important,
-							image: req.files[0].filename,
-							secondPick: req.files[1].filename,
-							thirdPick: req.files[2].filename,
-							fourthPick: req.files[3].filename,
-							discount: Number(req.body.discount)
-						}
-					}
-					
-					
-					for (let i = 0; i < products.length; i++) {
-						if (products[i].id == id) {
-							products[i] = productEdited;
-						}
-					}
-					
-					fs.writeFileSync(productsDB, JSON.stringify(products));
-					
-					
-					res.redirect('/products/detail/' + id);
-				},
-				
-				// Delete - Delete one product from DB
-				destroy: (req, res, next) => {
-					
-					let id = req.params.productId;
-					
-					products = products.filter((producto) => { return producto.id != id });
-					
-					fs.writeFileSync(productsDB, JSON.stringify(products));
-					res.redirect('/products');
+						.then((brand) => {
+							db.Product.create({
+								name: req.body.name,
+								description: req.body.description,
+								price: Number(req.body.price),
+								discount: Number(req.body.discount),
+								tax: req.body.tax,
+								state: 1,
+								category_id: req.body.category,
+								subcategory_id: req.body.subcategory,
+								brand_id: brand.id
+							})
+								.then((newProduct) => {
+									console.log(newProduct)
+									db.Image.create({
+										name: req.files[0].filename,
+										main: 1,
+										product_id: newProduct.id
+									})
+								})
+						})
+						.then(() => {
+							res.redirect('/products');
+						})
+						.catch((error) => {
+							console.log(error);
+						})
 				}
-			};
+			})
+			.catch((error) => {
+				console.log(error);
+			})
+
+	},
+
+
+
+	/* 		db.Product.create({
+				name: req.body.name,
+				description: req.body.description,
+				price: Number(req.body.price),
+				discount: Number(req.body.discount),
+				tax: req.body.tax,
+				state: 1,
+				category_id: req.body.category,
+				subcategory_id: req.body.subcategory,
+		
+		
+		
+		
+				brand_id: req.body.brand
+			})
+				.then(() => {
+					res.redirect('/products');
+				})
+				.catch((error) => {
+					console.log(error);
+				})
+		}, */
+
+
+
+	/* let newProduct;
+	let productIdMaker = 0;
+	for (let i = 0; i < products.length; i++) {
+		if (products[i].id > productIdMaker) {
+			productIdMaker = products[i].id;
+		}
+	}
+		
+	if (req.files == "" && req.files[1] == undefined && req.files[2] == undefined && req.files[3] == undefined) {
+		newProduct = {
+			name: req.body.name,
+			description: req.body.description,
+			price: Number(req.body.price),
+			discount: Number(req.body.discount),
+			tax: req.body.tax,
+			state: 1,
+			category_id: req.body.pickCategory,
+			subcategory_id: req.body.pickSubCategory,
+			brand_id: req.body.brand},
+	
+		
+			image: 'logo-pickBazar.jpg',
+			secondPick: '',
+			thirdPick: '',
+			fourthPick: '',
+			important: 'new',
 			
-			module.exports = controller;
-			
-			
-			
+		}
+	} else if (req.files[0] != undefined && req.files[1] == undefined && req.files[2] == undefined && req.files[3] == undefined) {
+		newProduct = {
+			id: productIdMaker + 1,
+			category: req.body.pickCategory,
+			subCategory: req.body.pickSubCategory,
+			name: req.body.name,
+			brand: req.body.brand,
+			description: req.body.description,
+			price: Number(req.body.price),
+			tax: req.body.tax,
+			image: req.files[0].filename,
+			secondPick: '',
+			thirdPick: '',
+			fourthPick: '',
+			important: 'new',
+			discount: Number(req.body.discount)
+		}
+	} else if (req.files[0] != undefined && req.files[1] != undefined && req.files[2] == undefined && req.files[3] == undefined) {
+		newProduct = {
+			id: productIdMaker + 1,
+			category: req.body.pickCategory,
+			subCategory: req.body.pickSubCategory,
+			name: req.body.name,
+			brand: req.body.brand,
+			description: req.body.description,
+			price: Number(req.body.price),
+			tax: req.body.tax,
+			image: req.files[0].filename,
+			secondPick: req.files[1].filename,
+			thirdPick: '',
+			fourthPick: '',
+			important: 'new',
+			discount: Number(req.body.discount)
+		}
+	} else if (req.files[0] != undefined && req.files[1] != undefined && req.files[2] != undefined && req.files[3] == undefined) {
+		newProduct = {
+			id: productIdMaker + 1,
+			category: req.body.pickCategory,
+			subCategory: req.body.pickSubCategory,
+			name: req.body.name,
+			brand: req.body.brand,
+			description: req.body.description,
+			price: Number(req.body.price),
+			tax: req.body.tax,
+			image: req.files[0].filename,
+			secondPick: req.files[1].filename,
+			thirdPick: req.files[2].filename,
+			fourthPick: '',
+			important: 'new',
+			discount: Number(req.body.discount)
+		}
+	} else if (req.files[0] != undefined && req.files[1] != undefined && req.files[2] != undefined && req.files[3] != undefined) {
+		newProduct = {
+			id: productIdMaker + 1,
+			category: req.body.pickCategory,
+			subCategory: req.body.pickSubCategory,
+			name: req.body.name,
+			brand: req.body.brand,
+			description: req.body.description,
+			price: Number(req.body.price),
+			tax: req.body.tax,
+			image: req.files[0].filename,
+			secondPick: req.files[1].filename,
+			thirdPick: req.files[2].filename,
+			fourthPick: req.files[3].filename,
+			important: 'new',
+			discount: Number(req.body.discount)
+		}
+	}
+	products.push(newProduct);
+	fs.writeFileSync(productsDB, JSON.stringify(products));
+	res.redirect('/products');
+	}, */
+
+	// Update - Form to edit
+	edit: (req, res, next) => {
+		let product;
+		let id = req.params.productId;
+		for (let i = 0; i < products.length; i++) {
+			if (products[i].id == id) {
+				product = products[i];
+			}
+		}
+		res.render("./products/edit-form", { product: product })
+	},
+
+	// Update - Method to update
+	update: (req, res, next) => {
+
+		let id = req.params.productId;
+		let productToEdit;
+		let productEdited;
+
+		for (let i = 0; i < products.length; i++) {
+			if (products[i].id == id) {
+				productToEdit = products[i];
+			}
+		}
+		if (req.files == "" && req.files[1] == undefined && req.files[2] == undefined && req.files[3] == undefined) {
+			productEdited = {
+				id: productToEdit.id,
+				category: req.body.pickCategory,
+				subCategory: req.body.pickSubCategory,
+				name: req.body.name,
+				brand: req.body.brand,
+				description: req.body.description,
+				price: Number(req.body.price),
+				tax: req.body.tax,
+				important: productToEdit.important,
+				image: 'logo-pickBazar.jpg',
+				secondPick: '',
+				thirdPick: '',
+				fourthPick: '',
+				discount: Number(req.body.discount)
+			}
+		} else if (req.files[0] != undefined && req.files[1] == undefined && req.files[2] == undefined && req.files[3] == undefined) {
+			productEdited = {
+				id: productToEdit.id,
+				category: req.body.pickCategory,
+				subCategory: req.body.pickSubCategory,
+				name: req.body.name,
+				brand: req.body.brand,
+				description: req.body.description,
+				price: Number(req.body.price),
+				tax: req.body.tax,
+				important: productToEdit.important,
+				image: req.files[0].filename,
+				secondPick: '',
+				thirdPick: '',
+				fourthPick: '',
+				discount: Number(req.body.discount)
+			}
+		} else if (req.files[0] != undefined && req.files[1] != undefined && req.files[2] == undefined && req.files[3] == undefined) {
+			productEdited = {
+				id: productToEdit.id,
+				category: req.body.pickCategory,
+				subCategory: req.body.pickSubCategory,
+				name: req.body.name,
+				brand: req.body.brand,
+				description: req.body.description,
+				price: Number(req.body.price),
+				tax: req.body.tax,
+				important: productToEdit.important,
+				image: req.files[0].filename,
+				secondPick: req.files[1].filename,
+				thirdPick: '',
+				fourthPick: '',
+				discount: Number(req.body.discount)
+			}
+		} else if (req.files[0] != undefined && req.files[1] != undefined && req.files[2] != undefined && req.files[3] == undefined) {
+			productEdited = {
+				id: productToEdit.id,
+				category: req.body.pickCategory,
+				subCategory: req.body.pickSubCategory,
+				name: req.body.name,
+				brand: req.body.brand,
+				description: req.body.description,
+				price: Number(req.body.price),
+				tax: req.body.tax,
+				important: productToEdit.important,
+				image: req.files[0].filename,
+				secondPick: req.files[1].filename,
+				thirdPick: req.files[2].filename,
+				fourthPick: '',
+				discount: Number(req.body.discount)
+			}
+		} else if (req.files[0] != undefined && req.files[1] != undefined && req.files[2] != undefined && req.files[3] != undefined) {
+			productEdited = {
+				id: productToEdit.id,
+				category: req.body.pickCategory,
+				subCategory: req.body.pickSubCategory,
+				name: req.body.name,
+				brand: req.body.brand,
+				description: req.body.description,
+				price: Number(req.body.price),
+				tax: req.body.tax,
+				important: productToEdit.important,
+				image: req.files[0].filename,
+				secondPick: req.files[1].filename,
+				thirdPick: req.files[2].filename,
+				fourthPick: req.files[3].filename,
+				discount: Number(req.body.discount)
+			}
+		}
+
+
+		for (let i = 0; i < products.length; i++) {
+			if (products[i].id == id) {
+				products[i] = productEdited;
+			}
+		}
+
+		fs.writeFileSync(productsDB, JSON.stringify(products));
+
+
+		res.redirect('/products/detail/' + id);
+	},
+
+	// Delete - Delete one product from DB
+	destroy: (req, res, next) => {
+
+		let id = req.params.productId;
+
+		products = products.filter((producto) => { return producto.id != id });
+
+		fs.writeFileSync(productsDB, JSON.stringify(products));
+		res.redirect('/products');
+	}
+};
+
+module.exports = controller;
+
+

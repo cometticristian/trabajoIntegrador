@@ -2,12 +2,6 @@ module.exports = function (sequelize, dataTypes) {
     let alias = "Product";
     
     let cols = {
-        id: {
-            type: dataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-            allowNull: false
-        },
         name: {
             type: dataTypes.STRING,
             allowNull: false
@@ -35,7 +29,6 @@ module.exports = function (sequelize, dataTypes) {
             type: dataTypes.INTEGER,
             allowNull: false
         },
-        
         subcategory_id: {
             type: dataTypes.INTEGER,
             allowNull: false
@@ -52,12 +45,12 @@ module.exports = function (sequelize, dataTypes) {
         
         created_at: {
             type: dataTypes.DATE,
-            allowNull: false
+            allowNull: true
         },
         
         updated_at: {
             type: dataTypes.DATE,
-            allowNull: false
+            allowNull: true
         }
     }
     
@@ -76,14 +69,14 @@ module.exports = function (sequelize, dataTypes) {
             timestamps: false
             
         });
-        
+
         Product.belongsTo(models.Category,{
             as: "Category",
             foreignKey: "category_id",
             timestamps: false
             
         });
-        
+
         Product.belongsTo(models.Brand,{
             as: "brand",
             foreignKey: "brand_id",
