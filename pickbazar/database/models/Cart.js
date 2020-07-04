@@ -38,12 +38,14 @@ module.exports = function (sequelize, dataTypes) {
     let Cart = sequelize.define(alias, cols, config);
     
     Cart.associate = function (models){
-        Cart.hasOne(models.User,{
+        
+        //REVISAR RELACION USUARIO CARRITO
+        /*Cart.hasOne(models.User,{
             as: "User",
             foreignKey: "user_id",
             timestamps: false
             
-        });
+        });*/
 
         Cart.belongsToMany(models.Product,{
             as: "Products",

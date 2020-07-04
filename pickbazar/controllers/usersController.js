@@ -2,7 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcrypt');
 const { check, validationResult, body } = require('express-validator');
-
+const db = require ("../database/models")
+const { Op } = require("sequelize");
 
 const usersDB = path.join(__dirname, '../data/usersDB.json');
 let users = JSON.parse(fs.readFileSync(usersDB, 'utf-8'));
@@ -60,7 +61,11 @@ const controller = {
 	
 	// Create - Form to create
 	register: (req, res, next) => {
-		res.render('users/register')
+		db.User.findAll({where:{email:{[Op.eq]:"davidmessina@gmail.com"}}})
+		.then(function(users){
+			//console.log(users);
+			return res.render('users/register');
+        })	
 	},
 	
 	// Create -  Method to store
@@ -69,40 +74,48 @@ const controller = {
 		let errors = validationResult(req);
 		
 		if (errors.isEmpty()) {
-			let newUser;
+			/*let newUser;
 			let userIdMaker = 0;
 			for (let i = 0; i < users.length; i++) {
 				if (users[i].id > userIdMaker) {
 					userIdMaker = users[i].id;
 				}
-			}
+			}*/
 			if (req.files == '') {
-				newUser = {
-					id: userIdMaker + 1,
-					first_name: req.body.first_name,
-					last_name: req.body.last_name,
+				//newUser = {
+					//id: userIdMaker + 1,
+				db.User.create({
+					firstName: req.body.firstName,
+					lastName: req.body.lastName,
 					email: req.body.email,
-					phone: req.body.phone,
 					password: bcrypt.hashSync(req.body.password, 10),
-					category: 'active',
-					avatar: 'default.png'
-				}
+					user:"",
+					phone: req.body.phone,
+					address:"",
+					userType: "client",
+					state: 1,
+					avatar: 'default.png',
+					created_at:"2020-07-03"
+				});
 			} else {
-				newUser = {
-					id: userIdMaker + 1,
-					first_name: req.body.first_name,
-					last_name: req.body.last_name,
+				//newUser = {
+					//id: userIdMaker + 1,
+				db.User.create({	
+					firstName: req.body.firstName,
+					lastName: req.body.lastName,
 					email: req.body.email,
-					phone: req.body.phone,
 					password: bcrypt.hashSync(req.body.password, 10),
-					category: 'active',
+					user:"",
+					phone: req.body.phone,
+					address:"",
+					userType: "client",
+					state: 1,
 					avatar: req.files[0].filename
-				}
+				});
 			}
 
-
-			users.push(newUser);
-			fs.writeFileSync(usersDB, JSON.stringify(users));
+			//users.push(newUser);
+			//fs.writeFileSync(usersDB, JSON.stringify(users));
 			res.redirect('login');
 		} else {
 			res.render('users/register', {errors: errors.errors, datos: req.body});

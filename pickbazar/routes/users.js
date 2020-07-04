@@ -8,9 +8,10 @@ const usersController = require('../controllers/usersController');
 const fs = require('fs');
 const bcrypt = require('bcrypt');
 const userMiddlewares = require('../middlewares/userMiddlewares')
+const db = require ("../database/models")
 
-const usersDB = path.join(__dirname, '../data/usersDB.json');
-let users = JSON.parse(fs.readFileSync(usersDB, 'utf-8'));
+//const usersDB = path.join(__dirname, '../data/usersDB.json');
+//let users = JSON.parse(fs.readFileSync(usersDB, 'utf-8'));
 
 /************ MULTER STORAGE ************/
 var storage = multer.diskStorage({
@@ -45,23 +46,31 @@ router.get('/register/', userMiddlewares.gest, usersController.register);
 
 /* POST - Store in Data Base */
 router.post('/register/', upload.any(), [
-    check('first_name').isLength({ min: 2 }).withMessage('El nombre debe tener mas de 2 caracteres'),
-    check('last_name').isLength({ min: 2 }).withMessage('El apellido debe tener mas de 2 caracteres'),
+    check('firstName').isLength({ min: 2 }).withMessage('El nombre debe tener mas de 2 caracteres'),
+    check('lastName').isLength({ min: 2 }).withMessage('El apellido debe tener mas de 2 caracteres'),
     check('email').isEmail().withMessage('Debe ingresar un Email valido'),
     check('phone').isInt().withMessage('Debe ingresar solo numeros'),
     check('phone').isLength({ min: 8, max: 10}).withMessage('Máximo 10 dígitos y debe incluir el código de area'),
     check('password').isLength({ min: 6 }).withMessage('La contraseña debe tener mas de 6 caracteres'),
     body('email').custom(function (value) {
-        for (let i=0; i<users.length; i++) {
-            if (users[i].email == value) {
-                return false;
+        
+        db.User.findAll(/*{where:{email:{[Op.eq]:value}}}*/)
+		.then(function(users){
+            for (let i=0; i<users.length; i++) {
+                if (users[i].email == value) {
+                    //console.log(users[i].email);
+                    return false;
+                }
+                return true;
             }
-        }
-        return true;
+		})	
+         
+        
     }).withMessage('Usuario existente'),
+
     body('passwordConfirm').custom(function (value, { req }) {
         let pass = req.body.password;
-        console.log(pass);
+        //console.log(pass);
         if (pass != value) {
             return false
         }

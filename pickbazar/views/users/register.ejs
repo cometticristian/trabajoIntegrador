@@ -55,16 +55,16 @@
                }
                %>
                   <form action="/users/register" method="POST" enctype="multipart/form-data">
-                     <label for="first_name">
+                     <label for="firstName">
                         <h3>Nombre (*):</h3>
                      </label>
-                     <input type="text" required id="first_name" name="first_name" value="<%= (typeof datos != 'undefined') ? datos.first_name : ''  %>">
-                     <span style="color: red;font-size: 12px;"><%= buscarError('first_name')[0].msg %></span>
-                     <label for="last_name">
+                     <input type="text" required id="firstName" name="firstName" value="<%= (typeof datos != 'undefined') ? datos.firstName : ''  %>">
+                     <span style="color: red;font-size: 12px;"><%= buscarError('firstName')[0].msg %></span>
+                     <label for="lastName">
                         <h3>Apellido (*):</h3>
                      </label>
-                     <input type="text" required id="last_name" name="last_name" value="<%= (typeof datos != 'undefined') ? datos.last_name : ''  %>">
-                     <span style="color: red;font-size: 12px;"><%= buscarError('last_name')[0].msg %></span>
+                     <input type="text" required id="lastName" name="lastName" value="<%= (typeof datos != 'undefined') ? datos.lastName : ''  %>">
+                     <span style="color: red;font-size: 12px;"><%= buscarError('lastName')[0].msg %></span>
                      <label for="email">
                         <h3>Email (*):</h3>
                      </label>

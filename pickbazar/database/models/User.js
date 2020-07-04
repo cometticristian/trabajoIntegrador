@@ -48,11 +48,11 @@ module.exports = function (sequelize, dataTypes) {
         },
         created_at: {
             type: dataTypes.DATE,
-            allowNull: false
+            allowNull: true
         },
         updated_at: {
             type: dataTypes.DATE,
-            allowNull: false
+            allowNull: true
         }
     }
     
@@ -62,15 +62,16 @@ module.exports = function (sequelize, dataTypes) {
     }
     
     let User = sequelize.define(alias, cols, config);
-    
-    User.associate = function (models){
+
+    //REVISAR RELACION USUARIO CARRITO
+    /*User.associate = function (models){
         User.belongsTo(models.Cart,{
             as: "Cart",
             foreignKey: "user_id",
             timestamps: false
             
         });
-    }
+    }*/ 
     
     
     return User;
