@@ -14,16 +14,16 @@
                 <ul class="list">
                     <li>
                         <a href="/products/category/<%=product.category%>">
-                            <h2 class="product-title"><%=product[0].Category.name.toUpperCase()%> |</h2>
+                            <h2 class="product-title"><%=product.Category.name.toUpperCase()%> |</h2>
                         </a>
                     </li>
                     <li>
                         <a href="/products/subCategory/<%=product.subCategory%>">
-                            <h2 class="product-title">| <%=product[0].Subcategory.name.toUpperCase();%> |</h2>
+                            <h2 class="product-title">| <%=product.Subcategory.name.toUpperCase();%> |</h2>
                         </a>
                     </li>
                     <li>
-                        <h2 class="product-title">| <%=product[0].name.toUpperCase();%></h2>
+                        <h2 class="product-title">| <%=product.name.toUpperCase();%></h2>
                     </li>
                 </ul>
             </div>
@@ -33,27 +33,27 @@
                     <div class="row">
                         <div class="col-md-3 small-img-box">
                             <div class="img-small">
-                                <img class="img-s" src="/images/products/<%=product[0].Image[0].name%>" alt="">
+                                <img class="img-s" src="/images/products/<%=product.Image[0].name%>" alt="">
                             </div>
                             <div class="img-small">
-                                <img class="img-s" src="/images/products/<%=product[0].Image[0].name%>" alt="">
+                                <img class="img-s" src="/images/products/<%=product.Image[0].name%>" alt="">
                             </div>
                             <div class="img-small">
-                                <img class="img-s" src="/images/products/<%=product[0].Image[0].name%>" alt="">
+                                <img class="img-s" src="/images/products/<%=product.Image[0].name%>" alt="">
                             </div>
                         </div>
                         <div class=" col-12 col-md-9 img-box">
-                            <img id="img1" src="/images/products/<%=product[0].Image[0].name%>" alt="">
+                            <img id="img1" src="/images/products/<%=product.Image[0].name%>" alt="">
                             <%- include("../partials/slide-button") %>
                         </div>
                     </div>
                 </div>
                 <div class="description-box container col-12 col-md-4">
                     <div>
-                        <h2 class="description"><%=product[0].name%></h2>
-                        <h2 class="description">Precio $<%=product[0].price%></h2>
+                        <h2 class="description"><%=product.name%></h2>
+                        <h2 class="description">Precio $<%=product.price%></h2>
                         <h3 class="h3-detail description">DESCRIPCION</h3>
-                        <p class="p-detail description"><%=product[0].description%></p>
+                        <p class="p-detail description"><%=product.description%></p>
                         <div class="design-box">
                             <div id="design1">Elegir Diseño</div>
                             <div id="design2">⯆</div>
@@ -81,7 +81,7 @@
                 </div>
                 <div id="down2" class="col-12">
                     <% category.forEach(function(category){ %>
-                        <% if (category.category_id == product[0].category_id && category.id != product[0].id){%>
+                        <% if (category.category_id == product.category_id && category.id != product.id){%>
                     <div class="col-6 col-sm-3 col-lg-3">
                         <section class="product-box">
                             <a href="/products/detail/<%=category.id%>">

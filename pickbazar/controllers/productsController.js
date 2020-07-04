@@ -108,25 +108,40 @@ const controller = {
 	// Detail - Detail from one product
 	detail: (req, res, next) => {
 
-		let detailReq = db.Product.findAll(
-			{
-				where: { id: req.params.productId },
-				include: [{ association: "Subcategory" },
+
+		/*obtenerUsuarios()
+			.then(function(data){
+			return filtrarDatos(data);
+			})
+			.then(function(dataFiltrada){
+			console.log(dataFiltrada);
+			})
+*/
+
+		db.Product.findByPk(req.params.productId,
+			{include: [{ association: "Subcategory" },
 				{ association: "Category" },
 				{ association: "Image" }]
 			})
-
-		let similarReq = db.Product.findAll(
-			{/*where:{category_id : 1},*/
-				include: [{ association: "Subcategory" },
-				{ association: "Category" },
-				{ association: "Image" }]
+			.then(function(product){
+				return product;
+				console.log(product);
 			})
-
-
-		Promise.all([detailReq, similarReq])
-			.then(function ([product, similar]) {
-				//console.log(product);
+			
+			
+			.then(function(similar){
+				db.Product.findAll(
+					{where:{category_id : product.id},
+						include: [{ association: "Subcategory" },
+						{ association: "Category" },
+						{ association: "Image" }]
+					})
+				return similar
+			})
+			
+			.then(function (product, similar) {
+				console.log("--------"+product);
+				console.log("--------"+similar);
 				res.render('./products/detail', {
 					product: product,
 					category: similar
@@ -137,18 +152,7 @@ const controller = {
 			})
 
 		/*let product
-		for (let i = 0; i < products.length; i++) {
-			if (products[i].id == req.params.productId) {
-				product = products[i];
-			}
-		}
-		let category = [];
-		products.forEach(function (similar) {
-			if (similar.category == product.category) {
-				category.push(similar);
-			}
-			
-		})
+		for (let i = 0; i < products.length; i++) {if (products[i].id == req.params.productId) {product = products[i];}}let category = []; products.forEach(function (similar) {if (similar.category == product.category) {category.push(similar);}})
 		res.render('./products/detail', { product: product, category: category })
 		*/
 	},

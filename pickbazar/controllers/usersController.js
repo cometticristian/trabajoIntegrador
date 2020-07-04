@@ -61,11 +61,8 @@ const controller = {
 	
 	// Create - Form to create
 	register: (req, res, next) => {
-		db.User.findAll({where:{email:{[Op.eq]:"davidmessina@gmail.com"}}})
-		.then(function(users){
-			//console.log(users);
-			return res.render('users/register');
-        })	
+		return res.render('users/register');
+        	
 	},
 	
 	// Create -  Method to store
