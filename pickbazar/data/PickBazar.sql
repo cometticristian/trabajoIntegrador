@@ -1,197 +1,325 @@
--- MySQL Administrator dump 1.4
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
 --
--- ------------------------------------------------------
--- Server version	5.7.22-log
+-- Host: 127.0.0.1
+-- Generation Time: Jul 03, 2020 at 02:31 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.6
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Create schema pickbazar
+-- Database: `pickbazar`
 --
-DROP DATABASE IF EXISTS pickbazar;
-CREATE DATABASE pickbazar;
-USE pickbazar;
+CREATE DATABASE IF NOT EXISTS `pickbazar` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `pickbazar`;
+
+-- --------------------------------------------------------
 
 --
--- Definition of table `cartitems`
+-- Table structure for table `brands`
 --
 
-DROP TABLE IF EXISTS `cartitems`;
-CREATE TABLE `cartitems` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `id_cart` int(10) unsigned NOT NULL,
-  `id_product` int(10) unsigned NOT NULL,
-  `units` int(10) unsigned NOT NULL,
-  `subtotal` int(10) unsigned NOT NULL,
-  `discount` int(10) unsigned NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+DROP TABLE IF EXISTS `brands`;
+CREATE TABLE IF NOT EXISTS `brands` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8_bin NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `cartitems`
+-- RELATIONSHIPS FOR TABLE `brands`:
 --
 
-/*!40000 ALTER TABLE `cartitems` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cartitems` ENABLE KEYS */;
+--
+-- Dumping data for table `brands`
+--
 
+INSERT INTO `brands` (`id`, `name`, `created_at`) VALUES
+(1, 'Sukà', NULL);
+
+-- --------------------------------------------------------
 
 --
--- Definition of table `carts`
+-- Table structure for table `carts`
 --
 
 DROP TABLE IF EXISTS `carts`;
-CREATE TABLE `carts` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `id_user` int(10) unsigned NOT NULL,
-  `total` int(10) unsigned NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+CREATE TABLE IF NOT EXISTS `carts` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `total` int(10) UNSIGNED NOT NULL,
+  `state` varchar(45) COLLATE utf8_bin NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `carts`
+-- RELATIONSHIPS FOR TABLE `carts`:
 --
 
-/*!40000 ALTER TABLE `carts` DISABLE KEYS */;
-/*!40000 ALTER TABLE `carts` ENABLE KEYS */;
-
+-- --------------------------------------------------------
 
 --
--- Definition of table `categories`
+-- Table structure for table `cart_product`
+--
+
+DROP TABLE IF EXISTS `cart_product`;
+CREATE TABLE IF NOT EXISTS `cart_product` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `units` int(10) UNSIGNED NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `discount` int(10) UNSIGNED NOT NULL,
+  `subtotal` decimal(10,2) UNSIGNED NOT NULL,
+  `cart_id` int(10) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- RELATIONSHIPS FOR TABLE `cart_product`:
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
 --
 
 DROP TABLE IF EXISTS `categories`;
-CREATE TABLE `categories` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `category` varchar(45) NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+CREATE TABLE IF NOT EXISTS `categories` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- RELATIONSHIPS FOR TABLE `categories`:
+--
 
 --
 -- Dumping data for table `categories`
 --
 
-/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
+INSERT INTO `categories` (`id`, `name`, `created_at`) VALUES
+(1, 'Cocina', '2020-06-27 01:57:34'),
+(2, 'Baño', '2020-06-27 01:57:34'),
+(3, 'Decoración', '2020-06-27 01:57:34'),
+(4, 'Limpieza', '2020-06-27 01:57:34');
 
+-- --------------------------------------------------------
 
 --
--- Definition of table `images`
+-- Table structure for table `images`
 --
 
 DROP TABLE IF EXISTS `images`;
-CREATE TABLE `images` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `image` varchar(150) NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+CREATE TABLE IF NOT EXISTS `images` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) COLLATE utf8_bin NOT NULL,
+  `main` tinyint(1) UNSIGNED DEFAULT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- RELATIONSHIPS FOR TABLE `images`:
+--
 
 --
 -- Dumping data for table `images`
 --
 
-/*!40000 ALTER TABLE `images` DISABLE KEYS */;
-/*!40000 ALTER TABLE `images` ENABLE KEYS */;
+INSERT INTO `images` (`id`, `name`, `main`, `product_id`, `created_at`) VALUES
+(1, 'sarten-antiadherente-28cm.jpg', 1, 1, '2020-07-02 18:56:32'),
+(2, 'cesto-negro.jpg', 1, 2, '2020-07-02 18:56:32'),
+(3, 'frasco-vidrio-decal-22cm.jpg', 1, 3, '2020-07-02 18:56:32'),
+(4, 'canasto-laundry-bamboo-marron.jpg', 1, 4, '2020-07-02 18:56:32'),
+(5, 'cacerola-enlozada-x3.jpg', 1, 5, '2020-07-02 18:56:32'),
+(6, 'mopa.jpg', 1, 6, '2020-07-02 18:56:32'),
+(7, 'cubiertero.jpg', 1, 7, '2020-07-02 18:56:32'),
+(8, 'pava-silvadora-acero.jpg', 1, 8, '2020-07-02 18:56:32'),
+(9, 'cacerola-antiadherente-x3.jpg', 1, 9, '2020-07-02 18:56:32'),
+(10, 'canasto-laundry-tela-max.jpg', 1, 10, '2020-07-02 18:56:32'),
+(11, 'cesto-elegance.jpg', 1, 11, '2020-07-02 18:56:32'),
+(12, 'bandeja-cama.jpg', 1, 12, '2020-07-02 18:56:32'),
+(13, 'mopa.jpg', 1, 13, '2020-07-02 19:52:48');
 
+-- --------------------------------------------------------
 
 --
--- Definition of table `products`
+-- Table structure for table `products`
 --
 
 DROP TABLE IF EXISTS `products`;
-CREATE TABLE `products` (
-  `id` int(10) unsigned NOT NULL,
-  `name` varchar(80) DEFAULT NULL,
-  `description` varchar(250) DEFAULT NULL,
-  `price` float DEFAULT NULL,
-  `discount` int(10) unsigned DEFAULT NULL,
-  `tax` int(10) unsigned DEFAULT NULL,
-  `state` tinyint(1) unsigned DEFAULT NULL,
-  `onsale` tinyint(1) unsigned DEFAULT NULL,
-  `id_provider` int(10) unsigned DEFAULT NULL,
-  `id_image` int(10) unsigned DEFAULT NULL,
-  `id_category` int(10) unsigned DEFAULT NULL,
-  `id_subcategory` int(10) unsigned DEFAULT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+CREATE TABLE IF NOT EXISTS `products` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `description` varchar(250) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `discount` int(10) UNSIGNED DEFAULT NULL,
+  `tax` int(10) UNSIGNED DEFAULT NULL,
+  `state` tinyint(1) UNSIGNED NOT NULL,
+  `category_id` int(10) UNSIGNED NOT NULL,
+  `subcategory_id` int(10) UNSIGNED NOT NULL,
+  `brand_id` int(10) UNSIGNED NOT NULL,
+  `provider_id` int(10) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELATIONSHIPS FOR TABLE `products`:
+--
 
 --
 -- Dumping data for table `products`
 --
 
-/*!40000 ALTER TABLE `products` DISABLE KEYS */;
-/*!40000 ALTER TABLE `products` ENABLE KEYS */;
+INSERT INTO `products` (`id`, `name`, `description`, `price`, `discount`, `tax`, `state`, `category_id`, `subcategory_id`, `brand_id`, `provider_id`, `created_at`, `updated_at`) VALUES
+(1, 'Sarten antiadherente de 28cm', 'Sarten cerámico antiadherente de 28cm de diámetro. Colores \'Black\' o \'Aqua\'', '5000.00', 10, 21, 1, 1, 5, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
+(2, 'Cesto de residuos Black&Gold', 'Cesto de residuos con pedal Black&Gold, 3 litros de capacidad', '5000.00', 10, 21, 1, 2, 7, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
+(3, 'Frasco de vidrio de 22cm', 'Frasco de vidrio con tapa Simple Home de 22cm. de alto', '5000.00', 10, 21, 1, 1, 4, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
+(4, 'Canasto laundry de 40cm', 'Canasto laundry color chocolate de 40cm. de diámetro', '5000.00', 10, 21, 1, 2, 8, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
+(5, 'Cacerolas enlozadas - set de 3 piezas', 'Cacerolas enlozadas con tapa de vidrio - 3 piezas de 20, 22 y 24cm', '5000.00', 10, 21, 1, 1, 1, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
+(6, 'Mopa con balde centrífugo', 'Mopa con brazo extensible y balde centrífugo', '5000.00', 10, 21, 1, 4, 17, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
+(7, 'Cubiertero de bamboo', 'Cubiertero de bamboo con 5 divisiones - 30cm. x  40cm', '5000.00', 0, 21, 1, 1, 6, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
+(8, 'Pava silvadora acero', 'Pava silvadora acero color cobre - 3 litros de capacidad', '5000.00', 0, 21, 1, 1, 2, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
+(9, 'Cacerolas antiadherentes - set de 3 piezas', 'Set cacerolas antiadherentes con tapa de vidrio - 3 de piezas 20, 22 y 24cm', '5000.00', 0, 21, 1, 1, 1, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
+(10, 'Canasto laundry de tela', 'Canasto laundry de tela de 58cm de diámetro', '5000.00', 0, 21, 1, 2, 8, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
+(11, 'Cesto de residuos Elegance', 'Cesto de residuos Elegance con pedal - capacidad 3 litros', '5000.00', 0, 21, 1, 2, 7, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
+(12, 'Bandeja desayunador', 'Bandeja desayunador de bamboo con patas rebatibles', '5000.00', 0, 21, 1, 1, 6, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22');
 
+-- --------------------------------------------------------
 
 --
--- Definition of table `subcategories`
+-- Table structure for table `subcategories`
 --
 
 DROP TABLE IF EXISTS `subcategories`;
-CREATE TABLE `subcategories` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `subcategory` varchar(45) NOT NULL,
-  `id_category` int(10) unsigned NOT NULL,
-  `created_date` varchar(45) NOT NULL,
+CREATE TABLE IF NOT EXISTS `subcategories` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8_bin NOT NULL,
+  `category_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- RELATIONSHIPS FOR TABLE `subcategories`:
+--
 
 --
 -- Dumping data for table `subcategories`
 --
 
-/*!40000 ALTER TABLE `subcategories` DISABLE KEYS */;
-/*!40000 ALTER TABLE `subcategories` ENABLE KEYS */;
+INSERT INTO `subcategories` (`id`, `name`, `category_id`, `created_at`, `updated_at`) VALUES
+(1, 'Cacerolas', 1, '2020-07-02 20:23:55', '2020-07-02 20:23:55'),
+(2, 'Pavas', 1, '2020-07-02 20:23:55', '2020-07-02 20:23:55'),
+(3, 'Jarros', 1, '2020-07-02 20:26:02', '2020-07-02 20:26:02'),
+(4, 'Frascos', 1, '2020-07-02 20:26:02', '2020-07-02 20:26:02'),
+(5, 'Sartenes', 1, '2020-07-02 20:26:02', '2020-07-02 20:26:02'),
+(6, 'Accesorios', 1, '2020-07-02 20:26:02', '2020-07-02 20:26:02'),
+(7, 'Cestos', 2, '2020-07-02 20:26:02', '2020-07-02 20:26:02'),
+(8, 'Canastos', 2, '2020-07-02 20:26:02', '2020-07-02 20:26:02'),
+(9, 'Alfombras', 2, '2020-07-02 20:26:02', '2020-07-02 20:26:02'),
+(10, 'Limas', 2, '2020-07-02 20:26:02', '2020-07-02 20:26:02'),
+(11, 'Esponjas', 2, '2020-07-02 20:26:02', '2020-07-02 20:26:02'),
+(12, 'Relojes', 3, '2020-07-02 20:26:02', '2020-07-02 20:26:02'),
+(13, 'Espejos', 3, '2020-07-02 20:26:02', '2020-07-02 20:26:02'),
+(14, 'Cuadros', 3, '2020-07-02 20:26:02', '2020-07-02 20:26:02'),
+(15, 'Velas', 3, '2020-07-02 20:26:02', '2020-07-02 20:26:02'),
+(16, 'Faroles', 3, '2020-07-02 20:26:02', '2020-07-02 20:26:02'),
+(17, 'Mopas', 4, '2020-07-02 20:26:02', '2020-07-02 20:26:02');
 
+-- --------------------------------------------------------
 
 --
--- Definition of table `users`
+-- Table structure for table `users`
 --
 
 DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `firstName` varchar(45) NOT NULL,
-  `lastName` varchar(45) NOT NULL,
-  `avatar` varchar(45) NOT NULL,
-  `user` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  `phone` varchar(45) NOT NULL,
-  `email` varchar(105) NOT NULL,
-  `address` varchar(200) NOT NULL,
-  `userType` varchar(45) NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `state` tinyint(1) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `firstName` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `lastName` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `email` varchar(105) CHARACTER SET latin1 NOT NULL,
+  `password` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `user` varchar(45) COLLATE utf8_bin DEFAULT NULL,
+  `phone` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `address` varchar(200) CHARACTER SET latin1 NOT NULL,
+  `userType` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `state` tinyint(1) UNSIGNED NOT NULL,
+  `avatar` varchar(45) COLLATE utf8_bin DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `users`
+-- RELATIONSHIPS FOR TABLE `users`:
 --
 
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
+--
+-- Metadata
+--
+USE `phpmyadmin`;
 
+--
+-- Metadata for table brands
+--
 
+--
+-- Metadata for table carts
+--
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Metadata for table cart_product
+--
+
+--
+-- Metadata for table categories
+--
+
+--
+-- Metadata for table images
+--
+
+--
+-- Metadata for table products
+--
+
+--
+-- Metadata for table subcategories
+--
+
+--
+-- Metadata for table users
+--
+
+--
+-- Metadata for database pickbazar
+--
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

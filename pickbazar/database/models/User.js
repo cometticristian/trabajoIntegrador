@@ -16,21 +16,18 @@ module.exports = function (sequelize, dataTypes) {
             type: dataTypes.STRING,
             allowNull: false
         },
-        avatar: {
-            type: dataTypes.STRING
-        },
-        user: {
-            type: dataTypes.STRING
+        email: {
+            type: dataTypes.STRING,
+            allowNull: false
         },
         password: {
             type: dataTypes.STRING,
             allowNull: false
         },
-        phone: {
-            type: dataTypes.STRING,
-            allowNull: false
+        user: {
+            type: dataTypes.STRING
         },
-        email: {
+        phone: {
             type: dataTypes.STRING,
             allowNull: false
         },
@@ -45,6 +42,9 @@ module.exports = function (sequelize, dataTypes) {
         state: {
             type: dataTypes.INTEGER,
             allowNull: false
+        },
+        avatar: {
+            type: dataTypes.STRING
         },
         created_at: {
             type: dataTypes.DATE,

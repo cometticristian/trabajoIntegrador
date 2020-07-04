@@ -12,13 +12,17 @@ module.exports = function(sequelize, dataTypes){
             type:dataTypes.STRING,
             allowNull: false
         },
+        main:{
+            type:dataTypes.INTEGER,
+            allowNull: false
+        },
         product_id:{
             type:dataTypes.INTEGER,
             allowNull: false
         },
         created_at:{
             type:dataTypes.DATE,
-            allowNull: false
+            allowNull: true
         }
     }
     
@@ -34,13 +38,8 @@ module.exports = function(sequelize, dataTypes){
             as: "Product",
             foreignKey: "product_id",
             timestamps: "false"
-        }),
-        Image.hasOne(models.Product,{
-            as: "Mainproduct",
-            foreignKey: "mainimage_id",
-            timestamps: "false"
         })
-        
+     
     }
     
     return Image;

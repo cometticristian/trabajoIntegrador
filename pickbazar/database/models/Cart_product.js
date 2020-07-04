@@ -1,5 +1,5 @@
 module.exports = function (sequelize, dataTypes) {
-    let alias = "Cart";
+    let alias = "Cart_product";
     
     let cols = {
         id: {
@@ -8,16 +8,34 @@ module.exports = function (sequelize, dataTypes) {
             autoIncrement: true,
             allowNull: false
         },
-        user_id: {
+        
+        units: {
             type: dataTypes.INTEGER,
             allowNull: false
         },
-        total: {
+        
+        price: {
+            type: dataTypes.DECIMAL,
+            allowNull: false
+        },
+        
+        discount: {
             type: dataTypes.INTEGER,
             allowNull: false
         },
-        state: {
-            type: dataTypes.STRING,
+        
+        subtotal: {
+            type: dataTypes.DECIMAL,
+            allowNull: false
+        },
+        
+        cart_id: {
+            type: dataTypes.INTEGER,
+            allowNull: false
+        },
+
+        product_id: {
+            type: dataTypes.INTEGER,
             allowNull: false
         },
         created_at: {
@@ -31,29 +49,12 @@ module.exports = function (sequelize, dataTypes) {
     }
     
     let config = {
-        tableName: "carts",
+        tableName: "cart_product",
         timestamps: false
     }
     
-    let Cart = sequelize.define(alias, cols, config);
+    let Cart_product = sequelize.define(alias, cols, config);
     
-    Cart.associate = function (models){
-        Cart.hasOne(models.User,{
-            as: "User",
-            foreignKey: "user_id",
-            timestamps: false
-            
-        });
-
-        Cart.belongsToMany(models.Product,{
-            as: "Products",
-            through: "cart_product",
-            foreignKey: "cart_id",
-            otherKey: "product_id",
-            timestamps: false
-        })
-        
-    }
-    
-    return Cart;
+   
+    return Cart_product;
 }

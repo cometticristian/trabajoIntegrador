@@ -24,14 +24,8 @@ module.exports = function (sequelize, dataTypes) {
             type: dataTypes.INTEGER,
             allowNull: false
         },
-        onsale: {
-            type: dataTypes.INTEGER,
-            allowNull: false
-        },
-        provider_id: {
-            type: dataTypes.INTEGER
-        },
-        brand_id: {
+        
+        category_id: {
             type: dataTypes.INTEGER,
             allowNull: false
         },
@@ -39,21 +33,24 @@ module.exports = function (sequelize, dataTypes) {
             type: dataTypes.INTEGER,
             allowNull: false
         },
-        category_id: {
+        
+        brand_id: {
             type: dataTypes.INTEGER,
             allowNull: false
         },
-        image: {
-            type: dataTypes.INTEGER,
-            allowNull: false
+        
+        provider_id: {
+            type: dataTypes.INTEGER
         },
+        
         created_at: {
             type: dataTypes.DATE,
-            allowNull: false
+            allowNull: true
         },
+        
         updated_at: {
             type: dataTypes.DATE,
-            allowNull: false
+            allowNull: true
         }
     }
     
@@ -65,7 +62,7 @@ module.exports = function (sequelize, dataTypes) {
     let Product = sequelize.define(alias, cols, config);
     
     Product.associate = function (models){
-
+        
         Product.belongsTo(models.Subcategory,{
             as: "Subcategory",
             foreignKey: "subcategory_id",
@@ -79,10 +76,18 @@ module.exports = function (sequelize, dataTypes) {
             timestamps: false
             
         });
-        
+
         Product.belongsTo(models.Brand,{
             as: "brand",
             foreignKey: "brand_id",
+            timestamps: false
+        });
+        
+        Product.belongsToMany(models.Cart,{
+            as: "Carts",
+            through: "cart_product",
+            foreignKey: "product_id",
+            otherKey: "cart_id",
             timestamps: false
         });
 
@@ -91,23 +96,8 @@ module.exports = function (sequelize, dataTypes) {
             foreignKey: "product_id",
             timestamps: "false"
         });
-        
-        Product.belongsTo(models.Image,{
-            as: "Mainimage",
-            foreignKey: "mainimage_id",
-            timestamps: "false"
-        });
-        
-        //Está comentado porque sino tira error
-        /*Product.belongsTo(models.Cartitem,{
-            as: "Cartitem",
-            foreignKey: "product_id",
-            timestamps: false
-            
-        })*/
-
+       
     }
-    
-    
+   
     return Product;
 }

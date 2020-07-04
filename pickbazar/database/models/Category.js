@@ -30,16 +30,15 @@ module.exports = function(sequelize, dataTypes){
             as: "Subcategory",
             foreignKey: "category_id",
             timestamps: "false"
-        })
+        }),
 
-        Category.hasMany(models.Producto,{
-            as: "Producto",
+        Category.hasMany(models.Product,{
+            as: "Product",
             foreignKey: "category_id",
             timestamps: "false"
         })
+
     }
-
-
     return Category;
 }
 

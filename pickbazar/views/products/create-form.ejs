@@ -21,32 +21,17 @@
             <div class="sec2">
                 <form action="/products/create" enctype="multipart/form-data" method="POST">
                     <div class="form">
-                        <select name="pickCategory" id="category" class="select">
+                        <select name="category" id="category" class="select">
                             <option value="0">SELECCIONE CATEGORIA</option>
-                            <option value="COCINA">COCINA</option>
-                            <option value="BAÑO">BAÑO</option>
-                            <option value="DECORACION">DECORACION</option>
-                            <option value="LIMPIEZA">LIMPIEZA</option>
+                            <% categories.forEach((cat) => { %>
+                                <option value="<%= cat.id %>"><%= cat.name %></option>
+                            <% }) %>
                         </select>
-                        <select name="pickSubCategory" id="subcategory" class="select">
+                        <select name="subcategory" id="subcategory" class="select">
                             <option value="0">SELECCIONE SUB CATEGORIA</option>
-                            <option value="CACEROLA">CACEROLA</option>
-                            <option value="PAVA">PAVA</option>
-                            <option value="JARRO">JARRO</option>
-                            <option value="FRASCO">FRASCO</option>
-                            <option value="SARTEN">SARTEN</option>
-                            <option value="ACCESORIO">ACCESORIO</option>
-                            <option value="CESTO">CESTO</option>
-                            <option value="CANASTO">CANASTO</option>
-                            <option value="ALFOMBRA">ALFOMBRA</option>
-                            <option value="LIMA">LIMA</option>
-                            <option value="ESPONJA">ESPONJA</option>
-                            <option value="RELOJ">RELOJ</option>
-                            <option value="ESPEJO">ESPEJO</option>
-                            <option value="CUADRO">CUADRO</option>
-                            <option value="VELA">VELA</option>
-                            <option value="FAROL">FAROL</option>
-                            <option value="MOPA">MOPA</option>
+                            <% subCategories.forEach((subcat) => { %>
+                                <option value="<%= subcat.id %>"><%= subcat.name %></option>
+                            <% }) %>
                         </select>
                     </div>
             </div>
@@ -68,8 +53,8 @@
                     <p class="font-price">
                         <label for="model">IVA</label>
                         <select name="tax" id="" class="iva">
-                            <option value="10.5">21</option>
-                            <option value="21">10,5</option>
+                            <option value="21">21</option>
+                            <option value="10.5">10,5</option>
                         </select>
                     </p>
                     <p class="font-price">
