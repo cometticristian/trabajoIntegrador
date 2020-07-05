@@ -200,6 +200,8 @@ const controller = {
 						brand_id: marca.dataValues.id
 					})
 						.then((newProduct) => {
+							console.log(newProduct);
+							
 							db.Image.create({
 								name: req.files[0].filename,
 								main: 1,
@@ -382,20 +384,122 @@ const controller = {
 
 	// Update - Form to edit
 	edit: (req, res, next) => {
-		let product;
-		let id = req.params.productId;
-		for (let i = 0; i < products.length; i++) {
-			if (products[i].id == id) {
-				product = products[i];
-			}
-		}
-		res.render("./products/edit-form", { product: product })
+
+		let categories = db.Category.findAll()
+		let subCategories = db.Subcategory.findAll()
+		let product = db.Product.findByPk(req.params.productId, {
+			include: [{ association: 'Category' }, { association: 'Subcategory' }]
+		})
+
+		Promise.all([categories, subCategories, product])
+			.then(([categories, subCategories, product]) => {
+				res.render("./products/edit-form", { categories, subCategories, product })
+			})
+			.catch((error) => {
+				console.log(error);
+			})
 	},
 
 	// Update - Method to update
 	update: (req, res, next) => {
+		db.Product.update({
+			name: req.body.name,
+			description: req.body.description,
+			price: Number(req.body.price),
+			discount: Number(req.body.discount),
+			tax: req.body.tax,
+			state: 1,
+			category_id: req.body.category,
+			subcategory_id: req.body.subcategory,
+		}, {
+			where: {
+				id: req.params.productId
+			}
+		})
+			.then((productEdited) => {
+				console.log(productEdited);
+				console.log('$$$$$$$$$$$$$$$$$$$$$');
+				console.log(productEdited.id);
 
-		let id = req.params.productId;
+				db.Image.update({
+					name: req.files[0].filename,
+					main: 1,
+					product_id: productEdited.id
+				}, {
+					where: {
+						product_id: productEdited.id
+					}
+				})
+			})
+			.then(() => {
+				res.redirect('/products/detail/' + req.params.productId)
+			})
+			.catch((error) => {
+				console.log(error);
+			})
+
+		/* 					db.Product.create({
+								name: req.body.name,
+								description: req.body.description,
+								price: Number(req.body.price),
+								discount: Number(req.body.discount),
+								tax: req.body.tax,
+								state: 1,
+								category_id: req.body.category,
+								subcategory_id: req.body.subcategory,
+								brand_id: marca.dataValues.id
+							})
+								.then((newProduct) => {
+									db.Image.create({
+										name: req.files[0].filename,
+										main: 1,
+										product_id: newProduct.id
+									})
+								})
+								.then(() => {
+									res.redirect('/products');
+								})
+								.catch((error) => {
+									console.log(error);
+								})
+						} else {
+							db.Brand.create({
+								name: marcaBody
+							})
+								.then((brand) => {
+									db.Product.create({
+										name: req.body.name,
+										description: req.body.description,
+										price: Number(req.body.price),
+										discount: Number(req.body.discount),
+										tax: req.body.tax,
+										state: 1,
+										category_id: req.body.category,
+										subcategory_id: req.body.subcategory,
+										brand_id: brand.id
+									})
+										.then((newProduct) => {
+											console.log(newProduct)
+											db.Image.create({
+												name: req.files[0].filename,
+												main: 1,
+												product_id: newProduct.id
+											})
+										})
+								})
+								.then(() => {
+									res.redirect('/products');
+								})
+								.catch((error) => {
+									console.log(error);
+								})
+						}
+					})
+					.catch((error) => {
+						console.log(error);
+					}) */
+
+		/* let id = req.params.productId;
 		let productToEdit;
 		let productEdited;
 
@@ -501,7 +605,7 @@ const controller = {
 		fs.writeFileSync(productsDB, JSON.stringify(products));
 
 
-		res.redirect('/products/detail/' + id);
+		res.redirect('/products/detail/' + id); */
 	},
 
 	// Delete - Delete one product from DB
