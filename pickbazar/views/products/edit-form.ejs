@@ -19,33 +19,19 @@
             <div class="sec2">
                 <form action="/products/edit/<%=product.id%>?_method=PUT" enctype="multipart/form-data" method="POST">
                     <div class="form">
-                        <select name="pickCategory" id="category" class="select">
-                            <option value="<%=product.category%>"><%=product.category.toUpperCase()%></option>
-                            <option value="COCINA">COCINA</option>
-                            <option value="BAÑO">BAÑO</option>
-                            <option value="DECORACION">DECORACION</option>
-                            <option value="LIMPIEZA">LIMPIEZA</option>
+                        <select name="category" id="category" class="select">
+                            <option value="<%=product.category_id%>"><%= product.Category.name %></option>
+                            <% categories.forEach((cat) => { %>
+                                <% if (cat.id != product.Category.id) {%>
+                                <option value="<%= cat.id %>"><%= cat.name %></option>
+                            <%} }) %>
                         </select>
-                        <select name="pickSubCategory" id="sub-category" class="select">
-                            <option value="<%=product.subCategory%>"><%=product.subCategory.toUpperCase();%></option>
-                            <option value="0">SELECCIONE SUB CATEGORIA</option>
-                            <option value="CACEROLA">CACEROLA</option>
-                            <option value="PAVA">PAVA</option>
-                            <option value="JARRO">JARRO</option>
-                            <option value="FRASCO">FRASCO</option>
-                            <option value="SARTEN">SARTEN</option>
-                            <option value="ACCESORIO">ACCESORIO</option>
-                            <option value="CESTO">CESTO</option>
-                            <option value="CANASTO">CANASTO</option>
-                            <option value="ALFOMBRA">ALFOMBRA</option>
-                            <option value="LIMA">LIMA</option>
-                            <option value="ESPONJA">ESPONJA</option>
-                            <option value="RELOJ">RELOJ</option>
-                            <option value="ESPEJO">ESPEJO</option>
-                            <option value="CUADRO">CUADRO</option>
-                            <option value="VELA">VELA</option>
-                            <option value="FAROL">FAROL</option>
-                            <option value="MOPA">MOPA</option>
+                        <select name="subcategory" id="subcategory" class="select">
+                            <option value="<%=product.subcategory_id%>"><%= product.Subcategory.name %></option>
+                            <% subCategories.forEach((subcat) => { %>
+                                <% if (subcat.id != product.Subcategory.id) {%>
+                                <option value="<%= subcat.id %>"><%= subcat.name %></option>
+                            <%} }) %>
                         </select>
                     </div>
             </div>
@@ -54,8 +40,6 @@
                 <div class="form2">
                     <label class="label-block" for="name">NOMBRE DEL PRODUCTO</label>
                     <input class="input-block" type="text" name="name" value="<%=product.name%>">
-                    <label class="label-block" for="brand">MARCA</label>
-                    <input class="input-block" type="text" name="brand" value="<%=product.brand%>">
                     <label class="label-block" for="description">DESCRIPCION</label>
                     <textarea name="description" id="desc" cols="30" rows="10"><%=product.description%></textarea>
                 </div>
