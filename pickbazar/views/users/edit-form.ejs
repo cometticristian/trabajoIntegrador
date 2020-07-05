@@ -55,40 +55,40 @@
                }
                %>
                   <form action="/users/edit?_method=PUT" method="POST" enctype="multipart/form-data">
-                     <label for="first_name">
+                     <label for="firstName">
                         <h3>Nombre (*):</h3>
                      </label>
-                     <input type="text" required id="first_name" name="first_name" value="<%= (typeof datos != 'undefined') ? datos.first_name : user[0].first_name  %>">
+                     <input class="input" type="text" required id="firstName" name="firstName" value="<%= (typeof datos != 'undefined') ? datos.firstName : user[0].firstName  %>">
                      <span style="color: red;font-size: 12px;"><%= buscarError('first_name')[0].msg %></span>
                      <label for="last_name">
                         <h3>Apellido (*):</h3>
                      </label>
-                     <input type="text" required id="last_name" name="last_name" value="<%= (typeof datos != 'undefined') ? datos.last_name : user[0].last_name %>">
+                     <input class="input" type="text" required id="lastName" name="lastName" value="<%= (typeof datos != 'undefined') ? datos.lastName : user[0].lastName %>">
                      <span style="color: red;font-size: 12px;"><%= buscarError('last_name')[0].msg %></span>
                      <label for="email">
                         <h3>Email (*):</h3>
                      </label>
-                     <input type="email" required id="email" name="email" value="<%= (typeof datos != 'undefined') ? datos.email : user[0].email  %>">
+                     <input class="input" type="email" required id="email" name="email" value="<%= (typeof datos != 'undefined') ? datos.email : user[0].email  %>">
                      <span style="color: red;font-size: 12px;"><%= buscarError('email')[0].msg %></span>
                      <label for="phone">
                         <h3>Telefono:</h3>
                      </label>
-                     <input type="tel" required id="phone" name="phone" value="<%= (typeof datos != 'undefined') ? datos.phone : user[0].phone  %>">
+                     <input class="input" type="tel" required id="phone" name="phone" value="<%= (typeof datos != 'undefined') ? datos.phone : user[0].phone  %>">
                      <span style="color: red;font-size: 12px;"><%= buscarError('phone')[0].msg %></span>
                      <label for="password">
                         <h3>Contraseña (*):</h3>
                      </label>
-                     <input type="password" required id="password" name="password" value="">
+                     <input class="input" type="password" required id="password" name="password" value="">
                      <span style="color: red;font-size: 12px;"><%= buscarError('password')[0].msg %></span>
                      <label for="passwordConfirm">
                         <h3>Confirmar contraseña (*):</h3>
                      </label>
-                     <input type="password" required id="passwordConfirm" name="passwordConfirm">
+                     <input class="input" type="password" required id="passwordConfirm" name="passwordConfirm">
                      <span style="color: red;font-size: 12px;"><%= buscarError('passwordConfirm')[0].msg %></span>
                      <label for="avatar">
                         <h3>Imágen de perfil:</h3>
                      </label>
-                     <input type="file" name="avatar">
+                     <input class="input" type="file" name="avatar">
 
                      <div class="align"><input class="btn-login black" type="submit" value="GUARDAR CAMBIOS"></div>
                   </form>
