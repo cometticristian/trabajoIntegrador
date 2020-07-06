@@ -44,7 +44,24 @@ Reuniones por Zoom o Webex que permitan mantener una comunicación más fluida y
 Trabajar de forma coordinada, sin superponernos, priorizando las tareas própias de cada sprint. 
 
 4. Hacer menos:
-Por elmomento consideramos que no tenemos alguna práctica que debamos hacer menos o dejar de hacer
+Por el momento consideramos que no tenemos alguna práctica que debamos hacer menos o dejar de hacer
 
 5. Dejar de hacer:
-Por elmomento consideramos que no tenemos alguna práctica que debamos hacer menos o dejar de hacer
+Por el momento consideramos que no tenemos alguna práctica que debamos hacer menos o dejar de hacer
+
+RETROSPECTIVA Sprint 4
+
+1. Comenzar a hacer:
+
+2. Hacer más:
+Reuniones para resolver en equipo problematicas que frenan el avance del proyecto
+
+3. Continuar haciendo:
+Reuniones por Zoom o Webex que permitan mantener una comunicación más fluida y verificar el avance del proyecto. Comunicar en que instancia del desarrollo del proyecto está cada miembro y de ser necesario solicitar colaboración.
+Trabajar de forma coordinada, sin superponernos, priorizando las tareas própias de cada sprint. 
+
+4. Hacer menos:
+Consideramos que no tenemos alguna práctica que debamos hacer menos.
+
+5. Dejar de hacer:
+Consideramos que no tenemos alguna práctica que debamos dejar de hacer.
