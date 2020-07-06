@@ -36,6 +36,7 @@ const controller = {
 			//GUARDA AL USUARIO LOGUEADO PARA USARLOS EN LAS VISTAS
 		} else {
 			req.session.userFound = userFound;
+			req.session.carrito = [];
 			res.locals.userFound = userFound[0];
 
 			if (req.body.remember != undefined){
