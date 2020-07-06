@@ -19,24 +19,22 @@ const controller = {
 		db.User.findAll()
 		.then((users) => {		
 			
-<<<<<<< HEAD
 			//console.log(userFound);
 			//PRENDE SESION PARA EL USUARION LOGEADO
 			//GUARDA AL USUARIO LOGUEADO PARA USARLOS EN LAS VISTAS
-		} else {
-			req.session.userFound = userFound;
-			req.session.carrito = [];
-			res.locals.userFound = userFound[0];
+			//} else {
+			//	req.session.userFound = userFound;
+			//	req.session.carrito = [];
+			//	res.locals.userFound = userFound[0];
 
 			if (req.body.remember != undefined){
 				res.cookie('remember', userFound[0].email, {maxAge: 180000000})
-=======
-			let errors = validationResult(req);
+			}
+				let errors = validationResult(req);
 			
 			let userFound;
 			if (!errors.isEmpty()) {
 				res.render('users/login', { errors: errors.errors });
->>>>>>> f52453b877fcfa6287ba2d7e8fbd6d9cd2f4b947
 			}
 			
 			userFound = users.filter(function (user) {
@@ -61,7 +59,7 @@ const controller = {
 					res.cookie('remember', userFound[0].email, {maxAge: 180000000})
 				}
 				
-				res.redirect('/')
+				res.redirect('/');
 			}
 		})
 		.catch((errors) => {
