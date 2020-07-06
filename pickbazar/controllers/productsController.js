@@ -3,6 +3,7 @@ const path = require('path');
 const db = require('../database/models');
 const { Op } = require("sequelize");
 
+
 const productsDB = path.join(__dirname, '../data/productsDB.json');
 let products = JSON.parse(fs.readFileSync(productsDB, 'utf-8'));
 
@@ -16,8 +17,6 @@ const controller = {
 			})
 
 			.then(function (products) {
-				//console.log(products);
-
 				res.render('./products/list', { category: products, nombreCategoria: "" })
 			})
 			.catch(function (error) {
@@ -27,20 +26,17 @@ const controller = {
 
 	category: (req, res, next) => {
 
-		let productReq = db.Product.findAll(
-			{
-				where: { category_id: req.params.productCategory },
-				include: [{ association: "Category" }, { association: "Image" }]
-			})
+		let productReq = db.Product.findAll({
+			where: { category_id: req.params.productCategory },
+			include: [{ association: "Category" }, { association: "Image" }]
+		})
 
-		let categoryReq = db.Category.findAll(
-			{
-				where: { id: req.params.productCategory }
-			})
+		let categoryReq = db.Category.findAll({
+			where: { id: req.params.productCategory }
+		})
 
 		Promise.all([productReq, categoryReq])
 			.then(function ([category, categoryName]) {
-				//console.log(categoryName[0].name);
 				res.render('./products/list', {
 					category: category,
 					nombreCategoria: categoryName[0].name
@@ -49,27 +45,26 @@ const controller = {
 			.catch(function (error) {
 				console.log(error);
 			})
-
-		/*let category = []
-		products.forEach(function (product) {
-			if (product.category == req.params.productCategory) {
-				category.push(product)
-			}
-		})
-		res.render('./products/list', { category: category,
-			nombreCategoria: req.params.productCategory })
-		*/
 	},
+
+	/*let category = []
+	products.forEach(function (product) {
+		if (product.category == req.params.productCategory) {
+			category.push(product)
+		}
+	})
+	res.render('./products/list', { category: category,
+		nombreCategoria: req.params.productCategory })
+		*/
 
 	subCategory: (req, res, next) => {
 
-		let productReq = db.Product.findAll(
-			{
-				where: { subcategory_id: req.params.productSubCategory },
-				include: [{ association: "Subcategory" },
-				{ association: "Category" },
-				{ association: "Image" }]
-			})
+		let productReq = db.Product.findAll({
+			where: { subcategory_id: req.params.productSubCategory },
+			include: [{ association: "Subcategory" },
+			{ association: "Category" },
+			{ association: "Image" }]
+		})
 
 		let subcategoryReq = db.Subcategory.findAll(
 			{
@@ -90,72 +85,59 @@ const controller = {
 			.catch(function (error) {
 				console.log(error);
 			})
-
-		/*let category = [];
-		let nombreCategoria = "";
-		products.forEach(function (product) {
-			if (product.subCategory == req.params.productSubCategory) {
-				category.push(product);
-				nombreCategoria = product.category
-			}
-		})
-		res.render('./products/list', { category: category,
-			nombreCategoria: nombreCategoria + " || " + req.params.productSubCategory })
-		*/
 	},
 
+	/*let category = [];
+	let nombreCategoria = "";
+	products.forEach(function (product) {
+		if (product.subCategory == req.params.productSubCategory) {
+			category.push(product);
+			nombreCategoria = product.category
+		}
+	})
+	res.render('./products/list', { category: category,
+		nombreCategoria: nombreCategoria + " || " + req.params.productSubCategory })
+		*/
 
 	// Detail - Detail from one product
 	detail: (req, res, next) => {
 
-
-		/*obtenerUsuarios()
-			.then(function(data){
-			return filtrarDatos(data);
-			})
-			.then(function(dataFiltrada){
-			console.log(dataFiltrada);
-			})
-*/
-
 		db.Product.findByPk(req.params.productId,
-			{include: [{ association: "Subcategory" },
+			{
+				include: [{ association: "Subcategory" },
 				{ association: "Category" },
 				{ association: "Image" }]
 			})
-			.then(function(product){
+			.then((product) => {
+				categoria = product.category_id
 				return product;
-				console.log(product);
 			})
-			
-			
-			.then(function(similar){
+			.then((productDetail) => {
 				db.Product.findAll(
-					{where:{category_id : product.id},
+					{
+						where: { category_id: productDetail.category_id },
+						limit:4,
 						include: [{ association: "Subcategory" },
 						{ association: "Category" },
 						{ association: "Image" }]
 					})
-				return similar
+					.then((similar) => {
+						res.render('./products/detail', {
+							product: productDetail,
+							category: similar
+						})
+					})
+					.catch(function (error) {
+						console.log(error);
+					})
 			})
-			
-			.then(function (product, similar) {
-				console.log("--------"+product);
-				console.log("--------"+similar);
-				res.render('./products/detail', {
-					product: product,
-					category: similar
-				})
-			})
-			.catch(function (error) {
-				console.log(error);
-			})
-
-		/*let product
-		for (let i = 0; i < products.length; i++) {if (products[i].id == req.params.productId) {product = products[i];}}let category = []; products.forEach(function (similar) {if (similar.category == product.category) {category.push(similar);}})
-		res.render('./products/detail', { product: product, category: category })
-		*/
 	},
+
+	/*let product
+	for (let i = 0; i < products.length; i++) {if (products[i].id == req.params.productId) {product = products[i];}}let category = []; products.forEach(function (similar) {if (similar.category == product.category) {category.push(similar);}})
+	res.render('./products/detail', { product: product, category: category })
+	*/
+
 
 	// Create - Form to create
 	create: (req, res, next) => {
@@ -260,27 +242,27 @@ const controller = {
 
 
 	/* 		db.Product.create({
-				name: req.body.name,
-				description: req.body.description,
-				price: Number(req.body.price),
-				discount: Number(req.body.discount),
-				tax: req.body.tax,
-				state: 1,
-				category_id: req.body.category,
-				subcategory_id: req.body.subcategory,
+		name: req.body.name,
+		description: req.body.description,
+		price: Number(req.body.price),
+		discount: Number(req.body.discount),
+		tax: req.body.tax,
+		state: 1,
+		category_id: req.body.category,
+		subcategory_id: req.body.subcategory,
 		
 		
 		
 		
-				brand_id: req.body.brand
-			})
-				.then(() => {
-					res.redirect('/products');
-				})
-				.catch((error) => {
-					console.log(error);
-				})
-		}, */
+		brand_id: req.body.brand
+	})
+	.then(() => {
+		res.redirect('/products');
+	})
+	.catch((error) => {
+		console.log(error);
+	})
+}, */
 
 
 
@@ -291,7 +273,7 @@ const controller = {
 			productIdMaker = products[i].id;
 		}
 	}
-		
+	
 	if (req.files == "" && req.files[1] == undefined && req.files[2] == undefined && req.files[3] == undefined) {
 		newProduct = {
 			name: req.body.name,
@@ -303,8 +285,8 @@ const controller = {
 			category_id: req.body.pickCategory,
 			subcategory_id: req.body.pickSubCategory,
 			brand_id: req.body.brand},
-	
-		
+			
+			
 			image: 'logo-pickBazar.jpg',
 			secondPick: '',
 			thirdPick: '',
@@ -384,7 +366,7 @@ const controller = {
 	products.push(newProduct);
 	fs.writeFileSync(productsDB, JSON.stringify(products));
 	res.redirect('/products');
-	}, */
+}, */
 
 	// Update - Form to edit
 	edit: (req, res, next) => {

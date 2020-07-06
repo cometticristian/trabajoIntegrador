@@ -23,7 +23,7 @@ const userMiddlewares = {
         if (req.session.userFound == undefined) {
             res.redirect("/")
                         
-        } else if (req.session.userFound[0].category == "admin"){
+        } else if (req.session.userFound[0].userType == "admin"){
             next();            
         } else {
             res.redirect("/")

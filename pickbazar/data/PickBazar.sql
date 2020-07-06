@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 03, 2020 at 02:31 AM
+-- Generation Time: Jul 05, 2020 at 11:20 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `cart_product` (
 DROP TABLE IF EXISTS `categories`;
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `name` varchar(100) COLLATE utf8_bin NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -117,8 +117,8 @@ CREATE TABLE IF NOT EXISTS `categories` (
 
 INSERT INTO `categories` (`id`, `name`, `created_at`) VALUES
 (1, 'Cocina', '2020-06-27 01:57:34'),
-(2, 'Baño', '2020-06-27 01:57:34'),
-(3, 'Decoración', '2020-06-27 01:57:34'),
+(2, 'Ba?o', '2020-06-27 01:57:34'),
+(3, 'Decoraci?n', '2020-06-27 01:57:34'),
 (4, 'Limpieza', '2020-06-27 01:57:34');
 
 -- --------------------------------------------------------
@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `images` (
   `product_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- RELATIONSHIPS FOR TABLE `images`:
@@ -158,7 +158,8 @@ INSERT INTO `images` (`id`, `name`, `main`, `product_id`, `created_at`) VALUES
 (10, 'canasto-laundry-tela-max.jpg', 1, 10, '2020-07-02 18:56:32'),
 (11, 'cesto-elegance.jpg', 1, 11, '2020-07-02 18:56:32'),
 (12, 'bandeja-cama.jpg', 1, 12, '2020-07-02 18:56:32'),
-(13, 'mopa.jpg', 1, 13, '2020-07-02 19:52:48');
+(13, 'mopa.jpg', 1, 13, '2020-07-02 19:52:48'),
+(14, 'mainPick-1593979283710.jpg', 1, 14, '2020-07-05 20:01:24');
 
 -- --------------------------------------------------------
 
@@ -169,8 +170,8 @@ INSERT INTO `images` (`id`, `name`, `main`, `product_id`, `created_at`) VALUES
 DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `description` varchar(250) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `name` varchar(100) COLLATE utf8_bin NOT NULL,
+  `description` varchar(250) COLLATE utf8_bin NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `discount` int(10) UNSIGNED DEFAULT NULL,
   `tax` int(10) UNSIGNED DEFAULT NULL,
@@ -182,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- RELATIONSHIPS FOR TABLE `products`:
@@ -204,7 +205,8 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `discount`, `tax`,
 (9, 'Cacerolas antiadherentes - set de 3 piezas', 'Set cacerolas antiadherentes con tapa de vidrio - 3 de piezas 20, 22 y 24cm', '5000.00', 0, 21, 1, 1, 1, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
 (10, 'Canasto laundry de tela', 'Canasto laundry de tela de 58cm de diámetro', '5000.00', 0, 21, 1, 2, 8, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
 (11, 'Cesto de residuos Elegance', 'Cesto de residuos Elegance con pedal - capacidad 3 litros', '5000.00', 0, 21, 1, 2, 7, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
-(12, 'Bandeja desayunador', 'Bandeja desayunador de bamboo con patas rebatibles', '5000.00', 0, 21, 1, 1, 6, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22');
+(12, 'Bandeja desayunador', 'Bandeja desayunador de bamboo con patas rebatibles', '5000.00', 0, 21, 1, 1, 6, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
+(14, 'Cecerola Antiadherente 24cm', 'Cacerola cerámica antiadherente de 24cm de diámetro. Colores \'Black\' o \'Aqua\'', '5000.00', 0, 21, 1, 1, 1, 1, NULL, '2020-07-05 20:01:23', '2020-07-05 20:01:23');
 
 -- --------------------------------------------------------
 
@@ -258,24 +260,32 @@ INSERT INTO `subcategories` (`id`, `name`, `category_id`, `created_at`, `updated
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `firstName` varchar(45) CHARACTER SET latin1 NOT NULL,
-  `lastName` varchar(45) CHARACTER SET latin1 NOT NULL,
-  `email` varchar(105) CHARACTER SET latin1 NOT NULL,
-  `password` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `firstName` varchar(45) COLLATE utf8_bin NOT NULL,
+  `lastName` varchar(45) COLLATE utf8_bin NOT NULL,
+  `email` varchar(105) COLLATE utf8_bin NOT NULL,
+  `password` varchar(500) COLLATE utf8_bin NOT NULL,
   `user` varchar(45) COLLATE utf8_bin DEFAULT NULL,
-  `phone` varchar(45) CHARACTER SET latin1 NOT NULL,
-  `address` varchar(200) CHARACTER SET latin1 NOT NULL,
-  `userType` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `phone` varchar(45) COLLATE utf8_bin NOT NULL,
+  `address` varchar(200) COLLATE utf8_bin NOT NULL,
+  `userType` varchar(45) COLLATE utf8_bin NOT NULL,
   `state` tinyint(1) UNSIGNED NOT NULL,
-  `avatar` varchar(45) COLLATE utf8_bin DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `avatar` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- RELATIONSHIPS FOR TABLE `users`:
 --
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `user`, `phone`, `address`, `userType`, `state`, `avatar`, `created_at`, `updated_at`) VALUES
+(1, 'David', 'Messina', 'davidmessina9@gmail.com', '$2b$10$a7dORGZNd0RYscUci59mQ.LdxxpmhtEE5SX8b66HnRNB/FCWqcoci', '', '1132146241', '', 'admin', 1, 'avatar-1593978857012.jpg', '2020-07-05 19:54:17', '2020-07-05 19:54:17'),
+(2, 'David', 'Messina', 'davidmessina@speedy.com.ar', '$2b$10$3Hmpw2AmaYpZjYtQpltQ.OO96MfEKkV1.6XB2ZFg5FOc6moOv2Auu', '', '1132146241', '', 'client', 1, 'avatar-1593979609920.jpg', '2020-07-05 20:06:50', '2020-07-05 20:06:50');
 
 
 --

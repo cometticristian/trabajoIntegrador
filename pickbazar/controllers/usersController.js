@@ -5,8 +5,8 @@ const { check, validationResult, body } = require('express-validator');
 const db = require ("../database/models")
 const { Op } = require("sequelize");
 
-const usersDB = path.join(__dirname, '../data/usersDB.json');
-let users = JSON.parse(fs.readFileSync(usersDB, 'utf-8'));
+//const usersDB = path.join(__dirname, '../data/usersDB.json');
+//let users = JSON.parse(fs.readFileSync(usersDB, 'utf-8'));
 
 const controller = {
 	
@@ -15,22 +15,11 @@ const controller = {
 	},
 	
 	processLogin: (req, res, next) => {
-				
-		let errors = validationResult(req);
 		
-		let userFound;
-		if (!errors.isEmpty()) {
-			res.render('users/login', { errors: errors.errors });
-		}
-		
-		userFound = users.filter(function (user) {
-			return user.email == req.body.email &&
-			bcrypt.compareSync(req.body.password, user.password)
-		});
-		
-		if (userFound == "") {
-			res.render('users/login', { errors: [{ msg: "Credenciales invalidas" }] });
+		db.User.findAll()
+		.then((users) => {		
 			
+<<<<<<< HEAD
 			//console.log(userFound);
 			//PRENDE SESION PARA EL USUARION LOGEADO
 			//GUARDA AL USUARIO LOGUEADO PARA USARLOS EN LAS VISTAS
@@ -41,29 +30,64 @@ const controller = {
 
 			if (req.body.remember != undefined){
 				res.cookie('remember', userFound[0].email, {maxAge: 180000000})
+=======
+			let errors = validationResult(req);
+			
+			let userFound;
+			if (!errors.isEmpty()) {
+				res.render('users/login', { errors: errors.errors });
+>>>>>>> f52453b877fcfa6287ba2d7e8fbd6d9cd2f4b947
 			}
+			
+			userFound = users.filter(function (user) {
+				return user.email == req.body.email && 
+				bcrypt.compareSync(req.body.password, user.password)
+				
+			});
+			
+			console.log(userFound)
 
-			res.redirect('/')
-		}
+			if (userFound == "") {
+				res.render('users/login', { errors: [{ msg: "Credenciales invalidas" }] });
+				
+				//console.log(userFound);
+				//PRENDE SESION PARA EL USUARION LOGEADO
+				//GUARDA AL USUARIO LOGUEADO PARA USARLOS EN LAS VISTAS
+			} else {
+				req.session.userFound = userFound;
+				res.locals.userFound = userFound[0];
+				
+				if (req.body.remember != undefined){
+					res.cookie('remember', userFound[0].email, {maxAge: 180000000})
+				}
+				
+				res.redirect('/')
+			}
+		})
+		.catch((errors) => {
+			console.log(errors);
+		})
 	},
+	
 	logout: function(req,res,next){
-        //cerrar sesión
+		//cerrar sesión
 		req.session.destroy();
 		res.clearCookie('remember')
 		res.redirect("/");
-      },
+	},
 	
 	// Detail - Detail from one user
 	profile: (req, res, next) => {
 		let user = req.session.userFound
-		//console.log("PROFILE-"+user2);
+		//console.log("----------------req.session.userFound.id--------------");
+		//console.log(req.session.userFound[0].id);
 		res.render('./users/profile', { user: user })
 	},
 	
 	// Create - Form to create
 	register: (req, res, next) => {
 		return res.render('users/register');
-        	
+		
 	},
 	
 	// Create -  Method to store
@@ -81,7 +105,7 @@ const controller = {
 			}*/
 			if (req.files == '') {
 				//newUser = {
-					//id: userIdMaker + 1,
+				//id: userIdMaker + 1,
 				db.User.create({
 					firstName: req.body.firstName,
 					lastName: req.body.lastName,
@@ -93,11 +117,11 @@ const controller = {
 					userType: "client",
 					state: 1,
 					avatar: 'default.png',
-					created_at:"2020-07-03"
+					//created_at:"2020-07-03"
 				});
 			} else {
 				//newUser = {
-					//id: userIdMaker + 1,
+				//id: userIdMaker + 1,
 				db.User.create({	
 					firstName: req.body.firstName,
 					lastName: req.body.lastName,
@@ -111,7 +135,7 @@ const controller = {
 					avatar: req.files[0].filename
 				});
 			}
-
+			
 			//users.push(newUser);
 			//fs.writeFileSync(usersDB, JSON.stringify(users));
 			res.redirect('login');
@@ -124,59 +148,73 @@ const controller = {
 	// Update - Form to edit
 	edit: (req, res, next) => {
 		let user = req.session.userFound
-
+		//console.log(user);
+		
 		res.render("./users/edit-form", { user: user })
 	},
 	
 	// Update - Method to update
 	update: (req, res, next) => {
-
+		
 		let errors = validationResult(req);
 		let user = req.session.userFound;
-
+		console.log(user);
+				
 		if (errors.isEmpty()) {		
 			
 			if (req.files == '') {
-				userEdited = {
-					id: user[0].id,
-					first_name: req.body.first_name,
-					last_name: req.body.last_name,
+				db.User.update({
+					//id: user[0].id,
+					firstName: req.body.firstName,
+					lastName: req.body.lastName,
 					email: req.body.email,
-					phone: req.body.phone,
 					password: bcrypt.hashSync(req.body.password, 10),
-					category: user[0].category,
-					avatar: 'default.png'
-				}
+					user:"",
+					phone: req.body.phone,
+					address:"",
+					userType: "client",
+					state: 1,
+					avatar: 'default.png',
+				},{
+					where: {
+						id: user[0].id
+					}
+				});
+				
 			} else {
-				userEdited = {
-					id: user[0].id,
-					first_name: req.body.first_name,
-					last_name: req.body.last_name,
+				db.User.create({
+					//id: user[0].id,
+					firstName: req.body.firstName,
+					lastName: req.body.lastName,
 					email: req.body.email,
-					phone: req.body.phone,
 					password: bcrypt.hashSync(req.body.password, 10),
-					category: user[0].category,
+					user:"",
+					phone: req.body.phone,
+					address:"",
+					userType: "client",
+					state: 1,
 					avatar: req.files[0].filename
-				}
+				},{
+					where: {
+						id: user[0].id
+					}
+				});
 			}
-
 			
-			for (let i = 0; i < users.length; i++) {
+			/*for (let i = 0; i < users.length; i++) {
 				if (users[i].id == user[0].id) {
 					users[i] = userEdited;
 				}
 			}
-
 			req.session.userFound = [userEdited];
+			fs.writeFileSync(usersDB, JSON.stringify(users));*/
 			
-
-			fs.writeFileSync(usersDB, JSON.stringify(users));
 			res.redirect('/users/login');
 			
 		} else {
 			res.render("users/edit-form", {errors: errors.errors, datos: req.body});	
 		}
-
+		
 	},
 	
 	// Delete - change user category to 'inactive'

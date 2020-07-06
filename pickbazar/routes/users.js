@@ -1,14 +1,15 @@
 // ************ Require's ************
 var express = require('express');
 var router = express.Router();
-const path = require('path');
+const usersController = require('../controllers/usersController');
+const userMiddlewares = require('../middlewares/userMiddlewares');
 const { check, validationResult, body } = require('express-validator');
 const multer = require('multer');
-const usersController = require('../controllers/usersController');
-const fs = require('fs');
 const bcrypt = require('bcrypt');
-const userMiddlewares = require('../middlewares/userMiddlewares')
 const db = require("../database/models")
+
+const path = require('path');
+const fs = require('fs');
 
 //const usersDB = path.join(__dirname, '../data/usersDB.json');
 //let users = JSON.parse(fs.readFileSync(usersDB, 'utf-8'));
@@ -19,7 +20,7 @@ var storage = multer.diskStorage({
         cb(null, 'public/images/users')
     },
     filename: (req, file, cb) => {
-        cb(null, file.fieldname + ' ' + Date.now() + path.extname(file.originalname))
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
     }
 })
 var upload = multer({ storage: storage });
@@ -90,30 +91,42 @@ db.User.findAll()
 router.get('/edit', userMiddlewares.auth, usersController.edit);
 
 /* PUT - Update in Data Base */
-router.put('/edit', upload.any(), [
-    check('first_name').isLength({ min: 2 }).withMessage('El nombre debe tener mas de 2 caracteres'),
-    check('last_name').isLength({ min: 2 }).withMessage('El apellido debe tener mas de 2 caracteres'),
+
+    db.User.findAll()
+    .then((users) => {
+    router.put('/edit', upload.any(), [
+    check('firsName').isLength({ min: 2 }).withMessage('El nombre debe tener mas de 2 caracteres'),
+    check('lastName').isLength({ min: 2 }).withMessage('El apellido debe tener mas de 2 caracteres'),
     check('email').isEmail().withMessage('Debe ingresar un Email valido'),
     check('phone').isInt().withMessage('Debe ingresar solo numeros'),
-    check('phone').isLength({ min: 8 }).withMessage('El telefono debe tener el codigo de area'),
+    check('phone').isLength({ min: 8, max: 10 }).withMessage('Máximo 10 dígitos y debe incluir el código de area'),
     check('password').isLength({ min: 6 }).withMessage('La contraseña debe tener mas de 6 caracteres'),
-    body('email').custom(function (value, { req }) {
+        body('email').custom(function (value, { req }) {
+        let contador = 0;
         for (let i = 0; i < users.length; i++) {
             if (users[i].email == value && req.session.userFound[0].email != value) {
-                return false;
+                contador++;
             }
         }
-        return true;
+        if (contador > 0) {
+            return false;
+        } else {
+            return true;
+        }
     }).withMessage('Usuario existente'),
     body('passwordConfirm').custom(function (value, { req }) {
         let pass = req.body.password;
-        console.log(pass);
+        //console.log(pass);
         if (pass != value) {
             return false
         }
         return true;
     }).withMessage('Las contraseñas no coinciden')
 ], usersController.update);
+    })
+    .catch((errors) => {
+        console.log(errors);
+    })
 
 /************ CHANGE USER TO CATEGORY INACTIVE ************/
 /* DELETE - Change user category to inactive */

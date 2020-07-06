@@ -34,7 +34,7 @@
             <% if (userFound==undefined){%>
               <a href="/users/login">Login <i class="fas fa-address-card"></i></a>
             <%}else{%>
-              <a href="/users/profile">Ver perfil <i class="fas fa-user"></i> <br> <%=userFound[0].first_name + ' ' + userFound[0].last_name%> </a>
+              <a href="/users/profile">Ver perfil <i class="fas fa-user"></i> <br> <%=userFound[0].firstName + ' ' + userFound[0].lastName%> </a>
             <%}%>
             <a class="cart" href="/cart">Carrito <i class="fas fa-shopping-cart"></i></a>
           
