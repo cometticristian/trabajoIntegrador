@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2020 at 11:20 PM
+-- Generation Time: Jul 07, 2020 at 02:27 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -158,8 +158,7 @@ INSERT INTO `images` (`id`, `name`, `main`, `product_id`, `created_at`) VALUES
 (10, 'canasto-laundry-tela-max.jpg', 1, 10, '2020-07-02 18:56:32'),
 (11, 'cesto-elegance.jpg', 1, 11, '2020-07-02 18:56:32'),
 (12, 'bandeja-cama.jpg', 1, 12, '2020-07-02 18:56:32'),
-(13, 'mopa.jpg', 1, 13, '2020-07-02 19:52:48'),
-(14, 'mainPick-1593979283710.jpg', 1, 14, '2020-07-05 20:01:24');
+(13, 'mainPick-1593979283710.jpg', 1, 13, '2020-07-06 23:39:41');
 
 -- --------------------------------------------------------
 
@@ -206,7 +205,7 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `discount`, `tax`,
 (10, 'Canasto laundry de tela', 'Canasto laundry de tela de 58cm de diámetro', '5000.00', 0, 21, 1, 2, 8, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
 (11, 'Cesto de residuos Elegance', 'Cesto de residuos Elegance con pedal - capacidad 3 litros', '5000.00', 0, 21, 1, 2, 7, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
 (12, 'Bandeja desayunador', 'Bandeja desayunador de bamboo con patas rebatibles', '5000.00', 0, 21, 1, 1, 6, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
-(14, 'Cecerola Antiadherente 24cm', 'Cacerola cerámica antiadherente de 24cm de diámetro. Colores \'Black\' o \'Aqua\'', '5000.00', 0, 21, 1, 1, 1, 1, NULL, '2020-07-05 20:01:23', '2020-07-05 20:01:23');
+(13, 'Cecerola Antiadherente 24cm', 'Cacerola cerámica antiadherente de 24cm de diámetro. Colores \'Black\' o \'Aqua\'', '5000.00', 0, 21, 0, 1, 1, 1, NULL, '2020-07-06 23:44:33', '2020-07-06 23:44:33');
 
 -- --------------------------------------------------------
 
@@ -285,7 +284,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `user`, `phone`, `address`, `userType`, `state`, `avatar`, `created_at`, `updated_at`) VALUES
 (1, 'David', 'Messina', 'davidmessina9@gmail.com', '$2b$10$a7dORGZNd0RYscUci59mQ.LdxxpmhtEE5SX8b66HnRNB/FCWqcoci', '', '1132146241', '', 'admin', 1, 'avatar-1593978857012.jpg', '2020-07-05 19:54:17', '2020-07-05 19:54:17'),
-(2, 'David', 'Messina', 'davidmessina@speedy.com.ar', '$2b$10$3Hmpw2AmaYpZjYtQpltQ.OO96MfEKkV1.6XB2ZFg5FOc6moOv2Auu', '', '1132146241', '', 'client', 1, 'avatar-1593979609920.jpg', '2020-07-05 20:06:50', '2020-07-05 20:06:50');
+(2, 'David', 'Messina', 'davidmessina@speedy.com.ar', '$2b$10$kk/Fmfnj2kzYtGOZ83FfmeCYNHjHDqN9iOx50391d5J6x3v.jI1u.', '', '1132146241', '', 'client', 1, 'avatar-1594076314868.jpg', '2020-07-05 20:06:50', '2020-07-05 20:06:50');
 
 
 --
@@ -316,6 +315,13 @@ USE `phpmyadmin`;
 --
 -- Metadata for table products
 --
+
+--
+-- Dumping data for table `pma__table_uiprefs`
+--
+
+INSERT INTO `pma__table_uiprefs` (`username`, `db_name`, `table_name`, `prefs`, `last_update`) VALUES
+('root', 'pickbazar', 'products', '{\"sorted_col\":\"`products`.`state` ASC\"}', '2020-07-07 00:25:48');
 
 --
 -- Metadata for table subcategories

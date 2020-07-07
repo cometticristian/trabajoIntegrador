@@ -598,11 +598,23 @@ const controller = {
 	destroy: (req, res, next) => {
 
 		let id = req.params.productId;
-
-		products = products.filter((producto) => { return producto.id != id });
-
-		fs.writeFileSync(productsDB, JSON.stringify(products));
-		res.redirect('/products');
+		db.Product.update({
+			state: 0
+		},{
+			where: {
+				id: req.params.productId
+			}
+		})
+		.then(() => {
+				res.redirect('/products')
+			})
+			.catch((error) => {
+				console.log(error);
+			})
+		
+		//products = products.filter((producto) => { return producto.id != id });
+		//fs.writeFileSync(productsDB, JSON.stringify(products));
+		
 	}
 };
 

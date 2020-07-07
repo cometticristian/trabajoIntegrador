@@ -11,6 +11,10 @@
     <section>
         <div class="container">
             <div>
+                <% if (product.state == 0){%>
+                    <div id="down1" class="col-12">No es posible mostrar el detalle de un PRODUCTO INEXISTENTE</div>
+                    <%}else{%>
+                        
                 <ul class="list">
                     <li>
                         <a href="/products/category/<%=product.category%>">
@@ -73,6 +77,7 @@
                     </div>
                 </div>
             </div>
+            <%}%>
             <div id="down" class="row">
                 <div id="down1" class="col-12">
                     <div>

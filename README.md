@@ -3,6 +3,9 @@ Cristian Cometti
 Cintia Diaz
 David Messina
 
+Ubicación del Script de creación de base de datos:
+\pickbazar\data\PickBazar.sql
+
 Ecommerce: productos de bazar
 Nombre: pickBazar
 
