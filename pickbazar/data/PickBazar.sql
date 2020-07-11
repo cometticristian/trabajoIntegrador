@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 07, 2020 at 02:27 AM
+-- Generation Time: Jul 11, 2020 at 07:44 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -117,8 +117,8 @@ CREATE TABLE IF NOT EXISTS `categories` (
 
 INSERT INTO `categories` (`id`, `name`, `created_at`) VALUES
 (1, 'Cocina', '2020-06-27 01:57:34'),
-(2, 'Ba?o', '2020-06-27 01:57:34'),
-(3, 'Decoraci?n', '2020-06-27 01:57:34'),
+(2, 'Baño', '2020-07-09 19:01:59'),
+(3, 'Decoración', '2020-07-09 20:51:08'),
 (4, 'Limpieza', '2020-06-27 01:57:34');
 
 -- --------------------------------------------------------

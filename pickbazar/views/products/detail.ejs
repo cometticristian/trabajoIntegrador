@@ -17,17 +17,17 @@
                         
                 <ul class="list">
                     <li>
-                        <a href="/products/category/<%=product.category%>">
-                            <h2 class="product-title"><%=product.Category.name.toUpperCase()%> |</h2>
+                        <a href="/products/category/<%=product.Category.id%>">
+                            <h2 class="product-title"><%=product.Category.name%> ></h2>
                         </a>
                     </li>
                     <li>
-                        <a href="/products/subCategory/<%=product.subCategory%>">
-                            <h2 class="product-title">| <%=product.Subcategory.name.toUpperCase();%> |</h2>
+                        <a href="/products/subCategory/<%=product.Subcategory.id%>">
+                            <h2 class="product-title"> > <%=product.Subcategory.name;%> > </h2>
                         </a>
                     </li>
                     <li>
-                        <h2 class="product-title">| <%=product.name.toUpperCase();%></h2>
+                        <h2 class="product-title">> <%=product.name;%></h2>
                     </li>
                 </ul>
             </div>
