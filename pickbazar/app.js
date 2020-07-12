@@ -39,13 +39,10 @@ app.use(function (req, res, next) {
   db.Category.findAll(
     )
     .then(function (category) {
-      return category
+      res.locals.cat = category
+      next()
     })
-    .then(function(global){
-      res.locals.cat = global
-    })
-    next()
-})
+  })
 
 app.use(function (req, res, next) {
   
@@ -53,12 +50,9 @@ app.use(function (req, res, next) {
     {include: [{ association: "Category" }]
     })
     .then(function (subCategory) {
-      return subCategory
+      res.locals.subCat = subCategory
+      next()
     })
-    .then(function(send){
-      res.locals.subCat = send
-    })
-    next()
 })
 
 app.use('/', indexRouter);

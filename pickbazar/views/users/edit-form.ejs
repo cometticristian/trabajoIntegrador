@@ -89,7 +89,7 @@
                         <h3>Imágen de perfil:</h3>
                      </label>
                      <input class="input" type="file" name="avatar">
-
+                     <span style="color: red;font-size: 12px;"><%= buscarError('avatar')[0].msg %></span>
                      <div class="align"><input class="btn-login black" type="submit" value="GUARDAR CAMBIOS"></div>
                   </form>
 

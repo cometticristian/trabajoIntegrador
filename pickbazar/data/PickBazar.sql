@@ -205,7 +205,7 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `discount`, `tax`,
 (10, 'Canasto laundry de tela', 'Canasto laundry de tela de 58cm de diámetro', '5000.00', 0, 21, 1, 2, 8, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
 (11, 'Cesto de residuos Elegance', 'Cesto de residuos Elegance con pedal - capacidad 3 litros', '5000.00', 0, 21, 1, 2, 7, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
 (12, 'Bandeja desayunador', 'Bandeja desayunador de bamboo con patas rebatibles', '5000.00', 0, 21, 1, 1, 6, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
-(13, 'Cecerola Antiadherente 24cm', 'Cacerola cerámica antiadherente de 24cm de diámetro. Colores \'Black\' o \'Aqua\'', '5000.00', 0, 21, 0, 1, 1, 1, NULL, '2020-07-06 23:44:33', '2020-07-06 23:44:33');
+(13, 'Cacerola Antiadherente 24cm', 'Cacerola cerámica antiadherente de 24cm de diámetro. Colores \'Black\' o \'Aqua\'', '5000.00', 0, 21, 0, 1, 1, 1, NULL, '2020-07-06 23:44:33', '2020-07-06 23:44:33');
 
 -- --------------------------------------------------------
 

@@ -217,7 +217,7 @@ const controller = {
 			}
 		})
 		.then(()=>{
-			console.log(user[0].state);
+			//console.log(user[0].state);
 			
 			//cierra sesion
 		req.session.destroy();
