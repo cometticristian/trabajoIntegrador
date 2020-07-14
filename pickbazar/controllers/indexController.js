@@ -10,13 +10,14 @@ const controller = {
 
 	root: (req, res, next) => {
 
-		let selectedReq = db.Product.findAll(
-			{
+		let selectedReq = db.Product.findAll({
+				where: { state: {[Op.ne]: 0} },
 				limit: 8,
 				include: [{ association: "Subcategory" }, { association: "Image" }]
 			})
 
-		let newsReq = db.Product.findAll({/*where:{id:{[Op.gt]:8}*/
+		let newsReq = db.Product.findAll({
+			where: { state: {[Op.ne]: 0} },
 			order: [['created_at', 'DESC']],
 			limit: 4,
 			include: [{ association: "Subcategory" }, { association: "Image" }]
@@ -24,7 +25,6 @@ const controller = {
 
 		Promise.all([selectedReq, newsReq])
 			.then(function ([selected, news]) {
-				//console.log(selected[0].Image[0].name);
 				res.render("index", { selected: selected, news: news })
 			})
 			.catch(function (error) {

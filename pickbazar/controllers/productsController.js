@@ -103,7 +103,7 @@ const controller = {
 	sale: (req, res, next) => {
 		db.Product.findAll(
 			{
-				where: { discount: { [Op.gt]: 0 } },
+				where: { discount: { [Op.gt]: 0 }, state: {[Op.ne]: 0} },
 				include: [{ association: "Category" }, { association: "Subcategory" },
 				{ association: "Image" }]
 			})
