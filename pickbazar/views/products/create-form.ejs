@@ -18,12 +18,10 @@
     </div>
     <section class="container">
         <% function buscarError(name){
-            //console.log("buscarError");
             if(typeof errors != 'undefined'){
                   let error = errors.filter(function(error){
                      return error.param == name;
                   });
-                  //console.log(errors);
                   if(error.length == 0){
                      let error = [{
                      value: '',
@@ -32,7 +30,6 @@
                      location: ''
                   }
                   ];
-                  //console.log(error);
                   return error;
                   }
                   return error;
@@ -44,14 +41,13 @@
                      location: ''
                   }
                   ];
-                  //console.log(error);
                   return error;
             }
          }
          %>
         <div class="left">
             <div class="sec2">
-                <form action="/products/create" enctype="multipart/form-data" method="POST">
+                <form class="productValidate" action="/products/create" enctype="multipart/form-data" method="POST">
                     <div class="form">
                         <select name="category" id="category" class="select">
                             <option value="0">SELECCIONE CATEGORIA</option>
@@ -71,19 +67,21 @@
 
                 <div class="form2">
                     <label class="label-block" for="name">NOMBRE DEL PRODUCTO</label>
-                    <input class="input-block" type="text" name="name" value="<%= (typeof datos != 'undefined') ? datos.name : ''  %>">
-                    <span style="color: red;font-size: 12px;"><%= buscarError('name')[0].msg %></span>
+                    <input class="input-block name" type="text" name="name" value="<%= (typeof datos != 'undefined') ? datos.name : ''  %>">
+                    <span class="name" style="color: red;font-size: 12px;"><%= buscarError('name')[0].msg %></span>
                     <label class="label-block" for="brand">MARCA</label>
-                    <input class="input-block" type="text" name="brand">
+                    <input class="input-block brand" type="text" name="brand" value="<%= (typeof datos != 'undefined') ? datos.brand : ''  %>">
+                    <span class="brand" style="color: red;font-size: 12px;"><%= buscarError('name')[0].msg %></span>
                     <label class="label-block" for="description">DESCRIPCION</label>
-                    <textarea name="description" id="desc" cols="30" rows="10" value="<%= (typeof datos != 'undefined') ? datos.description : ''  %>"></textarea>
-                    <span style="color: red;font-size: 12px;"><%= buscarError('description')[0].msg %></span>
+                    <textarea class="description" name="description " id="desc" cols="30" rows="10" value="<%= (typeof datos != 'undefined') ? datos.description : ''  %>"></textarea>
+                    <span class="description" style="color: red;font-size: 12px;"><%= buscarError('description')[0].msg %></span>
                 </div>
                 <div class="form-price">
                     <p class="font-price">
                         <label for="price">PRECIO DE COSTO</label>
-                        <input class="input-price" type="number" name="price">
+                        <input class="input-price price" type="number" name="price" value="<%= (typeof datos != 'undefined') ? datos.price : ''  %>"> 
                     </p>
+                    <span class="price" style="color: red;font-size: 12px;"><%= buscarError('price')[0].msg %></span>
                     <p class="font-price">
                         <label for="model">IVA</label>
                         <select name="tax" id="" class="iva">
@@ -93,8 +91,9 @@
                     </p>
                     <p class="font-price">
                         <label for="desc">DESCUENTO</label>
-                        <input class="input-price" type="number" name="discount">
+                        <input class="input-price discount" type="number" name="discount"value="<%= (typeof datos != 'undefined') ? datos.discount : ''  %>">
                     </p>
+                    <span class="discount" style="color: red;font-size: 12px;"><%= buscarError('discount')[0].msg %></span>
                     <p class="submit">
                         <input class="send" type="submit" value="CARGAR PRODUCTO">
                     </p>
@@ -138,7 +137,7 @@
             <h2 class="upload-text">Subir lista de excel</h2>
         </div>
     </footer>
-
+<script src="/javascripts/validateProduct.js"></script>
 </body>
 
 </html>

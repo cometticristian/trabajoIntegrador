@@ -1,6 +1,6 @@
 window.addEventListener("load", function () {
-    let form = document.querySelector("form.register");
-    form.addEventListener("submit", function (e) {
+    let userForm = document.querySelector("form.register");
+    userForm.addEventListener("submit", function (e) {
         
         let errors= [] ;
 
@@ -16,17 +16,23 @@ window.addEventListener("load", function () {
 
         let email = document.querySelector("input.email");
         if (email.value.indexOf('@') < 0){
-            errors.push(["Email inválido", "email"]);
+            errors.push(["Debe ingresar un Email valido", "email"]);
         };
 
         let phone = document.querySelector("input.phone");
-        if (phone.value.length!=8 || phone.value.length!=10){
-            errors.push(["El teléfono debe tener 8 o 10 números", "phone"]);
+        if (phone.value.length!=10){
+            errors.push(["El teléfono debe tener 10 dígitos e incluir el código de area", "phone"]);
         };
 
+        /*let phoneNum = document.querySelector("input.phone");
+        if (isNaN(parseInt(phoneNum.value))) {
+            errors.push(["El teléfono debe tener 10 dígitos e incluir el código de area", "phone"]);
+            return false;
+        };*/
+
         let password = document.querySelector("input.password");
-        if (password.value.length<6){
-            errors.push(["La contraseña debe tener al menos 6 caracteres","password"]);
+        if (password.value.length<8){
+            errors.push(["La contraseña debe tener al menos 8 caracteres","password"]);
         };
 
         let passwordConfirm = document.querySelector("input.passwordConfirm");
@@ -43,13 +49,14 @@ window.addEventListener("load", function () {
             let password = document.querySelector("span.password");
             let passwordConfirm = document.querySelector("span.passwordConfirm");
             errors.forEach(error => {
-                if(error[1] == "firstName"){firstName.innerHTML += error[0]}
-                else if(error[1] == "lastName"){lastName.innerHTML += error[0]}
-                else if(error[1] == "email"){email.innerHTML += error[0]}
-                else if(error[1] == "phone"){phone.innerHTML += error[0]}
-                else if(error[1] == "password"){password.innerHTML += error[0]}
-                else if(error[1] == "passwordConfirm"){passwordConfirm.innerHTML += error[0]}
+                if(error[1] == "firstName"){if(firstName.innerHTML==""){firstName.innerHTML += error[0]}}
+                else if(error[1] == "lastName"){if(lastName.innerHTML==""){lastName.innerHTML += error[0]}}
+                else if(error[1] == "email"){if(email.innerHTML==""){email.innerHTML += error[0]}}
+                else if(error[1] == "phone"){if(phone.innerHTML==""){phone.innerHTML += error[0]}}
+                else if(error[1] == "password"){if(password.innerHTML==""){password.innerHTML += error[0]}}
+                else if(error[1] == "passwordConfirm"){if(passwordConfirm.innerHTML==""){passwordConfirm.innerHTML += error[0]}}
             });
+            console.log(firstName.innerHTML.length);
         }
     });
 })

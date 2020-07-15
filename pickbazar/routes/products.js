@@ -39,8 +39,8 @@ router.get('/create/', userMiddlewares.admin, productsController.create);
 
 /* POST - Store in Data Base */
 router.post('/create/', upload.any(),[
-    check('name').isLength({ min: 5 }).withMessage('El nombre debe tener mas de 5 caracteres'),
-        check('description').isLength({ min: 20 }).withMessage('La descripción debe tener mas de 20 caracteres'),
+    check('name').isLength({ min: 5 }).withMessage('El nombre debe tener al menos 5 caracteres'),
+    check('description').isLength({ min: 20 }).withMessage('La descripción debe tener al menos 20 caracteres'),
     body('mainPick').custom(function (value, { req }) {
                 let ext
                 if(req.files.length==0){

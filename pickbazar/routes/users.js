@@ -58,12 +58,12 @@ router.get('/register/', userMiddlewares.gest, usersController.register);
 db.User.findAll()
     .then((users) => {
         router.post('/register/', upload.any(), [
-            check('firstName').isLength({ min: 2 }).withMessage('El nombre debe tener mas de 2 caracteres'),
-            check('lastName').isLength({ min: 2 }).withMessage('El apellido debe tener mas de 2 caracteres'),
+            check('firstName').isLength({ min: 2 }).withMessage('El nombre debe tener al menos 2 caracteres'),
+            check('lastName').isLength({ min: 2 }).withMessage('El apellido debe tener al menos 2 caracteres'),
             check('email').isEmail().withMessage('Debe ingresar un Email valido'),
             check('phone').isInt().withMessage('Debe ingresar solo numeros'),
-            check('phone').isLength({ min: 8, max: 10 }).withMessage('Máximo 10 dígitos y debe incluir el código de area'),
-            check('password').isLength({ min: 6 }).withMessage('La contraseña debe tener mas de 6 caracteres'),
+            check('phone').isLength({ min: 8, max: 10 }).withMessage('El teléfono debe tener 10 dígitos e incluir el código de area'),
+            check('password').isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres'),
             body('email').custom(function (value) {
                 let contador = 0;
                 for (let i = 0; i < users.length; i++) {
@@ -121,12 +121,12 @@ router.get('/edit', userMiddlewares.auth, usersController.edit);
 db.User.findAll()
     .then((users) => {
         router.put('/edit', upload.any(), [
-            check('firstName').isLength({ min: 2 }).withMessage('El nombre debe tener mas de 2 caracteres'),
-            check('lastName').isLength({ min: 2 }).withMessage('El apellido debe tener mas de 2 caracteres'),
+            check('firstName').isLength({ min: 2 }).withMessage('El nombre debe tener al menos 2 caracteres'),
+            check('lastName').isLength({ min: 2 }).withMessage('El apellido debe tener al menos 2 caracteres'),
             check('email').isEmail().withMessage('Debe ingresar un Email valido'),
             check('phone').isInt().withMessage('Debe ingresar solo numeros'),
-            check('phone').isLength({ min: 8, max: 10 }).withMessage('Máximo 10 dígitos y debe incluir el código de area'),
-            check('password').isLength({ min: 6 }).withMessage('La contraseña debe tener mas de 6 caracteres'),
+            check('phone').isLength({ min: 8, max: 10 }).withMessage('El teléfono debe tener 10 dígitos e incluir el código de area'),
+            check('password').isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres'),
             body('email').custom(function (value, { req }) {
                 let contador = 0;
                 for (let i = 0; i < users.length; i++) {
