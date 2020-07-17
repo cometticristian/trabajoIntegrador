@@ -421,10 +421,6 @@ const controller = {
 			}
 		})
 			.then((productEdited) => {
-				console.log(productEdited);
-				console.log('$$$$$$$$$$$$$$$$$$$$$');
-				console.log(productEdited.id);
-
 				db.Image.update({
 					name: req.files[0].filename,
 					main: 1,
