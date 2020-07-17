@@ -16,22 +16,22 @@ const fs = require('fs');
 
 /************ MULTER STORAGE ************/
 var storage = multer.diskStorage({
-    
-    destination: (req, file, cb) => {
-        cb(null, 'public/images/users')
-    },
     filename: (req, file, cb) => {
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
     },
-    fileFilter: function (req, file, cb) {
-        //console.log(!file.originalname.match(/\.(jpg|jpeg|png|gif)$/));
-        if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
-            return cb(new Error('Only image files are allowed!'));
-        }
-        cb(null, true);
-      },
+    destination: (req, file, cb) => {
+        cb(null, 'public/images/users')
+    },
+    
+    
 })
-var upload = multer({ storage: storage });
+var upload = multer({ storage: storage, fileFilter: function (req, file, cb) {
+    //console.log(!file.originalname.match(/\.(jpg|jpeg|png|gif)$/));
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+        return cb(new Error('Only image files are allowed!'));
+    }
+    cb(null, true);
+  }, });
 
 /************ LOGIN USER ************/
 /* GET - Form to login */

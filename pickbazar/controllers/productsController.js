@@ -179,7 +179,7 @@ const controller = {
 
 			let marcaBody = req.body.brand;
 			marcaBody = marcaBody.toLowerCase();
-			function MaysPrimera(string) {
+						function MaysPrimera(string) {
 				return string.charAt(0).toUpperCase() + string.slice(1);
 			}
 			marcaBody = MaysPrimera(marcaBody);
@@ -207,7 +207,7 @@ const controller = {
 							brand_id: marca.dataValues.id
 						})
 							.then((newProduct) => {
-								console.log(newProduct);
+								//console.log(newProduct);
 
 								db.Image.create({
 									name: req.files[0].filename,
@@ -238,7 +238,7 @@ const controller = {
 									brand_id: brand.id
 								})
 									.then((newProduct) => {
-										console.log(newProduct)
+										//console.log(newProduct)
 										db.Image.create({
 											name: req.files[0].filename,
 											main: 1,

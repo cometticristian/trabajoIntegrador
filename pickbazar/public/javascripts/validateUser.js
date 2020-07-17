@@ -1,18 +1,21 @@
 window.addEventListener("load", function () {
     let userForm = document.querySelector("form.register");
-    userForm.addEventListener("submit", function (e) {
+    userForm.addEventListener("change", function (e) {
         
         let errors= [] ;
 
         let firstName = document.querySelector("input.firstName");
         if (firstName.value.length < 2){
-            errors.push(["El nombre debe tener al menos 2 caracteres", "firstName"]);
-        };
+            let message = "El nombre debe tener al menos 2 caracteres"
+            document.querySelector("span.firstName").innerText = message
+        }else{document.querySelector("span.firstName").innerText = ""};
 
         let lastName = document.querySelector("input.lastName");
         if (lastName.value.length < 2){
-            errors.push(["El apellido debe tener al menos 2 caracteres", "lastName"]);
-        };
+            let message = "El apellido debe tener al menos 2 caracteres"
+            document.querySelector("span.lastName").innerText = message
+            
+        }else{document.querySelector("span.lastName").innerText = ""};
 
         let email = document.querySelector("input.email");
         if (email.value.indexOf('@') < 0){
@@ -20,15 +23,10 @@ window.addEventListener("load", function () {
         };
 
         let phone = document.querySelector("input.phone");
-        if (phone.value.length!=10){
+        let noNumero = isNaN(phone.value)
+        if (noNumero && phone.value.length != 10){
             errors.push(["El teléfono debe tener 10 dígitos e incluir el código de area", "phone"]);
         };
-
-        /*let phoneNum = document.querySelector("input.phone");
-        if (isNaN(parseInt(phoneNum.value))) {
-            errors.push(["El teléfono debe tener 10 dígitos e incluir el código de area", "phone"]);
-            return false;
-        };*/
 
         let password = document.querySelector("input.password");
         if (password.value.length<8){
@@ -56,7 +54,7 @@ window.addEventListener("load", function () {
                 else if(error[1] == "password"){if(password.innerHTML==""){password.innerHTML += error[0]}}
                 else if(error[1] == "passwordConfirm"){if(passwordConfirm.innerHTML==""){passwordConfirm.innerHTML += error[0]}}
             });
-            console.log(firstName.innerHTML.length);
+            console.log(errors);
         }
     });
 })
