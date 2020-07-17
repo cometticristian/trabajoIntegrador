@@ -9,7 +9,7 @@ Nombre: pickBazar
 Link tablero de trabajo
 https://trello.com/b/iR4BHdRN/ecommerce-trabajo-integrador
 
-RETROSPECTIVA Sprint 1
+*** RETROSPECTIVA Sprint 1
 
 1. Comenzar a hacer:
 ---aquellas cosas innovadoras o que por cierta curiosidad queremos probar. O tal vez son soluciones comprobadas que notamos que deberíamos usar---
@@ -33,7 +33,7 @@ Organizar las tareas en nuestro tablero de trabajo a través de Trello
 ---aquellas practicas que podemos eliminar. Cuando el equipo ve que no le da valor o simplemente no le gusta una practica puede optar por eliminarla---
 //Por elmomento consideramos que no tenemos alguna práctica que debamos hacer menos o dejar de hacer
 
-RETROSPECTIVA Sprint 2
+*** RETROSPECTIVA Sprint 2
 
 1. Comenzar a hacer:
 
@@ -44,7 +44,24 @@ Reuniones por Zoom o Webex que permitan mantener una comunicación más fluida y
 Trabajar de forma coordinada, sin superponernos, priorizando las tareas própias de cada sprint. 
 
 4. Hacer menos:
-Por elmomento consideramos que no tenemos alguna práctica que debamos hacer menos o dejar de hacer
+Por el momento consideramos que no tenemos alguna práctica que debamos hacer menos o dejar de hacer
 
 5. Dejar de hacer:
-Por elmomento consideramos que no tenemos alguna práctica que debamos hacer menos o dejar de hacer
+Por el momento consideramos que no tenemos alguna práctica que debamos hacer menos o dejar de hacer
+
+*** RETROSPECTIVA Sprint 4
+
+1. Comenzar a hacer:
+
+2. Hacer más:
+Reuniones para resolver en equipo problematicas que frenan el avance del proyecto
+
+3. Continuar haciendo:
+Reuniones por Zoom o Webex que permitan mantener una comunicación más fluida y verificar el avance del proyecto. Comunicar en que instancia del desarrollo del proyecto está cada miembro y de ser necesario solicitar colaboración.
+Trabajar de forma coordinada, sin superponernos, priorizando las tareas própias de cada sprint. 
+
+4. Hacer menos:
+Consideramos que no tenemos alguna práctica que debamos hacer menos.
+
+5. Dejar de hacer:
+Consideramos que no tenemos alguna práctica que debamos dejar de hacer.

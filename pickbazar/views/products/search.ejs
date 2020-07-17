@@ -10,11 +10,7 @@
    <div class="container products-wrapper">
       <div class="row">
          <div class="col-12">
-            <%if(category.length>0){%>
-               <a href="/products/category/<%=category[0].Category.id%>">
-                  <h2 class="product-title"><%=nombreCategoria;%></h2>
-               </a>
-               <%}else{%>
+            <%if(category.length==0){%>
                   <h2 class="product-title">En este momento no hay productos de esta categoría</h2>
                   <%}%>    
                </div>

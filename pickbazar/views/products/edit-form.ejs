@@ -15,6 +15,38 @@
         </header>
     </div>
     <section class="container">
+        <% function buscarError(name){
+            //console.log("buscarError");
+            if(typeof errors != 'undefined'){
+                  let error = errors.filter(function(error){
+                     return error.param == name;
+                  });
+                  //console.log(errors);
+                  if(error.length == 0){
+                     let error = [{
+                     value: '',
+                     msg: '',
+                     param: '',
+                     location: ''
+                  }
+                  ];
+                  //console.log(error);
+                  return error;
+                  }
+                  return error;
+            }else{
+                  let error = [{
+                     value: '',
+                     msg: '',
+                     param: '',
+                     location: ''
+                  }
+                  ];
+                  //console.log(error);
+                  return error;
+            }
+         }
+         %>
         <div class="left">
             <div class="sec2">
                 <form action="/products/edit/<%=product.id%>?_method=PUT" enctype="multipart/form-data" method="POST">
@@ -39,9 +71,11 @@
 
                 <div class="form2">
                     <label class="label-block" for="name">NOMBRE DEL PRODUCTO</label>
-                    <input class="input-block" type="text" name="name" value="<%=product.name%>">
+                    <input class="input-block" type="text" name="name" value="<%= (typeof datos != 'undefined') ? datos.name : product.name  %>">
+                    <span style="color: red;font-size: 12px;"><%= buscarError('name')[0].msg %></span>
                     <label class="label-block" for="description">DESCRIPCION</label>
-                    <textarea name="description" id="desc" cols="30" rows="10"><%=product.description%></textarea>
+                    <textarea name="description" id="desc" cols="30" rows="10" value="<%= (typeof datos != 'undefined') ? datos.description : product.description  %>"><%=product.description%></textarea>
+                    <span style="color: red;font-size: 12px;"><%= buscarError('description')[0].msg %></span>
                 </div>
                 <div class="form-price">
                     <p class="font-price">
@@ -72,6 +106,7 @@
                     <input type="file" name="mainPick" class="inputFile">
                     <i class="fas fa-camera"></i>
                 </div>
+                <span style="color: red;font-size: 12px;"><%= buscarError('mainPick')[0].msg %></span>
                 <div class="photo photo-sec">
                     <input type="file" name="secondPick" class="inputFile">
                     <i class="fas fa-camera camera-sec"></i>

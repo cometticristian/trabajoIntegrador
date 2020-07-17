@@ -3,9 +3,10 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const methodOverride =  require('method-override'); // Para poder usar los métodos PUT y DELETE
+const methodOverride = require('method-override'); // Para poder usar los métodos PUT y DELETE
 const session = require('express-session');// Para usar Session
-const rememberMiddleware = require ('./middlewares/rememberMiddleware');
+const rememberMiddleware = require('./middlewares/rememberMiddleware');
+const db = require('./database/models');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -25,13 +26,34 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
-app.use(session({secret:'PickbazarSecret'}));
+app.use(session({ secret: 'PickbazarSecret' }));
 app.use(rememberMiddleware);
 
 app.use(function (req, res, next) {
   res.locals.userFound = req.session.userFound;
   next()
+})
+
+app.use(function (req, res, next) {
+  
+  db.Category.findAll(
+    )
+    .then(function (category) {
+      res.locals.cat = category
+      next()
+    })
   })
+
+app.use(function (req, res, next) {
+  
+  db.Subcategory.findAll(
+    {include: [{ association: "Category" }]
+    })
+    .then(function (subCategory) {
+      res.locals.subCat = subCategory
+      next()
+    })
+})
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -41,12 +63,12 @@ app.use('/cart', cartRouter);
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

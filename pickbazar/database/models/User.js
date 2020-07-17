@@ -64,14 +64,14 @@ module.exports = function (sequelize, dataTypes) {
     let User = sequelize.define(alias, cols, config);
 
     //REVISAR RELACION USUARIO CARRITO
-    /*User.associate = function (models){
-        User.belongsTo(models.Cart,{
+    User.associate = function (models){
+        User.hasMany(models.Cart,{
             as: "Cart",
             foreignKey: "user_id",
             timestamps: false
             
         });
-    }*/ 
+    } 
     
     
     return User;

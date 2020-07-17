@@ -40,12 +40,12 @@ module.exports = function (sequelize, dataTypes) {
     Cart.associate = function (models){
         
         //REVISAR RELACION USUARIO CARRITO
-        /*Cart.hasOne(models.User,{
+        Cart.belongsTo(models.User,{
             as: "User",
             foreignKey: "user_id",
             timestamps: false
             
-        });*/
+        });
 
         Cart.belongsToMany(models.Product,{
             as: "Products",

@@ -173,7 +173,15 @@ font-size: 2em;
   border-top: solid 3px #666;
   border-bottom: solid 3px #666;
   z-index: 1;
+  /*height: 500px;
+  animation-name: show;
+  animation-duration: 1000ms;*/
 }
+/*
+@keyframes show {
+  from {height: 0px;}
+  to {height: 500px}
+}*/
 
 .mobile-navbar span {
   display:flex;
@@ -470,30 +478,38 @@ font-size: 2em;
     margin-left: 15px;
   }
 
-  .cocina,
+  /*.cocina,
   .baño,
   .decoracion,
-  .limpieza{
+  .limpieza*/
+  .generico{
     -display: inline-block;
     display: block;
     background-color: rgba(245, 130, 32, 0.7);
     border-left: solid 3px #f58220;
-    padding: 0 3px 0 5px;
+    padding: 0 5px 0 5px;
     position: absolute;
     line-height: 20px;
     z-index: 1;
+    transition: 1000ms;
+    transition-delay: 100ms;
+    transition-duration: 500ms;
+    overflow: hidden;
   }
-  .cocina ul a:hover,
+  /*.cocina ul a:hover,
   .baño ul a:hover,
   .decoracion ul a:hover,
-  .limpieza ul a:hover{
+  .limpieza ul a:hover*/
+  
+  .generico ul a:hover{
     color: #f58220;
   }
 
-  .cocina,
+  /*.cocina,
   .baño,
   .decoracion,
-  .limpieza{
+  .limpieza*/
+  .generico{
     margin: 5px 0 0 0;
   }
 

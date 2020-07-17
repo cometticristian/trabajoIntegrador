@@ -20,6 +20,7 @@
          </div>
          
          <% selected.forEach (function(select){ %>
+            <%if(select.state!=0){%>
             <div class="col-6 col-sm-4 col-lg-3">
                <section class="product-box">
                   <a href="/products/detail/<%=select.id%>">
@@ -35,6 +36,7 @@
                   </a>
                </section>
             </div>
+            <%}%>
          <%})%>
             
             <!-- /Productos aleatorios -->
@@ -44,6 +46,7 @@
             </div>
             
             <% news.forEach (function(nuevo){ %>
+               <%if(nuevo.state!=0){%>
                <div class="col-6 col-sm-4 col-lg-3">
                   <section class="product-box">
                      <a href="/products/detail/<%=nuevo.id%>">
@@ -59,8 +62,8 @@
                      </a>
                   </section>
                </div>
-               
-               <%})%>
+               <%}%>
+            <%})%>
             </div>
          </div>
          <!-- /Nuevos Productos -->
