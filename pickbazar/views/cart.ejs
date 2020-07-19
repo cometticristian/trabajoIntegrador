@@ -80,7 +80,8 @@
         </thead>
         <tbody>
           <% 
-          if (empty!=0)
+          console.log("empty es: "+empty);
+          if (empty==0)
           {
           var totalDiscount,subtotal,taxes,total=0;
           var idCart=product[0].cart_id;
@@ -122,12 +123,13 @@
         
          %>
          <tr align="left">
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th> 
+          <th>&nbsp;</th>
         </tr>
         <% } %>
         </tbody>
@@ -156,9 +158,11 @@
     <td><h4>Total del Pedido</h4></td>
     <td><h4>$<%=total%></h4></td>
   </tr>
-  <%if (empty==0) {%>
+  <%
+  console.log("empty2:" + empty);
+  if (Number(empty)==0) {%>
   <tr align="center">
-    <td colspan="2"><button class="btn-orange" onclick="location.href='/cart/confirm/<%=idCart%>'">CONFIRMAR SU PEDIDO<%=idCart%></button></td>
+    <td colspan="2"><button class="btn-orange" onclick="location.href='/cart/confirm/<%=idCart%>'">CONFIRMAR SU PEDIDO <%=idCart%></button></td>
   </tr>
   <%}%>
 </table></div>
