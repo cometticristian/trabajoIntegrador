@@ -20,18 +20,21 @@ var storage = multer.diskStorage({
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
     },
     destination: (req, file, cb) => {
-        cb(null, 'public/images/users')
+        if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+            cb(null, 'public/images/delete')
+        }else{
+            cb(null, 'public/images/users')
+        }
     },
     
     
 })
-var upload = multer({ storage: storage, fileFilter: function (req, file, cb) {
-    //console.log(!file.originalname.match(/\.(jpg|jpeg|png|gif)$/));
+var upload = multer({ storage: storage/*, fileFilter: function (req, file, cb) {
     if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
         return cb(new Error('Only image files are allowed!'));
     }
     cb(null, true);
-  }, });
+  }*/ });
 
 /************ LOGIN USER ************/
 /* GET - Form to login */

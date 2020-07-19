@@ -74,17 +74,11 @@
                                         </div>
                                         <%}%>
                                     </div>
-                                    <div class="add-box">
                                                                               
-                                        <div id="add2" class="add">
-                                            <form action="/cart/add/<%=product.id%>">
-                                                <input class="" type="number" name="item" value="1">
-                                                <div id="add1" class="">
-                                                    <button type="submit">Agregar al carrito</button>
-                                                </div>
+                                            <form class="add-box" action="/cart/add/<%=product.id%>">
+                                                <button class="add1" type="submit">Agregar al carrito</button>
+                                                <input class="add2" type="number" name="item" value="1">
                                             </form>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <%}%>

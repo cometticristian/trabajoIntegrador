@@ -64,23 +64,24 @@
     margin-top: 35px;
     justify-content: space-between;
 }
-#add1 {
+.add1 {
     width: 77%;
-    display: flex;
-    flex-wrap: wrap;
     padding: 10px 6px;
     border-radius: 5px;
-    padding-left: 6px;
     background-color: #f58220;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    text-align: center;
 }
-#add2 {
+.add2 {
     width: 20%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     align-items: center;
     border-radius: 5px;
     border: 2px #f58220 solid;
+    font-family: inherit;
+    font-size: inherit;
+    text-align: center;
 }
 #down {
     display: none;

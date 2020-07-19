@@ -111,7 +111,7 @@ font-size: 2em;
 }
 
 .search a{
-  font-size: 1.5em;
+  font-size: 1.2em;
   display: block;
   padding: 5px 0;
 }
@@ -432,6 +432,12 @@ font-size: 2em;
 
   .btn-toggle-navbar {
     display: none;
+  }
+
+  .search a{
+    font-size: 1.5em;
+    display: block;
+    padding: 5px 0;
   }
 
   .cart{

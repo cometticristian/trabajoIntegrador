@@ -1,60 +1,83 @@
 window.addEventListener("load", function () {
-    let userForm = document.querySelector("form.register");
-    userForm.addEventListener("change", function (e) {
-        
-        let errors= [] ;
 
-        let firstName = document.querySelector("input.firstName");
-        if (firstName.value.length < 2){
+    let firstName = document.querySelector("input.firstName");
+    firstName.addEventListener("blur", function () {
+        if (firstName.value.length < 2) {
             let message = "El nombre debe tener al menos 2 caracteres"
-            document.querySelector("span.firstName").innerText = message
-        }else{document.querySelector("span.firstName").innerText = ""};
+            document.querySelector("span.firstName").innerText = message;
+        } else {
+            document.querySelector("span.firstName").innerText = ""
+        };
+    })
 
-        let lastName = document.querySelector("input.lastName");
-        if (lastName.value.length < 2){
+    let lastName = document.querySelector("input.lastName");
+    lastName.addEventListener("blur", function () {
+        if (lastName.value.length < 2) {
             let message = "El apellido debe tener al menos 2 caracteres"
-            document.querySelector("span.lastName").innerText = message
-            
-        }else{document.querySelector("span.lastName").innerText = ""};
-
-        let email = document.querySelector("input.email");
-        if (email.value.indexOf('@') < 0){
-            errors.push(["Debe ingresar un Email valido", "email"]);
+            document.querySelector("span.lastName").innerText = message;
+        } else {
+            document.querySelector("span.lastName").innerText = ""
         };
+    })
 
-        let phone = document.querySelector("input.phone");
+    let email = document.querySelector("input.email");
+    email.addEventListener("blur", function () {
+        if (email.value.indexOf('@') < 0) {
+            let message = "Debe ingresar un Email valido"
+            document.querySelector("span.email").innerText = message;
+        } else {
+            document.querySelector("span.email").innerText = ""
+        };
+    })
+
+    let phone = document.querySelector("input.phone");
+    phone.addEventListener("blur", function () {
         let noNumero = isNaN(phone.value)
-        if (noNumero && phone.value.length != 10){
-            errors.push(["El teléfono debe tener 10 dígitos e incluir el código de area", "phone"]);
-        };
-
-        let password = document.querySelector("input.password");
-        if (password.value.length<8){
-            errors.push(["La contraseña debe tener al menos 8 caracteres","password"]);
-        };
-
-        let passwordConfirm = document.querySelector("input.passwordConfirm");
-        if (passwordConfirm.value != password.value){
-            errors.push(["Las contraseñas no coinciden", "passwordConfirm"]);
-        };
-
-        if (errors.length > 0){
-            e.preventDefault();
-            let firstName = document.querySelector("span.firstName");
-            let lastName = document.querySelector("span.lastName");
-            let email = document.querySelector("span.email");
-            let phone = document.querySelector("span.phone");
-            let password = document.querySelector("span.password");
-            let passwordConfirm = document.querySelector("span.passwordConfirm");
-            errors.forEach(error => {
-                if(error[1] == "firstName"){if(firstName.innerHTML==""){firstName.innerHTML += error[0]}}
-                else if(error[1] == "lastName"){if(lastName.innerHTML==""){lastName.innerHTML += error[0]}}
-                else if(error[1] == "email"){if(email.innerHTML==""){email.innerHTML += error[0]}}
-                else if(error[1] == "phone"){if(phone.innerHTML==""){phone.innerHTML += error[0]}}
-                else if(error[1] == "password"){if(password.innerHTML==""){password.innerHTML += error[0]}}
-                else if(error[1] == "passwordConfirm"){if(passwordConfirm.innerHTML==""){passwordConfirm.innerHTML += error[0]}}
-            });
-            console.log(errors);
+        if (noNumero) {
+            let message = "Solo números"
+            document.querySelector("span.phone").innerText = message;
         }
+        else if (phone.value.length != 10) {
+            let message = "El teléfono debe tener 10 dígitos e incluir el código de area"
+            document.querySelector("span.phone").innerText = message;
+        }
+        else {
+            document.querySelector("span.phone").innerText = ""
+        };
+    })
+
+    let password = document.querySelector("input.password");
+    password.addEventListener("blur", function () {
+        if (password.value.length < 8 || password.value.length > 12) {
+            let message = "La contraseña debe tener entre 8  y 12 caracteres"
+            document.querySelector("span.password").innerText = message;
+        } else {
+            document.querySelector("span.password").innerText = ""
+        };
+    })
+
+    let passwordConfirm = document.querySelector("input.passwordConfirm");
+    passwordConfirm.addEventListener("blur", function () {
+        if (passwordConfirm.value != password.value || passwordConfirm.value=="") {
+            let message = "La contraseña no coincide"
+            document.querySelector("span.passwordConfirm").innerText = message
+        } else {
+            document.querySelector("span.passwordConfirm").innerText = ""
+        };
+    })
+
+    let userForm = document.querySelector("form.register");
+    userForm.addEventListener("submit", function (e) {
+
+        if (document.querySelector("span.firstName").innerText ||
+            document.querySelector("span.lastName").innerText ||
+            document.querySelector("span.email").innerText ||
+            document.querySelector("span.phone").innerText ||
+            document.querySelector("span.password").innerText ||
+            document.querySelector("span.passwordConfirm").innerText
+            ) {
+            e.preventDefault();
+        };
     });
+
 })

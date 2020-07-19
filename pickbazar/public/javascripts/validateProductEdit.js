@@ -60,16 +60,6 @@ window.addEventListener("load", function () {
         };
     })
     
-    let brand = document.querySelector("input.brand");
-    brand.addEventListener("blur", function () {
-        if (brand.value.length < 1){
-            let message = "Debe completar la marca";
-            document.querySelector("span.brand").innerText = message;
-        }else {
-            document.querySelector("span.brand").innerText = ""
-        };
-    })
-    
     let productForm = document.querySelector("form.productValidate");
     productForm.addEventListener("submit", function (e) {
         if (category.value < 1){document.querySelector("span.category").innerText = "Debe asignar una categoria"; e.preventDefault();}
@@ -78,7 +68,6 @@ window.addEventListener("load", function () {
         else if(discount.value < 1){document.querySelector("span.price").innerText = "Debe completar el descuento aunque sea 0"; e.preventDefault();}            
         else if(
             document.querySelector("span.name").innerText ||
-            brand.value.length < 1 ||
             document.querySelector("span.description").innerText
             ) {
                 e.preventDefault();
