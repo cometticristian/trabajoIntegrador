@@ -173,7 +173,7 @@ const controller = {
 
 	// Create -  Method to store
 	store: (req, res, next) => {
-
+console.log(req.body.description);
 		let errors = validationResult(req);
 		if (errors.isEmpty()) {
 
@@ -434,8 +434,7 @@ const controller = {
 				}
 			})
 				.then((productEdited) => {
-					console.log(req.params.productId);
-					console.log('$$$$$$$$$$$$$$$$$$$$$');
+					//console.log(req.params.productId);
 					//console.log(productEdited[0].id);
 
 					db.Image.update({

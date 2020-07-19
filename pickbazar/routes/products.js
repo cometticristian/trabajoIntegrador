@@ -9,11 +9,16 @@ const productsController = require('../controllers/productsController');
 
 /************ MULTER STORAGE ************/
 var storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'public/images/products')
-    },
+
     filename: (req, file, cb) => {
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+    },
+    destination: (req, file, cb) => {
+        if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+            cb(null, 'public/images/delete')
+        }else{
+            cb(null, 'public/images/products')
+        }
     }
 })
 var upload = multer({ storage: storage });
@@ -44,7 +49,7 @@ router.post('/create/', upload.any(),[
     body('mainPick').custom(function (value, { req }) {
                 let ext
                 if(req.files.length==0){
-                    return true
+                    return false
                 }else{
                     ext = path.extname(req.files[0].filename).toLowerCase();
                 }
@@ -57,7 +62,7 @@ router.post('/create/', upload.any(),[
                         return true;
                     }
                     return false;
-            }).withMessage('Solo archivos JPG, JPEG, PNG o GIF')
+            }).withMessage('Imágen obligatoria - Solo archivos JPG, JPEG, PNG o GIF')
         ], productsController.store);
 
 /************ EDIT ONE PRODUCT ************/
@@ -65,16 +70,16 @@ router.post('/create/', upload.any(),[
 router.get('/edit/:productId', userMiddlewares.admin, productsController.edit);
 /* PUT - Update in Data Base */
 router.put('/edit/:productId', upload.any(),[
-    check('name').isLength({ min: 5 }).withMessage('El nombre debe tener mas de 5 caracteres'),
-        check('description').isLength({ min: 20 }).withMessage('La descripción debe tener mas de 20 caracteres'),
+    check('name').isLength({ min: 5 }).withMessage('El nombre debe tener al menos 5 caracteres'),
+    check('description').isLength({ min: 20 }).withMessage('La descripción debe tener al menos 20 caracteres'),
     body('mainPick').custom(function (value, { req }) {
                 let ext
                 if(req.files.length==0){
-                    return true
+                    return false
                 }else{
                     ext = path.extname(req.files[0].filename).toLowerCase();
                 }
-                //console.log(ext);
+                console.log(ext);
                 if (
                     ext == ".jpg" ||
                     ext == ".jpeg" ||
@@ -83,7 +88,7 @@ router.put('/edit/:productId', upload.any(),[
                         return true;
                     }
                     return false;
-            }).withMessage('Solo archivos JPG, JPEG, PNG o GIF')
+            }).withMessage('Imágen obligatoria - Solo archivos JPG, JPEG, PNG o GIF')
         ], productsController.update);
 
 /************ DELET ONE PRODUCT ************/
