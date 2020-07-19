@@ -80,39 +80,56 @@
         </thead>
         <tbody>
           <% 
+          if (empty!=0)
+          {
           var totalDiscount,subtotal,taxes,total=0;
-          for(let i=0; i<cart.product.length; i++){ %>
+          var idCart=product[0].cart_id;
+          for(let i=0; i<product.length; i++){ %>
           <tr>
             <td scope="row"><%=i+1%></td>
             <td width="55"> <figure>
-              <img src="/images/products/<%=cart.product[i].name%>" style="width:50px;" alt="imagen de <%=cart.product[i].name%>">
+              <img src="/images/products/<%=product[i].image%>" style="width:50px;" alt="imagen de <%=product[i].name%>">
             </figure></td>
-            <td><%=cart.product[i].name%></td>
-            <% if(cart.product[i].discount!=0) {%>
-            <td>$<%=cart.product[i].price%> <span class="cart-discount"><%=cart.product[i].discount%>% OFF</span></td>
+            <td><%=product[i].name%></td>
+            <% if(product[i].discount!="0") {%>
+            <td>$<%=product[i].price%> <span class="cart-discount"><%=product[i].discount%>% OFF</span></td>
             <% 
-           totalDiscount=totalDiscount+(cart.product[i].price*cart.cart_item.units)*cart.product[i].discount/100;
-            subtotal=subtotal+((cart.product[i].price*cart.cart_item.units)-((cart.product[i].price*cart.cart_item.units)*cart.product[i].discount/100));
+            //Da NaN xq el JSON devuelve los numeros como strings, pero desde la BD devolvera integer, lo ajusto luego
+            totalDiscount=totalDiscount+(product[i].price*product[i].units)*product[i].discount/100;
+            subtotal=subtotal+((product[i].price*product[i].units)-((product[i].price*product[i].units)*product[i].discount/100));
             %> 
 
-            <td>$<%=(cart.product[i].price*cart.cart_item.units)*cart.cart_item.discount/100%></td>
+            <td>$<%=(product[i].price*product[i].units)*product[i].discount/100%></td>
             <% } else {
-            subtotal=subtotal+((cart.product[i].price*cart.cart_item.units)-((cart.product[i].price*cart.cart_item.units)*cart.product[i].discount/100));
+            subtotal=subtotal+((product[i].price*product[i].units)-((product[i].price*product[i].units)*product[i].discount/100));
             %>
-              <td>$<%=cart.product[i].price%></td>
-              <td>$<%=(cart.product[i].price*cart.cart_item.units)*cart.product[i].discount/100%></td>
+              <td>$<%=product[i].price%></td>
+              <td>$<%=(product[i].price*product[i].units)*product[i].discount/100%></td>
             <% }%>
                      
-            <td><span><a href="/cart/minus/<%=cart.cart_item.id%>"><i class='fas fa-minus'></i></a></span>&nbsp;<span class="orange" style="height: 30px;padding:3px"><%=cart.product[i].units%></span>&nbsp;<span><a href="/cart/plus/<%=cart.cart_item.id%>"><i class='fas fa-plus'></i></a></span></td>
-            <td>$<%=((cart.product[i].price*cart.cart_item.units)-((cart.product[i].price*cart.cart_item.units)*cart.product[i].discount/100))%></td>
-            <td class="td-accion"><a href="/cart/remove/<%=cart.cart_item.id%>"><i class='fas fa-trash-alt'></i></a></td>
+            <td><span><a href="/cart/minus/<%=product[i].id%>"><i class='fas fa-minus'></i></a></span>&nbsp;<span class="orange" style="height: 30px;padding:3px"><%=product[i].units%></span>&nbsp;<span><a href="/cart/plus/<%=product[i].id%>"><i class='fas fa-plus'></i></a></span></td>
+            <td>$<%=((product[i].price*product[i].units)-((product[i].price*product[i].units)*product[i].discount/100))%></td>
+            <td class="td-accion"><a href="/cart/remove/<%=product[i].id%>"><i class='fas fa-trash-alt'></i></a></td>
           </tr>
           <%}%>
          <%
-         console.log(subtotal);
          taxes=Number(subtotal)*21/100;
          total=subtotal+taxes;
+        }
+        else
+        {
+          //carrito vacio
+        
          %>
+         <tr align="left">
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <% } %>
         </tbody>
       </table>
 
@@ -137,11 +154,13 @@
   </tr>
   <tr>
     <td><h4>Total del Pedido</h4></td>
-    <td><h4>$<%=cart.total%></h4></td>
+    <td><h4>$<%=total%></h4></td>
   </tr>
+  <%if (empty==0) {%>
   <tr align="center">
-    <td colspan="2"><button class="btn-orange">CONFIRMAR SU PEDIDO</button></td>
+    <td colspan="2"><button class="btn-orange" onclick="location.href='/cart/confirm/<%=idCart%>'">CONFIRMAR SU PEDIDO<%=idCart%></button></td>
   </tr>
+  <%}%>
 </table></div>
 
       </div>

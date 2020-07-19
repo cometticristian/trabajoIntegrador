@@ -15,61 +15,6 @@
                     <div id="down1" class="col-12">No es posible mostrar el detalle de un PRODUCTO INEXISTENTE</div>
                     <%}else{%>
                         
-<<<<<<< HEAD
-                <ul class="list">
-                    <li>
-                        <a href="/products/category/<%=product.Category.id%>">
-                            <h2 class="product-title"><%=product.Category.name%> ></h2>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/products/subCategory/<%=product.Subcategory.id%>">
-                            <h2 class="product-title"> > <%=product.Subcategory.name;%> > </h2>
-                        </a>
-                    </li>
-                    <li>
-                        <h2 class="product-title">> <%=product.name;%></h2>
-                    </li>
-                </ul>
-            </div>
-            <div class="row detail">
-
-                <div class=" col-12 col-md-8">
-                    <div class="row">
-                        <div class="col-md-3 small-img-box">
-                            <div class="img-small">
-                                <img class="img-s" src="/images/products/<%=product.Image[0].name%>" alt="">
-                            </div>
-                            <div class="img-small">
-                                <img class="img-s" src="/images/products/<%=product.Image[0].name%>" alt="">
-                            </div>
-                            <div class="img-small">
-                                <img class="img-s" src="/images/products/<%=product.Image[0].name%>" alt="">
-                            </div>
-                        </div>
-                        <div class=" col-12 col-md-9 img-box">
-                            <img id="img1" src="/images/products/<%=product.Image[0].name%>" alt="">
-                            <%- include("../partials/slide-button") %>
-                        </div>
-                    </div>
-                </div>
-                <div class="description-box container col-12 col-md-4">
-                    <div>
-                        <h2 class="description"><%=product.name%></h2>
-                        <h2 class="description">Precio $<%=product.price%></h2>
-                        <h3 class="h3-detail description">DESCRIPCION</h3>
-                        <p class="p-detail description"><%=product.description%></p>
-                        <div class="design-box">
-                            <div id="design1">Elegir Diseño</div>
-                            <div id="design2">⯆</div>
-                        </div>
-                        <div class="crud">
-                            <form action="/products/delete/<%=product.id%>?_method=DELETE" method="POST">
-                                <button id="delete" class="send" type="submit">ELIMINAR</button>
-                            </form>
-                            <a id="edit" class="send" href='/products/edit/<%=product.id%>' target="_blank"><div>EDITAR</div></a>
-                        </div>
-=======
                         <ul class="list">
                             <li>
                                 <a href="/products/category/<%=product.Category.id%>">
@@ -85,7 +30,6 @@
                                 <h2 class="product-title">> <%=product.name;%></h2>
                             </li>
                         </ul>
->>>>>>> b46e1b3284b608d3677e6f884961cb8ba8bc3ac7
                     </div>
                     <div class="row detail">
                         

@@ -55,11 +55,6 @@ module.exports = function (sequelize, dataTypes) {
             timestamps: false
         })
         
-        //agregue esto para q traiga los datos de la relacion
-       /*  Cart.hasMany(models.Cart_product,{
-            as: "cart_item",
-            foreignKey: "id"
-        })*/
     }
     
     return Cart;

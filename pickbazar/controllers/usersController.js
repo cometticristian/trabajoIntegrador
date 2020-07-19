@@ -102,7 +102,6 @@ const controller = {
 					userType: "client",
 					state: 1,
 					avatar: 'default.png',
-					//created_at:"2020-07-03"
 				});
 			} else {
 				//newUser = {
@@ -121,8 +120,6 @@ const controller = {
 				});
 			}
 			
-			//users.push(newUser);
-			//fs.writeFileSync(usersDB, JSON.stringify(users));
 			res.redirect('login');
 		} else {
 			res.render('users/register', {errors: errors.errors, datos: req.body});
@@ -217,7 +214,7 @@ const controller = {
 			}
 		})
 		.then(()=>{
-			console.log(user[0].state);
+			//console.log(user[0].state);
 			
 			//cierra sesion
 		req.session.destroy();

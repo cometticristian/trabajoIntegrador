@@ -173,20 +173,9 @@ font-size: 2em;
   border-top: solid 3px #666;
   border-bottom: solid 3px #666;
   z-index: 1;
-<<<<<<< HEAD
-  height: 500px;
-  animation-name: show;
-  animation-duration: 10000ms;
-}
-
-@keyframes show {
-  from {height: 0px;}
-  to {height: 500px}
-=======
   /*height: 500px;
   animation-name: show;
   animation-duration: 1000ms;*/
->>>>>>> b46e1b3284b608d3677e6f884961cb8ba8bc3ac7
 }
 /*
 @keyframes show {

@@ -97,10 +97,6 @@ module.exports = function (sequelize, dataTypes) {
             timestamps: "false"
         });
        
-        Product.hasMany(models.Cart_product,{
-            as: "cart_item",
-            foreignKey: "product_id"
-        })
     }
    
     return Product;

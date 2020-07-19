@@ -39,34 +39,10 @@ app.use(function (req, res, next) {
   db.Category.findAll(
     )
     .then(function (category) {
-<<<<<<< HEAD
-      return category
-    })
-    .then(function(global){
-      res.locals.cat = global
-    })
-    next()
-})
-
-app.use(function (req, res, next) {
-  
-  db.Subcategory.findAll(
-    {include: [{ association: "Category" }]
-    })
-    .then(function (subCategory) {
-      return subCategory
-    })
-    .then(function(send){
-      res.locals.subCat = send
-    })
-    next()
-})
-=======
       res.locals.cat = category
       next()
     })
   })
->>>>>>> b46e1b3284b608d3677e6f884961cb8ba8bc3ac7
 
 app.use(function (req, res, next) {
   
