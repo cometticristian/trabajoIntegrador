@@ -11,77 +11,112 @@ const { Op } = require("sequelize");
 
 
 const controller = {
-       
+
     create: function (req, res, next) {
-        let productId = req.params.id;
-        var cartId;
-        db.Cart.findOne({where: {
-            user_id: req.session.userFound[0].id,
-            state: 1,
-        }})
-        .then((cart)=>{
-            if (cart) {
-                cartId = cart.id;
-            } else {
-                db.Cart.create({
+        console.log(req.session.userFound);
+
+        if (req.session.userFound == undefined) {
+            res.redirect('/users/login');
+        } else {
+            let productId = req.params.id;
+            var cartId;
+            db.Cart.findOne({
+                where: {
                     user_id: req.session.userFound[0].id,
-                    total: 0,
-                    state: 1
-                })
-                .then((cartCreated)=>{
-                    
-                    cartId = cartCreated.id;
-                })
-            }
-            
-            db.Product.findByPk(productId)
-            .then((product) => {
-                //console.log(product);
-                db.Cart_product.create({
-                    units: req.query.item,
-                    price: product.price,
-                    discount: product.discount,
-                    subtotal: 1,
-                    cart_id: cartId,
-                    product_id: productId,
-                })
+                    state: 1,
+                }
             })
-        })
+                .then((cart) => {
+                    if (cart) {
+                        cartId = cart.id;
 
-        /*db.Product.findByPk(productId,{})
-        
+                        db.Product.findByPk(productId)
+                            .then((product) => {
+                                db.Cart_product.create({
+                                    units: req.query.item,
+                                    price: product.price,
+                                    discount: product.discount,
+                                    subtotal: 1,
+                                    cart_id: cartId,
+                                    product_id: productId,
+                                })
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            })
+                    } else {
+                        db.Cart.create({
+                            user_id: req.session.userFound[0].id,
+                            total: 0,
+                            state: 1
+                        })
+                            .then((cartCreated) => {
+                                cartId = cartCreated.id;
 
-        let cartProductReq = db.Cart_product.create({
-            units: req.query.item,
-            price: 1,
-            discount:10 ,
-            subtotal: 1,
-            cart_id:1,
-            product_id: productId,
-        })
-            .then((newCart) => {
-                console.log(newCart);
-
-                db.Cart_product.create({
-                    product_id: newProduct.id,
-                    cart_id: newCart.id,
-                    subtotal: 100, //req.price.value,
-                    units: 1,
-                    discount: idUser,
-                    date: new Date()
+                                db.Product.findByPk(productId)
+                                    .then((product) => {
+                                        db.Cart_product.create({
+                                            units: req.query.item,
+                                            price: product.price,
+                                            discount: product.discount,
+                                            subtotal: 1,
+                                            cart_id: cartId,
+                                            product_id: productId,
+                                        })
+                                    })
+                                    .catch((error) => {
+                                        console.log(error);
+                                    })
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            })
+                    }
                 })
-            })
-            .then(() => {
-                res.redirect('/cart');
-            })
-            .catch((error) => {
-                console.log(error);
-            })
+                .catch((error) => {
+                    console.log(error);
+                })
+                .then(() => {
+                    res.redirect('/products');
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        }
 
-*/
-        res.render('cart', { cart: cart });
+
     },
-    
+
+    show: function (req, res, next) {
+        if (req.session.userFound == undefined) {
+            res.redirect('/users/login');
+        } else {
+
+            db.Cart.findOne({
+                where: {
+                    user_id: req.session.userFound[0].id,
+                    state: 1
+                }
+            })
+                .then((cart) => {
+                    let cartId = cart.id;
+                    console.log(cartId);
+                    db.Cart_product.findAll({
+                        where: {
+                            cart_id: cartId,
+                        }
+                    })
+                    .then((cartProducts) => {
+                        console.log(cartProducts);
+                    })
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+
+            res.render('cart');
+        }
+    }
 }
 
 module.exports = controller;

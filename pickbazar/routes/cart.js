@@ -10,7 +10,7 @@ const cartController = require('../controllers/cartController');
 //  res.render('cart');
 //});
 
-//router.get('/', cartController.show);
+router.get('/', cartController.show);
 
 /************ ADD Items to CART ************/
 /* GET - Form to create */
