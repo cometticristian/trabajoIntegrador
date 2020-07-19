@@ -4,15 +4,15 @@ const db = require('../database/models');
 const { Op } = require("sequelize");
 
 
-const productsDB = path.join(__dirname, '../data/productsDB.json');
-let products = JSON.parse(fs.readFileSync(productsDB, 'utf-8'));
+//const productsDB = path.join(__dirname, '../data/productsDB.json');
+//slet products = JSON.parse(fs.readFileSync(productsDB, 'utf-8'));
 
 const controller = {
 	// Root - Show all products
 	root: (req, res, next) => {
 		db.Product.findAll(
 			{
-				include: [{ association: "Subcategory" },
+				include: [{ association: "Category" }, { association: "Subcategory" },
 				{ association: "Image" }]
 			})
 
@@ -28,7 +28,7 @@ const controller = {
 
 		let productReq = db.Product.findAll({
 			where: { category_id: req.params.productCategory },
-			include: [{ association: "Category" }, { association: "Image" }]
+			include: [{ association: "Category" }, { association: "Subcategory" }, { association: "Image" }]
 		})
 
 		let categoryReq = db.Category.findAll({
@@ -79,7 +79,7 @@ const controller = {
 				console.log(subcategoryName[0].Category.name);
 				res.render('./products/list', {
 					category: category,
-					nombreCategoria: subcategoryName[0].Category.name + " || " + subcategoryName[0].name
+					nombreCategoria: subcategoryName[0].Category.name + " >> " + subcategoryName[0].name
 				})
 			})
 			.catch(function (error) {

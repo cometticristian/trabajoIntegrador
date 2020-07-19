@@ -66,8 +66,6 @@ const controller = {
 	// Detail - Detail from one user
 	profile: (req, res, next) => {
 		let user = req.session.userFound
-		//console.log("----------------req.session.userFound.id--------------");
-		//console.log(req.session.userFound[0].id);
 		res.render('./users/profile', { user: user })
 	},
 	
@@ -135,9 +133,6 @@ const controller = {
 	// Update - Form to edit
 	edit: (req, res, next) => {
 		let user = req.session.userFound
-		console.log("*********user.id GET*********");
-		console.log(user[0].avatar);
-		
 		res.render("./users/edit-form", { user: user })
 	},
 	

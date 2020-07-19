@@ -32,47 +32,112 @@
 
           <div class="col-9 col-md-3 login-cart">
             <% if (userFound==undefined){%>
-              <a href="/users/login">Login <i class="fas fa-address-card"></i></a>
+            <a href="/users/login">Login <i class="fas fa-address-card"></i></a>
             <%}else{%>
-              <a href="/users/profile">Ver perfil <i class="fas fa-user"></i> <br> <%=userFound[0].firstName + ' ' + userFound[0].lastName%> </a>
+            <a href="/users/profile">Ver perfil <i class="fas fa-user"></i> <br>
+              <%=userFound[0].firstName + ' ' + userFound[0].lastName%> </a>
             <%}%>
-            <a class="cart" href="/cart">Carrito <i class="fas fa-shopping-cart"></i></a>
-          
-          </div>
-        </div>
-        
-        <nav class="row">
-          <div class="col-md-9 menu-wrapper">
-            
+                  <a class="cart" href="/cart">Carrito <i class="fas fa-shopping-cart"></i></a>
+                  
+                </div>
+              </div>
+              
+              <nav class="row">
+                <div class="col-md-9 menu-wrapper">
+                  
+                  <div class="main-navbar">
+                    <a href="/products">CATÁLOGO</a>
+                  </div>
+                  
+                  <div class="main-navbar">
+                    <a href="/products/category/1">COCINA</a>
+                    <ul class="generico">
+                      <li><a href="/products/subCategory/1">CACEROLAS</a></li>
+                      <li><a href="/products/subCategory/2">PAVAS</a></li>
+                      <li><a href="/products/subCategory/3">JARROS</a></li>
+                      <li><a href="/products/subCategory/4">FRASCOS</a></li>
+                      <li><a href="/products/subCategory/5">SARTENES</a></li>
+                      <li><a href="/products/subCategory/6">ACCESORIOS</a></li>
+                    </ul>
+                  </div>
+                  
+                  <div class="main-navbar">
+                    <a href="/products/category/2">BAÑO</a>
+                    <ul class="generico">
+                      <li><a href="/products/subCategory/7">CESTOS</a></li>
+                      <li><a href="/products/subCategory/8">CANASTOS</a></li>
+                      <li><a href="/products/subCategory/9">ALFOMBRAS</a></li>
+                      <li><a href="/products/subCategory/10">LIMAS</a></li>
+                      <li><a href="/products/subCategory/11">ESPONJAS</a></li>
+                    </ul>
+                  </div>
+                  
+                  <div class="main-navbar">
+                    <a href="/products/category/3">DECORACIÓN</a>
+                    <ul class="generico">
+                      <li><a href="/products/subCategory/12">RELOJES</a></li>
+                      <li><a href="/products/subCategory/13">ESPEJOS</a></li>
+                      <li><a href="/products/subCategory/14">CUADROS</a></li>
+                      <li><a href="/products/subCategory/15">VELAS</a></li>
+                      <li><a href="/products/subCategory/16">FAROLES</a></li>
+                    </ul>
+                  </div>
+                  
+                  <div class="main-navbar">
+                    <a href="/products/category/4">LIMPIEZA</a>
+                    <ul class="generico">
+                      <li><a href="/products/subCategory/17">MOPAS</a></li>
+                    </ul>
+                  </div>
+                  
+                  <div class="main-navbar">
+                    <a href="/products/category/5">PROMOCIONES</a>
+                  </div>
+                  <% if (userFound==undefined || userFound[0].userType != "admin"){%>
             <div class="main-navbar">
-              <a href="/products">CATÁLOGO</a>
             </div>
-            
+            <%}else{%>
             <div class="main-navbar">
-              <a href="/products/category/1">COCINA</a>
-              <ul class="cocina">
-                <li><a href="/products/subCategory/1">CACEROLAS</a></li>
-                <li><a href="/products/subCategory/2">PAVAS</a></li>
-                <li><a href="/products/subCategory/3">JARROS</a></li>
-                <li><a href="/products/subCategory/4">FRASCOS</a></li>
-                <li><a href="/products/subCategory/5">SARTENES</a></li>
-                <li><a href="/products/subCategory/6">ACCESORIOS</a></li>
-              </ul>
+              <a style="color:#f1b580;" href="/products/create" target="_blank">ADMINISTRADOR</a>
             </div>
-            
-            <div class="main-navbar">
-              <a href="/products/category/2">BAÑO</a>
-              <ul class="baño">
-                <li><a href="/products/subCategory/7">CESTOS</a></li>
-                <li><a href="/products/subCategory/8">CANASTOS</a></li>
-                <li><a href="/products/subCategory/9">ALFOMBRAS</a></li>
-                <li><a href="/products/subCategory/10">LIMAS</a></li>
-                <li><a href="/products/subCategory/11">ESPONJAS</a></li>
-              </ul>
-            </div>
-            
-            <div class="main-navbar">
-              <a href="/products/category/3">DECORACIÓN</a>
+            <%}%>
+                    </div>
+                  </nav>
+                  
+                  <nav class="mobile-navbar">
+                    <span><a href="/products/category/1">
+                      <h3>COCINA</h3>
+                    </a>
+                    <h3>>></h3>
+                  </span>
+                  
+                  <ul class="cocina">
+                    <li><a href="/products/subCategory/1">CACEROLAS</a></li>
+                    <li><a href="/products/subCategory/2">PAVAS</a></li>
+                    <li><a href="/products/subCategory/3">JARROS</a></li>
+                    <li><a href="/products/subCategory/4">FRASCOS</a></li>
+                    <li><a href="/products/subCategory/5">SARTENES</a></li>
+                    <li><a href="/products/subCategory/6">ACCESORIOS</a></li>
+                  </ul>
+                  
+                  <span><a href="/products/category/2">
+                    <h3>BAÑO</h3>
+                  </a>
+                  <h3>>></h3>
+                </span>
+                <ul class="baño">
+                  <li><a href="/products/subCategory/7">CESTOS</a></li>
+                  <li><a href="/products/subCategory/8">CANASTOS</a></li>
+                  <li><a href="/products/subCategory/9">ALFOMBRAS</a></li>
+                  <li><a href="/products/subCategory/10">LIMAS</a></li>
+                  <li><a href="/products/subCategory/11">ESPONJAS</a></li>
+                </ul>
+                
+                <span><a href="/products/category/3">
+                  <h3>DECORACIÓN</h3>
+                </a>
+                <h3>>></h3>
+              </span>
               <ul class="decoracion">
                 <li><a href="/products/subCategory/12">RELOJES</a></li>
                 <li><a href="/products/subCategory/13">ESPEJOS</a></li>
@@ -80,89 +145,36 @@
                 <li><a href="/products/subCategory/15">VELAS</a></li>
                 <li><a href="/products/subCategory/16">FAROLES</a></li>
               </ul>
-            </div>
+              
+              <span><a href="/products/category/4">
+                <h3>LIMPIEZA</h3>
+              </a>
+              <h3>>></h3>
+            </span>
+            <ul class="limpieza">
+              <li><a href="/products/subCategory/17">MOPAS</a></li>
+            </ul>
             
-            <div class="main-navbar">
-              <a href="/products/category/4">LIMPIEZA</a>
-              <ul class="limpieza">
-                <li><a href="/products/subCategory/17">MOPAS</a></li>
-              </ul>
-            </div>
+            <span><a href="/products/category/promocion">
+              <h3>PROMOCIONES</h3>
+            </a>
+            <h3>>></h3>
+          </span>
+          
+          <% if (userFound==undefined || userFound[0].userType != "admin"){%>
+            <span>
+            </span>
+            <%}else{%>
+            <span><a style="color:#f1b580" href="/products/create" target="_blank">
+                <h3>ADMINISTRADOR</h3>
+              </a>
+              <h3 style="color:#f1b580">>></h3>
+            </span>
+            <%}%>
             
-            <div class="main-navbar">
-              <a href="/products/category/5">PROMOCIONES</a>
-            </div>
             
-            <div class="main-navbar">
-              <a style="color:#f1b580;" href="/products/create" target="_blank">ADMINISTRADOR</a>
-            </div>
+            
           </div>
-        </nav>
-        
-        <nav class="mobile-navbar">
-          <span><a href="/products/category/1">
-            <h3>COCINA</h3>
-          </a>
-          <h3>>></h3>
-        </span>
-        
-        <ul class="cocina">
-          <li><a href="/products/subCategory/1">CACEROLAS</a></li>
-          <li><a href="/products/subCategory/2">PAVAS</a></li>
-          <li><a href="/products/subCategory/3">JARROS</a></li>
-          <li><a href="/products/subCategory/4">FRASCOS</a></li>
-          <li><a href="/products/subCategory/5">SARTENES</a></li>
-          <li><a href="/products/subCategory/6">ACCESORIOS</a></li>
-        </ul>
-        
-        <span><a href="/products/category/2">
-          <h3>BAÑO</h3>
-        </a>
-        <h3>>></h3>
-      </span>
-      <ul class="baño">
-        <li><a href="/products/subCategory/7">CESTOS</a></li>
-        <li><a href="/products/subCategory/8">CANASTOS</a></li>
-        <li><a href="/products/subCategory/9">ALFOMBRAS</a></li>
-        <li><a href="/products/subCategory/10">LIMAS</a></li>
-        <li><a href="/products/subCategory/11">ESPONJAS</a></li>
-      </ul>
-      
-      <span><a href="/products/category/3">
-        <h3>DECORACIÓN</h3>
-      </a>
-      <h3>>></h3>
-    </span>
-    <ul class="decoracion">
-      <li><a href="/products/subCategory/12">RELOJES</a></li>
-      <li><a href="/products/subCategory/13">ESPEJOS</a></li>
-      <li><a href="/products/subCategory/14">CUADROS</a></li>
-      <li><a href="/products/subCategory/15">VELAS</a></li>
-      <li><a href="/products/subCategory/16">FAROLES</a></li>
-    </ul>
-    
-    <span><a href="/products/category/4">
-      <h3>LIMPIEZA</h3>
-    </a>
-    <h3>>></h3>
-  </span>
-  <ul class="limpieza">
-    <li><a href="/products/subCategory/17">MOPAS</a></li>
-  </ul>
-  
-  <span><a href="/products/category/promocion">
-    <h3>PROMOCIONES</h3>
-  </a>
-  <h3>>></h3>
-</span>
-<span><a style="color:#f1b580" href="/products/create"target="_blank">
-  <h3>ADMINISTRADOR</h3>
-</a>
-<h3 style="color:#f1b580">>></h3>
-</span>
-
-
-</div>
-</div>
-</div>
-</header>
+        </div>
+      </div>
+    </header>
