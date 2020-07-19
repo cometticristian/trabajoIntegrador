@@ -16,14 +16,22 @@ const fs = require('fs');
 
 /************ MULTER STORAGE ************/
 var storage = multer.diskStorage({
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+    },
     destination: (req, file, cb) => {
         cb(null, 'public/images/users')
     },
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
-    }
+    
+    
 })
-var upload = multer({ storage: storage });
+var upload = multer({ storage: storage, fileFilter: function (req, file, cb) {
+    //console.log(!file.originalname.match(/\.(jpg|jpeg|png|gif)$/));
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+        return cb(new Error('Only image files are allowed!'));
+    }
+    cb(null, true);
+  }, });
 
 /************ LOGIN USER ************/
 /* GET - Form to login */
@@ -50,16 +58,16 @@ router.get('/register/', userMiddlewares.gest, usersController.register);
 db.User.findAll()
     .then((users) => {
         router.post('/register/', upload.any(), [
-            check('firstName').isLength({ min: 2 }).withMessage('El nombre debe tener mas de 2 caracteres'),
-            check('lastName').isLength({ min: 2 }).withMessage('El apellido debe tener mas de 2 caracteres'),
+            check('firstName').isLength({ min: 2 }).withMessage('El nombre debe tener al menos 2 caracteres'),
+            check('lastName').isLength({ min: 2 }).withMessage('El apellido debe tener al menos 2 caracteres'),
             check('email').isEmail().withMessage('Debe ingresar un Email valido'),
             check('phone').isInt().withMessage('Debe ingresar solo numeros'),
-            check('phone').isLength({ min: 8, max: 10 }).withMessage('Máximo 10 dígitos y debe incluir el código de area'),
-            check('password').isLength({ min: 6 }).withMessage('La contraseña debe tener mas de 6 caracteres'),
+            check('phone').isLength({ min: 8, max: 10 }).withMessage('El teléfono debe tener 10 dígitos e incluir el código de area'),
+            check('password').isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres'),
             body('email').custom(function (value) {
                 let contador = 0;
                 for (let i = 0; i < users.length; i++) {
-                    console.log(value);
+                    //console.log(value);
                     if (users[i].email == value) {
                         contador++;
                     }
@@ -78,7 +86,25 @@ db.User.findAll()
                     return false
                 }
                 return true;
-            }).withMessage('Las contraseñas no coinciden')
+            }).withMessage('Las contraseñas no coinciden'),
+
+            body('avatar').custom(function (value, { req }) {
+                let ext
+                if(req.files.length==0){
+                    return true
+                }else{
+                    ext = ""+path.extname(req.files[0].filename).toLowerCase();
+                }
+                //console.log(ext);
+                if (
+                    ext == ".jpg" ||
+                    ext == ".jpeg" ||
+                    ext == ".png" ||
+                    ext == ".gif"){
+                        return true;
+                    }
+                    return false;
+            }).withMessage('Solo archivos JPG, JPEG, PNG o GIF')
         ], usersController.store);
     })
     .catch((errors) => {
@@ -92,37 +118,57 @@ router.get('/edit', userMiddlewares.auth, usersController.edit);
 
 /* PUT - Update in Data Base */
 
-    db.User.findAll()
+db.User.findAll()
     .then((users) => {
-    router.put('/edit', upload.any(), [
-    check('firstName').isLength({ min: 2 }).withMessage('El nombre debe tener mas de 2 caracteres'),
-    check('lastName').isLength({ min: 2 }).withMessage('El apellido debe tener mas de 2 caracteres'),
-    check('email').isEmail().withMessage('Debe ingresar un Email valido'),
-    check('phone').isInt().withMessage('Debe ingresar solo numeros'),
-    check('phone').isLength({ min: 8, max: 10 }).withMessage('Máximo 10 dígitos y debe incluir el código de area'),
-    check('password').isLength({ min: 6 }).withMessage('La contraseña debe tener mas de 6 caracteres'),
-       body('email').custom(function (value, { req }) {
-        let contador = 0;
-        for (let i = 0; i < users.length; i++) {
-            if (users[i].email == value && req.session.userFound[0].email != value) {
-                contador++;
-            }
-        }
-        if (contador > 0) {
-            return false;
-        } else {
-            return true;
-        }
-    }).withMessage('Usuario existente'),
-    body('passwordConfirm').custom(function (value, { req }) {
-        let pass = req.body.password;
-        //console.log(pass);
-        if (pass != value) {
-            return false
-        }
-        return true;
-    }).withMessage('Las contraseñas no coinciden')
-], usersController.update);
+        router.put('/edit', upload.any(), [
+            check('firstName').isLength({ min: 2 }).withMessage('El nombre debe tener al menos 2 caracteres'),
+            check('lastName').isLength({ min: 2 }).withMessage('El apellido debe tener al menos 2 caracteres'),
+            check('email').isEmail().withMessage('Debe ingresar un Email valido'),
+            check('phone').isInt().withMessage('Debe ingresar solo numeros'),
+            check('phone').isLength({ min: 8, max: 10 }).withMessage('El teléfono debe tener 10 dígitos e incluir el código de area'),
+            check('password').isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres'),
+            body('email').custom(function (value, { req }) {
+                let contador = 0;
+                for (let i = 0; i < users.length; i++) {
+                    if (users[i].email == value && req.session.userFound[0].email != value) {
+                        contador++;
+                    }
+                }
+                if (contador > 0) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }).withMessage('Usuario existente'),
+            
+            body('passwordConfirm').custom(function (value, { req }) {
+                let pass = req.body.password;
+                //console.log(pass);
+                if (pass != value) {
+                    return false
+                }
+                return true;
+            }).withMessage('Las contraseñas no coinciden'),
+
+            body('avatar').custom(function (value, { req }) {
+                let ext
+                if(req.files.length==0){
+                    return true
+                }else{
+                    ext = ""+path.extname(req.files[0].filename).toLowerCase();
+                }
+                                
+                //console.log(ext);
+                if (
+                    ext == ".jpg" ||
+                    ext == ".jpeg" ||
+                    ext == ".png" ||
+                    ext == ".gif"){
+                        return true;
+                    }
+                    return false;
+            }).withMessage('Solo archivos JPG, JPEG, PNG o GIF')
+        ], usersController.update);
     })
     .catch((errors) => {
         console.log(errors);

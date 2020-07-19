@@ -20,6 +20,7 @@
          </div>
          
          <% selected.forEach (function(select){ %>
+            <%if(select.state!=0){%>
             <div class="col-6 col-sm-4 col-lg-3">
                <section class="product-box">
                   <a href="/products/detail/<%=select.id%>">
@@ -31,10 +32,11 @@
                         <span><%=select.discount%>% OFF</span>
                         <p><%=select.description%></p>
                      </article>
-                     <a href="/cart/add/<%=select.id%>"><i class="fas fa-cart-plus"></i></a>
+                     <a href="/cart/add/<%=select.id%>?item=1"><i class="fas fa-cart-plus"></i></a>
                   </a>
                </section>
             </div>
+            <%}%>
          <%})%>
             
             <!-- /Productos aleatorios -->
@@ -44,6 +46,7 @@
             </div>
             
             <% news.forEach (function(nuevo){ %>
+               <%if(nuevo.state!=0){%>
                <div class="col-6 col-sm-4 col-lg-3">
                   <section class="product-box">
                      <a href="/products/detail/<%=nuevo.id%>">
@@ -55,12 +58,12 @@
                            <span><%=nuevo.discount%>% OFF</span>
                            <p><%=nuevo.description%></p>
                         </article>
-                        <a href="/cart/add/<%=nuevo.id%>"><i class="fas fa-cart-plus"></i></a>
+                        <a href="/cart/add/<%=nuevo.id%>?item=1"><i class="fas fa-cart-plus"></i></a>
                      </a>
                   </section>
                </div>
-               
-               <%})%>
+               <%}%>
+            <%})%>
             </div>
          </div>
          <!-- /Nuevos Productos -->

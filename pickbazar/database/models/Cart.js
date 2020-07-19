@@ -22,11 +22,11 @@ module.exports = function (sequelize, dataTypes) {
         },
         created_at: {
             type: dataTypes.DATE,
-            allowNull: false
+            allowNull: true
         },
         updated_at: {
             type: dataTypes.DATE,
-            allowNull: false
+            allowNull: true
         }
     }
     
@@ -48,18 +48,18 @@ module.exports = function (sequelize, dataTypes) {
         });
 
         Cart.belongsToMany(models.Product,{
-            as: "product",
+            as: "Products",
             through: "cart_product",
             foreignKey: "cart_id",
             otherKey: "product_id",
             timestamps: false
         })
-         //agregue esto para q traiga los datos de la relacion
-         Cart.hasMany(models.Cart_product,{
+        
+        //agregue esto para q traiga los datos de la relacion
+       /*  Cart.hasMany(models.Cart_product,{
             as: "cart_item",
             foreignKey: "id"
-        })
-
+        })*/
     }
     
     return Cart;

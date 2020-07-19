@@ -29,7 +29,6 @@ const controller = {
                 .then((cart) => {
                     if (cart) {
                         cartId = cart.id;
-    
                         db.Product.findByPk(productId)
                             .then((product) => {
                                 db.Cart_product.create({
@@ -41,7 +40,9 @@ const controller = {
                                     product_id: productId,
                                 })
                             })
-    
+                            .catch((error) => {
+                                console.log(error);
+                            })
                     } else {
                         db.Cart.create({
                             user_id: req.session.userFound[0].id,
@@ -50,7 +51,6 @@ const controller = {
                         })
                             .then((cartCreated) => {
                                 cartId = cartCreated.id;
-    
                                 db.Product.findByPk(productId)
                                     .then((product) => {
                                         db.Cart_product.create({
@@ -62,16 +62,59 @@ const controller = {
                                             product_id: productId,
                                         })
                                     })
+                                    .catch((error) => {
+                                        console.log(error);
+                                    })
+                            })
+                            .catch((error) => {
+                                console.log(error);
                             })
                     }
                 })
+                .catch((error) => {
+                    console.log(error);
+                })
                 .then(() => {
                     res.redirect('/products');
+                })
+                .catch((error) => {
+                    console.log(error);
                 })
         }
 
 
     },
+
+    show: function (req, res, next) {
+        if (req.session.userFound == undefined) {
+            res.redirect('/users/login');
+        } else {
+
+            db.Cart.findOne({
+                where: {
+                    user_id: req.session.userFound[0].id,
+                    state: 1
+                }
+            })
+                .then((cart) => {
+                    let cartId = cart.id;
+                    console.log(cartId);
+                    db.Cart_product.findAll({
+                        where: {
+                            cart_id: cartId,
+                        }
+                    })
+                    .then((cartProducts) => {
+                        console.log(cartProducts);
+                    })
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+
+            res.render('cart');
+        }
+    }
 }
 
 module.exports = controller;
