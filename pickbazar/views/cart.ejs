@@ -80,39 +80,56 @@
         </thead>
         <tbody>
           <% 
+          if (empty!=0)
+          {
           var totalDiscount,subtotal,taxes,total=0;
-          for(let i=0; i<cart.length; i++){ %>
+          var idCart=product[0].cart_id;
+          for(let i=0; i<product.length; i++){ %>
           <tr>
             <td scope="row"><%=i+1%></td>
             <td width="55"> <figure>
-              <img src="/images/products/<%=cart[i].image%>" style="width:50px;" alt="imagen de <%=cart[i].name%>">
+              <img src="/images/products/<%=product[i].image%>" style="width:50px;" alt="imagen de <%=product[i].name%>">
             </figure></td>
-            <td><%=cart[i].name%></td>
-            <% if(cart[i].discount!="0") {%>
-            <td>$<%=cart[i].price%> <span class="cart-discount"><%=cart[i].discount%>% OFF</span></td>
+            <td><%=product[i].name%></td>
+            <% if(product[i].discount!="0") {%>
+            <td>$<%=product[i].price%> <span class="cart-discount"><%=product[i].discount%>% OFF</span></td>
             <% 
             //Da NaN xq el JSON devuelve los numeros como strings, pero desde la BD devolvera integer, lo ajusto luego
-            totalDiscount=totalDiscount+(cart[i].price*cart[i].units)*cart[i].discount/100;
-            subtotal=subtotal+((cart[i].price*cart[i].units)-((cart[i].price*cart[i].units)*cart[i].discount/100));
+            totalDiscount=totalDiscount+(product[i].price*product[i].units)*product[i].discount/100;
+            subtotal=subtotal+((product[i].price*product[i].units)-((product[i].price*product[i].units)*product[i].discount/100));
             %> 
 
-            <td>$<%=(cart[i].price*cart[i].units)*cart[i].discount/100%></td>
+            <td>$<%=(product[i].price*product[i].units)*product[i].discount/100%></td>
             <% } else {
-            subtotal=subtotal+((cart[i].price*cart[i].units)-((cart[i].price*cart[i].units)*cart[i].discount/100));
+            subtotal=subtotal+((product[i].price*product[i].units)-((product[i].price*product[i].units)*product[i].discount/100));
             %>
-              <td>$<%=cart[i].price%></td>
-              <td>$<%=(cart[i].price*cart[i].units)*cart[i].discount/100%></td>
+              <td>$<%=product[i].price%></td>
+              <td>$<%=(product[i].price*product[i].units)*product[i].discount/100%></td>
             <% }%>
                      
-            <td><span><a href="/cart/minus/<%=cart[i].id%>"><i class='fas fa-minus'></i></a></span>&nbsp;<span class="orange" style="height: 30px;padding:3px"><%=cart[i].units%></span>&nbsp;<span><a href="/cart/plus/<%=cart[i].id%>"><i class='fas fa-plus'></i></a></span></td>
-            <td>$<%=((cart[i].price*cart[i].units)-((cart[i].price*cart[i].units)*cart[i].discount/100))%></td>
-            <td class="td-accion"><a href="/cart/remove/<%=cart[i].id%>"><i class='fas fa-trash-alt'></i></a></td>
+            <td><span><a href="/cart/minus/<%=product[i].id%>"><i class='fas fa-minus'></i></a></span>&nbsp;<span class="orange" style="height: 30px;padding:3px"><%=product[i].units%></span>&nbsp;<span><a href="/cart/plus/<%=product[i].id%>"><i class='fas fa-plus'></i></a></span></td>
+            <td>$<%=((product[i].price*product[i].units)-((product[i].price*product[i].units)*product[i].discount/100))%></td>
+            <td class="td-accion"><a href="/cart/remove/<%=product[i].id%>"><i class='fas fa-trash-alt'></i></a></td>
           </tr>
           <%}%>
          <%
          taxes=Number(subtotal)*21/100;
          total=subtotal+taxes;
+        }
+        else
+        {
+          //carrito vacio
+        
          %>
+         <tr align="left">
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <% } %>
         </tbody>
       </table>
 
@@ -139,9 +156,11 @@
     <td><h4>Total del Pedido</h4></td>
     <td><h4>$<%=total%></h4></td>
   </tr>
+  <%if (empty==0) {%>
   <tr align="center">
-    <td colspan="2"><button class="btn-orange">CONFIRMAR SU PEDIDO</button></td>
+    <td colspan="2"><button class="btn-orange" onclick="location.href='/cart/confirm/<%=idCart%>'">CONFIRMAR SU PEDIDO<%=idCart%></button></td>
   </tr>
+  <%}%>
 </table></div>
 
       </div>
