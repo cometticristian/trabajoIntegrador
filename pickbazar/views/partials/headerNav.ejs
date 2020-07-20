@@ -49,14 +49,18 @@
                   </div>
                   <% cat.forEach(function(category){ %>
             <div class="main-navbar">
-              <a href="/products/category/<%=category.id%>"><%=category.name.toUpperCase()%></a>
-              <ul class="generico">
-                <% subCat.forEach(function(subCategory){ %>
-                <%if(subCategory.category_id==category.id){%>
-                <li><a href="/products/subCategory/<%=subCategory.id%>"><%=subCategory.name.toUpperCase()%></a></li>
-                <%}%>
-                    <%})%>
-              </ul>
+              <div class="ulSubcategory">
+              <a class="categoryTitle" href="/products/category/<%=category.id%>"><%=category.name.toUpperCase()%></a>
+              
+                <ul class="generico">
+                  <% subCat.forEach(function(subCategory){ %>
+                  <%if(subCategory.category_id==category.id){%>
+                  <li><a href="/products/subCategory/<%=subCategory.id%>"><%=subCategory.name.toUpperCase()%></a></li>
+                  <%}%>
+                      <%})%>
+                </ul>
+              </div>
+              
             </div>
             <%})%>
             <div class="main-navbar">
@@ -115,6 +119,7 @@
       </div>
     </div>
   </div>
+  <script src="/javascripts/navBar.js"></script>
 </header>
 
 <!-- MAIN-NAVBAR
