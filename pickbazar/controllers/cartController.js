@@ -102,7 +102,29 @@ const controller = {
             })
                 .then((cart) => {
                     console.log(cart);
-                    if (cart==null)
+                    if (cart!=[ ])
+                    {
+                        
+                        let cartId = cart.id;
+                        console.log("cart q no fue x null " + cart);
+                        sequelize.query("SELECT p.id, p.name, cp.cart_id, cp.price, cp.discount, cp.subtotal, cp.units, c.total, c.state, i.name as image, c.updated_at FROM carts as c LEFT OUTER JOIN (cart_product as cp INNER JOIN products as p ON p.id = cp.product_id) ON c.id = cp.cart_id INNER JOIN images as i ON i.product_id=p.id WHERE i.main=1 and c.id="+cartId)
+                        
+                        .then((cartProducts) => {
+                            if (cartProducts[0]!="")
+                            {
+                            console.log("productos carrito " + cartProducts[0]);
+                            console.log(cartProducts[0]);
+                            let cart=cartProducts[0];
+                            res.render ('cart', {product:cart,empty:0});
+                            }
+                            else
+                            {
+                            console.log("no hay items, solo un carro vacio");   
+                            res.render ('cart', {empty:1});    
+                            }
+                        })
+                    }
+                    else
                     {
                         console.log("entro por NULL");
                         db.Cart.create({
@@ -114,20 +136,7 @@ const controller = {
                         res.render ('cart', {product:cart,empty:1});
                         })
                     }
-                    else
-                    {
-                        let cartId = cart.id;
                     
-                        sequelize.query("SELECT p.id, p.name, cp.cart_id, cp.price, cp.discount, cp.subtotal, cp.units, c.total, c.state, i.name as image, c.updated_at FROM carts as c LEFT OUTER JOIN (cart_product as cp INNER JOIN products as p ON p.id = cp.product_id) ON c.id = cp.cart_id INNER JOIN images as i ON i.product_id=p.id WHERE i.main=1 and c.id="+cartId)
-                        
-                        .then((cartProducts) => {
-                            //console.log("cantidad productos " + cartProducts[0].textRow.lenght);
-                            console.log("productos carrito " + cartProducts);
-                            console.log(cartProducts[0]);
-                            let cart=cartProducts[0];
-                            res.render ('cart', {product:cart,empty:0});
-                        })
-                    }
                 })
                 .catch((error) => {
                     console.log(error);
@@ -159,7 +168,7 @@ const controller = {
                     }
                     })
                  .then((cartProducts) => {
-                     
+                    
                     res.redirect('/cart');
                  })
              })

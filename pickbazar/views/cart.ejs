@@ -96,7 +96,8 @@
             <td>$<%=product[i].price%> <span class="cart-discount"><%=product[i].discount%>% OFF</span></td>
             <% 
             //Da NaN xq el JSON devuelve los numeros como strings, pero desde la BD devolvera integer, lo ajusto luego
-            totalDiscount=totalDiscount+(product[i].price*product[i].units)*product[i].discount/100;
+            totalDiscount=Number(totalDiscount)+(Number(product[i].price)*Number(product[i].units))*Number(product[i].discount)/100;
+            console.log("discountt "+totalDiscount);
             subtotal=subtotal+((product[i].price*product[i].units)-((product[i].price*product[i].units)*product[i].discount/100));
             %> 
 
@@ -115,7 +116,10 @@
           <%}%>
          <%
          taxes=Number(subtotal)*21/100;
+         console.log("IMPUestos: " + taxes);
+         console.log("subtotal: " + subtotal);
          total=subtotal+taxes;
+         console.log("total: " + total);
         }
         else
         {
