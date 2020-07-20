@@ -488,9 +488,12 @@ font-size: 2em;
   .baño,
   .decoracion,
   .limpieza*/
+  .ulSubcategory {
+    display: block;
+  }
   .generico{
     -display: inline-block;
-    display: block;
+    display: none;
     background-color: rgba(245, 130, 32, 0.7);
     border-left: solid 3px #f58220;
     padding: 0 5px 0 5px;
