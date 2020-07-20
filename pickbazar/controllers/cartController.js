@@ -102,7 +102,7 @@ const controller = {
             })
                 .then((cart) => {
                     console.log(cart);
-                    if (cart!=[ ])
+                    if (cart)
                     {
                         
                         let cartId = cart.id;
