@@ -139,7 +139,6 @@ const controller = {
 		let errors = validationResult(req);
 		let user = req.session.userFound;
 		if (errors.isEmpty()) {		
-			
 			if (req.files == '') {
 				db.User.update({
 					//id: user[0].id,
