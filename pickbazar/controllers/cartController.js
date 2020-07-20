@@ -110,9 +110,11 @@ const controller = {
 
                             .then((cartProducts) => {
                                 if (cartProducts[0] != "") {
-                                    console.log("productos carrito " + cartProducts[0]);
+                                    console.log("productos carrito");
                                     console.log(cartProducts[0]);
+                                    console.log(cartProducts[0].length);
                                     let cart = cartProducts[0];
+                                    res.locals.cartItems = cartProducts[0].length;
                                     res.render('cart', { product: cart, empty: 0 });
                                 }
                                 else {
