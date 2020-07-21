@@ -163,6 +163,7 @@ font-size: 2em;
 }
 
 .mobile-navbar{
+  display: none;
   position: absolute;
   top: 30px;
   right: 15px;
@@ -491,8 +492,8 @@ font-size: 2em;
   .ulSubcategory {
     display: block;
   }
-  .generico{
-    -display: inline-block;
+  .subcategory{
+    /*display: inline-block;*/
     display: none;
     background-color: rgba(245, 130, 32, 0.7);
     border-left: solid 3px #f58220;
