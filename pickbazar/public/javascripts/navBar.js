@@ -5,15 +5,17 @@ window.addEventListener('load', () => {
     let aCategory = document.querySelectorAll('.categoryTitle');
     let toggle = document.querySelector('.btn-toggle-navbar');
     let mobile = document.querySelector('.mobile-navbar');
-
+console.log(toggle.innerHTML);
     let show = false
     toggle.addEventListener('click', () => {
         if (show == false) {
             show = true
             mobile.style.display = 'block';
+            toggle.innerHTML = '<i class="fa fa-chevron-up"></i>'
         } else if (show == true) {
             show = false
             mobile.style.display = 'none';
+            toggle.innerHTML = '<i class="fa fa-chevron-down"></i>'
         }
     })
 
