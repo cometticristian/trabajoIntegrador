@@ -105,11 +105,16 @@ const controller = {
                     if (cart) {
 
                         let cartId = cart.id;
-                        console.log("cart q no fue x null " + cart);
                         sequelize.query("SELECT p.id, p.name, cp.cart_id, cp.price, cp.discount, cp.subtotal, cp.units, c.total, c.state, i.name as image, c.updated_at FROM carts as c LEFT OUTER JOIN (cart_product as cp INNER JOIN products as p ON p.id = cp.product_id) ON c.id = cp.cart_id INNER JOIN images as i ON i.product_id=p.id WHERE i.main=1 and c.id=" + cartId)
-
+                       // db.Cart_product.findOne({
+                       //     where: {
+                       //         cart_id: cartId
+                                
+                       //     }
+                       // })                      })
                             .then((cartProducts) => {
                                 if (cartProducts[0] != "") {
+                                    //cantidad=cartProducts[0].length;
                                     console.log("productos carrito");
                                     console.log(cartProducts[0]);
                                     console.log(cartProducts[0].length);

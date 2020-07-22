@@ -26,12 +26,17 @@
             <th scope="col" colspan="2"><h3>SUBTOTAL</h3></th>
           </tr>
         </thead>
+        <%
+        var totalDiscount=0;
+        var subtotal=0;
+        var taxes=0;
+        var total=0;
+        %>
         <tbody>
           <% 
           console.log("empty es: "+empty);
           if (empty==0)
           {
-          var totalDiscount,subtotal,taxes,total=0;
           var idCart=product[0].cart_id;
           for(let i=0; i<product.length; i++){ %>
           <tr>
@@ -40,18 +45,17 @@
               <img src="/images/products/<%=product[i].image%>" style="width:50px;" alt="imagen de <%=product[i].name%>">
             </figure></td>
             <td><%=product[i].name%></td>
-            <% if(product[i].discount!="0") {%>
+            <% if(product[i].discount!=0) {%>
             <td>$<%=product[i].price%> <span class="cart-discount"><%=product[i].discount%>% OFF</span></td>
             <% 
-            //Da NaN xq el JSON devuelve los numeros como strings, pero desde la BD devolvera integer, lo ajusto luego
-            totalDiscount=Number(totalDiscount)+(Number(product[i].price)*Number(product[i].units))*Number(product[i].discount)/100;
-            console.log("discountt "+totalDiscount);
+            totalDiscount=((Number(product[i].price) * product[i].units * product[i].discount)/100)+totalDiscount;
             subtotal=subtotal+((product[i].price*product[i].units)-((product[i].price*product[i].units)*product[i].discount/100));
             %> 
 
             <td>$<%=(product[i].price*product[i].units)*product[i].discount/100%></td>
             <% } else {
             subtotal=subtotal+((product[i].price*product[i].units)-((product[i].price*product[i].units)*product[i].discount/100));
+            console.log("subtotal del else: " + subtotal);
             %>
               <td>$<%=product[i].price%></td>
               <td>$<%=(product[i].price*product[i].units)*product[i].discount/100%></td>
@@ -64,10 +68,7 @@
           <%}%>
          <%
          taxes=Number(subtotal)*21/100;
-         console.log("IMPUestos: " + taxes);
-         console.log("subtotal: " + subtotal);
          total=subtotal+taxes;
-         console.log("total: " + total);
         }
         else
         {
@@ -93,7 +94,7 @@
       <td>$<%=subtotal%></td>
   </tr>
   <tr>
-    <td>Impuestos</td>
+    <td>Impuestos 21%</td>
     <td>$<%=taxes%></td>
   </tr>
   <tr>
