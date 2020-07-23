@@ -12,10 +12,12 @@ console.log(toggle.innerHTML);
             show = true
             mobile.style.display = 'block';
             toggle.innerHTML = '<i class="fa fa-chevron-up"></i>'
+            //toggle.style.transform = 'rotate(180deg)';
         } else if (show == true) {
             show = false
             mobile.style.display = 'none';
             toggle.innerHTML = '<i class="fa fa-chevron-down"></i>'
+            //toggle.style.transform = 'rotate(180deg)';
         }
     })
 

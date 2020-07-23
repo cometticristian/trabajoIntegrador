@@ -6,7 +6,6 @@
       </div>
     </div>
   </div>
-
   <div class="container">
     <div class="row" style="border-bottom: solid 1px #999;padding-bottom: 15px;">
 
@@ -37,7 +36,17 @@
             <%}else{%>
             <a href="/users/profile">Ver perfil <i class="fas fa-user"></i> <br>
               <%=userFound[0].firstName + ' ' + userFound[0].lastName%> </a>
-              <a class="cart" href="/cart">Carrito <i class="fas fa-shopping-cart"></i></a>
+              <div style="display: flex; justify-content: space-around;">
+              <a class="cart" href="/cart"><i class="fas fa-shopping-cart"></i> </a>
+              <div class="items" style="text-align: center;
+              line-height: 2;
+              color: white;
+              background-color: #f58220;
+              border-radius: 50%;
+              width: 25px;
+              height: 21px;
+              margin: 5px 0 0 5px;"><%=cartItems%></div>
+              </div>  
             <%}%>
           </div>
         </div>
