@@ -41,6 +41,7 @@ const controller = {
 				//PRENDE SESION PARA EL USUARION LOGEADO
 				//GUARDA AL USUARIO LOGUEADO PARA USARLOS EN LAS VISTAS
 			} else {
+				console.log(userFound);
 				req.session.userFound = userFound;
 				//res.locals.userFound = userFound[0];
 				
@@ -102,7 +103,15 @@ const controller = {
 					state: 1,
 					avatar: 'default.png',
 					country: req.body.country
-				});
+				})
+				.then((newUser) => {
+					let userFound = [newUser]
+					req.session.userFound = userFound;
+					res.redirect("/");
+				})
+				.catch((errors) => {
+					console.log(errors);
+				})
 			} else {
 				//newUser = {
 				//id: userIdMaker + 1,
@@ -118,10 +127,16 @@ const controller = {
 					state: 1,
 					avatar: req.files[0].filename,
 					country: req.body.country
-				});
+				})
+				.then((newUser) => {
+					let userFound = [newUser]
+					req.session.userFound = userFound;
+					res.redirect("/");
+				})
+				.catch((errors) => {
+					console.log(errors);
+				})
 			}
-			
-			res.redirect('login');
 		} else {
 			res.render('users/register', {errors: errors.errors, datos: req.body});
 		}

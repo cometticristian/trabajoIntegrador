@@ -40,6 +40,7 @@
 
             <%} else {%>  
             <a href="/users/profile">Ver perfil <i class="fas fa-user"></i> <br>
+              <% console.log(userFound) %>
               <%=userFound[0].firstName + ' ' + userFound[0].lastName%> </a>
               <div class="login-cart" >
               <a class="cart" href="/cart"><i class="fas fa-shopping-cart"></i> </a>
