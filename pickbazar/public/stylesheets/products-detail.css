@@ -89,6 +89,9 @@
 .small-img-box {
     display: none;
 }
+.selected {
+    border: 3px #f58220 solid;
+}
 .send {
     border-radius: 5px;
     background-color: #f58220;
