@@ -71,7 +71,7 @@ db.User.findAll()
                 let contador = 0;
                 for (let i = 0; i < users.length; i++) {
                     //console.log(value);
-                    if (users[i].email == value) {
+                    if (users[i].email == value && users[i].state == 1) {
                         contador++;
                     }
                 }

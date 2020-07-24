@@ -21,7 +21,7 @@
                      <p style="color: crimson"><%=errors[0].msg%></p>
                      <%}%>
                      
-                     <form action="/users/login" method="POST">
+                     <form class="login" action="/users/login" method="POST">
                         <label for="email">
                            <h3>Email:</h3>
                         </label>
@@ -30,7 +30,8 @@
                         <label for="password">
                            <h3>Contraseña:</h3>
                         </label>
-                        <input class="input" type="password" id="password" name="password">
+                        <input class="input password" type="password" id="password" name="password">
+                        <span class="password" style="color: red;font-size: 12px;"></span>
                         
                            <label class="remember" for="remember">
                               <h3>Recordame</h3>
@@ -53,11 +54,9 @@
          </div>
       </div>
       
-      
-      
-      
-      
       <%- include('../partials/footer') %>
+      <script src="/javascripts/validateLogin.js"></script>
+
    </body>
    
    </html>

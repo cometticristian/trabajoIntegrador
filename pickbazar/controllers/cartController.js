@@ -78,8 +78,8 @@ const controller = {
                     console.log(error);
                 })
                 .then(() => {
-                    //res.redirect('/products');
-                    res.redirect('/cart');
+                    res.redirect('/products');
+                    //res.redirect('/cart');
                 })
                 .catch((error) => {
                     console.log(error);
