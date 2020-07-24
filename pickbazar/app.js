@@ -57,30 +57,10 @@ app.use(function (req, res, next) {
   })
   
   app.use(function (req, res, next) {
-    /*if (req.session.userFound == undefined) {
-      next()
-    } else { 
-    db.Cart.findOne({
-        where: {
-          user_id: req.session.userFound[0].id,
-          state: 1
-        }
-      })
-      .then((cart) => {
-          let cartId = cart.id;
-          sequelize.query("SELECT p.id, p.name, cp.cart_id, cp.price, cp.discount, cp.subtotal, cp.units, c.total, c.state, i.name as image, c.updated_at FROM carts as c LEFT OUTER JOIN (cart_product as cp INNER JOIN products as p ON p.id = cp.product_id) ON c.id = cp.cart_id INNER JOIN images as i ON i.product_id=p.id WHERE i.main=1 and c.id=" + cartId)
-          
-          .then((cartProducts) => {
-              res.locals.cartItems = cartProducts[0].length;
-              next()
-            })
-                
-      })
-    }*/
-    
-
+  
     if (req.session.userFound == undefined) {
       next()
+    
     } else {
       db.Cart.findOne({
         where: {
@@ -89,7 +69,12 @@ app.use(function (req, res, next) {
         }
       })
       .then((cart) => {
-        if (cart) {
+        if (!cart) {
+          res.locals.cartItems = 0
+          next()
+          
+        }
+        else {
           let cartId = cart.id;
           sequelize.query("SELECT p.id, p.name, cp.cart_id, cp.price, cp.discount, cp.subtotal, cp.units, c.total, c.state, i.name as image, c.updated_at FROM carts as c LEFT OUTER JOIN (cart_product as cp INNER JOIN products as p ON p.id = cp.product_id) ON c.id = cp.cart_id INNER JOIN images as i ON i.product_id=p.id WHERE i.main=1 and c.id=" + cartId)
           
@@ -97,9 +82,6 @@ app.use(function (req, res, next) {
               res.locals.cartItems = cartProducts[0].length;
               next()
             })
-        }
-        else {
-          next()
         }        
       })
     }

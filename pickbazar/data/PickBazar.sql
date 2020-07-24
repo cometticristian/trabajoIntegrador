@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 11, 2020 at 07:44 PM
+-- Generation Time: Jul 24, 2020 at 08:37 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -269,6 +269,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `userType` varchar(45) COLLATE utf8_bin NOT NULL,
   `state` tinyint(1) UNSIGNED NOT NULL,
   `avatar` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `country` varchar(500) COLLATE utf8_bin NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
@@ -282,9 +283,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `user`, `phone`, `address`, `userType`, `state`, `avatar`, `created_at`, `updated_at`) VALUES
-(1, 'David', 'Messina', 'davidmessina9@gmail.com', '$2b$10$a7dORGZNd0RYscUci59mQ.LdxxpmhtEE5SX8b66HnRNB/FCWqcoci', '', '1132146241', '', 'admin', 1, 'avatar-1593978857012.jpg', '2020-07-05 19:54:17', '2020-07-05 19:54:17'),
-(2, 'David', 'Messina', 'davidmessina@speedy.com.ar', '$2b$10$kk/Fmfnj2kzYtGOZ83FfmeCYNHjHDqN9iOx50391d5J6x3v.jI1u.', '', '1132146241', '', 'client', 1, 'avatar-1594076314868.jpg', '2020-07-05 20:06:50', '2020-07-05 20:06:50');
+INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `user`, `phone`, `address`, `userType`, `state`, `avatar`, `country`, `created_at`, `updated_at`) VALUES
+(1, 'David', 'Messina', 'davidmessina9@gmail.com', '$2b$10$a7dORGZNd0RYscUci59mQ.LdxxpmhtEE5SX8b66HnRNB/FCWqcoci', '', '1132146241', '', 'admin', 1, 'avatar-1593978857012.jpg', '', '2020-07-05 19:54:17', '2020-07-05 19:54:17'),
+(2, 'David', 'Messina', 'davidmessina@speedy.com.ar', '$2b$10$kk/Fmfnj2kzYtGOZ83FfmeCYNHjHDqN9iOx50391d5J6x3v.jI1u.', '', '1132146241', '', 'client', 1, 'avatar-1594076314868.jpg', '', '2020-07-05 20:06:50', '2020-07-05 20:06:50');
 
 
 --

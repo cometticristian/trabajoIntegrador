@@ -42,7 +42,7 @@ const controller = {
 				//GUARDA AL USUARIO LOGUEADO PARA USARLOS EN LAS VISTAS
 			} else {
 				req.session.userFound = userFound;
-				res.locals.userFound = userFound[0];
+				//res.locals.userFound = userFound[0];
 				
 				if (req.body.remember != undefined){
 					res.cookie('remember', userFound[0].email, {maxAge: 180000000})
@@ -72,7 +72,6 @@ const controller = {
 	// Create - Form to create
 	register: (req, res, next) => {
 		return res.render('users/register');
-		
 	},
 	
 	// Create -  Method to store
@@ -102,6 +101,7 @@ const controller = {
 					userType: "client",
 					state: 1,
 					avatar: 'default.png',
+					country: req.body.country
 				});
 			} else {
 				//newUser = {
@@ -116,7 +116,8 @@ const controller = {
 					address:"",
 					userType: "client",
 					state: 1,
-					avatar: req.files[0].filename
+					avatar: req.files[0].filename,
+					country: req.body.country
 				});
 			}
 			
@@ -130,6 +131,7 @@ const controller = {
 	// Update - Form to edit
 	edit: (req, res, next) => {
 		let user = req.session.userFound
+		console.log(user);
 		res.render("./users/edit-form", { user: user })
 	},
 	
@@ -152,6 +154,7 @@ const controller = {
 					userType: "client",
 					state: 1,
 					avatar: user[0].avatar,
+					country: req.body.country
 				},{
 					where: {
 						id: user[0].id
@@ -170,7 +173,8 @@ const controller = {
 					address:"",
 					userType: "client",
 					state: 1,
-					avatar: req.files[0].filename
+					avatar: req.files[0].filename,
+					country: req.body.country
 				},{
 					where: {
 						id: user[0].id
