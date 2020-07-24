@@ -51,6 +51,13 @@
                }
                %>
                   <form class="register" action="/users/edit?_method=PUT" method="POST" enctype="multipart/form-data">
+                     <label for="country">
+                        <h3>País de residencia (Solo Sudamerica):</h3>
+                     </label>
+                     <select name="country" id="country" class="input country" required>
+                        <option value="0"><%=user[0].country%></option>
+                     </select>
+                     
                      <label for="firstName">
                         <h3>Nombre (*):</h3>
                      </label>
@@ -101,6 +108,7 @@
 
    <%- include('../partials/footer') %>
    <script src="/javascripts/validateUser.js"></script>
+   <script src="/javascripts/fetchCountry.js"></script>
 </body>
 
 </html>

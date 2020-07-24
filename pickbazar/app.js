@@ -7,6 +7,7 @@ const methodOverride = require('method-override'); // Para poder usar los métod
 const session = require('express-session');// Para usar Session
 const rememberMiddleware = require('./middlewares/rememberMiddleware');
 const db = require('./database/models');
+const sequelize = db.sequelize;
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -43,17 +44,48 @@ app.use(function (req, res, next) {
       next()
     })
   })
-
-app.use(function (req, res, next) {
   
-  db.Subcategory.findAll(
-    {include: [{ association: "Category" }]
+  app.use(function (req, res, next) {
+    
+    db.Subcategory.findAll(
+      {include: [{ association: "Category" }]
     })
     .then(function (subCategory) {
       res.locals.subCat = subCategory
       next()
     })
-})
+  })
+  
+  app.use(function (req, res, next) {
+  
+    if (req.session.userFound == undefined) {
+      next()
+    
+    } else {
+      db.Cart.findOne({
+        where: {
+          user_id: req.session.userFound[0].id,
+          state: 1
+        }
+      })
+      .then((cart) => {
+        if (!cart) {
+          res.locals.cartItems = 0
+          next()
+          
+        }
+        else {
+          let cartId = cart.id;
+          sequelize.query("SELECT p.id, p.name, cp.cart_id, cp.price, cp.discount, cp.subtotal, cp.units, c.total, c.state, i.name as image, c.updated_at FROM carts as c LEFT OUTER JOIN (cart_product as cp INNER JOIN products as p ON p.id = cp.product_id) ON c.id = cp.cart_id INNER JOIN images as i ON i.product_id=p.id WHERE i.main=1 and c.id=" + cartId)
+          
+          .then((cartProducts) => {
+              res.locals.cartItems = cartProducts[0].length;
+              next()
+            })
+        }        
+      })
+    }
+  })
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -72,7 +104,7 @@ app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
+  
   // render the error page
   res.status(err.status || 500);
   res.render('error');

@@ -12,7 +12,7 @@ window.addEventListener("load", function () {
 
 
     let userLogin = document.querySelector("form.login");
-    userForm.addEventListener("submit", function (e) {
+    userLogin.addEventListener("submit", function (e) {
 
         if (
             document.querySelector("span.password").innerText
