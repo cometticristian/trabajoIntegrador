@@ -611,12 +611,6 @@ const controller = {
 								}
 							})
 
-							img2 = db.Image.create({
-								name: images[1].name,
-								main: 2,
-								product_id: req.params.productId
-							})
-							Promise.all([img1, img2])
 								.then(() => {
 									res.redirect('/products/detail/' + req.params.productId)
 								})
