@@ -83,26 +83,7 @@
                         <% } %>
                         <% } %>
                         <% fourthImage = 'logo-pickBazar.jpg' %>
-
-                        <!-- Si el producto trae 4 imagenes -->
-
-                        <% } else if(product.Image.length == 4) { %>
-                        <% for (let i = 0; i < product.Image.length; i++) { %>
-                        <% if (product.Image[i].main == 1) { %>
-                        <% mainImage = product.Image[i].name %>
                         <% } %>
-                        <% if (product.Image[i].main == 2) { %>
-                        <% secondImage = product.Image[i].name %>
-                        <% } %>
-                        <% if (product.Image[i].main == 3) { %>
-                        <% thirdImage = product.Image[i].name %>
-                        <% } %>
-                        <% if (product.Image[i].main == 4) { %>
-                        <% fourthImage = product.Image[i].name %>
-                        <% } %>
-                        <% } %>
-                        <% } %>
-
 
                         <div class="col-md-3 small-img-box">
                             <div class="img-small">
