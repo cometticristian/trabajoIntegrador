@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const { check, validationResult, body } = require('express-validator');
 const db = require ("../database/models")
 const { Op } = require("sequelize");
+const sequelize = db.sequelize;
 
 //const usersDB = path.join(__dirname, '../data/usersDB.json');
 //let users = JSON.parse(fs.readFileSync(usersDB, 'utf-8'));
@@ -67,7 +68,31 @@ const controller = {
 	// Detail - Detail from one user
 	profile: (req, res, next) => {
 		let user = req.session.userFound
-		res.render('./users/profile', { user: user })
+
+		db.Cart.findAll({
+			where: {
+				user_id: req.session.userFound[0].id,
+				state: 0
+			}
+		})
+		.then((carts) => {
+			//console.log(carts);
+			if (carts) {
+				//console.log(carts);
+				sequelize.query("SELECT p.id, p.name, cp.cart_id, cp.price, cp.discount, cp.subtotal, cp.units, c.total, c.state, i.name as image, c.updated_at FROM carts as c LEFT OUTER JOIN (cart_product as cp INNER JOIN products as p ON p.id = cp.product_id) ON c.id = cp.cart_id INNER JOIN images as i ON i.product_id=p.id WHERE i.main=1 and c.user_id=" + req.session.userFound[0].id + " and c.state=0 order by cart_id asc")
+					.then((cartProducts) => {
+						console.log(cartProducts[0]);
+						res.render('./users/profile', { user: user, product:cartProducts[0]});
+					})
+				
+			}
+			else {
+				res.render('./users/profile', { user: user });
+			}
+		})
+		.catch((error) => {
+			console.log(error);
+		})
 	},
 	
 	// Create - Form to create

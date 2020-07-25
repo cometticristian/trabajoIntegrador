@@ -173,7 +173,6 @@ const controller = {
 
 	// Create -  Method to store
 	store: (req, res, next) => {
-		console.log(req.body.description);
 		let errors = validationResult(req);
 		if (errors.isEmpty()) {
 

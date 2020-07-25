@@ -8,12 +8,12 @@
     
     <div class="container -products-wrapper">
         <div class="row">
-            
+            <%//console.log(tickets.name)%>
             <div class="col-6 offset-3 col-sm-4 offset-sm-4 col-lg-4 offset-lg-4">
                 <section class="product-box">
                     <a href="/users/edit">
                         <article class="profile_data">
-                            <h2> Bienvenido/a <%=user[0].first_name%> <%=user[0].last_name%></h2>
+                            <h2><%=userFound[0].firstName + ' ' + userFound[0].lastName%></h2>
                             <figure class="product-box_image">
                                 <img src="/images/users/<%=user[0].avatar%>" alt="imagen de <%=user[0].avatar%>"">
                             </figure>
@@ -22,7 +22,6 @@
                             <p > <%=user[0].email%></p>
                         </article>
                     </a>
-                                       
                 </section>
                 <div class="orderButton"> 
                     <form action="/users/logout" method="POST">
@@ -35,6 +34,41 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-12 col-lg-12">
+              <h2>Historial de compra</h2>
+              <table border="0" align="left" class="table table-hover" style="width: 100%;">
+                <thead>
+                  <tr align="left">
+                    <th scope="col"><h3>#</h3></th>
+                    <th scope="col" colspan="2"><h3>PRODUCTO</h3></th>
+                    <th scope="col"><h3>COMPROBANTE Nº</h3></th>
+                    <th scope="col"><h3>PRECIO</h3></th>
+                    <th scope="col"><h3>DESCUENTO</h3></th>
+                    <th scope="col"><h3>CANT</h3></th>
+                    <th scope="col" colspan="2"><h3>SUBTOTAL</h3></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%for(let i=0; i<product.length; i++){ %>
+                  <tr>
+                    <td scope="row"><%=i+1%></td>
+                    <td width="55"> <figure>
+                      <img src="/images/products/<%=product[i].image%>" style="width:50px;" alt="imagen de <%=product[i].name%>">
+                    </figure></td>
+                    <td><%=product[i].name%></td>
+                    <td><%=product[i].cart_id%></td>
+                    <td>$<%=product[i].price%> <span class="cart-discount"><%=product[i].discount%>% OFF</span></td>
+                    <td>$<%=(product[i].price*product[i].units)*product[i].discount/100%></td>
+                             
+                    <td><%=product[i].units%></td>
+                    <td><%=product[i].subtotal%></td>
+                  </tr>
+                  <%}%>
+                </tbody>
+              </table>
+            </div>
     </div>
     
     

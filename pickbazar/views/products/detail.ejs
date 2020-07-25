@@ -136,17 +136,17 @@
                         </div>
                         <%}else{%>
                         <div class="crud">
-                            <form action="/products/delete/<%=product.id%>?_method=DELETE" method="POST">
-                                <button id="delete" class="send" type="submit">ELIMINAR</button>
-                            </form>
-                            <a id="edit" class="send" href='/products/edit/<%=product.id%>' target="_blank">
+                            <a id="edit" class="" href='/products/edit/<%=product.id%>' target="_blank">
                                 <div>EDITAR</div>
                             </a>
+                            <form action="/products/delete/<%=product.id%>?_method=DELETE" method="POST">
+                                <button id="delete" class="" type="submit">ELIMINAR</button>
+                            </form>
                         </div>
                         <%}%>
-                                    </div>
+                        </div>
                                                                               
-                                            <form class="add-box" action="/cart/add/<%=product.id%>">
+                        <form class="add-box" action="/cart/add/<%=product.id%>">
                         <button class="add1" type="submit">Agregar al carrito</button>
                         <input class="add2" type="number" name="item" value="1">
                         </form>
