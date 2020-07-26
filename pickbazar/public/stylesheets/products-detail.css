@@ -178,7 +178,7 @@
         display: flex;
         flex-wrap: wrap;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: right;
         -align-items: center;
     }
     .img-small {

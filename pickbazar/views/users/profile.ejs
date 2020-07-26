@@ -38,41 +38,81 @@
         <div class="row">
             <div class="col-12 col-lg-12">
               <h2>Historial de compra</h2>
-              <table border="0" align="left" class="table table-hover" style="width: 100%;">
+              <%if(product!=0){ %>
+              <table border="0" align="left" class="table table-hover" style="width: 100%; padding-bottom: 20px;">
                 <thead>
                   <tr align="left">
-                    <th scope="col"><h3>#</h3></th>
-                    <th scope="col" colspan="2"><h3>PRODUCTO</h3></th>
-                    <th scope="col"><h3>COMPROBANTE Nº</h3></th>
-                    <th scope="col"><h3>PRECIO</h3></th>
-                    <th scope="col"><h3>DESCUENTO</h3></th>
-                    <th scope="col"><h3>CANT</h3></th>
-                    <th scope="col" colspan="2"><h3>SUBTOTAL</h3></th>
+                    <th scope="col"><h4>Ticket</h4></th>
+                    <th scope="col" colspan="2"><h4>Producto</h4></th>
+                    <th scope="col"><h4>Fecha</h4></th>
+                    <th scope="col"><h4>Precio</h4></th>
+                    <th scope="col"><h4>Descuento</h4></th>
+                    <th scope="col"><h4>Cant</h4></th>
+                    <th scope="col" colspan="2"><h4>Subtotal</h4></th>
                   </tr>
                 </thead>
                 <tbody>
                   <%for(let i=0; i<product.length; i++){ %>
+                    <%let fecha = ""+product[i].updated_at%>
+                    <%let date = fecha.split(' ')%>
                   <tr>
-                    <td scope="row"><%=i+1%></td>
+                    <td width="20" style="text-align: center;"><%=product[i].cart_id%></td>
                     <td width="55"> <figure>
                       <img src="/images/products/<%=product[i].image%>" style="width:50px;" alt="imagen de <%=product[i].name%>">
                     </figure></td>
-                    <td><%=product[i].name%></td>
-                    <td><%=product[i].cart_id%></td>
-                    <td>$<%=product[i].price%> <span class="cart-discount"><%=product[i].discount%>% OFF</span></td>
-                    <td>$<%=(product[i].price*product[i].units)*product[i].discount/100%></td>
+                    <td style="text-align: center;"><%=product[i].name%></td>
+                    <td style="text-align: center;"><%=date[1] +" "+ date[2] +" "+ date[3] +" "+ date[4]%></td>
+                    <td style="text-align: center;">$<%=product[i].price%> <span class="cart-discount"><%=product[i].discount%>% OFF</span></td>
+                    <td style="text-align: center;">$<%=(product[i].price*product[i].units)*product[i].discount/100%></td>
                              
-                    <td><%=product[i].units%></td>
-                    <td><%=product[i].subtotal%></td>
+                    <td style="text-align: center;"><%=product[i].units%></td>
+                    <td style="text-align: center;"><%=product[i].subtotal%></td>
                   </tr>
                   <%}%>
                 </tbody>
               </table>
+              <%} else {%>
+                <h3 style="color: #f58220;">Aquí podrás encontrar el detalle de tus compras realizadas</h3>
+                <table border="0" align="left" class="table table-hover" style="width: 100%; padding-bottom: 20px;">
+                  <thead>
+                    <tr align="left">
+                      <th scope="col"><h4>Compra#</h4></th>
+                      <th scope="col" colspan="2"><h4>Producto</h4></th>
+                      <th scope="col"><h4>Fecha</h4></th>
+                      <th scope="col"><h4>Precio</h4></th>
+                      <th scope="col"><h4>Descuento</h4></th>
+                      <th scope="col"><h4>Cant</h4></th>
+                      <th scope="col" colspan="2"><h4>Subtotal</h4></th>
+                    </tr>
+                  </thead>
+                  <tbody><tr>
+                    <td scope="row"></td>
+                    <td width="55"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+                
+              <%}%>
             </div>
     </div>
-    
+    </div>
+
     
     <%- include('../partials/footer') %>
+    <!--<script>
+      let confirmar = document.querySelector("#delete");
+       confirmar.addEventListener("click", function (e) {
+          
+        let resultado = confirm("¿Darse de baja?")
+        console.log(resultado);
+       })
+    </script>-->
 </body>
 
 </html>

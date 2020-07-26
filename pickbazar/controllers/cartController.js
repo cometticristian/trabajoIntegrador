@@ -289,7 +289,7 @@ const controller = {
                             }
                         })
                         .then(() => {
-                            res.redirect('/');
+                            res.redirect('/users/profile');
                         })
                         .catch((error) => {
                             console.log(error);
