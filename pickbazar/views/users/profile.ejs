@@ -38,7 +38,6 @@
         <div class="row">
             <div class="col-12 col-lg-12">
               <h2>Historial de compra</h2>
-              <%if(product!=0){ %>
               <table border="0" align="left" class="table table-hover" style="width: 100%; padding-bottom: 20px;">
                 <thead>
                   <tr align="left">
@@ -51,6 +50,7 @@
                     <th scope="col" colspan="2"><h4>Subtotal</h4></th>
                   </tr>
                 </thead>
+              <%if(product!=0){ %>
                 <tbody>
                   <%let ticket=product[0].cart_id;%>
                   <%let total=product[0].total;%>
@@ -100,33 +100,15 @@
                 </tbody>
               </table>
               <%} else {%>
-                <h3 style="color: #f58220;">Aquí podrás encontrar el detalle de tus compras realizadas</h3>
-                <table border="0" align="left" class="table table-hover" style="width: 100%; padding-bottom: 20px;">
-                  <thead>
-                    <tr align="left">
-                      <th scope="col"><h4>Compra#</h4></th>
-                      <th scope="col" colspan="2"><h4>Producto</h4></th>
-                      <th scope="col"><h4>Fecha</h4></th>
-                      <th scope="col"><h4>Precio</h4></th>
-                      <th scope="col"><h4>Descuento</h4></th>
-                      <th scope="col"><h4>Cant</h4></th>
-                      <th scope="col" colspan="2"><h4>Subtotal</h4></th>
-                    </tr>
-                  </thead>
-                  <tbody><tr>
-                    <td scope="row"></td>
-                    <td width="55"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+               
+                  <tr>
+                    <td colspan="8" align="center"><h3>NO HAY HISTORIAL DE COMPRAS</h3></td>
                   </tr>
+                  <%}%>
                 </tbody>
               </table>
                 
-              <%}%>
+             
             </div>
     </div>
     </div>
