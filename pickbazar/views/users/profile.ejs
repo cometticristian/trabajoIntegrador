@@ -52,23 +52,51 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <%let ticket=product[0].cart_id;%>
+                  <%let total=product[0].total;%>
                   <%for(let i=0; i<product.length; i++){ %>
-                    <%let fecha = ""+product[i].updated_at%>
-                    <%let date = fecha.split(' ')%>
-                  <tr>
-                    <td width="20" style="text-align: center;"><%=product[i].cart_id%></td>
-                    <td width="55"> <figure>
-                      <img src="/images/products/<%=product[i].image%>" style="width:50px;" alt="imagen de <%=product[i].name%>">
-                    </figure></td>
-                    <td style="text-align: center;"><%=product[i].name%></td>
-                    <td style="text-align: center;"><%=date[1] +" "+ date[2] +" "+ date[3] +" "+ date[4]%></td>
-                    <td style="text-align: center;">$<%=product[i].price%> <span class="cart-discount"><%=product[i].discount%>% OFF</span></td>
-                    <td style="text-align: center;">$<%=(product[i].price*product[i].units)*product[i].discount/100%></td>
-                             
-                    <td style="text-align: center;"><%=product[i].units%></td>
-                    <td style="text-align: center;"><%=product[i].subtotal%></td>
-                  </tr>
+                    <%let fecha = ""+product[i].updated_at;%>
+                    <%let date = fecha.split(' ');%>
+                    <%if (ticket==product[i].cart_id) {%>
+                      <tr>
+                        <td width="20" style="text-align: center;"><%=product[i].cart_id%></td>
+                        <td width="55"> <figure>
+                          <img src="/images/products/<%=product[i].image%>" style="width:50px;" alt="imagen de <%=product[i].name%>">
+                        </figure></td>
+                        <td style="text-align: center;"><%=product[i].name%></td>
+                        <td style="text-align: center;"><%=date[1] +" "+ date[2] +" "+ date[3] +" "+ date[4]%></td>
+                        <td style="text-align: center;">$<%=product[i].price%> <span class="cart-discount"><%=product[i].discount%>% OFF</span></td>
+                        <td style="text-align: center;">$<%=(product[i].price*product[i].units)*product[i].discount/100%></td>
+                                
+                        <td style="text-align: center;"><%=product[i].units%></td>
+                        <td style="text-align: center;">$<%=product[i].subtotal%>%></td>
+                      </tr>
+                      <%} else {%>
+                        <tr>
+                          <th colspan="7" style="text-align: right;">TOTAL</th>
+                          <th style="text-align: center;">$<%=total%></th>
+                        </tr>
+                        <tr>
+                          <td width="20" style="text-align: center;"><%=product[i].cart_id%></td>
+                          <td width="55"> <figure>
+                            <img src="/images/products/<%=product[i].image%>" style="width:50px;" alt="imagen de <%=product[i].name%>">
+                          </figure></td>
+                          <td style="text-align: center;"><%=product[i].name%></td>
+                          <td style="text-align: center;"><%=date[1] +" "+ date[2] +" "+ date[3] +" "+ date[4]%></td>
+                          <td style="text-align: center;">$<%=product[i].price%> <span class="cart-discount"><%=product[i].discount%>% OFF</span></td>
+                          <td style="text-align: center;">$<%=(product[i].price*product[i].units)*product[i].discount/100%></td>
+                                  
+                          <td style="text-align: center;"><%=product[i].units%></td>
+                          <td style="text-align: center;">$<%=product[i].subtotal%>%></td>
+                        </tr>
+                      <%ticket=product[i].cart_id;
+                        total=product[i].total;
+                        }%>
                   <%}%>
+                  <tr>
+                    <th colspan="7" style="text-align: right;">TOTAL</th>
+                    <th style="text-align: center;">$<%=total%></th>
+                  </tr>
                 </tbody>
               </table>
               <%} else {%>
