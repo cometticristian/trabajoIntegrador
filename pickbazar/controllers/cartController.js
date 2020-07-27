@@ -5,7 +5,7 @@ const { check, validationResult, body } = require('express-validator');
 const db = require("../database/models")
 const { Op } = require("sequelize");
 const { setupMaster } = require('cluster');
-const { response } = require('express');
+const express = require('express');
 let sequelize = db.sequelize;
 
 //const cartDB = path.join(__dirname, '../data/cartDB.json');
@@ -107,8 +107,8 @@ const controller = {
                 console.log(error);
             })*/
             .then(() => {
-                //res.redirect('/products');
-                res.redirect('/cart');
+                res.redirect('/products');
+                //res.redirect('/cart');
             })
             .catch((error) => {
                 console.log(error);
