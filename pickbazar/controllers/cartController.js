@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 const { check, validationResult, body } = require('express-validator');
 const db = require("../database/models")
 const { Op } = require("sequelize");
+const { setupMaster } = require('cluster');
+const { response } = require('express');
 let sequelize = db.sequelize;
 
 //const cartDB = path.join(__dirname, '../data/cartDB.json');
@@ -26,19 +28,52 @@ const controller = {
             .then((cart) => {
                 if (cart) {
                     cartId = cart.id;
-                    db.Product.findByPk(productId)
-                    .then((product) => {
-                        db.Cart_product.create({
-                            units: req.query.item,
-                            price: product.price,
-                            discount: product.discount,
-                            subtotal: (product.price*req.query.item)-((product.price*req.query.item)*product.discount/100),
-                            cart_id: cartId,
-                            product_id: productId,
-                        })
+
+                    db.Cart_product.findAll({
+                        where: {cart_id:cartId,product_id:req.params.id}
                     })
-                    .catch((error) => {
-                        console.log(error);
+                    .then((item) => {
+                    if(item!=""){
+                            console.log("----------------SUMA UN ITEM-------------->");
+                            let unidades = item[0].units + 1;
+                            let precio = item[0].price;
+                            let descuento = item[0].discount;
+                            let subtotal = (precio * unidades) - (((precio * unidades) * descuento) / 100)
+                            db.Cart_product.update({
+                                units: unidades,
+                                price: precio,
+                                subtotal: subtotal
+                                }, {
+                                where: {
+                                product_id: req.params.id,
+                                cart_id: cartId
+                                }
+                            })
+                            .then((agregado) => {
+                                console.log("----------------ITEM SUMADO-------------->");
+                                res.render('/cart');
+                               
+                            })
+                                .catch((error) => {
+                                console.log(error);
+                                }) 
+                            } 
+                    else {
+                            db.Product.findByPk(productId)
+                            .then((product) => {
+                                db.Cart_product.create({
+                                    units: req.query.item,
+                                    price: product.price,
+                                    discount: product.discount,
+                                    subtotal: (product.price*req.query.item)-((product.price*req.query.item)*product.discount/100),
+                                    cart_id: cartId,
+                                    product_id: productId,
+                                })
+                            })
+                           /* .catch((error) => {
+                                console.log(error);
+                            })*/
+                        }//cierra else interno
                     })
                 } else {
                     db.Cart.create({
@@ -59,21 +94,21 @@ const controller = {
                                 product_id: productId,
                             })
                         })
-                        .catch((error) => {
+                        /*.catch((error) => {
                             console.log(error);
-                        })
+                        })*/
                     })
-                    .catch((error) => {
+                   /* .catch((error) => {
                         console.log(error);
-                    })
+                    })*/
                 }
             })
-            .catch((error) => {
+           /* .catch((error) => {
                 console.log(error);
-            })
+            })*/
             .then(() => {
-                res.redirect('/products');
-                //res.redirect('/cart');
+                //res.redirect('/products');
+                res.redirect('/cart');
             })
             .catch((error) => {
                 console.log(error);
@@ -180,6 +215,7 @@ const controller = {
                     }
                 })
                 .then((item_carrito) => {
+                    console.log("------PLUS----------->")
                     let unidades = item_carrito.units + 1;
                     let precio = item_carrito.price;
                     let descuento = item_carrito.discount;
