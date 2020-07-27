@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 const { check, validationResult, body } = require('express-validator');
 const db = require("../database/models")
 const { Op } = require("sequelize");
+const { setupMaster } = require('cluster');
+const express = require('express');
 let sequelize = db.sequelize;
 
 //const cartDB = path.join(__dirname, '../data/cartDB.json');
@@ -26,59 +28,37 @@ const controller = {
             .then((cart) => {
                 if (cart) {
                     cartId = cart.id;
-                    console.log("----------------YA TIENE  CARRITO-------------->");
-                    console.log(cartId);
-                    console.log(req.params.id);
+
                     db.Cart_product.findAll({
-                        where: {cart_id:cartId, product_id:req.params.id}
+                        where: {cart_id:cartId,product_id:req.params.id}
                     })
-                    .then((productExist) => {
-                      
-                        if (productExist!="") {
-                            console.log("va por PLUS tiene que agregarlo");
-                            console.log(productExist);
-                            console.log(req.params.id);
-                            console.log(cartId);
-                            //res.redirect('/cart/plus/1');
-                            //agregado de plus
+                    .then((item) => {
+                    if(item!=""){
                             console.log("----------------SUMA UN ITEM-------------->");
-                            let unidades = productExist[0].units + 1;
-                            let precio = productExist[0].price;
-                            let descuento = productExist[0].discount;
+                            let unidades = item[0].units + 1;
+                            let precio = item[0].price;
+                            let descuento = item[0].discount;
                             let subtotal = (precio * unidades) - (((precio * unidades) * descuento) / 100)
-                            console.log(unidades);
-                            console.log(precio);
-                            console.log(subtotal);
-                            db.Cart_product.update(
-                                {
-                                    units: unidades,
-                                    price: precio,
-                                    subtotal: subtotal
+                            db.Cart_product.update({
+                                units: unidades,
+                                price: precio,
+                                subtotal: subtotal
                                 }, {
-                                    where: {
-                                        product_id: req.params.id,
-                                        cart_id: cartId
-                                    }
-                                })
-                                .then((agregado) => {
-                                    console.log("----------------ITEM SUMADO-------------->");
-                                    console.log(agregado);
-                                    //res.redirect('/cart');
-                                    res.render('/cart');
-                                    console.log("----------------redirect -------------->");
-                                })
-                            
+                                where: {
+                                product_id: req.params.id,
+                                cart_id: cartId
+                                }
+                            })
+                            .then((agregado) => {
+                                console.log("----------------ITEM SUMADO-------------->");
+                                res.render('/cart');
+                               
+                            })
                                 .catch((error) => {
-                                    console.log(error);
-                                }) //AGREGDO DE PLUS
-
-
-
-
-                        } else           {
-                            console.log("es producto nuevo para ese carrito");
-
-                             //es producto nuevo para ese carrito
+                                console.log(error);
+                                }) 
+                            } 
+                    else {
                             db.Product.findByPk(productId)
                             .then((product) => {
                                 db.Cart_product.create({
@@ -90,30 +70,21 @@ const controller = {
                                     product_id: productId,
                                 })
                             })
-                            .catch((error) => {
+                           /* .catch((error) => {
                                 console.log(error);
-                            })
-                        }//else
-
+                            })*/
+                        }//cierra else interno
                     })
-                    .catch((error) => {
-                        console.log(error);
-                    })
-                   
                 } else {
-                    console.log("----------------CREATE CARRITO-------------->");
-                    console.log(req.session.userFound[0].id);
                     db.Cart.create({
                         user_id: req.session.userFound[0].id,
                         total: 0,
                         state: 1
                     })
                     .then((cartCreated) => {
-                        console.log(cartCreated);
                         cartId = cartCreated.id;
                         db.Product.findByPk(productId)
                         .then((product) => {
-                            console.log(product);
                             db.Cart_product.create({
                                 units: req.query.item,
                                 price: product.price,
@@ -123,21 +94,21 @@ const controller = {
                                 product_id: productId,
                             })
                         })
-                        .catch((error) => {
+                        /*.catch((error) => {
                             console.log(error);
-                        })
+                        })*/
                     })
-                    .catch((error) => {
+                   /* .catch((error) => {
                         console.log(error);
-                    })
+                    })*/
                 }
             })
-            .catch((error) => {
+           /* .catch((error) => {
                 console.log(error);
-            })
+            })*/
             .then(() => {
-                //res.redirect('/products');
-                res.redirect('/cart');
+                res.redirect('/products');
+                //res.redirect('/cart');
             })
             .catch((error) => {
                 console.log(error);
@@ -224,7 +195,6 @@ const controller = {
     },
 
     plus: function (req, res, next) {
-        console.log("----------------ENTRO A PLUS-------------->");
         //agrega un item del carrito
         if (req.session.userFound == undefined) {
             res.redirect('/users/login');
@@ -245,7 +215,7 @@ const controller = {
                     }
                 })
                 .then((item_carrito) => {
-                    console.log("----------------SUMA UN ITEM-------------->");
+                    console.log("------PLUS----------->")
                     let unidades = item_carrito.units + 1;
                     let precio = item_carrito.price;
                     let descuento = item_carrito.discount;
@@ -262,8 +232,6 @@ const controller = {
                             }
                         })
                         .then((cartProducts) => {
-                            console.log("----------------SUMA UN ITEM-------------->");
-                            console.log(cartProducts);
                             res.redirect('/cart');
                         })
                     })

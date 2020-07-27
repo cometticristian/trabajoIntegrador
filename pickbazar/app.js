@@ -75,10 +75,11 @@ app.use(function (req, res, next) {
         }
         else {
           let cartId = cart.id;
-          sequelize.query("SELECT p.id, p.name, cp.cart_id, cp.price, cp.discount, cp.subtotal, cp.units, c.total, c.state, i.name as image, c.updated_at FROM carts as c LEFT OUTER JOIN (cart_product as cp INNER JOIN products as p ON p.id = cp.product_id) ON c.id = cp.cart_id INNER JOIN images as i ON i.product_id=p.id WHERE i.main=1 and c.id=" + cartId)
-          
+          sequelize.query("SELECT sum(units) AS items FROM cart_product WHERE cart_id =" + cartId)
           .then((cartProducts) => {
-              res.locals.cartItems = cartProducts[0].length;
+            let [dato]= cartProducts
+            let items = dato[0].items
+              res.locals.cartItems = items;
               next()
             })
         }        

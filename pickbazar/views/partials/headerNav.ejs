@@ -32,7 +32,7 @@
             <a href="/users/register">Registro <i class="fas fa-address-card"></i></a>
             <a class="cart" href="/users/login">Login <i class="fas fa-user"></i></a>
 
-            <%}else if (userFound!=undefined && cartItems==0){%>
+            <%}else if (userFound!=undefined && cartItems<1){%>
             <a href="/users/profile">Ver perfil <i class="fas fa-user"></i> <br>
             <%=userFound[0].firstName + ' ' + userFound[0].lastName%> </a>
             <a class="cart" href="/cart">Carrito <i class="fas fa-shopping-cart"></i> </a>
