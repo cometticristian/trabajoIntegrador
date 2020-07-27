@@ -26,94 +26,30 @@ const controller = {
             .then((cart) => {
                 if (cart) {
                     cartId = cart.id;
-                    console.log("----------------YA TIENE  CARRITO-------------->");
-                    console.log(cartId);
-                    console.log(req.params.id);
-                    db.Cart_product.findAll({
-                        where: {cart_id:cartId, product_id:req.params.id}
-                    })
-                    .then((productExist) => {
-                      
-                        if (productExist!="") {
-                            console.log("va por PLUS tiene que agregarlo");
-                            console.log(productExist);
-                            console.log(req.params.id);
-                            console.log(cartId);
-                            //res.redirect('/cart/plus/1');
-                            //agregado de plus
-                            console.log("----------------SUMA UN ITEM-------------->");
-                            let unidades = productExist[0].units + 1;
-                            let precio = productExist[0].price;
-                            let descuento = productExist[0].discount;
-                            let subtotal = (precio * unidades) - (((precio * unidades) * descuento) / 100)
-                            console.log(unidades);
-                            console.log(precio);
-                            console.log(subtotal);
-                            db.Cart_product.update(
-                                {
-                                    units: unidades,
-                                    price: precio,
-                                    subtotal: subtotal
-                                }, {
-                                    where: {
-                                        product_id: req.params.id,
-                                        cart_id: cartId
-                                    }
-                                })
-                                .then((agregado) => {
-                                    console.log("----------------ITEM SUMADO-------------->");
-                                    console.log(agregado);
-                                    //res.redirect('/cart');
-                                    res.render('/cart');
-                                    console.log("----------------redirect -------------->");
-                                })
-                            
-                                .catch((error) => {
-                                    console.log(error);
-                                }) //AGREGDO DE PLUS
-
-
-
-
-                        } else           {
-                            console.log("es producto nuevo para ese carrito");
-
-                             //es producto nuevo para ese carrito
-                            db.Product.findByPk(productId)
-                            .then((product) => {
-                                db.Cart_product.create({
-                                    units: req.query.item,
-                                    price: product.price,
-                                    discount: product.discount,
-                                    subtotal: (product.price*req.query.item)-((product.price*req.query.item)*product.discount/100),
-                                    cart_id: cartId,
-                                    product_id: productId,
-                                })
-                            })
-                            .catch((error) => {
-                                console.log(error);
-                            })
-                        }//else
-
+                    db.Product.findByPk(productId)
+                    .then((product) => {
+                        db.Cart_product.create({
+                            units: req.query.item,
+                            price: product.price,
+                            discount: product.discount,
+                            subtotal: (product.price*req.query.item)-((product.price*req.query.item)*product.discount/100),
+                            cart_id: cartId,
+                            product_id: productId,
+                        })
                     })
                     .catch((error) => {
                         console.log(error);
                     })
-                   
                 } else {
-                    console.log("----------------CREATE CARRITO-------------->");
-                    console.log(req.session.userFound[0].id);
                     db.Cart.create({
                         user_id: req.session.userFound[0].id,
                         total: 0,
                         state: 1
                     })
                     .then((cartCreated) => {
-                        console.log(cartCreated);
                         cartId = cartCreated.id;
                         db.Product.findByPk(productId)
                         .then((product) => {
-                            console.log(product);
                             db.Cart_product.create({
                                 units: req.query.item,
                                 price: product.price,
@@ -136,8 +72,8 @@ const controller = {
                 console.log(error);
             })
             .then(() => {
-                //res.redirect('/products');
-                res.redirect('/cart');
+                res.redirect('/products');
+                //res.redirect('/cart');
             })
             .catch((error) => {
                 console.log(error);
@@ -224,7 +160,6 @@ const controller = {
     },
 
     plus: function (req, res, next) {
-        console.log("----------------ENTRO A PLUS-------------->");
         //agrega un item del carrito
         if (req.session.userFound == undefined) {
             res.redirect('/users/login');
@@ -245,7 +180,6 @@ const controller = {
                     }
                 })
                 .then((item_carrito) => {
-                    console.log("----------------SUMA UN ITEM-------------->");
                     let unidades = item_carrito.units + 1;
                     let precio = item_carrito.price;
                     let descuento = item_carrito.discount;
@@ -262,8 +196,6 @@ const controller = {
                             }
                         })
                         .then((cartProducts) => {
-                            console.log("----------------SUMA UN ITEM-------------->");
-                            console.log(cartProducts);
                             res.redirect('/cart');
                         })
                     })
