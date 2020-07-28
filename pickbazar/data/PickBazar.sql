@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 25, 2020 at 01:36 PM
+-- Generation Time: Jul 28, 2020 at 05:56 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -63,11 +63,18 @@ CREATE TABLE IF NOT EXISTS `carts` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- RELATIONSHIPS FOR TABLE `carts`:
 --
+
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`id`, `user_id`, `total`, `state`, `created_at`, `updated_at`) VALUES
+(1, 1, 0, '1', '2020-07-28 15:21:49', '2020-07-28 15:21:49');
 
 -- --------------------------------------------------------
 
@@ -135,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `images` (
   `product_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- RELATIONSHIPS FOR TABLE `images`:
@@ -158,7 +165,12 @@ INSERT INTO `images` (`id`, `name`, `main`, `product_id`, `created_at`) VALUES
 (10, 'canasto-laundry-tela-max.jpg', 1, 10, '2020-07-02 18:56:32'),
 (11, 'cesto-elegance.jpg', 1, 11, '2020-07-02 18:56:32'),
 (12, 'bandeja-cama.jpg', 1, 12, '2020-07-02 18:56:32'),
-(13, 'mainPick-1593979283710.jpg', 1, 13, '2020-07-06 23:39:41');
+(13, 'mainPick-1595949777242.jpg', 1, 13, '2020-07-28 15:22:57'),
+(14, 'mainPick-1595949892881.jpg', 1, 14, '2020-07-28 15:24:52'),
+(15, 'secondPick-1595949777247.jpg', 2, 13, '2020-07-28 15:22:57'),
+(16, 'secondPick-1595949892883.jpg', 2, 14, '2020-07-28 15:24:52'),
+(17, 'secondPick-1595950339237.jpg', 2, 15, '2020-07-28 15:32:19'),
+(18, 'mainPick-1595950339082.jpg', 1, 15, '2020-07-28 15:32:19');
 
 -- --------------------------------------------------------
 
@@ -182,7 +194,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- RELATIONSHIPS FOR TABLE `products`:
@@ -205,7 +217,9 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `discount`, `tax`,
 (10, 'Canasto laundry de tela', 'Canasto laundry de tela de 58cm de diámetro', '5000.00', 0, 21, 1, 2, 8, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
 (11, 'Cesto de residuos Elegance', 'Cesto de residuos Elegance con pedal - capacidad 3 litros', '5000.00', 0, 21, 1, 2, 7, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
 (12, 'Bandeja desayunador', 'Bandeja desayunador de bamboo con patas rebatibles', '5000.00', 0, 21, 1, 1, 6, 1, NULL, '2020-07-01 18:51:22', '2020-07-01 18:51:22'),
-(13, 'Cacerola Antiadherente 24cm', 'Cacerola cerámica antiadherente de 24cm de diámetro. Colores \'Black\' o \'Aqua\'', '5000.00', 0, 21, 0, 1, 1, 1, NULL, '2020-07-06 23:44:33', '2020-07-06 23:44:33');
+(13, 'Cacerola Antiadherente 24cm', 'Cacerola cerámica antiadherente de 24cm de diámetro. Colores \'Black\' o \'Aqua\'', '5000.00', 0, 21, 1, 1, 1, 1, NULL, '2020-07-28 15:19:21', '2020-07-28 15:19:21'),
+(14, 'Frasco de vidrio de 18cm', 'Frasco de vidrio con tapa Simple Home de 18cm. de alto', '2500.00', 15, 21, 1, 1, 4, 1, NULL, '2020-07-28 15:19:21', '2020-07-28 15:19:21'),
+(15, 'Alfombra Sanitizante Home', 'Alfombra de alto tránsito - PVC - 40 x 60 cm. Se lava con agua y jabón.', '900.00', 10, 21, 1, 3, 9, 1, NULL, '2020-07-28 15:32:19', '2020-07-28 15:32:19');
 
 -- --------------------------------------------------------
 
@@ -240,7 +254,7 @@ INSERT INTO `subcategories` (`id`, `name`, `category_id`, `created_at`, `updated
 (6, 'Accesorios', 1, '2020-07-02 20:26:02', '2020-07-02 20:26:02'),
 (7, 'Cestos', 2, '2020-07-02 20:26:02', '2020-07-02 20:26:02'),
 (8, 'Canastos', 2, '2020-07-02 20:26:02', '2020-07-02 20:26:02'),
-(9, 'Alfombras', 2, '2020-07-02 20:26:02', '2020-07-02 20:26:02'),
+(9, 'Alfombras', 3, '2020-07-28 15:54:46', '2020-07-28 15:54:46'),
 (10, 'Limas', 2, '2020-07-02 20:26:02', '2020-07-02 20:26:02'),
 (11, 'Esponjas', 2, '2020-07-02 20:26:02', '2020-07-02 20:26:02'),
 (12, 'Relojes', 3, '2020-07-02 20:26:02', '2020-07-02 20:26:02'),
@@ -284,8 +298,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `user`, `phone`, `address`, `userType`, `state`, `avatar`, `country`, `created_at`, `updated_at`) VALUES
-(1, 'David', 'Messina', 'davidmessina9@gmail.com', '$2b$10$a7dORGZNd0RYscUci59mQ.LdxxpmhtEE5SX8b66HnRNB/FCWqcoci', '', '1132146241', '', 'admin', 1, 'avatar-1593978857012.jpg', '', '2020-07-05 19:54:17', '2020-07-05 19:54:17'),
-(2, 'David', 'Messina', 'davidmessina@speedy.com.ar', '$2b$10$kk/Fmfnj2kzYtGOZ83FfmeCYNHjHDqN9iOx50391d5J6x3v.jI1u.', '', '1132146241', '', 'client', 1, 'avatar-1594076314868.jpg', '', '2020-07-05 20:06:50', '2020-07-05 20:06:50');
+(1, 'David', 'Messina', 'davidmessina9@gmail.com', '$2b$10$a7dORGZNd0RYscUci59mQ.LdxxpmhtEE5SX8b66HnRNB/FCWqcoci', '', '1132146241', '', 'admin', 1, 'avatar-1595944590397.jpg', 'Argentina', '2020-07-05 19:54:17', '2020-07-05 19:54:17'),
+(2, 'David', 'Messina', 'davidmessina@speedy.com.ar', '$2b$10$kk/Fmfnj2kzYtGOZ83FfmeCYNHjHDqN9iOx50391d5J6x3v.jI1u.', '', '1132146241', '', 'client', 1, 'avatar-1594076314868.jpg', 'Argentina', '2020-07-05 20:06:50', '2020-07-05 20:06:50');
 
 
 --

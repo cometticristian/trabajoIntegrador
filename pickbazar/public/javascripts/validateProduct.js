@@ -75,7 +75,7 @@ window.addEventListener("load", function () {
         if (category.value < 1){document.querySelector("span.category").innerText = "Debe asignar una categoria"; e.preventDefault();}
         else if(subCategory.value < 1){document.querySelector("span.subCategory").innerText = "Debe asignar una subcategoria"; e.preventDefault();}
         else if(price.value < 1){document.querySelector("span.price").innerText = "Debe completar el precio"; e.preventDefault();}
-        else if(discount.value < 1){document.querySelector("span.price").innerText = "Debe completar el descuento aunque sea 0"; e.preventDefault();}            
+        else if(discount.value < 0){document.querySelector("span.discount").innerText = "Debe completar el descuento aunque sea 0"; e.preventDefault();}            
         else if(
             document.querySelector("span.name").innerText ||
             brand.value.length < 1 ||

@@ -27,7 +27,7 @@ const controller = {
 			if (!errors.isEmpty()) {
 				res.render('users/login', { errors: errors.errors });
 			}
-			
+			/*------------------flter------------------*/
 			userFound = users.filter(function (user) {
 				return user.email == req.body.email && 
 				bcrypt.compareSync(req.body.password, user.password)
@@ -43,8 +43,26 @@ const controller = {
 				if (req.body.remember != undefined){
 					res.cookie('remember', userFound[0].email, {maxAge: 180000000})
 				}
-				
-				res.redirect('/');
+				db.Cart.findOne({
+					where: {
+					   user_id: req.session.userFound[0].id,
+					   state: 1,
+					}
+				 })
+				 .then((cart) => {
+					 if(cart){
+						res.redirect('/');
+					 }else{
+						db.Cart.create({
+							user_id: req.session.userFound[0].id,
+							total: 0,
+							state: 1
+						 })
+						 .then(() => {
+							res.redirect('/');
+						 })
+					 }
+				 })
 			}
 		})
 		.catch((errors) => {
@@ -62,7 +80,7 @@ const controller = {
 	// Detail - Detail from one user
 	profile: (req, res, next) => {
 		let user = req.session.userFound
-
+		//console.log(user);
 		db.Cart.findAll({
 			where: {
 				user_id: req.session.userFound[0].id,
@@ -116,7 +134,26 @@ const controller = {
 				.then((newUser) => {
 					let userFound = [newUser]
 					req.session.userFound = userFound;
-					res.redirect("/");
+					db.Cart.findOne({
+						where: {
+						   user_id: req.session.userFound[0].id,
+						   state: 1,
+						}
+					 })
+					 .then((cart) => {
+						 if(cart){
+							res.redirect('/');
+						 }else{
+							db.Cart.create({
+								user_id: req.session.userFound[0].id,
+								total: 0,
+								state: 1
+							 })
+							 .then(() => {
+								res.redirect('/');
+							 })
+						 }
+					 })
 				})
 				.catch((errors) => {
 					console.log(errors);
@@ -138,7 +175,26 @@ const controller = {
 				.then((newUser) => {
 					let userFound = [newUser]
 					req.session.userFound = userFound;
-					res.redirect("/");
+					db.Cart.findOne({
+						where: {
+						   user_id: req.session.userFound[0].id,
+						   state: 1,
+						}
+					 })
+					 .then((cart) => {
+						 if(cart){
+							res.redirect('/');
+						 }else{
+							db.Cart.create({
+								user_id: req.session.userFound[0].id,
+								total: 0,
+								state: 1
+							 })
+							 .then(() => {
+								res.redirect('/');
+							 })
+						 }
+					 })
 				})
 				.catch((errors) => {
 					console.log(errors);
@@ -201,7 +257,9 @@ const controller = {
 					}
 				});
 			}
-			res.redirect('/users/login');
+			req.session.destroy();
+			res.clearCookie('remember')
+			res.redirect("/users/login");
 			
 		} else {
 			res.render("users/edit-form", {errors: errors.errors, datos: req.body});	

@@ -18,8 +18,6 @@
          <div class="col-12 col-md-6 offset-md-3 columna">
             <div class="formulario">
                <h1>EDITAR PERFIL</h1>
-               <!--<HR style="height:1px;border-width:0;color:gray;background-color:gray"></HR>-->
-
                <section class="log-reg">
                               
                   <% function buscarError(name){
@@ -55,7 +53,7 @@
                         <h3>País de residencia (Solo Sudamerica):</h3>
                      </label>
                      <select name="country" id="country" class="input country" required>
-                        <option value="0"><%=user[0].country%></option>
+                        <option value=<%=user[0].country%>><%=user[0].country%></option>
                      </select>
                      
                      <label for="firstName">
