@@ -17,7 +17,7 @@ const controller = {
 				{ association: "Image" }]
 			})
 
-			.then(function (products) {
+			.then((products) => {
 				res.render('./products/list', { category: products, nombreCategoria: "Nuestros Productos" })
 			})
 			.catch(function (error) {
@@ -39,7 +39,7 @@ const controller = {
 		Promise.all([productReq, categoryReq])
 			.then(function ([category, categoryName]) {
 				res.render('./products/list', {
-					category: category,
+					category: category,/*productos de la categoría*/
 					nombreCategoria: categoryName[0].name
 				})
 			})
@@ -47,16 +47,6 @@ const controller = {
 				console.log(error);
 			})
 	},
-
-	/*let category = []
-	products.forEach(function (product) {
-		if (product.category == req.params.productCategory) {
-			category.push(product)
-		}
-	})
-	res.render('./products/list', { category: category,
-		nombreCategoria: req.params.productCategory })
-		*/
 
 	subCategory: (req, res, next) => {
 
@@ -77,9 +67,8 @@ const controller = {
 
 		Promise.all([productReq, subcategoryReq])
 			.then(function ([category, subcategoryName]) {
-				console.log(subcategoryName[0].Category.name);
 				res.render('./products/list', {
-					category: category,
+					category: category,/*productos de la subcategoría*/
 					nombreCategoria: subcategoryName[0].Category.name + " >> " + subcategoryName[0].name
 				})
 			})
@@ -88,17 +77,6 @@ const controller = {
 			})
 	},
 
-	/*let category = [];
-	let nombreCategoria = "";
-	products.forEach(function (product) {
-		if (product.subCategory == req.params.productSubCategory) {
-			category.push(product);
-			nombreCategoria = product.category
-		}
-	})
-	res.render('./products/list', { category: category,
-		nombreCategoria: nombreCategoria + " || " + req.params.productSubCategory })
-		*/
 
 	sale: (req, res, next) => {
 		db.Product.findAll(
@@ -133,6 +111,7 @@ const controller = {
 				db.Product.findAll(
 					{
 						where: { category_id: productDetail.category_id },
+						order: [['created_at', 'DESC']],
 						limit: 4,
 						include: [{ association: "Subcategory" },
 						{ association: "Category" },
@@ -149,12 +128,6 @@ const controller = {
 					})
 			})
 	},
-
-	/*let product
-	for (let i = 0; i < products.length; i++) {if (products[i].id == req.params.productId) {product = products[i];}}let category = []; products.forEach(function (similar) {if (similar.category == product.category) {category.push(similar);}})
-	res.render('./products/detail', { product: product, category: category })
-	*/
-
 
 	// Create - Form to create
 	create: (req, res, next) => {
@@ -206,7 +179,7 @@ const controller = {
 							brand_id: marca.dataValues.id
 						})
 							.then((newProduct) => {
-								console.log(req.files);
+								//console.log(req.files);
 								let img1;
 								let img2;
 								let img3;
@@ -299,7 +272,7 @@ const controller = {
 
 
 									.then((newProduct) => {
-										console.log(req.files);
+										//console.log(req.files);
 										let img1;
 										let img2;
 										let img3;
@@ -370,10 +343,7 @@ const controller = {
 													console.log(error);
 												})
 										}
-
 									})
-
-
 							})
 							.then(() => {
 								res.redirect('/products');
@@ -571,7 +541,7 @@ const controller = {
 
 					} else if (images.length == 2) {
 
-						console.log(images);
+						//console.log(images);
 
 						// SI LA CANTIDAD DE IMAGENES QUE TENIA ANTERIORMENTE EL ARTICULO ES 2 \\
 						// Y NO SE EDITA NINGUNA IMAGEN \\
@@ -849,10 +819,6 @@ const controller = {
 			.catch((error) => {
 				console.log(error);
 			})
-
-		//products = products.filter((producto) => { return producto.id != id });
-		//fs.writeFileSync(productsDB, JSON.stringify(products));
-
 	}
 };
 

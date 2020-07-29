@@ -14,7 +14,7 @@ var storage = multer.diskStorage({
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
     },
     destination: (req, file, cb) => {
-        if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+        if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
             cb(null, 'public/images/delete')
         }else{
             cb(null, 'public/images/products')
@@ -53,7 +53,7 @@ router.post('/create/', upload.any(),[
                 }else{
                     ext = path.extname(req.files[0].filename).toLowerCase();
                 }
-                console.log(ext);
+                //console.log(ext);
                 if (
                     ext == ".jpg" ||
                     ext == ".jpeg" ||

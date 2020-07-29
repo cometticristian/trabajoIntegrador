@@ -30,15 +30,6 @@ const controller = {
 			.catch(function (error) {
 				console.log(error);
 			})
-
-		/*let selected = products.filter(product=>{
-			return product.important=="home";
-		});
-		let news = products.filter(product=>{
-			return product.important=="new";
-		});
-		res.render ('index', {selected, news});
-		*/
 	},
 
 	search: (req, res, next) => {
@@ -47,7 +38,7 @@ const controller = {
 		function capitalize(search) {
 			return search[0].toUpperCase() + search.slice(1);
 		  }
-	
+		/*BUSCA POR NOMBRE, DONDE CONTENGA LO QUE LLEGA POR SEARCH O COMIENZE CON LO QUE LLEGA POR SEARCH PRIMERA LETRA EN MAYUSCULA*/  
 		db.Product.findAll(
 			{where: {
 				name: { [Op.or]: [{ [Op.substring]: search }, { [Op.startsWith]: capitalize(search) }] }
@@ -55,7 +46,7 @@ const controller = {
 				include: [{ association: "Subcategory" }, { association: "Image" }]
 			})
 			.then((category) => {
-				console.log(category);
+				//console.log(category);
 				
 			res.render('products/search', { category: category });
 		})

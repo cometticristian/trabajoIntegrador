@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const { check, validationResult, body } = require('express-validator');
 const db = require("../database/models")
 const { Op } = require("sequelize");
@@ -212,7 +212,7 @@ const controller = {
                })
                   .then((item_carrito) => {
                      if (item_carrito) {
-                        console.log("------PLUS----------->")
+                        //console.log("------PLUS----------->")
                         let unidades = item_carrito.units + 1;
                         let precio = item_carrito.price;
                         let descuento = item_carrito.discount;
