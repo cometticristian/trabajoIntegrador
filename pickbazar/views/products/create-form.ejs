@@ -61,6 +61,7 @@
                             style="color: red;font-size: 12px;"><%= buscarError('category')[0].msg %></span>
                         <select name="subcategory" id="subcategory" class="select subCategory" required>
                             <option value="0">SELECCIONE SUB CATEGORIA (*)</option>
+                            <%console.log(subCategories)%>
                             <% subCategories.forEach((subcat) => { %>
                             <option value="<%= subcat.id %>"><%= subcat.name %></option>
                             <% }) %>
